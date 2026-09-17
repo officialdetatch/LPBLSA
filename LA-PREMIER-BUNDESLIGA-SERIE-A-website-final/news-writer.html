@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News writer | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">Fantasy football &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="news.html" data-nav="news" class="active">News</a>
+        <a href="teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
+        <a href="teams/peters.html" data-nav="peters">Peter&#x27;s</a>
+        <a href="teams/sierra.html" data-nav="sierra">Cameltoes</a>
+        <a href="teams/puntos.html" data-nav="puntos">Los Puntos</a>
+        <a href="teams/hobbit.html" data-nav="hobbit">Hobbit</a>
+        <a href="free-agents.html" data-nav="fa">Free agents</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">League wire</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:38px 0 28px">
+    <div class="wrap">
+      <div class="hero-kicker">Private tool &middot; not linked from the site</div>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">News <span class="accent">writer</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:34px">
+    <div class="wrap">
+      <div class="writer-note">
+        Write your stories here, then press <b>Download news.js</b> and drop the file into
+        <code>assets/</code>, replacing the old one. Nothing changes on the public site until you do.
+        Visitors never see this page unless you send them the link &mdash; delete
+        <code>news-writer.html</code> and <code>assets/writer.js</code> before uploading if you would
+        rather it never leaves your computer.
+      </div>
+
+      <div class="writer-note hidden" id="wDraftNote">
+        You have unsaved changes from a previous session, loaded below.
+      </div>
+
+      <div class="editor-panel">
+        <h3 id="wFormTitle">New story</h3>
+        <div class="writer-grid">
+          <div class="field">
+            <label for="wHeadline">Headline</label>
+            <input id="wHeadline" type="text" placeholder="Mugiwaras open with a statement win">
+          </div>
+          <div class="field">
+            <label for="wDate">Date line</label>
+            <input id="wDate" type="text" placeholder="Week 2 &middot; Sep 21">
+          </div>
+        </div>
+        <div class="field">
+          <label for="wSummary">Summary &mdash; the only part shown on the home page</label>
+          <input id="wSummary" type="text" placeholder="One or two lines that make someone click.">
+        </div>
+        <div class="field">
+          <label for="wBody">Full story &mdash; leave a blank line between paragraphs</label>
+          <textarea id="wBody" rows="9" placeholder="Write the article here.
+
+Blank line starts a new paragraph."></textarea>
+        </div>
+        <div class="writer-grid">
+          <div class="field">
+            <label for="wImage">Image path (optional)</label>
+            <input id="wImage" type="text" placeholder="images/news/week2.jpg">
+          </div>
+          <div class="field">
+            <label for="wCaption">Image caption (optional)</label>
+            <input id="wCaption" type="text" placeholder="Gibbs again.">
+          </div>
+        </div>
+        <div class="field">
+          <label for="wId">Link name (optional &mdash; made from the headline if blank)</label>
+          <input id="wId" type="text" placeholder="mugiwaras-week-2">
+        </div>
+        <div class="news-edit-row">
+          <button class="btn btn-solid btn-small" id="wSave">Add story</button>
+          <button class="btn btn-ghost btn-small" id="wClear">Clear form</button>
+        </div>
+      </div>
+
+      <div class="section-head"><h2>Stories</h2>
+        <span class="section-note">Top of the list is the lead story.</span>
+      </div>
+      <div id="wList"></div>
+
+      <div class="section-head" style="margin-top:34px"><h2>Your news.js</h2></div>
+      <textarea id="wOutput" readonly spellcheck="false"></textarea>
+      <div class="news-edit-row" style="margin-top:12px">
+        <button class="btn btn-solid btn-small" id="wDownload">Download news.js</button>
+        <button class="btn btn-small" id="wCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="wReset">Discard changes</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; five clubs, one crown.</div>
+      <div>Standings, rosters and projections from the league export.</div>
+    </div>
+  </footer>
+
+  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
+  <script src="assets/news.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/writer.js"></script>
+</body>
+</html>

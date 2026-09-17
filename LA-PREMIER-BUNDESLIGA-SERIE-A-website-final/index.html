@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-nav="home" class="active">Home</a>
+        <a href="news.html" data-nav="news">News</a>
+        <a href="teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
+        <a href="teams/peters.html" data-nav="peters">Peter&#x27;s</a>
+        <a href="teams/sierra.html" data-nav="sierra">Cameltoes</a>
+        <a href="teams/puntos.html" data-nav="puntos">Los Puntos</a>
+        <a href="teams/hobbit.html" data-nav="hobbit">Hobbit</a>
+        <a href="free-agents.html" data-nav="fa">Free agents</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <div class="hero-kicker">Week 2 &middot; 2026 season</div>
+        <h1>Cinco Equipos.<br><span class="accent">Un Solo Ganador.</span></h1>
+        <p>La Liga mas dura tiene pagina oficial.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>Mugiwaras De Caimito</b><span>Top of the table</span></div>
+          <div class="hero-stat"><b>189.78</b><span>Most points scored (MDC)</span></div>
+          <div class="hero-stat"><b>15</b><span>Weeks to survive</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Las Noticias</h2>
+        <a class="btn btn-small" href="news.html">Todas las noticias</a>
+      </div>
+      <div class="news-grid" id="newsGrid" data-limit="3"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Standings</h2>
+        <span class="section-note">El podio de los ganadores</span>
+      </div>
+      <div class="table-scroll">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>RK</th><th>Team</th>
+              <th class="num">W</th><th class="num">L</th><th class="num">T</th>
+              <th class="num">PCT</th><th class="num">GB</th>
+              <th class="num">PF</th><th class="num">PA</th>
+              <th class="num">Streak</th><th class="num">Playoff</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr class="rank-1">
+            <td><div class="rk-cell"><span class="medal g">1</span></div></td>
+            <td>
+              <a class="team-link" href="teams/mugiwaras.html">
+                <span class="crest">
+      <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <span class="crest-fallback">MDC</span>
+    </span>
+                <span class="name">Mugiwaras De Caimito</span>
+              </a>
+            </td>
+            <td class="num">1</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">--</td>
+            <td class="num">189.78</td>
+            <td class="num">136</td>
+            <td class="num"><span class="streak-w">W1</span></td>
+            <td class="num">92%</td>
+          </tr>
+          <tr class="rank-2">
+            <td><div class="rk-cell"><span class="medal s">2</span></div></td>
+            <td>
+              <a class="team-link" href="teams/peters.html">
+                <span class="crest">
+      <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
+      <span class="crest-fallback">PPT</span>
+    </span>
+                <span class="name">Peter&#x27;s Perfect Team</span>
+              </a>
+            </td>
+            <td class="num">1</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">--</td>
+            <td class="num">153.92</td>
+            <td class="num">140.02</td>
+            <td class="num"><span class="streak-w">W1</span></td>
+            <td class="num">87%</td>
+          </tr>
+          <tr class="rank-3">
+            <td><div class="rk-cell"><span class="medal b">3</span></div></td>
+            <td>
+              <a class="team-link" href="teams/sierra.html">
+                <span class="crest">
+      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
+      <span class="crest-fallback">SLC</span>
+    </span>
+                <span class="name">Sierra Linda Cameltoes</span>
+              </a>
+            </td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">140.02</td>
+            <td class="num">153.92</td>
+            <td class="num"><span class="streak-l">L1</span></td>
+            <td class="num">69%</td>
+          </tr>
+          <tr class="rank-n">
+            <td><div class="rk-cell"><span class="medal n">4</span></div></td>
+            <td>
+              <a class="team-link" href="teams/puntos.html">
+                <span class="crest">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span>
+                <span class="name">Los Puntos de Pina</span>
+              </a>
+            </td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">1</td>
+            <td class="num">136</td>
+            <td class="num">189.78</td>
+            <td class="num"><span class="streak-l">L1</span></td>
+            <td class="num">64%</td>
+          </tr>
+          <tr class="rank-n">
+            <td><div class="rk-cell"><span class="medal n">5</span></div></td>
+            <td>
+              <a class="team-link" href="teams/hobbit.html">
+                <span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span>
+                <span class="name">Hobbit</span>
+              </a>
+            </td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">0.5</td>
+            <td class="num">0</td>
+            <td class="num">0</td>
+            <td class="num">--</td>
+            <td class="num">88%</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Cinco Equipos Un Ganador.</div>
+      <div>EST 2026</div>
+    </div>
+  </footer>
+
+  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
+  <script src="assets/news.js"></script>
+  <script src="assets/app.js"></script>
+  
+</body>
+</html>

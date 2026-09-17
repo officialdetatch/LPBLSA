@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>News | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">Fantasy football &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="news.html" data-nav="news" class="active">News</a>
+        <a href="teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
+        <a href="teams/peters.html" data-nav="peters">Peter&#x27;s</a>
+        <a href="teams/sierra.html" data-nav="sierra">Cameltoes</a>
+        <a href="teams/puntos.html" data-nav="puntos">Los Puntos</a>
+        <a href="teams/hobbit.html" data-nav="hobbit">Hobbit</a>
+        <a href="free-agents.html" data-nav="fa">Free agents</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:44px 0 34px">
+    <div class="wrap">
+      <div class="hero-kicker">Rincon del Vago</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem)">Noticias<span class="accent">de la Liga</span></h1>
+      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Reportes o cualquier cosa relevante las pondremos aqui</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap" id="newsPage"></div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Cinco Equipos Un Ganador.</div>
+      <div>EST. 2026</div>
+    </div>
+  </footer>
+
+  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
+  <script src="assets/news.js"></script>
+  <script src="assets/app.js"></script>
+  
+</body>
+</html>

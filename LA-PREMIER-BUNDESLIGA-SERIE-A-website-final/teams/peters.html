@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peter&#x27;s Perfect Team | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+  
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">Fantasy football &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav">
+        <a href="../index.html" data-nav="home">Home</a>
+        <a href="../news.html" data-nav="news">News</a>
+        <a href="../teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
+        <a href="../teams/peters.html" data-nav="peters" class="active">Peter&#x27;s</a>
+        <a href="../teams/sierra.html" data-nav="sierra">Cameltoes</a>
+        <a href="../teams/puntos.html" data-nav="puntos">Los Puntos</a>
+        <a href="../teams/hobbit.html" data-nav="hobbit">Hobbit</a>
+        <a href="../free-agents.html" data-nav="fa">Free agents</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="wrap team-hero">
+    <span class="crest crest-lg">
+      <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
+      <span class="crest-fallback">PPT</span>
+    </span>
+    <div>
+      <h1>Peter&#x27;s Perfect Team</h1>
+      <div class="team-meta">Manager: Peter Cruz &middot; Ranked #2 of 5</div>
+      <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
+      <p class="team-bio">El autor del robo del siglo, drafteando a Drake "Drake Maye" Maye antes que los Puntos de Piña. No se hizo un brujo con Willie Lengua por que Drake Maye es Drake Maye</p>
+      <div class="team-badges">
+        <span class="pill">Record <b>1-0-0</b></span>
+        <span class="pill">Points for <b>153.92</b></span>
+        <span class="pill">Points against <b>140.02</b></span>
+        <span class="pill">Streak <b>W1</b></span>
+        <span class="pill gold-pill">Playoff odds <b>87%</b></span>
+        <span class="pill gold-pill">Starters projected <b>2552.3</b></span>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Roster</h2>
+        <span class="section-note">2026 projections: total points, per-week average, last game.</span>
+      </div>
+      <div class="roster-block">
+      <h3>Starters</h3>
+      <div class="table-scroll" style="border-top:none">
+        <table>
+          <thead>
+            <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><span class="slot-badge">QB</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">QB</span>
+                <span><span class="player-name">Drake Maye</span>
+                  <span class="nfl-tag">NE QB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">320.2</td>
+            <td class="num">18.8</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">RB</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">RB</span>
+                <span><span class="player-name">Derrick Henry</span>
+                  <span class="nfl-tag">BAL RB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">267.1</td>
+            <td class="num">15.7</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">RB</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">RB</span>
+                <span><span class="player-name">Breece Hall</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">NYJ RB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">248.3</td>
+            <td class="num">14.6</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">WR</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">WR</span>
+                <span><span class="player-name">Ja&#x27;Marr Chase</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">CIN WR</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">277</td>
+            <td class="num">16.3</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">WR</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">WR</span>
+                <span><span class="player-name">Skyler Bell</span>
+                  <span class="nfl-tag">BUF WR</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">28.1</td>
+            <td class="num">1.7</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">WR</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">WR</span>
+                <span><span class="player-name">Rashee Rice</span>
+                  <span class="nfl-tag">KC WR</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">213</td>
+            <td class="num">12.5</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">TE</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">TE</span>
+                <span><span class="player-name">Harold Fannin Jr.</span>
+                  <span class="nfl-tag">CLE TE</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">147</td>
+            <td class="num">8.6</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">FLEX</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">RB</span>
+                <span><span class="player-name">Kenneth Walker III</span>
+                  <span class="nfl-tag">KC RB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">248.9</td>
+            <td class="num">14.6</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">FLEX</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">RB</span>
+                <span><span class="player-name">Omarion Hampton</span>
+                  <span class="nfl-tag">LAC RB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">235.9</td>
+            <td class="num">13.9</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">OP</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">QB</span>
+                <span><span class="player-name">Dak Prescott</span>
+                  <span class="nfl-tag">DAL QB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">286.1</td>
+            <td class="num">16.8</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">D/ST</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">D/ST</span>
+                <span><span class="player-name">Seahawks</span>
+                  <span class="nfl-tag">SEA D/ST</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">122.2</td>
+            <td class="num">7.2</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">K</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">K</span>
+                <span><span class="player-name">Jason Myers</span>
+                  <span class="nfl-tag">SEA K</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">158.5</td>
+            <td class="num">9.3</td>
+            <td class="num">--</td>
+          </tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Starters projected total</td>
+            <td class="num" style="color:var(--gold-light);font-weight:700">2552.3</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      
+    </div>
+      <div class="roster-block">
+      <h3>Bench</h3>
+      <div class="table-scroll" style="border-top:none">
+        <table>
+          <thead>
+            <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">QB</span>
+                <span><span class="player-name">Patrick Mahomes</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">KC QB</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">291</td>
+            <td class="num">17.1</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">TE</span>
+                <span><span class="player-name">George Kittle</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">SF TE</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">155.2</td>
+            <td class="num">9.1</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">D/ST</span>
+                <span><span class="player-name">Ravens</span>
+                  <span class="nfl-tag">BAL D/ST</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">120</td>
+            <td class="num">7.1</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">WR</span>
+                <span><span class="player-name">Zay Flowers</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">BAL WR</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">197.6</td>
+            <td class="num">11.6</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">WR</span>
+                <span><span class="player-name">Mike Evans</span><span class="player-status">Q</span>
+                  <span class="nfl-tag">SF WR</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">151.8</td>
+            <td class="num">8.9</td>
+            <td class="num">--</td>
+          </tr>
+          <tr>
+            <td><span class="slot-badge">Bench</span></td>
+            <td>
+              <span class="player-cell">
+                <span class="player-avatar">K</span>
+                <span><span class="player-name">Eddy Pineiro</span>
+                  <span class="nfl-tag">SF K</span>
+                </span>
+              </span>
+            </td>
+            <td class="num">155.2</td>
+            <td class="num">9.1</td>
+            <td class="num">--</td>
+          </tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Bench projected total</td>
+            <td class="num" style="color:var(--gold-light);font-weight:700">1070.8</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      
+    </div>
+      <div class="roster-block">
+        <h3>Injured reserve</h3>
+        <p class="section-note" style="padding-top:12px">No players in this slot right now.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><h2>Schedule</h2></div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Week</th><th>Opponent</th><th>Venue</th></tr></thead>
+          <tbody>
+          <tr>
+            <td><span class="slot-badge">WK 1</span></td>
+            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
+      <span class="crest-fallback">SLC</span>
+    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 2</span></td>
+            <td><a class="team-link" href="../teams/hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 3</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 4</span></td>
+            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span><span class="name">Los Puntos de Pina</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 5</span></td>
+            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <span class="crest-fallback">MDC</span>
+    </span><span class="name">Mugiwaras De Caimito</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 6</span></td>
+            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
+      <span class="crest-fallback">SLC</span>
+    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 7</span></td>
+            <td><a class="team-link" href="../teams/hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 8</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 9</span></td>
+            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span><span class="name">Los Puntos de Pina</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 10</span></td>
+            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <span class="crest-fallback">MDC</span>
+    </span><span class="name">Mugiwaras De Caimito</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 11</span></td>
+            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
+      <span class="crest-fallback">SLC</span>
+    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 12</span></td>
+            <td><a class="team-link" href="../teams/hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 13</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 14</span></td>
+            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span><span class="name">Los Puntos de Pina</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 15</span></td>
+            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <span class="crest-fallback">MDC</span>
+    </span><span class="name">Mugiwaras De Caimito</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Cinco Equipos Un Ganador.</div>
+      <div>EST 2026</div>
+    </div>
+  </footer>
+
+  <script>window.LPBSA_NEWS_BASE = "../news.html#"; window.LPBSA_NEWS_INDEX = "../news.html";</script>
+  <script src="../assets/news.js"></script>
+  <script src="../assets/app.js"></script>
+  
+</body>
+</html>
