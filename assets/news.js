@@ -5,6 +5,22 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "pi-i-se-rinde",
+    "date": "Week 2 | Sept 18",
+    "headline": "Piñi se rinde???",
+    "summary": "Piñi visita a un brujo (y esto no es normal!!!)",
+    "image": "images\\news\\que-haces.jpeg",
+    "caption": "",
+    "body": [
+      "Las cosas se están poniendo raras en el campamento de Los Puntos de Pina. Primero fue A.J. Brown con el tobillo, y ahora se suma DJ Moore a la lista de golpeados. Y como si fuera poco, testigos reportan haber visto a Piñi, la mascota oficial del equipo, entrando a la casa de un brujo del barrio.",
+      "Lo que dicen los testigos Según fuentes cercanas, a Piñi se le vio llorando afuera de la casa, tocando la puerta con desesperación y repitiendo \"por favor, algo tiene que cambiar\" antes de que el brujo finalmente lo dejara pasar. Nadie sabe exactamente qué pasó adentro, pero la mascota salió con los ojos hinchados y cargando lo que parecía ser una vela.",
+      "El contexto (porque duele) Vamos a ser honestos, no es para menos. Dos lesiones importantes en las primeras semanas de temporada le pueden romper la fe a cualquiera, hasta a una mascota de peluche. Primero A.J. Brown se va a IR con el tobillo, y justo cuando el equipo empezaba a acomodarse, ahora es DJ Moore el que se apaga.",
+      "Uno se ríe de la escena de Piñi rogándole a un brujo, pero atrás de la broma hay una frustración real. Cuando las lesiones se acumulan así de rápido, se siente como que el universo tiene algo personal contra el roster.",
+      "Qué sigue Por ahora no hay comunicado oficial de la mascota ni del brujo. Se recomienda mantener velas prendidas, cruzar los dedos, y esperar buenas noticias en los próximos reportes de práctica.",
+      "Ánimo Piñi. Aquí seguimos, contigo y con el equipo."
+    ]
+  },
+  {
     "id": "game-of-the-week-alert",
     "date": "Week 2 | Sept 17",
     "headline": "Game of the Week Alert",
@@ -68,9 +84,9 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "Waiver claims process Wednesday 3:00 AM",
+  "DJ Moore lesionao! Piñi va a un brujo",
   "Daniel enfermo! Pronta recuperacion",
-  "Week 2 lineups lock at kickoff",
-  "Mugiwaras De Caimito lead the table at 1-0",
+  "Josh Allen minimo se esta pullando",
+  "Mugiwaras De Caimito andan de Bye Week en Filipinas",
   "Trade deadline: Week 11"
 ];

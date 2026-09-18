@@ -225,9 +225,85 @@
     });
   }
 
+  /* ---------- render rosters from window.LEAGUE_ROSTERS ---------- */
+  /* Every team's roster tables live in the DOM already, empty, waiting for
+     this. If a page has no roster containers (news, free agents) this is a
+     harmless no-op. */
+  function fmtNum(v) {
+    if (v === null || v === undefined || v === '') return '--';
+    return (typeof v === 'number') ? (Math.round(v * 10) / 10).toString() : String(v);
+  }
+  function playerCellHTML(p, slotLabel) {
+    var status = p.status ? '<span class="player-status">' + esc(p.status) + '</span>' : '';
+    return '<td><span class="slot-badge">' + esc(slotLabel) + '</span></td>' +
+      '<td><span class="player-cell"><span class="player-avatar">' + esc(p.pos || '?') + '</span>' +
+      '<span><span class="player-name">' + esc(p.name) + '</span>' + status +
+      '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
+      '<td class="num">' + fmtNum(p.fpts) + '</td><td class="num">' + fmtNum(p.avg) + '</td><td class="num">' + fmtNum(p.last) + '</td>';
+  }
+  function renderAllRosters() {
+    var rosters = window.LEAGUE_ROSTERS, slots = window.STARTER_SLOTS;
+    if (!rosters) return;
+    Object.keys(rosters).forEach(function (slug) {
+      var team = rosters[slug];
+      [['starters', team.starters, slots], ['bench', team.bench, null], ['ir', team.ir, null]]
+        .forEach(function (entry) {
+          var section = entry[0], players = entry[1] || [], slotList = entry[2];
+          var body = document.getElementById('body-' + section + '-' + slug);
+          var totalEl = document.getElementById('total-' + section + '-' + slug);
+          if (!body) return;
+          var rowsHtml = [];
+          var total = 0;
+          var any = false;
+          players.forEach(function (p, i) {
+            if (!p) return;
+            any = true;
+            var label = slotList ? slotList[i] : (section === 'bench' ? 'Bench' : 'IR');
+            rowsHtml.push('<tr>' + playerCellHTML(p, label) + '</tr>');
+            if (typeof p.fpts === 'number') total += p.fpts;
+          });
+          body.innerHTML = any ? rowsHtml.join('') :
+            '<tr><td colspan="5" class="section-note">No players here right now.</td></tr>';
+          if (totalEl) totalEl.textContent = fmtNum(Math.round(total * 10) / 10);
+        });
+      var badge = document.getElementById('starters-projected-' + slug);
+      if (badge) {
+        var startTotal = (team.starters || []).reduce(function (sum, p) {
+          return sum + (p && typeof p.fpts === 'number' ? p.fpts : 0);
+        }, 0);
+        badge.textContent = fmtNum(Math.round(startTotal * 10) / 10);
+      }
+    });
+  }
+  renderAllRosters();
+
+  function renderFreeAgentRows() {
+    var body = document.getElementById('faBody');
+    if (!body || !window.FREE_AGENTS) return;
+    var html = window.FREE_AGENTS.map(function (a, i) {
+      var status = a.status ? '<span class="player-status">' + esc(a.status) + '</span>' : '';
+      var fpts = typeof a.fpts === 'number' ? a.fpts : 0;
+      var avg = typeof a.avg === 'number' ? a.avg : 0;
+      var last = typeof a.last === 'number' ? a.last : 0;
+      var key = slug(a.name) + '-' + slug(a.pos || '');
+      return '<tr class="fa-row" data-pos="' + esc(a.pos) + '" data-name="' + esc((a.name || '').toLowerCase()) +
+        '" data-team="' + esc((a.team_abbr || '').toLowerCase()) + '" data-fpts="' + fpts + '" data-avg="' + avg +
+        '" data-last="' + last + '" data-rank="' + (i + 1) + '">' +
+        '<td class="num" style="color:var(--mute)">' + (i + 1) + '</td>' +
+        '<td><span class="player-cell"><span class="player-avatar">' + esc(a.pos) + '</span>' +
+        '<span><span class="player-name">' + esc(a.name) + '</span>' + status +
+        '<span class="nfl-tag">' + esc(a.team_abbr) + ' ' + esc(a.pos) + '</span></span></span></td>' +
+        '<td><span class="avail-pill">Available</span></td>' +
+        '<td class="num">' + fmtNum(a.fpts) + '</td><td class="num">' + fmtNum(a.avg) + '</td><td class="num">' + fmtNum(a.last) + '</td>' +
+        '<td><button class="star-btn" data-watch="' + key + '" aria-label="Add ' + esc(a.name) + ' to watchlist">&#9733;</button></td></tr>';
+    }).join('');
+    body.innerHTML = html || '<tr><td colspan="7" class="section-note">No free agents listed.</td></tr>';
+  }
+
   /* ---------- free agents ---------- */
   var faBody = document.getElementById('faBody');
   if (faBody) {
+    renderFreeAgentRows();
     var search = document.getElementById('faSearch');
     var sort = document.getElementById('faSort');
     var chips = document.getElementById('faChips');

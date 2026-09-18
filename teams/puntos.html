@@ -65,7 +65,7 @@
         <span class="pill">Points against <b>189.78</b></span>
         <span class="pill">Streak <b>L1</b></span>
         <span class="pill gold-pill">Playoff odds <b>64%</b></span>
-        <span class="pill gold-pill">Starters projected <b>2502.6</b></span>
+        <span class="pill gold-pill">Starters projected <b id="starters-projected-puntos">&mdash;</b></span>
       </div>
         <button class="btn btn-solid commish-trigger" data-commish-open>&#9819; El Bio mas duro.</button>
     </div>
@@ -134,179 +134,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody>
-          <tr>
-            <td><span class="slot-badge">QB</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">QB</span>
-                <span><span class="player-name">Brock Purdy</span>
-                  <span class="nfl-tag">SF QB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">301.1</td>
-            <td class="num">17.7</td>
-            <td class="num">21.1</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">RB</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">Bijan Robinson</span>
-                  <span class="nfl-tag">ATL RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">310</td>
-            <td class="num">18.2</td>
-            <td class="num">27.3</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">RB</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">Kyren Williams</span>
-                  <span class="nfl-tag">LAR RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">215.3</td>
-            <td class="num">12.7</td>
-            <td class="num">14</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">WR</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">Davante Adams</span>
-                  <span class="nfl-tag">LAR WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">198.4</td>
-            <td class="num">11.7</td>
-            <td class="num">4.1</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">WR</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">DJ Moore</span>
-                  <span class="nfl-tag">BUF WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">174.5</td>
-            <td class="num">10.3</td>
-            <td class="num">18.5</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">WR</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">Emeka Egbuka</span>
-                  <span class="nfl-tag">TB WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">193.6</td>
-            <td class="num">11.4</td>
-            <td class="num">8.8</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">TE</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">TE</span>
-                <span><span class="player-name">Tyler Warren</span>
-                  <span class="nfl-tag">IND TE</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">168.1</td>
-            <td class="num">9.9</td>
-            <td class="num">8.8</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">FLEX</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">David Montgomery</span>
-                  <span class="nfl-tag">HOU RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">184</td>
-            <td class="num">10.8</td>
-            <td class="num">27.4</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">FLEX</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">Bucky Irving</span>
-                  <span class="nfl-tag">TB RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">189.5</td>
-            <td class="num">11.1</td>
-            <td class="num">16.8</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">OP</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">QB</span>
-                <span><span class="player-name">Caleb Williams</span>
-                  <span class="nfl-tag">CHI QB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">290.9</td>
-            <td class="num">17.1</td>
-            <td class="num">37.26</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">D/ST</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">D/ST</span>
-                <span><span class="player-name">Texans</span>
-                  <span class="nfl-tag">HOU D/ST</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">130.3</td>
-            <td class="num">7.7</td>
-            <td class="num">-4</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">K</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">K</span>
-                <span><span class="player-name">Cam Little</span>
-                  <span class="nfl-tag">JAX K</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">146.9</td>
-            <td class="num">8.6</td>
-            <td class="num">12</td>
-          </tr>
+          <tbody id="body-starters-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Starters projected total</td>
-            <td class="num" style="color:var(--gold-light);font-weight:700">2502.6</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-starters-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -319,95 +152,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">QB</span>
-                <span><span class="player-name">Matthew Stafford</span>
-                  <span class="nfl-tag">LAR QB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">302.4</td>
-            <td class="num">17.8</td>
-            <td class="num">4.1</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">Tee Higgins</span>
-                  <span class="nfl-tag">CIN WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">182.4</td>
-            <td class="num">10.7</td>
-            <td class="num">7.4</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">Terry McLaurin</span>
-                  <span class="nfl-tag">WSH WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">179</td>
-            <td class="num">10.5</td>
-            <td class="num">2.4</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">Ashton Jeanty</span>
-                  <span class="nfl-tag">LV RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">246.2</td>
-            <td class="num">14.5</td>
-            <td class="num">29.7</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">TE</span>
-                <span><span class="player-name">Sam LaPorta</span>
-                  <span class="nfl-tag">DET TE</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">149.8</td>
-            <td class="num">8.8</td>
-            <td class="num">7.3</td>
-          </tr>
-          <tr>
-            <td><span class="slot-badge">Bench</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">RB</span>
-                <span><span class="player-name">Quinshon Judkins</span>
-                  <span class="nfl-tag">CLE RB</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">210.7</td>
-            <td class="num">12.4</td>
-            <td class="num">6</td>
-          </tr>
+          <tbody id="body-bench-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Bench projected total</td>
-            <td class="num" style="color:var(--gold-light);font-weight:700">1270.5</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-bench-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -420,25 +170,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody>
-          <tr>
-            <td><span class="slot-badge">IR</span></td>
-            <td>
-              <span class="player-cell">
-                <span class="player-avatar">WR</span>
-                <span><span class="player-name">A.J. Brown</span><span class="player-status">IR</span>
-                  <span class="nfl-tag">NE WR</span>
-                </span>
-              </span>
-            </td>
-            <td class="num">145.6</td>
-            <td class="num">12.1</td>
-            <td class="num">4.1</td>
-          </tr>
+          <tbody id="body-ir-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Injured reserve projected total</td>
-            <td class="num" style="color:var(--gold-light);font-weight:700">145.6</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-ir-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -579,6 +316,7 @@
 
   <script>window.LPBSA_NEWS_BASE = "../news.html#"; window.LPBSA_NEWS_INDEX = "../news.html";</script>
   <script src="../assets/news.js"></script>
+  <script src="../assets/roster-data.js"></script>
   <script src="../assets/app.js"></script>
   
 </body>
