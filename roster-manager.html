@@ -58,7 +58,11 @@
     <div class="wrap">
       <div class="writer-note">
         Search a player below and pick an action &mdash; draft them off free agency,
-        drop them, bench them, start them, or trade them to another team.
+        drop them, bench them, start them, or trade them to another team. In the
+        same row you can also edit their <b>Status, Proj FPTS, AVG and LAST</b>
+        directly &mdash; click into any of those boxes, type the new number or
+        tag, then click elsewhere (or hit Tab/Enter) to save it. Clear the
+        Status box to remove a tag like Q once a player is healthy again.
         When you are done, press <b>Download roster-data.js</b> and drop the file
         into <code>assets/</code>, replacing the old one. Nothing changes on the
         public site until you do. Visitors never see this page unless you send
@@ -121,10 +125,22 @@
       <p class="fa-count" id="rmCount"></p>
       <div class="table-scroll">
         <table>
-          <thead><tr><th>Player</th><th>Currently</th><th class="num">Proj FPTS</th><th>Action</th></tr></thead>
+          <thead><tr>
+            <th>Player</th><th>Currently</th><th>Status</th>
+            <th class="num">Proj FPTS</th><th class="num">AVG</th><th class="num">LAST</th>
+            <th>Action</th>
+          </tr></thead>
           <tbody id="rmBody"></tbody>
         </table>
       </div>
+      <datalist id="rmStatusOptions">
+        <option value="Q">Questionable</option>
+        <option value="D">Doubtful</option>
+        <option value="IR">Injured reserve</option>
+        <option value="OUT">Out</option>
+        <option value="SUSP">Suspended</option>
+        <option value="BYE">Bye week</option>
+      </datalist>
 
       <div class="section-head" style="margin-top:34px"><h2>Your roster-data.js</h2></div>
       <textarea id="rmOutput" readonly spellcheck="false"></textarea>

@@ -194,15 +194,31 @@
     return opts.join('');
   }
 
+  function locAttrs(loc) {
+    return ' data-loc-type="' + loc.type + '" data-loc-team="' + (loc.team || '') +
+      '" data-loc-section="' + (loc.section || '') +
+      '" data-loc-idx="' + (loc.idx != null ? loc.idx : '') + '"';
+  }
+  function statInputHTML(loc, field, value) {
+    var v = (value === null || value === undefined) ? '' : value;
+    return '<input type="number" step="0.1" inputmode="decimal" class="stat-input" data-field="' + field + '"' +
+      locAttrs(loc) + ' value="' + esc(v) + '" placeholder="--">';
+  }
+  function statusInputHTML(loc, value) {
+    return '<input type="text" list="rmStatusOptions" maxlength="8" class="status-input" data-field="status"' +
+      locAttrs(loc) + ' value="' + esc(value || '') + '" placeholder="Healthy">';
+  }
   function rowHTML(entry) {
     var p = entry.player, loc = entry.loc;
-    var status = p.status ? '<span class="player-status">' + esc(p.status) + '</span>' : '';
     return '<tr>' +
       '<td><span class="player-cell"><span class="player-avatar">' + esc(p.pos || '?') + '</span>' +
-      '<span><span class="player-name">' + esc(p.name) + '</span>' + status +
+      '<span><span class="player-name">' + esc(p.name) + '</span>' +
       '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
       '<td>' + locLabel(loc) + '</td>' +
-      '<td class="num">' + fmtNum(p.fpts) + '</td>' +
+      '<td>' + statusInputHTML(loc, p.status) + '</td>' +
+      '<td class="num">' + statInputHTML(loc, 'fpts', p.fpts) + '</td>' +
+      '<td class="num">' + statInputHTML(loc, 'avg', p.avg) + '</td>' +
+      '<td class="num">' + statInputHTML(loc, 'last', p.last) + '</td>' +
       '<td><select class="sort-select action-select" data-loc-type="' + loc.type +
         '" data-loc-team="' + (loc.team || '') + '" data-loc-section="' + (loc.section || '') +
         '" data-loc-idx="' + (loc.idx != null ? loc.idx : '') + '">' + actionOptionsHTML(loc) + '</select></td>' +
@@ -249,7 +265,7 @@
     els.count.textContent = entries.length + (entries.length === 1 ? ' player' : ' players') +
       (q ? ' matching "' + q + '"' : '') + '.';
     if (!entries.length) {
-      els.body.innerHTML = '<tr><td colspan="4" class="section-note">' +
+      els.body.innerHTML = '<tr><td colspan="7" class="section-note">' +
         (q ? 'No one matches that search.' : 'Nothing here yet.') + '</td></tr>';
       return;
     }
@@ -318,6 +334,38 @@
     toast(name + ' added to free agents.');
   });
 
+  /* ---------- editing status / fpts / avg / last in place ---------- */
+  function locFromEl(el) {
+    return {
+      type: el.getAttribute('data-loc-type'),
+      team: el.getAttribute('data-loc-team') || undefined,
+      section: el.getAttribute('data-loc-section') || undefined,
+      idx: el.getAttribute('data-loc-idx') !== '' ? Number(el.getAttribute('data-loc-idx')) : undefined
+    };
+  }
+  function flashSaved(el) {
+    el.classList.add('field-saved');
+    setTimeout(function () { el.classList.remove('field-saved'); }, 700);
+  }
+  function updateStatField(el) {
+    var loc = locFromEl(el);
+    var player = getPlayerAtLoc(loc);
+    if (!player) return;
+    var field = el.getAttribute('data-field');
+    var raw = el.value.trim();
+    if (field === 'status') {
+      player.status = raw ? raw.toUpperCase() : null;
+      el.value = player.status || '';
+    } else {
+      var num = raw === '' ? null : parseFloat(raw);
+      player[field] = (num === null || isNaN(num)) ? null : num;
+      el.value = player[field] === null ? '' : player[field];
+    }
+    saveDraft();
+    els.output.value = buildFile();
+    flashSaved(el);
+  }
+
   /* ---------- wiring ---------- */
   els.search.addEventListener('input', renderTable);
   els.chips.addEventListener('click', function (ev) {
@@ -331,17 +379,27 @@
     renderTable();
   });
   els.body.addEventListener('change', function (ev) {
+    var target = ev.target;
+    if (target.classList.contains('stat-input') || target.classList.contains('status-input')) {
+      updateStatField(target);
+      return;
+    }
     var select = ev.target.closest('.action-select');
     if (!select) return;
     var action = select.value;
     if (!action) return;
-    var loc = {
-      type: select.getAttribute('data-loc-type'),
-      team: select.getAttribute('data-loc-team') || undefined,
-      section: select.getAttribute('data-loc-section') || undefined,
-      idx: select.getAttribute('data-loc-idx') !== '' ? Number(select.getAttribute('data-loc-idx')) : undefined
-    };
+    var loc = locFromEl(select);
     applyAction(loc, action);
+  });
+  /* Enter should save-and-blur the field instead of doing nothing (text
+     inputs don't submit a form here). */
+  els.body.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter') return;
+    var target = ev.target;
+    if (target.classList.contains('stat-input') || target.classList.contains('status-input')) {
+      ev.preventDefault();
+      target.blur();
+    }
   });
 
   document.getElementById('rmCopy').addEventListener('click', function () {

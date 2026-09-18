@@ -528,6 +528,35 @@ tr.rank-3{ background:linear-gradient(90deg, rgba(205,127,50,.12), transparent);
 }
 .nfl-tag{ color:var(--mute); font-size:.78rem; }
 
+/* ---------- inline-editable fields (roster manager) ---------- */
+.stat-input, .status-input{
+  background:var(--navy-900);
+  border:1px solid var(--line);
+  color:var(--white);
+  border-radius:var(--radius);
+  font-family:var(--font-body);
+  transition:border-color .15s ease, background-color .5s ease;
+}
+.stat-input{
+  width:64px;
+  padding:7px 8px;
+  font-size:.85rem;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.status-input{
+  width:78px;
+  padding:7px 8px;
+  font-size:.8rem;
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.status-input::placeholder{ text-transform:none; letter-spacing:0; color:var(--mute); }
+.stat-input:focus, .status-input:focus{ border-color:var(--gold); outline:none; }
+.status-input:not(:placeholder-shown){ border-color:var(--gold-dark); color:var(--gold-light); }
+.field-saved{ background-color:rgba(212,175,55,.28) !important; }
+
 /* ---------- free agents ---------- */
 .fa-toolbar{
   display:flex; gap:12px; flex-wrap:wrap; align-items:center;
