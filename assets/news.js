@@ -84,9 +84,8 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "DJ Moore lesionao! Piñi va a un brujo",
-  "Daniel enfermo! Pronta recuperacion",
-  "Josh Allen minimo se esta pullando",
-  "Mugiwaras De Caimito andan de Bye Week en Filipinas",
-  "Trade deadline: Week 11"
+  "Week 2 promete un banger: Los Puntos de Piña vs Sierra Linda Cameltoes",
+  "El debut de Hobbit contra Peter's Perfect Team promete mucho",
+  "El Monster Blanco tiene que ser lo mejor del mundo!",
+  "Mugiwaras De Caimito andan de Bye Week en Filipinas"
 ];

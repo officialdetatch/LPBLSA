@@ -556,13 +556,13 @@ window.LEAGUE_ROSTERS = {
         "last": 27.3
       },
       {
-        "name": "Kyren Williams",
+        "name": "David Montgomery",
         "status": null,
-        "team_abbr": "LAR",
+        "team_abbr": "HOU",
         "pos": "RB",
-        "fpts": 215.3,
-        "avg": 12.7,
-        "last": 14
+        "fpts": 184,
+        "avg": 10.8,
+        "last": 27.4
       },
       {
         "name": "Davante Adams",
@@ -601,13 +601,13 @@ window.LEAGUE_ROSTERS = {
         "last": 8.8
       },
       {
-        "name": "David Montgomery",
+        "name": "Ashton Jeanty",
         "status": null,
-        "team_abbr": "HOU",
+        "team_abbr": "LV",
         "pos": "RB",
-        "fpts": 184,
-        "avg": 10.8,
-        "last": 27.4
+        "fpts": 246.2,
+        "avg": 14.5,
+        "last": 29.7
       },
       {
         "name": "Bucky Irving",
@@ -666,24 +666,6 @@ window.LEAGUE_ROSTERS = {
         "last": 7.4
       },
       {
-        "name": "Terry McLaurin",
-        "status": null,
-        "team_abbr": "WSH",
-        "pos": "WR",
-        "fpts": 179,
-        "avg": 10.5,
-        "last": 2.4
-      },
-      {
-        "name": "Ashton Jeanty",
-        "status": null,
-        "team_abbr": "LV",
-        "pos": "RB",
-        "fpts": 246.2,
-        "avg": 14.5,
-        "last": 29.7
-      },
-      {
         "name": "Sam LaPorta",
         "status": null,
         "team_abbr": "DET",
@@ -700,6 +682,24 @@ window.LEAGUE_ROSTERS = {
         "fpts": 210.7,
         "avg": 12.4,
         "last": 6
+      },
+      {
+        "name": "Stefon Diggs",
+        "status": null,
+        "team_abbr": "WSH",
+        "pos": "WR",
+        "fpts": 135.1,
+        "avg": 7.9,
+        "last": 13.5
+      },
+      {
+        "name": "Kyren Williams",
+        "status": null,
+        "team_abbr": "LAR",
+        "pos": "RB",
+        "fpts": 215.3,
+        "avg": 12.7,
+        "last": 14
       }
     ],
     "ir": [
@@ -886,6 +886,15 @@ window.LEAGUE_ROSTERS = {
 };
 
 window.FREE_AGENTS = [
+  {
+    "name": "Terry McLaurin",
+    "status": null,
+    "team_abbr": "WSH",
+    "pos": "WR",
+    "fpts": 179,
+    "avg": 10.5,
+    "last": 2.4
+  },
   {
     "name": "Isaiah Likely",
     "status": null,
@@ -1434,15 +1443,6 @@ window.FREE_AGENTS = [
     "fpts": 150.6,
     "avg": 8.9,
     "last": 12.1
-  },
-  {
-    "name": "Stefon Diggs",
-    "status": null,
-    "team_abbr": "WSH",
-    "pos": "WR",
-    "fpts": 135.1,
-    "avg": 7.9,
-    "last": 13.5
   },
   {
     "name": "Jared Goff",
