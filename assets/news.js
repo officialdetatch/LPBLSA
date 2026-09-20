@@ -5,6 +5,27 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "los-puntos-de-pi-a-malditos",
+    "date": "Week 2 | Sept 20",
+    "headline": "Los Puntos de Piña... Malditos? 😱",
+    "summary": "Dos semanas de temporada y ya parece que hay una maldición encima de este equipo. Vamos a repasar el desastre punto por punto porque la cosa se está poniendo seria.",
+    "image": "images\\news\\IMG_8586.jpeg",
+    "caption": "",
+    "body": [
+      "La lista de lesionados no para de crecer",
+      "Primero cayó A.J. Brown. Después fue DJ Moore. Y ahora se suma Caleb Williams con una lesión de hamstring. Tres jugadores clave lesionados en apenas dos semanas de temporada, eso no es mala suerte, eso es otra cosa.",
+      "Y los que sí están sanos, tampoco responden",
+      "Lo peor es que no es solo culpa de las lesiones. Bijan Robinson, Emeka Egbuka y David Montgomery, tres piezas que estaban proyectadas para acercarse a los 30 puntos combinados, terminaron entregando apenas 20 entre los tres. O sea que ni los sanos están rindiendo lo que deberían.",
+      "Lo que dijo el manager",
+      "Fuimos a buscar respuestas y hablamos directamente con el manager Christopher. Esto fue lo único que soltó antes de cerrarse por completo:",
+      "\"Todavía nos quedan 5 jugadores por jugar y espero que puedan hacer una sorpresa, especialmente Purdy. Pero sí, esperen muchos cambios en el equipo. Esas son mis únicas expresiones.\"",
+      "Se intentó hacer más preguntas, pero Christopher empujó y por poco agrede a un reportero en el proceso. Como consecuencia, el equipo fue sancionado con una multa de 300 dólares.",
+      "Entonces, ¿qué sigue?",
+      "La pregunta que queda en el aire es justo esa. ¿Qué va a ser de Los Puntos de Piña? Christopher ya dejó claro que vienen cambios, la pregunta es si van a ser suficientes para cortar esta racha o si la maldición sigue viva otra semana más.",
+      "Aquí seguiremos de cerca cada movimiento."
+    ]
+  },
+  {
     "id": "pi-i-se-rinde",
     "date": "Week 2 | Sept 18",
     "headline": "Piñi se rinde???",
