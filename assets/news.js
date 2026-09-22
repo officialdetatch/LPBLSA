@@ -5,6 +5,37 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "de-vuelta-a-la-vuelta",
+    "date": "Week 3 | Sept 22",
+    "headline": "De Vuelta a la Vuelta",
+    "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
+    "image": "images/news/danielcogeando.jpeg",
+    "caption": "",
+    "body": [
+      "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes.",
+      "Se reportó al manager Daniel llegando con moretones en el cuello y cojeando levemente. ¿Qué pasó en esas vacaciones? Nadie lo sabe con certeza, pero dado su fama, no sería raro que haya habido algún encontronazo por ahí. Lamentablemente no había presupuesto para mandar al agente 007 a investigar a fondo, así que por ahora esto se queda en el terreno del misterio.",
+      "Pronta recuperación, Daniel. Que sea lo que sea, esperamos que no afecte la estrategia de la semana.",
+      "Lesión misteriosa del manager aparte, el roster que trae Mugiwaras sigue intacto y peligroso. Joe Burrow y Jalen Hurts repartiéndose el trabajo desde los dos puestos de quarterback, Jahmyr Gibbs y James Cook III cargando en tierra, y Puka Nacua junto a Justin Jefferson dominando por el aire. Este equipo no descansó en lo futbolístico, aunque parece que sí se movió bastante en lo personal.",
+      "Sierra Linda Cameltoes no viene fácil tampoco. Con Lamar Jackson y Justin Herbert tirando el balón, más De'Von Achane en el backfield, este partido tiene toda la pinta de ser reñido.",
+      "Con Daniel de vuelta, cojera y todo, Mugiwaras va con la mira puesta en seguir invicto. Habrá que ver si el misterio del cuello se resuelve antes del kickoff o si se queda como uno de esos rumores que nunca se aclaran."
+    ]
+  },
+  {
+    "id": "los-hobbits-ya-no-son-virgen",
+    "date": "Week 3 | Sept 22",
+    "headline": "Los Hobbits ya no son Virgen",
+    "summary": "Dice la cancion \"Do you remember the 21st night of September\" Pues Hobbit si se recordaran, ya que entran al scoreboard oficial obteniendo su primera victoria!",
+    "image": "images/news/hobbitswin.jpeg",
+    "caption": "",
+    "body": [
+      "Criture y sus hobbits por fin se estrenan como debe. Hobbit se llevó el partido ante Peter's Perfect Team con un marcador de 186.86 a 161.18, y con eso quedan empatados en la cima con Mugiwaras De Caimito.",
+      "Tras la victoria, en el campamento de Hobbit celebran en todo lo alto. O más bien, en todo lo bajo, porque hablamos de Hobbits después de todo. Como sea que lo festejen, se lo ganaron.",
+      "Con este triunfo, Hobbit se para en el puesto número 2 de la tabla, pisándole los talones a Mugiwaras después de un arranque que hasta ahora venía frío por el bye de la semana 1. El roster ya venía luciendo cargado desde antes de debutar, y ahora lo están respaldando en la cancha.",
+      "La próxima parada es contra Los Puntos de Pina, el equipo que hasta ahora ha sido noticia más por las lesiones que por el juego. Hobbit ya sueña con el 2-0, y la verdad el roster que traen les da todo el derecho de ilusionarse.",
+      "Veremos si Los Puntos de Pina logran reponerse a tiempo o si Hobbit sigue de racha."
+    ]
+  },
+  {
     "id": "los-puntos-de-pi-a-malditos",
     "date": "Week 2 | Sept 20",
     "headline": "Los Puntos de Piña... Malditos? 😱",
@@ -23,22 +54,6 @@ window.LEAGUE_NEWS = [
       "Entonces, ¿qué sigue?",
       "La pregunta que queda en el aire es justo esa. ¿Qué va a ser de Los Puntos de Piña? Christopher ya dejó claro que vienen cambios, la pregunta es si van a ser suficientes para cortar esta racha o si la maldición sigue viva otra semana más.",
       "Aquí seguiremos de cerca cada movimiento."
-    ]
-  },
-  {
-    "id": "pi-i-se-rinde",
-    "date": "Week 2 | Sept 18",
-    "headline": "Piñi se rinde???",
-    "summary": "Piñi visita a un brujo (y esto no es normal!!!)",
-    "image": "images\\news\\que-haces.jpeg",
-    "caption": "",
-    "body": [
-      "Las cosas se están poniendo raras en el campamento de Los Puntos de Pina. Primero fue A.J. Brown con el tobillo, y ahora se suma DJ Moore a la lista de golpeados. Y como si fuera poco, testigos reportan haber visto a Piñi, la mascota oficial del equipo, entrando a la casa de un brujo del barrio.",
-      "Lo que dicen los testigos Según fuentes cercanas, a Piñi se le vio llorando afuera de la casa, tocando la puerta con desesperación y repitiendo \"por favor, algo tiene que cambiar\" antes de que el brujo finalmente lo dejara pasar. Nadie sabe exactamente qué pasó adentro, pero la mascota salió con los ojos hinchados y cargando lo que parecía ser una vela.",
-      "El contexto (porque duele) Vamos a ser honestos, no es para menos. Dos lesiones importantes en las primeras semanas de temporada le pueden romper la fe a cualquiera, hasta a una mascota de peluche. Primero A.J. Brown se va a IR con el tobillo, y justo cuando el equipo empezaba a acomodarse, ahora es DJ Moore el que se apaga.",
-      "Uno se ríe de la escena de Piñi rogándole a un brujo, pero atrás de la broma hay una frustración real. Cuando las lesiones se acumulan así de rápido, se siente como que el universo tiene algo personal contra el roster.",
-      "Qué sigue Por ahora no hay comunicado oficial de la mascota ni del brujo. Se recomienda mantener velas prendidas, cruzar los dedos, y esperar buenas noticias en los próximos reportes de práctica.",
-      "Ánimo Piñi. Aquí seguimos, contigo y con el equipo."
     ]
   },
   {
@@ -63,50 +78,14 @@ window.LEAGUE_NEWS = [
       "Ambos equipos tienen dos quarterbacks de calidad tirando el balón esta semana, así que esto se puede convertir en un shootout total. La diferencia probablemente la va a marcar quién saca más de sus flex y quién evita el típico bajón semanal de algún receptor estrella.",
       "Con esos odds de 51/49 literalmente puede caer para cualquier lado. Va a estar bueno."
     ]
-  },
-  {
-    "id": "el-debut-mas-esperado",
-    "date": "Week 2 | Sept 17",
-    "headline": "El Debut mas esperado",
-    "summary": "Hobbit hace su debut pero...",
-    "image": "",
-    "caption": "",
-    "body": [
-      "Los Hobbits se quedaron afuera en la semana 1 por el bye, pero ahora sí le toca debutar. Hobbit entra a la cancha esta semana contra Peter's Perfect Team, y la verdad el roster que trae luce como uno de los más completos de toda la liga.",
-      "Lo que trae Hobbit",
-      "Empezando por QB, Josh Allen es una locura de opción para arrancar la temporada, y eso que todavía tiene a Jaxson Dart metido en el slot de OP, así que ahí ya van dos quarterbacks con techo altísimo.",
-      "En el backfield no se quedan atrás. Christian McCaffrey y Jonathan Taylor de titulares, más Saquon Barkley y Javonte Williams repartiéndose el flex. Eso es prácticamente un all star team de corredores.",
-      "Por el aire traen a Amon-Ra St. Brown y Nico Collins, y a Tetairoa McMillan agarrando ritmo. En TE tienen a Brock Bowers, que ya de por sí es un problema para cualquier defensa.",
-      "El rival de esta semana",
-      "Peter's Perfect Team llega de ganarle a Sierra Linda en la semana 1, así que tampoco vienen mancos. Traen a Ja'Marr Chase, Derrick Henry y Drake Maye tirando, más Dak Prescott en el OP. No va a ser un paseo para nadie.",
-      "Qué esperar",
-      "Con el roster que tiene Hobbit, la pregunta no es tanto si van a competir, sino si Jose va a manejar bien las rotaciones de flex y OP semana a semana. Si eso lo tiene resuelto, este equipo puede meterse rápido en la conversación de favoritos.",
-      "Debut con presión, pero con material de sobra para ganarlo."
-    ]
-  },
-  {
-    "id": "mugiwaras-de-caimito-arrancan-con-todo",
-    "date": "Week 2 | Sept 17",
-    "headline": "Mugiwaras De Caimito arrancan con todo",
-    "summary": "La primera pela de la historia???",
-    "image": "",
-    "caption": "",
-    "body": [
-      "Los Muwigaras les dieron una cátedra a todo el mundo en la semana 1. Mugiwaras De Caimito se llevaron el partido contra Los Puntos de Pina con un marcador de 189.78 a 136, y la verdad es que fue una paliza desde temprano.",
-      "Cómo lo lograron",
-      "El secreto no fue solo un jugador, fue prácticamente todo el roster prendido al mismo tiempo. Jahmyr Gibbs y James Cook III cargando en el backfield, Puka Nacua y Justin Jefferson dominando por fuera, y encima Joe Burrow y Jalen Hurts tirando desde los dos puestos de quarterback. Cuando las cuatro piezas grandes rinden la misma semana, es prácticamente imposible pararlos.",
-      "CeeDee Lamb en el flex también hizo su parte, y Trey McBride en TE dio un rendimiento sólido y confiable, justo lo que se necesita cuando el resto del equipo está explotando.",
-      "Lo que dice de cara al resto de la temporada",
-      "Con ese arranque, Mugiwaras se para como el primer favorito claro de la liga después de la semana 1. Tienen profundidad en las tres fases (aire, tierra y el doble QB) y eso los hace peligrosos semana tras semana, no solo cuando les toca un buen matchup.",
-      "Habrá que verlos de cerca las próximas semanas para saber si esto fue una explosión puntual o si de verdad tienen el roster más completo de la liga."
-    ]
   }
 ];
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "Week 2 promete un banger: Los Puntos de Piña vs Sierra Linda Cameltoes",
-  "El debut de Hobbit contra Peter's Perfect Team promete mucho",
-  "El Monster Blanco tiene que ser lo mejor del mundo!",
-  "Mugiwaras De Caimito andan de Bye Week en Filipinas"
+  "Week 3 traera sorpresitas y drama en la liga",
+  "Manager de Los Puntos de Piña es visto con grandes figuras",
+  "La Cancion de entrada del Hijo del Dr Wagner Jr es el banger mas grande del mundo",
+  "Podran Los Hobbits vencer los Cameltoes?",
+  "Se ofrecen 1000 por quien tenga informacion de la cogera de Daniel"
 ];
