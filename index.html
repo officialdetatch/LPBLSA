@@ -89,123 +89,7 @@
               <th class="num">Streak</th><th class="num">Playoff</th>
             </tr>
           </thead>
-          <tbody>
-          <tr class="rank-1">
-            <td><div class="rk-cell"><span class="medal g">1</span></div></td>
-            <td>
-              <a class="team-link" href="teams/mugiwaras.html">
-                <span class="crest">
-      <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
-      <span class="crest-fallback">MDC</span>
-    </span>
-                <span class="name">Mugiwaras De Caimito</span>
-              </a>
-            </td>
-            <td class="num">1</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">--</td>
-            <td class="num">189.78</td>
-            <td class="num">136</td>
-            <td class="num"><span class="streak-w">W1</span></td>
-            <td class="num">92%</td>
-          </tr>
-          <tr class="rank-2">
-            <td><div class="rk-cell"><span class="medal s">2</span></div></td>
-            <td>
-              <a class="team-link" href="teams/peters.html">
-                <span class="crest">
-      <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
-      <span class="crest-fallback">PPT</span>
-    </span>
-                <span class="name">Peter&#x27;s Perfect Team</span>
-              </a>
-            </td>
-            <td class="num">1</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">--</td>
-            <td class="num">153.92</td>
-            <td class="num">140.02</td>
-            <td class="num"><span class="streak-w">W1</span></td>
-            <td class="num">87%</td>
-          </tr>
-          <tr class="rank-3">
-            <td><div class="rk-cell"><span class="medal b">3</span></div></td>
-            <td>
-              <a class="team-link" href="teams/sierra.html">
-                <span class="crest">
-      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
-      <span class="crest-fallback">SLC</span>
-    </span>
-                <span class="name">Sierra Linda Cameltoes</span>
-              </a>
-            </td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">140.02</td>
-            <td class="num">153.92</td>
-            <td class="num"><span class="streak-l">L1</span></td>
-            <td class="num">69%</td>
-          </tr>
-          <tr class="rank-n">
-            <td><div class="rk-cell"><span class="medal n">4</span></div></td>
-            <td>
-              <a class="team-link" href="teams/puntos.html">
-                <span class="crest">
-      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
-      <span class="crest-fallback">LPP</span>
-    </span>
-                <span class="name">Los Puntos de Pina</span>
-              </a>
-            </td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">1</td>
-            <td class="num">136</td>
-            <td class="num">189.78</td>
-            <td class="num"><span class="streak-l">L1</span></td>
-            <td class="num">64%</td>
-          </tr>
-          <tr class="rank-n">
-            <td><div class="rk-cell"><span class="medal n">5</span></div></td>
-            <td>
-              <a class="team-link" href="teams/hobbit.html">
-                <span class="crest">
-      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
-      <span class="crest-fallback">HOB</span>
-    </span>
-                <span class="name">Hobbit</span>
-              </a>
-            </td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">0.5</td>
-            <td class="num">0</td>
-            <td class="num">0</td>
-            <td class="num">--</td>
-            <td class="num">88%</td>
-          </tr>
-          </tbody>
+          <tbody id="standingsBody"></tbody>
         </table>
       </div>
     </div>
@@ -222,6 +106,7 @@
   <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
   <script src="assets/news.js"></script>
   <script src="assets/roster-data.js"></script>
+  <script src="assets/standings-data.js"></script>
   <script src="assets/app.js"></script>
   
 </body>

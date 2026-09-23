@@ -77,6 +77,52 @@
       : '<p class="section-note">No stories posted yet. Add one in assets/news.js.</p>';
   }
 
+  /* ---------- standings table (home page) ---------- */
+  function medalClass(rank) {
+    return rank === 1 ? 'g' : rank === 2 ? 's' : rank === 3 ? 'b' : 'n';
+  }
+  function standingsRowClass(rank) {
+    return rank <= 3 ? 'rank-' + rank : 'rank-n';
+  }
+  function streakClass(s) {
+    var c = String(s || '').trim().charAt(0).toUpperCase();
+    return c === 'W' ? 'streak-w' : c === 'L' ? 'streak-l' : '';
+  }
+  function findTeam(teamSlug) {
+    var teams = window.LEAGUE_TEAMS || [];
+    for (var i = 0; i < teams.length; i++) { if (teams[i].slug === teamSlug) return teams[i]; }
+    return null;
+  }
+  function standingsRowHTML(row, i) {
+    var rank = i + 1;
+    var t = findTeam(row.team) || { slug: row.team, name: row.team };
+    var initials = t.initials || String(t.name || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
+    var crestImg = t.crest ? '<img src="' + esc(t.crest) + '" alt="' + esc(t.name) + ' crest" onerror="this.remove()">' : '';
+    var streakText = row.streak ? '<span class="' + streakClass(row.streak) + '">' + esc(row.streak) + '</span>' : '--';
+    return '<tr class="' + standingsRowClass(rank) + '">' +
+      '<td><div class="rk-cell"><span class="medal ' + medalClass(rank) + '">' + rank + '</span></div></td>' +
+      '<td><a class="team-link" href="teams/' + esc(t.slug) + '.html">' +
+      '<span class="crest">' + crestImg + '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
+      '<span class="name">' + esc(t.name) + '</span></a></td>' +
+      '<td class="num">' + esc(row.w) + '</td>' +
+      '<td class="num">' + esc(row.l) + '</td>' +
+      '<td class="num">' + esc(row.t) + '</td>' +
+      '<td class="num">' + esc(row.pct) + '</td>' +
+      '<td class="num">' + esc(row.gb) + '</td>' +
+      '<td class="num">' + esc(row.pf) + '</td>' +
+      '<td class="num">' + esc(row.pa) + '</td>' +
+      '<td class="num">' + streakText + '</td>' +
+      '<td class="num">' + esc(row.playoff) + '</td>' +
+      '</tr>';
+  }
+  var standingsBody = document.getElementById('standingsBody');
+  if (standingsBody) {
+    var standingsRows = window.LEAGUE_STANDINGS || [];
+    standingsBody.innerHTML = standingsRows.length
+      ? standingsRows.map(standingsRowHTML).join('')
+      : '<tr><td colspan="11" class="section-note">No standings posted yet. Add one in assets/standings-data.js.</td></tr>';
+  }
+
   /* ---------- news page: index + single article ---------- */
   function articleHTML(n) {
     var paras = n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');

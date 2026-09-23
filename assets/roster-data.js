@@ -5,23 +5,33 @@
 window.LEAGUE_TEAMS = [
   {
     "slug": "mugiwaras",
-    "name": "Mugiwaras De Caimito"
+    "name": "Mugiwaras De Caimito",
+    "crest": "images/mugiwaras.png",
+    "initials": "MDC"
   },
   {
     "slug": "peters",
-    "name": "Peter's Perfect Team"
+    "name": "Peter's Perfect Team",
+    "crest": "images/peters.png",
+    "initials": "PPT"
   },
   {
     "slug": "sierra",
-    "name": "Sierra Linda Cameltoes"
+    "name": "Sierra Linda Cameltoes",
+    "crest": "images/sierra.png",
+    "initials": "SLC"
   },
   {
     "slug": "puntos",
-    "name": "Los Puntos de Pina"
+    "name": "Los Puntos de Pina",
+    "crest": "images/puntos.png",
+    "initials": "LPP"
   },
   {
     "slug": "hobbit",
-    "name": "Hobbit"
+    "name": "Hobbit",
+    "crest": "images/hobbit.png",
+    "initials": "HOB"
   }
 ];
 

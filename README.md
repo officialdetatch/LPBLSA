@@ -12,12 +12,15 @@ Keep the folder structure intact.
   teams/<team>.html     one page per club: crest, roster, schedule
   news-writer.html      YOUR private tool for writing news (see below)
   roster-manager.html   YOUR private tool for rosters and free agents (see below)
+  standings-manager.html YOUR private tool for the standings table (see below)
   assets/news.js        the stories themselves - the only file you edit to post
   assets/roster-data.js every team's roster and the free agent board - edited via roster-manager.html, not by hand
+  assets/standings-data.js the standings table on the home page - edited via standings-manager.html, not by hand
   assets/style.css      all colours, type and layout
-  assets/app.js         menu, ticker, news rendering, roster tables, free agent filters
+  assets/app.js         menu, ticker, news rendering, standings, roster tables, free agent filters
   assets/writer.js      powers news-writer.html only
   assets/roster-manager.js  powers roster-manager.html only
+  assets/standings-manager.js  powers standings-manager.html only
   images/               your logos go here (see images/README.txt)
 
 ## Posting news - you are the only editor
@@ -59,13 +62,31 @@ renders without it.
 The scrolling gold wire at the top reads window.LEAGUE_TICKER at the bottom of
 the same file. Empty that array and it falls back to your news headlines.
 
-## Updating standings
-Standings are plain HTML, so you edit them by hand. They live in index.html
-inside <table class="standings-table">. Ranks 1, 2 and 3 get their gold,
-silver and bronze treatment from the row classes rank-1, rank-2, rank-3 and
-the medal classes g, s, b - move those classes when the table reorders. This
-one only changes on a new weekly export from your spreadsheet, not on a
-transaction, so it is not part of the roster manager below.
+## Updating standings - standings-manager.html
+Standings are no longer plain HTML you edit by hand. They live in
+assets/standings-data.js and you edit that file using
+standings-manager.html - never by editing the table in index.html
+directly, since app.js overwrites it with whatever standings-data.js says
+every time the page loads.
+
+Open standings-manager.html on your own computer. Every team is a row, in
+rank order - the top row is 1st place. Use the up/down arrows in the Move
+column to move a team to a different place in the table (a week's results
+flipping two teams is just two clicks), and click into any of the W, L, T,
+PCT, GB, PF, PA, Streak or Playoff boxes to edit it directly, the same way
+you edit stats in the roster manager. If a team is ever missing from the
+table - say you add a sixth team next season - a small panel appears above
+it so you can add it to the bottom; there's a matching Remove button on
+each row for a team that leaves the league.
+
+When you are done, press Download, and index.html picks up the new file the
+moment you replace it. Like the other two tools, this page is not linked
+from the site's menu, your work is saved in the browser if you close the
+tab mid-session, and there are links to jump to the roster manager or news
+writer. If you would rather it never goes online at all, delete
+standings-manager.html and assets/standings-manager.js before you upload -
+the home page keeps working off whatever assets/standings-data.js already
+says, it just loses the tool that edits it.
 
 ## Managing rosters and free agents - roster-manager.html
 Rosters and the free agent board are no longer baked into each team page by

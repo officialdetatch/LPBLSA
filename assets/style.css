@@ -556,6 +556,19 @@ tr.rank-3{ background:linear-gradient(90deg, rgba(205,127,50,.12), transparent);
 .stat-input:focus, .status-input:focus{ border-color:var(--gold); outline:none; }
 .status-input:not(:placeholder-shown){ border-color:var(--gold-dark); color:var(--gold-light); }
 .field-saved{ background-color:rgba(212,175,55,.28) !important; }
+.text-input{
+  background:var(--navy-900);
+  border:1px solid var(--line);
+  color:var(--white);
+  border-radius:var(--radius);
+  font-family:var(--font-body);
+  transition:border-color .15s ease, background-color .5s ease;
+  width:56px;
+  padding:7px 8px;
+  font-size:.82rem;
+  text-align:center;
+}
+.text-input:focus{ border-color:var(--gold); outline:none; }
 
 /* ---------- free agents ---------- */
 .fa-toolbar{
@@ -682,6 +695,13 @@ a.news-card:hover h3{ color:var(--gold-light); }
   background:var(--navy-800);
 }
 .article-figure img{ width:100%; }
+.article-figure video{
+  display:block;
+  width:100%;
+  height:min(60vh, 520px);
+  background:#000;
+  object-fit:contain;
+}
 .article-figure figcaption{
   padding:10px 14px;
   font-size:.82rem;
