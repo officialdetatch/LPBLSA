@@ -9,7 +9,7 @@ window.LEAGUE_NEWS = [
     "date": "Week 3 | Sept 22",
     "headline": "De Vuelta a la Vuelta",
     "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
-    "image": "images/news/danielcogeando.jpeg",
+    "image": "images/news/daniel-are-u-ok.mp4",
     "caption": "",
     "body": [
       "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes.",
@@ -25,7 +25,7 @@ window.LEAGUE_NEWS = [
     "date": "Week 3 | Sept 22",
     "headline": "Los Hobbits ya no son Virgen",
     "summary": "Dice la cancion \"Do you remember the 21st night of September\" Pues Hobbit si se recordaran, ya que entran al scoreboard oficial obteniendo su primera victoria!",
-    "image": "images/news/hobbitswin.jpeg",
+    "image": "images/news/IMG_8596.JPG",
     "caption": "",
     "body": [
       "Criture y sus hobbits por fin se estrenan como debe. Hobbit se llevó el partido ante Peter's Perfect Team con un marcador de 186.86 a 161.18, y con eso quedan empatados en la cima con Mugiwaras De Caimito.",
@@ -83,9 +83,9 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "Week 3 traera sorpresitas y drama en la liga",
+  "Week 3 traera sorpresitas",
   "Manager de Los Puntos de Piña es visto con grandes figuras",
-  "La Cancion de entrada del Hijo del Dr Wagner Jr es el banger mas grande del mundo",
+  "El yogurt de fresa con cantos de fresa adentro sabe a mierda",
   "Podran Los Hobbits vencer los Cameltoes?",
-  "Se ofrecen 1000 por quien tenga informacion de la cogera de Daniel"
+  "Que sera de la vida de Indy Flow?"
 ];
