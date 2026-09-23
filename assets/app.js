@@ -80,11 +80,19 @@
   /* ---------- news page: index + single article ---------- */
   function articleHTML(n) {
     var paras = n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
-    var pic = n.image
-      ? '<figure class="article-figure"><img src="' + esc(n.image) + '" alt="' +
-        esc(n.headline) + '" onerror="this.closest(\'figure\').remove()">' +
-        (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') + '</figure>'
-      : '';
+    var pic = n.video
+  ? '<figure class="article-figure"><video controls playsinline preload="metadata">' +
+    '<source src="' + esc(n.video) + '" type="video/mp4">' +
+    'Your browser does not support video playback.' +
+    '</video>' +
+    (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
+    '</figure>'
+  : n.image
+    ? '<figure class="article-figure"><img src="' + esc(n.image) + '" alt="' +
+      esc(n.headline) + '" onerror="this.closest(\'figure\').remove()">' +
+      (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
+      '</figure>'
+    : '';
     var others = stories().filter(function (s) { return s.id !== n.id; }).slice(0, 3);
     var more = others.length
       ? '<div class="section-head" style="margin-top:46px"><h2>More stories</h2></div>' +

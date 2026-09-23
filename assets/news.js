@@ -9,7 +9,7 @@ window.LEAGUE_NEWS = [
     "date": "Week 3 | Sept 22",
     "headline": "De Vuelta a la Vuelta",
     "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
-    "image": "images/news/daniel-are-u-ok.mp4",
+    "video": "images/news/daniel-are-u-ok.mp4",
     "caption": "",
     "body": [
       "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes.",
