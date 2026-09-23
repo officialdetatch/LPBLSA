@@ -460,62 +460,6 @@ window.LEAGUE_ROSTERS = {
         "last": 6.1
       },
       {
-        "name": "Bo Nix",
-        "status": null,
-        "team_abbr": "DEN",
-        "pos": "QB",
-        "fpts": 261.7,
-        "avg": 17.4,
-        "last": 14.2
-      },
-      {
-        "name": "49ers",
-        "status": null,
-        "team_abbr": "SF",
-        "pos": "D/ST",
-        "fpts": 91.8,
-        "avg": 5.4,
-        "last": 9
-      },
-      {
-        "name": "Ka'imi Fairbairn",
-        "status": null,
-        "team_abbr": "HOU",
-        "pos": "K",
-        "fpts": 139.5,
-        "avg": 9.3,
-        "last": 6
-      }
-    ],
-    "bench": [
-      {
-        "name": "Colston Loveland",
-        "status": null,
-        "team_abbr": "CHI",
-        "pos": "TE",
-        "fpts": 120,
-        "avg": 9.8,
-        "last": 0.8
-      },
-      {
-        "name": "Gunnar Helm",
-        "status": null,
-        "team_abbr": "TEN",
-        "pos": "TE",
-        "fpts": 91.7,
-        "avg": 5.8,
-        "last": 2.3
-      },
-      {
-        "name": "Malik Nabers",
-        "status": "Q",
-        "team_abbr": "NYG",
-        "pos": "WR",
-        "fpts": 177.5,
-        "avg": 11.8,
-        "last": 0.6
-      },
-      {
         "name": "Justin Herbert",
         "status": null,
         "team_abbr": "LAC",
@@ -541,6 +485,62 @@ window.LEAGUE_ROSTERS = {
         "fpts": 130.4,
         "avg": 8.6,
         "last": 7
+      }
+    ],
+    "bench": [
+      {
+        "name": "Bo Nix",
+        "status": null,
+        "team_abbr": "DEN",
+        "pos": "QB",
+        "fpts": 261.7,
+        "avg": 17.4,
+        "last": 14.2
+      },
+      {
+        "name": "49ers",
+        "status": null,
+        "team_abbr": "SF",
+        "pos": "D/ST",
+        "fpts": 91.8,
+        "avg": 5.4,
+        "last": 9
+      },
+      {
+        "name": "Ka'imi Fairbairn",
+        "status": null,
+        "team_abbr": "HOU",
+        "pos": "K",
+        "fpts": 139.5,
+        "avg": 9.3,
+        "last": 6
+      },
+      {
+        "name": "Colston Loveland",
+        "status": null,
+        "team_abbr": "CHI",
+        "pos": "TE",
+        "fpts": 120,
+        "avg": 8,
+        "last": 0.8
+      },
+      {
+        "name": "Malik Nabers",
+        "status": "Q",
+        "team_abbr": "NYG",
+        "pos": "WR",
+        "fpts": 177.5,
+        "avg": 12.7,
+        "last": 0.6
+      },
+      {
+        "name": "Chuba Hubbard",
+        "status": null,
+        "team_abbr": "CAR",
+        "pos": "RB",
+        "fpts": 190,
+        "avg": 12.7,
+        "last": 13.4
       }
     ],
     "ir": []
@@ -897,6 +897,15 @@ window.LEAGUE_ROSTERS = {
 
 window.FREE_AGENTS = [
   {
+    "name": "Gunnar Helm",
+    "status": null,
+    "team_abbr": "TEN",
+    "pos": "TE",
+    "fpts": 91.7,
+    "avg": 5.8,
+    "last": 2.3
+  },
+  {
     "name": "Matt Gay",
     "status": null,
     "team_abbr": "LV",
@@ -1138,15 +1147,6 @@ window.FREE_AGENTS = [
     "fpts": 83.1,
     "avg": 4.9,
     "last": 12.3
-  },
-  {
-    "name": "Chuba Hubbard",
-    "status": null,
-    "team_abbr": "CAR",
-    "pos": "RB",
-    "fpts": 172.5,
-    "avg": 10.1,
-    "last": 22.2
   },
   {
     "name": "T.J. Hockenson",
