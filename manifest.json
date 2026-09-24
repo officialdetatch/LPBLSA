@@ -1,0 +1,20 @@
+{
+  "name": "La Premier Bundesliga Serie A",
+  "short_name": "LPBLSA",
+  "icons": [
+    {
+      "src": "images/league-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/league-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
