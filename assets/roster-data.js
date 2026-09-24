@@ -629,22 +629,22 @@ window.LEAGUE_ROSTERS = {
         "last": 11
       },
       {
-        "name": "Matthew Stafford",
+        "name": "Jared Goff",
         "status": null,
-        "team_abbr": "LAR",
+        "team_abbr": "DET",
         "pos": "QB",
-        "fpts": 265,
-        "avg": 17.7,
-        "last": 26.98
+        "fpts": 255.5,
+        "avg": 17,
+        "last": 29.78
       },
       {
-        "name": "Texans",
+        "name": "Patriots D/ST",
         "status": null,
-        "team_abbr": "HOU",
+        "team_abbr": "NE",
         "pos": "D/ST",
-        "fpts": 108.8,
-        "avg": 6.4,
-        "last": 7
+        "fpts": 89.5,
+        "avg": 5.3,
+        "last": 20
       },
       {
         "name": "Cam Little",
@@ -665,15 +665,6 @@ window.LEAGUE_ROSTERS = {
         "fpts": 154,
         "avg": 11,
         "last": -0.1
-      },
-      {
-        "name": "Tee Higgins",
-        "status": null,
-        "team_abbr": "CIN",
-        "pos": "WR",
-        "fpts": 168.1,
-        "avg": 11.2,
-        "last": 12
       },
       {
         "name": "Emeka Egbuka",
@@ -710,6 +701,15 @@ window.LEAGUE_ROSTERS = {
         "fpts": 163.6,
         "avg": 10.9,
         "last": 3.4
+      },
+      {
+        "name": "Matthew Stafford",
+        "status": null,
+        "team_abbr": "LAR",
+        "pos": "QB",
+        "fpts": 89.5,
+        "avg": 17.7,
+        "last": 26.98
       }
     ],
     "ir": [
@@ -896,6 +896,24 @@ window.LEAGUE_ROSTERS = {
 };
 
 window.FREE_AGENTS = [
+  {
+    "name": "Texans",
+    "status": null,
+    "team_abbr": "HOU",
+    "pos": "D/ST",
+    "fpts": 108.8,
+    "avg": 6.4,
+    "last": 7
+  },
+  {
+    "name": "Tee Higgins",
+    "status": null,
+    "team_abbr": "CIN",
+    "pos": "WR",
+    "fpts": 168.1,
+    "avg": 11.2,
+    "last": 12
+  },
   {
     "name": "Gunnar Helm",
     "status": null,
@@ -1248,15 +1266,6 @@ window.FREE_AGENTS = [
     "last": 16.4
   },
   {
-    "name": "Patriots D/ST",
-    "status": null,
-    "team_abbr": "NE",
-    "pos": "D/ST",
-    "fpts": 101.7,
-    "avg": 6,
-    "last": 7
-  },
-  {
     "name": "Falcons D/ST",
     "status": null,
     "team_abbr": "ATL",
@@ -1462,15 +1471,6 @@ window.FREE_AGENTS = [
     "fpts": 150.6,
     "avg": 8.9,
     "last": 12.1
-  },
-  {
-    "name": "Jared Goff",
-    "status": null,
-    "team_abbr": "DET",
-    "pos": "QB",
-    "fpts": 276.5,
-    "avg": 16.3,
-    "last": 16.44
   },
   {
     "name": "Rhamondre Stevenson",
