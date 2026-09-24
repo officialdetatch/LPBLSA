@@ -5,11 +5,29 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "llegaron-los-refuerzos",
+    "date": "Week 3 | Sept 24",
+    "headline": "Llegaron Los Refuerzos",
+    "summary": "Ante lo que se veía venir como la peor semana de la temporada, Los Puntos de Piña no se quedaron de brazos cruzados.",
+    "image": "images\\news\\IMG_8646.jpeg",
+    "caption": "",
+    "body": [
+      "Tras ser el único equipo 0-2 de toda la liga, el manager Christopher se movió rápido, y vaya que se movió bien.",
+      "Se confirmó ver al manager en las prácticas rodeado de nombres bastante conocidos: Travis Kelce, Jalen Coker, Christian Watson y Jared Goff. Cuatro jugadores con experiencia que llegan justo cuando más se necesitaban.",
+      "Y no llegan con las manos vacías. Así vienen de su última semana:",
+      "Travis Kelce — 20.6 puntos en la semana 2 Jared Goff — 29.78 puntos en la semana 2 Christian Watson — 12.1 puntos en la semana 2 Jalen Coker — 10.6 puntos en la semana 2",
+      "Números que le pueden dar aire fresco a un roster que venía golpeado por lesiones y bajones de rendimiento.",
+      "Adicionalmente, el equipo dejó libre a la defensa de los Texans esta semana y entra bajo un contrato de un día la defensa de los Patriots, con la puerta abierta a que se convierta en algo de largo plazo si rinde.",
+      "Sí, el equipo perdió varios jugadores en el proceso, pero para bien. Entre las lesiones y el rendimiento flojo que venían dando algunas piezas, no había mucho que defender ahí. A veces lo mejor es ver caras familiares y con hambre de demostrar algo, y ver qué pueden construir juntos de cara al resto de la temporada.",
+      "Los Puntos de Piña se refuerzan justo a tiempo. Ahora toca ver si esto alcanza para evitar el 0-3."
+    ]
+  },
+  {
     "id": "de-vuelta-a-la-vuelta",
     "date": "Week 3 | Sept 22",
     "headline": "De Vuelta a la Vuelta",
     "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
-    "video": "images/news/daniel-are-u-ok.mp4",
+    "image": "",
     "caption": "",
     "body": [
       "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes.",
@@ -83,9 +101,9 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "Week 3 traera sorpresitas",
-  "Manager de Los Puntos de Piña es visto con grandes figuras",
-  "El yogurt de fresa con cantos de fresa adentro sabe a mierda",
-  "Podran Los Hobbits vencer los Cameltoes?",
-  "Que sera de la vida de Indy Flow?"
+  "Detatch va a firmar a Pikachutec si pierde esta semana",
+  "Taylor Swift va cantar el himno nacional en el proximo partido de Los Puntos de Piña",
+  "El dolor que tenia Daniel era por que viajo en un avion con sillas plasticas",
+  "A Criture se le exploto una goma haciendo un Amazon y lo arreglo con tape negro",
+  "Joby Weeks dona 3 millones para la creacion del website official"
 ];
