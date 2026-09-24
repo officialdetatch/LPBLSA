@@ -10,17 +10,22 @@ Keep the folder structure intact.
   news.html             all stories, and the full article view
   free-agents.html      searchable top 100 free agent board
   teams/<team>.html     one page per club: crest, roster, schedule
+  about.html            the league's story - one page, see below
+  contact.html          "join us / ask a question" page with a contact form
   news-writer.html      YOUR private tool for writing news (see below)
   roster-manager.html   YOUR private tool for rosters and free agents (see below)
   standings-manager.html YOUR private tool for the standings table (see below)
+  about-manager.html    YOUR private tool for the About page (see below)
   assets/news.js        the stories themselves - the only file you edit to post
   assets/roster-data.js every team's roster and the free agent board - edited via roster-manager.html, not by hand
   assets/standings-data.js the standings table on the home page - edited via standings-manager.html, not by hand
+  assets/about-data.js  the About page's title, intro and content blocks - edited via about-manager.html, not by hand
   assets/style.css      all colours, type and layout
-  assets/app.js         menu, ticker, news rendering, standings, roster tables, free agent filters
+  assets/app.js         menu, ticker, news rendering, standings, roster tables, free agent filters, about page, contact form
   assets/writer.js      powers news-writer.html only
   assets/roster-manager.js  powers roster-manager.html only
   assets/standings-manager.js  powers standings-manager.html only
+  assets/about-manager.js  powers about-manager.html only
   images/               your logos go here (see images/README.txt)
 
 ## Posting news - you are the only editor
@@ -88,6 +93,54 @@ standings-manager.html and assets/standings-manager.js before you upload -
 the home page keeps working off whatever assets/standings-data.js already
 says, it just loses the tool that edits it.
 
+## About page - about-manager.html
+The About page (about.html) is the story of the league - as much or as
+little as you want to write, with photos wherever you want them. It is
+edited with about-manager.html rather than by hand, the same idea as the
+other tools but simpler: instead of a list of separate stories, there is
+just one page, built from a stack of blocks.
+
+Open about-manager.html on your own computer. At the top, set the page
+title and the short gold intro line under it. Below that is the list of
+blocks - each one is either a paragraph or an image with an optional
+caption. Add as many as you like with the two "Add" buttons, use the
+up/down arrows to put them in the order you want them to read, and click
+into any box to edit it directly. To add a photo, upload the image file
+itself into images/ first (an images/about/ folder keeps things tidy) and
+point the Image path box at wherever you put it, exactly like adding a
+photo to a news story.
+
+When you are done, press Download about-data.js and drop the file into
+assets/, replacing the old one. Like the other tools, your work is saved in
+the browser if you close the tab mid-session, this page is not linked from
+the site's menu, and there are links to jump to the other three tools. If
+you would rather it never goes online at all, delete about-manager.html and
+assets/about-manager.js before you upload - about.html keeps working off
+whatever assets/about-data.js already says, it just loses the tool that
+edits it.
+
+## Contact page
+contact.html is a "join us / ask a question" page with a form that emails
+whatever the person types straight to info@lpblsa.vip - there is no server
+of your own involved. That needs a free third-party service called
+Formspree to actually deliver the email, and it takes about five minutes
+to switch on:
+
+  1. Go to formspree.io and sign up using info@lpblsa.vip
+  2. Create a new form and confirm the verification email it sends you
+  3. Copy the endpoint it gives you - it looks like https://formspree.io/f/xxxxxxx
+  4. Open contact.html, find the <form ... action="..."> near the top of
+     the page body, and paste your endpoint in place of
+     https://formspree.io/f/YOUR_FORM_ID
+
+Until you do that, the form will politely tell whoever submits it to email
+you directly instead - it will not silently fail. The mailto link under the
+form (and the Discord link next to it) work immediately either way, no
+setup required. Formspree's free plan covers a generous number of
+submissions a month, which should be more than enough for a league contact
+form; if you ever want a different inbox, redo the steps above with the new
+address and swap in the new endpoint.
+
 ## Managing rosters and free agents - roster-manager.html
 Rosters and the free agent board are no longer baked into each team page by
 hand. They all read from one file, assets/roster-data.js, and you edit that
@@ -131,6 +184,14 @@ posting news and managing the roster. If you would rather it never goes
 online at all, delete roster-manager.html and assets/roster-manager.js
 before you upload - the team and free agent pages keep working off whatever
 assets/roster-data.js already says, they just lose the tool that edits it.
+
+## Footer social links
+Every page's footer has three round icons - Instagram, Threads and Discord -
+linking to the league's official pages. They are plain HTML, the same three
+links repeated in every file, so if a URL ever changes, search the project
+for that link (for example discord.gg) and replace it everywhere it
+appears. The icons themselves are inline SVG code sitting right next to the
+links, not image files, so there is nothing to upload for these.
 
 ## Badge shapes
 Every crest can be a pointed shield or a circle. The league logo in the header

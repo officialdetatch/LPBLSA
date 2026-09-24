@@ -636,11 +636,29 @@ tr.rank-3{ background:linear-gradient(90deg, rgba(205,127,50,.12), transparent);
 .site-footer .wrap{
   display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
 }
+.footer-social{
+  display:flex; gap:10px; align-items:center;
+}
+.social-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  color:var(--mute);
+  transition:border-color .15s ease, color .15s ease, background-color .15s ease;
+}
+.social-link svg{ width:17px; height:17px; }
+.social-link:hover{
+  color:var(--gold-light);
+  border-color:var(--gold-dark);
+  background:rgba(212,175,55,.12);
+}
 
 @media (max-width:600px){
   .hero{ padding:38px 0 30px; }
   .section{ padding:38px 0; }
   table{ font-size:.86rem; }
+  .hide-mobile{ display:none; }
 }
 
 /* ---------- news cards as links ---------- */

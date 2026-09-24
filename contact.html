@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>News | La Premier Bundesliga Serie A</title>
+  <title>Contact | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,21 +50,64 @@
   <main>
   <section class="hero" style="padding:44px 0 34px">
     <div class="wrap">
-      <div class="hero-kicker">Rincon del Vago</div>
-      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem)">Noticias<span class="accent"> de la Liga</span></h1>
-      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Reportes o cualquier cosa relevante las pondremos aqui</p>
+      <div class="hero-kicker">Contactanos</div>
+      <h1 style="font-size:clamp(1.7rem,4vw,2.6rem)">Quieres dar join<br class="hide-mobile"> pal proximo año, <span class="accent">o tienes otra pregunta?</span></h1>
+      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Contactate con nosotros aqui. Probablemente no te respondan tho.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap" id="newsPage"></div>
+    <div class="wrap" style="max-width:640px">
+      <form id="contactForm" class="editor-panel" action="https://formspree.io/f/mgavznle" method="POST">
+        <!--
+          SETUP: this form posts to Formspree so a real email reaches
+          info@lpblsa.vip with no server of your own. Free, five minutes:
+            1. Go to formspree.io and sign up with info@lpblsa.vip
+            2. Create a new form, confirm the verification email
+            3. Copy the endpoint it gives you (https://formspree.io/f/xxxxxxx)
+            4. Paste it in as the action= above, replacing YOUR_FORM_ID
+          Until you do that last step, the form will show an error when
+          someone submits it - the mailto link below always works meanwhile.
+        -->
+        <div class="field">
+          <label for="cfName">Nombre</label>
+          <input id="cfName" name="name" type="text" required>
+        </div>
+        <div class="field">
+          <label for="cfEmail">Email</label>
+          <input id="cfEmail" name="email" type="email" required>
+        </div>
+        <div class="field">
+          <label for="cfReason">Que quieres saber?</label>
+          <select id="cfReason" name="reason">
+            <option>Dar join</option>
+            <option>Pregunta sobre las reglas</option>
+            <option>Pregunta sobre el roster</option>
+            <option>Algo más</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cfMessage">Mensaje</label>
+          <textarea id="cfMessage" name="message" rows="5" required></textarea>
+        </div>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="New message from the lpblsa.vip contact form">
+        <button class="btn btn-solid" type="submit" id="cfSubmit">Send</button>
+        <p class="section-note" id="cfStatus" style="margin-top:14px" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="section-note" style="margin-top:22px;text-align:center">
+        Prefieres contactarte via email? Escribenos a <a href="mailto:info@lpblsa.vip">info@lpblsa.vip</a>,
+        o siguenos en <a href="https://www.instagram.com/lpblsa" target="_blank" rel="noopener noreferrer">Instagram</a>.
+      </p>
+    </div>
   </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <div>La Premier Bundesliga Serie A &middot; Cinco Equipos Un Ganador.</div>
-      <div>EST. 2026</div>
+      <div>EST 2026</div>
       <div class="footer-social" aria-label="Follow the league">
         <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>
@@ -81,7 +124,9 @@
 
   <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
   <script src="assets/news.js"></script>
+  <script src="assets/roster-data.js"></script>
+  <script src="assets/standings-data.js"></script>
+  <script src="assets/about-data.js"></script>
   <script src="assets/app.js"></script>
-  
 </body>
 </html>

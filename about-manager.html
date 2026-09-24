@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Standings manager | La Premier Bundesliga Serie A</title>
+  <title>About page manager | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,73 +52,64 @@
   <section class="hero" style="padding:38px 0 28px">
     <div class="wrap">
       <div class="hero-kicker">Private tool &middot; not linked from the site</div>
-      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">Standings <span class="accent">manager</span></h1>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">About page <span class="accent">manager</span></h1>
     </div>
   </section>
 
   <section class="section" style="padding-top:34px">
     <div class="wrap">
       <div class="writer-note">
-        This is the standings table from the home page &mdash; one row per team, in
-        rank order. Use the <b>&uarr; &darr;</b> arrows to move a team to a
-        different place in the table, and click into any of the number or text
-        boxes to edit W, L, T, PCT, GB, PF, PA, Streak or Playoff &mdash; type
-        the new value, then click elsewhere (or hit Tab/Enter) to save it. When
-        you are done, press <b>Download standings-data.js</b> and drop the file
-        into <code>assets/</code>, replacing the old one. Nothing changes on the
-        public site until you do. Visitors never see this page unless you send
-        them the link &mdash; delete <code>standings-manager.html</code> and
-        <code>assets/standings-manager.js</code> before uploading if you would
-        rather it never leaves your computer.
+        This is the one-page story of the league that visitors see at
+        <code>about.html</code>. Add the whole thing as a stack of blocks &mdash;
+        paragraphs and images, in any order you like. Reorder a block with the
+        <b>&uarr; &darr;</b> arrows, edit any text or image path directly, then
+        click elsewhere to save it. When you are done, press
+        <b>Download about-data.js</b> and drop the file into <code>assets/</code>,
+        replacing the old one. For an image block, upload the photo itself into
+        <code>images/</code> first (an <code>images/about/</code> folder keeps
+        things tidy) and point the Image path box at it, the same way news
+        photos work. Nothing changes on the public site until you replace the
+        file. Visitors never see this page unless you send them the link.
       </div>
 
-      <div class="writer-note hidden" id="smDraftNote">
+      <div class="writer-note hidden" id="amDraftNote">
         You have unsaved changes from a previous session, loaded below.
       </div>
 
       <p class="section-note">
-        <a href="roster-manager.html">&rarr; Go to the roster manager</a> to draft, drop or trade players,
-        <a href="news-writer.html">go to the news writer</a> to post a story, or
-        <a href="about-manager.html">go to the about page manager</a>.
+        <a href="news-writer.html">&rarr; Go to the news writer</a>,
+        <a href="roster-manager.html">the roster manager</a>, or
+        <a href="standings-manager.html">the standings manager</a>.
       </p>
 
-      <div class="editor-panel hidden" id="smAddPanel">
-        <h3>Add a team to the standings</h3>
-        <p class="section-note" style="margin-top:0">
-          Every team in <code>assets/roster-data.js</code> should have a row here. These are missing:
-        </p>
-        <div class="writer-grid">
-          <div class="field">
-            <label for="smAddSelect">Team</label>
-            <select id="smAddSelect"></select>
-          </div>
+      <div class="editor-panel">
+        <h3>Title &amp; intro</h3>
+        <div class="field">
+          <label for="amTitle">Page title</label>
+          <input id="amTitle" type="text" placeholder="About La Premier Bundesliga Serie A">
         </div>
-        <button class="btn btn-solid btn-small" id="smAddBtn">Add to bottom of table</button>
+        <div class="field" style="margin-bottom:0">
+          <label for="amLede">Intro line (shown in gold under the title)</label>
+          <input id="amLede" type="text" placeholder="The story of the league, in the owners&#x27; own words.">
+        </div>
       </div>
 
       <div class="section-head" style="margin-top:34px">
-        <h2>Standings</h2>
-        <span class="section-note">Top row is 1st place.</span>
+        <h2>Page content</h2>
+        <span class="section-note">Top block appears first on the page.</span>
       </div>
-      <div class="table-scroll">
-        <table>
-          <thead><tr>
-            <th>RK</th><th>Move</th><th>Team</th>
-            <th class="num">W</th><th class="num">L</th><th class="num">T</th>
-            <th class="num">PCT</th><th class="num">GB</th>
-            <th class="num">PF</th><th class="num">PA</th>
-            <th class="num">Streak</th><th class="num">Playoff</th><th></th>
-          </tr></thead>
-          <tbody id="smBody"></tbody>
-        </table>
+      <div id="amBlocks"></div>
+      <div class="news-edit-row" style="margin-top:14px">
+        <button class="btn btn-small" id="amAddP">+ Add paragraph</button>
+        <button class="btn btn-small" id="amAddImg">+ Add image</button>
       </div>
 
-      <div class="section-head" style="margin-top:34px"><h2>Your standings-data.js</h2></div>
-      <textarea id="smOutput" readonly spellcheck="false"></textarea>
+      <div class="section-head" style="margin-top:34px"><h2>Your about-data.js</h2></div>
+      <textarea id="amOutput" readonly spellcheck="false"></textarea>
       <div class="news-edit-row" style="margin-top:12px">
-        <button class="btn btn-solid btn-small" id="smDownload">Download standings-data.js</button>
-        <button class="btn btn-small" id="smCopy">Copy to clipboard</button>
-        <button class="btn btn-ghost btn-small" id="smReset">Discard changes</button>
+        <button class="btn btn-solid btn-small" id="amDownload">Download about-data.js</button>
+        <button class="btn btn-small" id="amCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="amReset">Discard changes</button>
       </div>
     </div>
   </section>
@@ -133,9 +124,8 @@
 
   <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
   <script src="assets/news.js"></script>
-  <script src="assets/roster-data.js"></script>
-  <script src="assets/standings-data.js"></script>
+  <script src="assets/about-data.js"></script>
   <script src="assets/app.js"></script>
-  <script src="assets/standings-manager.js"></script>
+  <script src="assets/about-manager.js"></script>
 </body>
 </html>

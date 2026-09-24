@@ -123,6 +123,54 @@
       : '<tr><td colspan="11" class="section-note">No standings posted yet. Add one in assets/standings-data.js.</td></tr>';
   }
 
+  /* ---------- about page ---------- */
+  var aboutBody = document.getElementById('aboutBody');
+  if (aboutBody) {
+    var about = window.LEAGUE_ABOUT || {};
+    var aboutTitleEl = document.getElementById('aboutTitle');
+    var aboutLedeEl = document.getElementById('aboutLede');
+    if (aboutTitleEl && about.title) aboutTitleEl.textContent = about.title;
+    if (aboutLedeEl) aboutLedeEl.textContent = about.lede || '';
+    var aboutBlocks = about.blocks || [];
+    aboutBody.innerHTML = aboutBlocks.length ? aboutBlocks.map(function (b) {
+      if (b.type === 'image' && b.src) {
+        return '<figure class="article-figure"><img src="' + esc(b.src) + '" alt="' + esc(b.caption || '') + '">' +
+          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+      }
+      return '<p>' + esc(b.text || '') + '</p>';
+    }).join('') : '<p class="section-note">Nothing here yet &mdash; add some in about-manager.html.</p>';
+  }
+
+  /* ---------- contact form ---------- */
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    var cfStatus = document.getElementById('cfStatus');
+    var cfSubmit = document.getElementById('cfSubmit');
+    contactForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (/YOUR_FORM_ID/.test(contactForm.action)) {
+        cfStatus.textContent = 'This form is not connected to an inbox yet - please email info@lpblsa.vip directly for now.';
+        return;
+      }
+      cfSubmit.disabled = true;
+      cfStatus.textContent = 'Sending...';
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          cfStatus.textContent = 'Thanks - your message is on its way. We will get back to you soon.';
+          contactForm.reset();
+        } else {
+          cfStatus.textContent = 'Something went wrong sending that. Please try again or email info@lpblsa.vip.';
+        }
+      }).catch(function () {
+        cfStatus.textContent = 'Something went wrong sending that. Please try again or email info@lpblsa.vip.';
+      }).then(function () { cfSubmit.disabled = false; });
+    });
+  }
+
   /* ---------- news page: index + single article ---------- */
   function articleHTML(n) {
     var paras = n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
