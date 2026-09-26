@@ -141,6 +141,72 @@
     }).join('') : '<p class="section-note">Nothing here yet &mdash; add some in about-manager.html.</p>';
   }
 
+  /* ---------- custom select dropdowns (contact page and anywhere else) ---------- */
+  var customSelects = document.querySelectorAll('.custom-select');
+  for (var csi = 0; csi < customSelects.length; csi++) {
+    (function (wrap) {
+      var btn = wrap.querySelector('.custom-select-btn');
+      var valueEl = wrap.querySelector('.custom-select-value');
+      var list = wrap.querySelector('.custom-select-list');
+      var hiddenField = wrap.querySelector('input[type="hidden"]');
+      var options = Array.prototype.slice.call(list.querySelectorAll('li'));
+      var activeIndex = 0;
+      for (var oi = 0; oi < options.length; oi++) {
+        if (options[oi].getAttribute('aria-selected') === 'true') { activeIndex = oi; break; }
+      }
+
+      function highlight(i) {
+        for (var j = 0; j < options.length; j++) { options[j].classList.toggle('active', j === i); }
+      }
+      function close() {
+        wrap.classList.remove('open');
+        list.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function open() {
+        wrap.classList.add('open');
+        list.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        highlight(activeIndex);
+        list.focus();
+      }
+      function choose(i) {
+        activeIndex = i;
+        for (var j = 0; j < options.length; j++) { options[j].setAttribute('aria-selected', j === i ? 'true' : 'false'); }
+        valueEl.textContent = options[i].textContent;
+        if (hiddenField) hiddenField.value = options[i].getAttribute('data-value') || options[i].textContent;
+        close();
+        btn.focus();
+      }
+
+      btn.addEventListener('click', function () {
+        if (wrap.classList.contains('open')) { close(); } else { open(); }
+      });
+      btn.addEventListener('keydown', function (ev) {
+        if (ev.key === 'ArrowDown' || ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          open();
+        }
+      });
+      list.addEventListener('keydown', function (ev) {
+        if (ev.key === 'ArrowDown') { ev.preventDefault(); activeIndex = Math.min(activeIndex + 1, options.length - 1); highlight(activeIndex); }
+        else if (ev.key === 'ArrowUp') { ev.preventDefault(); activeIndex = Math.max(activeIndex - 1, 0); highlight(activeIndex); }
+        else if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); choose(activeIndex); }
+        else if (ev.key === 'Escape') { close(); btn.focus(); }
+        else if (ev.key === 'Tab') { close(); }
+      });
+      for (var oi2 = 0; oi2 < options.length; oi2++) {
+        (function (idx) {
+          options[idx].addEventListener('click', function () { choose(idx); });
+          options[idx].addEventListener('mouseenter', function () { activeIndex = idx; highlight(idx); });
+        })(oi2);
+      }
+      document.addEventListener('click', function (ev) {
+        if (!wrap.contains(ev.target)) close();
+      });
+    })(customSelects[csi]);
+  }
+
   /* ---------- contact form ---------- */
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {

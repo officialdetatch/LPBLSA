@@ -84,13 +84,20 @@
           <input id="cfEmail" name="email" type="email" required>
         </div>
         <div class="field">
-          <label for="cfReason">Que quieres saber?</label>
-          <select id="cfReason" name="reason">
-            <option>Dar join</option>
-            <option>Pregunta sobre las reglas</option>
-            <option>Pregunta sobre el roster</option>
-            <option>Algo más</option>
-          </select>
+          <label for="cfReasonBtn">Que quieres saber?</label>
+          <div class="custom-select">
+            <button type="button" class="custom-select-btn" id="cfReasonBtn" aria-haspopup="listbox" aria-expanded="false">
+              <span class="custom-select-value">Dar join</span>
+              <svg class="custom-select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <ul class="custom-select-list" role="listbox" tabindex="-1" hidden>
+              <li role="option" aria-selected="true" data-value="Dar join">Dar join</li>
+              <li role="option" aria-selected="false" data-value="Pregunta sobre las reglas">Pregunta sobre las reglas</li>
+              <li role="option" aria-selected="false" data-value="Pregunta sobre el roster">Pregunta sobre el roster</li>
+              <li role="option" aria-selected="false" data-value="Algo más">Algo más</li>
+            </ul>
+            <input type="hidden" id="cfReason" name="reason" value="Dar join">
+          </div>
         </div>
         <div class="field">
           <label for="cfMessage">Mensaje</label>
@@ -121,7 +128,7 @@
         <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" font-family="Arial, sans-serif">@</text></svg>
         </a>
-        <a class="social-link" href="https://discord.gg/mVBmJYfrp" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+        <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="11" r="1" fill="currentColor" stroke="none"/></svg>
         </a>
       </div>
