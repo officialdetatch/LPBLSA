@@ -5,6 +5,19 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "tenemos-nuevo-discord",
+    "date": "Week 3 | Sept 25",
+    "headline": "Tenemos nuevo Discord!",
+    "summary": "La Premier Bundesliga Serie A ya tiene nuevo servidor de Discord!",
+    "image": "images\\news\\5968756.png",
+    "caption": "",
+    "body": [
+      "Únete para estar al día con la liga, hablar con los demás managers y compartir la competencia durante la temporada.",
+      "Entra aquí: https://discord.gg/xUnWp7ayS",
+      "Nos vemos en Discord!"
+    ]
+  },
+  {
     "id": "llegaron-los-refuerzos",
     "date": "Week 3 | Sept 24",
     "headline": "Llegaron Los Refuerzos",
@@ -101,8 +114,8 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
+  "Tenemos Discord nuevo! Ve a las noticias para el link",
   "Detatch va a firmar a Pikachutec si pierde esta semana",
-  "Taylor Swift va cantar el himno nacional en el proximo partido de Los Puntos de Piña",
   "El dolor que tenia Daniel era por que viajo en un avion con sillas plasticas",
   "A Criture se le exploto una goma haciendo un Amazon y lo arreglo con tape negro",
   "Joby Weeks dona 3 millones para la creacion del website official"
