@@ -58,7 +58,23 @@ window.LEAGUE_NEWS = [
       },
       {
         "type": "p",
-        "text": "1. J. Gibbs (Mugiwaras De Caimito) — 37.9 pts\n2. B. Robinson (Los Puntos de Piña) — 34.3 pts\n3. B. Purdy (Los Puntos de Piña) — 31.3 pts\n4. J. Smith-Njigba (Sierra Linda Cameltoes) — 30.4 pts\n5. S. Darnold (free agent) — 27.7 pts"
+        "text": "1. J. Gibbs (Mugiwaras De Caimito) — 37.9 pts"
+      },
+      {
+        "type": "p",
+        "text": "2. B. Robinson (Los Puntos de Piña) — 34.3 pts"
+      },
+      {
+        "type": "p",
+        "text": "3. B. Purdy (Los Puntos de Piña) — 31.3 pts"
+      },
+      {
+        "type": "p",
+        "text": "4. J. Smith-Njigba (Sierra Linda Cameltoes) — 30.4 pts"
+      },
+      {
+        "type": "p",
+        "text": "5. S. Darnold (free agent) — 27.7 pts"
       },
       {
         "type": "p",
@@ -70,15 +86,31 @@ window.LEAGUE_NEWS = [
       },
       {
         "type": "p",
-        "text": "1. Mugiwaras De Caimito (Daniel Heredia) — 2-0-0\n2. Hobbit (Jose Cruz) — 1-1-0\n3. Peter's Perfect Team (Peter Cruz) — 1-1-0\n4. Los Puntos de Piña (Christopher Ramirez) — 1-2-0\n5. Sierra Linda Cameltoes (George Sanchez) — 1-2-0"
+        "text": "1. Mugiwaras De Caimito (Daniel Heredia) — 2-0-0"
       },
       {
         "type": "p",
-        "text": "Con esta victoria, Los Puntos de Piña sale del último lugar y se mete de lleno en la pelea de la mitad de tabla."
+        "text": "2. Hobbit (Jose Cruz) — 1-1-0"
+      },
+      {
+        "type": "p",
+        "text": "3. Peter's Perfect Team (Peter Cruz) — 1-1-0"
+      },
+      {
+        "type": "p",
+        "text": "4. Los Puntos de Piña (Christopher Ramirez) — 1-2-0"
+      },
+      {
+        "type": "p",
+        "text": "5. Sierra Linda Cameltoes (George Sanchez) — 1-2-0"
       },
       {
         "type": "h",
         "text": "La Semana mas pareja esta por venir!"
+      },
+      {
+        "type": "p",
+        "text": "Con esta victoria, Los Puntos de Piña sale del último lugar y se mete de lleno en la pelea de la mitad de tabla."
       },
       {
         "type": "p",
