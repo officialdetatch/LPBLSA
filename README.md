@@ -233,3 +233,61 @@ Change them there and the whole site follows.
 It should not happen any more - each piece of the page checks for its own HTML
 before running. But if you remove a whole section, also remove the matching
 block in assets/app.js to keep things tidy.
+
+## Email alerts for new news
+When you add a NEW story to assets/news.js and push it, everyone who signed up
+gets an email with the headline, summary, photo and a link. It runs on GitHub
+(Actions) and sends through Brevo (free plan, 300 emails a day). You post news
+exactly the way you always did - nothing changes there.
+
+How it decides to send:
+  - Only a NEW story id triggers an email. Editing an old story, or changing
+    the ticker, sends nothing.
+  - It waits until the live site shows the story, so the link never 404s.
+  - A story is never emailed twice (unless you force it by hand).
+  - More than 3 new stories in one push = it refuses, in case something is off.
+
+Files:
+  .github/workflows/news-alert.yml   the trigger
+  scripts/send-news-alert.mjs        builds and sends the email (words in COPY)
+  assets/alerts.js                   the signup box on the site (words in COPY)
+
+### One-time setup (about 20 minutes)
+1. Create a free account at brevo.com. Brevo may ask a few questions and
+   approve the account before it lets you send - do this first.
+2. Contacts > Lists: create a list (e.g. "LPBLSA News Alerts"). Write down
+   its ID number.
+3. Add your domain: Brevo > Senders, domains & dedicated IPs > Domains >
+   add lpblsa.vip. Brevo shows DNS records; add them at wherever lpblsa.vip's
+   DNS lives. ADD them next to your existing Zoho records - do not delete or
+   replace the Zoho MX or SPF records - then click Authenticate in Brevo.
+4. Senders: add newsletter@lpblsa.vip. Brevo emails a code to that address,
+   so create that mailbox in Zoho first.
+5. Signup form: Contacts > Forms > create a Subscription form, attach it to
+   your list, turn on double opt-in (confirmation email), publish it. Open its
+   share / embed code and copy the URL inside action="https://....sibforms.com/
+   serve/...". Paste it into FORM_ACTION at the top of assets/alerts.js. Until
+   you do, the signup box stays hidden.
+6. API key: Brevo > SMTP & API > API keys > generate. If Brevo's "authorized
+   IPs" security setting is on, turn it off - GitHub's servers change address.
+7. GitHub repo > Settings > Secrets and variables > Actions:
+     Secrets tab   -> New secret    BREVO_API_KEY   = the key from step 6
+     Variables tab -> New variable  BREVO_LIST_ID   = the list number from step 2
+   (Optional variables: SENDER_EMAIL, SENDER_NAME, REPLY_TO. Defaults are
+   newsletter@lpblsa.vip, "La Premier Bundesliga Serie A", info@lpblsa.vip.)
+8. Sign yourself up with the box on the site to make sure it works.
+
+### Testing safely (Actions tab > "News alert email" > Run workflow)
+  story_id = any id from assets/news.js, e.g. resumen-de-la-semana
+  mode     = dry-run  builds the email only; download it from the run's
+                      Artifacts and open it in a browser
+           = test     emails ONLY the address you type in test_email
+           = send     emails the whole list (use for a manual resend)
+Try dry-run first, then test, and only then rely on the automatic sending.
+
+### Good to know
+  - Free-plan emails carry a small "Sent with Brevo" footer.
+  - The free plan sends 300 emails per day. If the list ever passes 300
+    people, the extra ones need a paid plan or a resend the next day.
+  - Never put subscriber emails in this repo - it is public. Brevo holds them.
+  - If a run fails, GitHub emails you; the log says why in plain words.

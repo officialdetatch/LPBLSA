@@ -1,0 +1,64 @@
+# Emails your subscribers when a NEW story is added to assets/news.js.
+# Setup steps are in README.md ("Email alerts for new news").
+name: News alert email
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - assets/news.js
+  workflow_dispatch:
+    inputs:
+      story_id:
+        description: "Story id from assets/news.js (e.g. resumen-de-la-semana)"
+        required: true
+      mode:
+        description: "dry-run = build a preview only | test = email only the address below | send = email the whole list"
+        type: choice
+        options: [dry-run, test, send]
+        default: dry-run
+      test_email:
+        description: "Your address (only used in test mode)"
+        required: false
+      force:
+        description: "Send even if this story was already emailed"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: news-alert
+  cancel-in-progress: false
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Send news alert
+        run: node scripts/send-news-alert.mjs
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_LIST_ID: ${{ vars.BREVO_LIST_ID }}
+          SENDER_EMAIL: ${{ vars.SENDER_EMAIL }}
+          SENDER_NAME: ${{ vars.SENDER_NAME }}
+          REPLY_TO: ${{ vars.REPLY_TO }}
+          BEFORE_SHA: ${{ github.event.before }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'send' }}
+          STORY_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.story_id || '' }}
+          TEST_EMAIL: ${{ inputs.test_email }}
+          FORCE: ${{ inputs.force }}
+
+      - name: Keep dry-run previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: email-preview
+          path: email-preview-*.html
+          if-no-files-found: ignore
