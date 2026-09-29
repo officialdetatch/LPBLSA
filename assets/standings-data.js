@@ -8,62 +8,62 @@
 window.LEAGUE_STANDINGS = [
   {
     "team": "mugiwaras",
-    "w": 1,
+    "w": 2,
     "l": 0,
     "t": 0,
     "pct": "1",
     "gb": "--",
-    "pf": 189.78,
-    "pa": 136,
-    "streak": "W1",
-    "playoff": "92%"
+    "pf": 360.38,
+    "pa": 285.64,
+    "streak": "W2",
+    "playoff": "95%"
   },
   {
     "team": "hobbit",
     "w": 1,
-    "l": 0,
+    "l": 1,
     "t": 0,
-    "pct": "1",
-    "gb": "--",
-    "pf": 186.86,
-    "pa": 161.18,
-    "streak": "W1",
-    "playoff": "93%"
+    "pct": ".500",
+    "gb": "1",
+    "pf": 342.52,
+    "pa": 340.62,
+    "streak": "L1",
+    "playoff": "90%"
   },
   {
     "team": "peters",
     "w": 1,
     "l": 1,
     "t": 0,
-    "pct": "1",
-    "gb": "0.5",
+    "pct": ".500",
+    "gb": "1",
     "pf": 315.1,
     "pa": 362.88,
     "streak": "L1",
-    "playoff": "83%"
+    "playoff": "82%"
+  },
+  {
+    "team": "puntos",
+    "w": 1,
+    "l": 2,
+    "t": 0,
+    "pct": ".333",
+    "gb": "1.5",
+    "pf": 453.54,
+    "pa": 491.06,
+    "streak": "W1",
+    "playoff": "63%"
   },
   {
     "team": "sierra",
     "w": 1,
-    "l": 1,
-    "t": 0,
-    "pct": "0",
-    "gb": "0.5",
-    "pf": 285.64,
-    "pa": 292.02,
-    "streak": "W1",
-    "playoff": "81%"
-  },
-  {
-    "team": "puntos",
-    "w": 0,
     "l": 2,
     "t": 0,
-    "pct": "0",
+    "pct": ".333",
     "gb": "1.5",
-    "pf": 274.1,
-    "pa": 335.4,
-    "streak": "L2",
-    "playoff": "52%"
+    "pf": 435.28,
+    "pa": 462.62,
+    "streak": "L1",
+    "playoff": "69%"
   }
 ];

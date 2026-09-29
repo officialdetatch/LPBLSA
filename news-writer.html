@@ -59,11 +59,18 @@
   <section class="section" style="padding-top:34px">
     <div class="wrap">
       <div class="writer-note">
-        Write your stories here, then press <b>Download news.js</b> and drop the file into
-        <code>assets/</code>, replacing the old one. Nothing changes on the public site until you do.
-        Visitors never see this page unless you send them the link &mdash; delete
-        <code>news-writer.html</code> and <code>assets/writer.js</code> before uploading if you would
-        rather it never leaves your computer.
+        Write a story as a stack of blocks &mdash; paragraphs, subtitles, images and videos, mixed
+        in whatever order you like. Add as many as you want with the buttons below the block list,
+        use the <b>&uarr; &darr;</b> arrows to reorder them, and click into any box to edit it
+        directly. For an image or video, upload the file itself into <code>images/</code> first (an
+        <code>images/news/</code> folder keeps things tidy) and point the path box at it. Any
+        http(s) link typed into a paragraph &mdash; like a Discord invite &mdash; becomes a real
+        clickable link automatically, no extra formatting needed. When you are done, press
+        <b>Download news.js</b> and drop the file into <code>assets/</code>, replacing the old one.
+        Nothing changes on the public site until you do. Visitors never see this page unless you
+        send them the link &mdash; delete <code>news-writer.html</code> and
+        <code>assets/writer.js</code> before uploading if you would rather it never leaves your
+        computer.
       </div>
 
       <div class="writer-note hidden" id="wDraftNote">
@@ -88,24 +95,20 @@
         </div>
         <div class="field">
           <label for="wSummary">Summary &mdash; the only part shown on the home page</label>
-          <input id="wSummary" type="text" placeholder="One or two lines that make someone click.">
+          <input id="wSummary" type="text" placeholder="One or two lines that make someone click. Left blank, the first paragraph below is used instead.">
         </div>
-        <div class="field">
-          <label for="wBody">Full story &mdash; leave a blank line between paragraphs</label>
-          <textarea id="wBody" rows="9" placeholder="Write the article here.
 
-Blank line starts a new paragraph."></textarea>
+        <div class="field" style="margin-bottom:8px">
+          <label>Story content &mdash; top block appears first</label>
         </div>
-        <div class="writer-grid">
-          <div class="field">
-            <label for="wImage">Image path (optional)</label>
-            <input id="wImage" type="text" placeholder="images/news/week2.jpg">
-          </div>
-          <div class="field">
-            <label for="wCaption">Image caption (optional)</label>
-            <input id="wCaption" type="text" placeholder="Gibbs again.">
-          </div>
+        <div id="wBlocks"></div>
+        <div class="news-edit-row" style="margin:10px 0 20px">
+          <button class="btn btn-small" id="wAddP" type="button">+ Add paragraph</button>
+          <button class="btn btn-small" id="wAddH" type="button">+ Add subtitle</button>
+          <button class="btn btn-small" id="wAddImg" type="button">+ Add image</button>
+          <button class="btn btn-small" id="wAddVideo" type="button">+ Add video</button>
         </div>
+
         <div class="field">
           <label for="wId">Link name (optional &mdash; made from the headline if blank)</label>
           <input id="wId" type="text" placeholder="mugiwaras-week-2">

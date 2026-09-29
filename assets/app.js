@@ -18,6 +18,41 @@
   function slug(s) {
     return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   }
+
+  /* Turn any http(s)/www link typed in plain text into a real clickable
+     link. Runs on already-escaped text, so it is safe against markup. */
+  function linkify(rawText) {
+    var text = esc(rawText);
+    return text.replace(/(https?:\/\/[^\s<]+|www\.[^\s<]+)/gi, function (match) {
+      var trail = '';
+      var m = match.match(/^(.*?)([.,!?;:)\]]+)$/);
+      if (m) { match = m[1]; trail = m[2]; }
+      var href = /^https?:\/\//i.test(match) ? match : 'https://' + match;
+      return '<a href="' + href + '" target="_blank" rel="noopener noreferrer">' + match + '</a>' + trail;
+    });
+  }
+
+  /* Shared renderer for the "content blocks" model used by the About page
+     and by news articles: an ordered list of paragraphs, subtitles,
+     images and videos. */
+  function renderBlocks(blocks) {
+    return (blocks || []).map(function (b) {
+      if (b.type === 'image' && b.src) {
+        return '<figure class="article-figure"><img src="' + esc(b.src) + '" alt="' + esc(b.caption || '') +
+          '" onerror="this.closest(\'figure\').remove()">' +
+          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+      }
+      if (b.type === 'video' && b.src) {
+        return '<figure class="article-figure"><video controls playsinline preload="metadata">' +
+          '<source src="' + esc(b.src) + '" type="video/mp4">Your browser does not support video playback.</video>' +
+          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+      }
+      if (b.type === 'h') {
+        return '<h2 class="article-subhead">' + esc(b.text || '') + '</h2>';
+      }
+      return '<p>' + linkify(b.text || '') + '</p>';
+    }).join('');
+  }
   function stories() {
     var list = window.LEAGUE_NEWS || [];
     return list.map(function (n, i) {
@@ -132,13 +167,8 @@
     if (aboutTitleEl && about.title) aboutTitleEl.textContent = about.title;
     if (aboutLedeEl) aboutLedeEl.textContent = about.lede || '';
     var aboutBlocks = about.blocks || [];
-    aboutBody.innerHTML = aboutBlocks.length ? aboutBlocks.map(function (b) {
-      if (b.type === 'image' && b.src) {
-        return '<figure class="article-figure"><img src="' + esc(b.src) + '" alt="' + esc(b.caption || '') + '">' +
-          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
-      }
-      return '<p>' + esc(b.text || '') + '</p>';
-    }).join('') : '<p class="section-note">Nothing here yet &mdash; add some in about-manager.html.</p>';
+    aboutBody.innerHTML = aboutBlocks.length ? renderBlocks(aboutBlocks) :
+      '<p class="section-note">Nothing here yet &mdash; add some in about-manager.html.</p>';
   }
 
   /* ---------- custom select dropdowns (contact page and anywhere else) ---------- */
@@ -239,20 +269,26 @@
 
   /* ---------- news page: index + single article ---------- */
   function articleHTML(n) {
-    var paras = n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('');
-    var pic = n.video
-  ? '<figure class="article-figure"><video controls playsinline preload="metadata">' +
-    '<source src="' + esc(n.video) + '" type="video/mp4">' +
-    'Your browser does not support video playback.' +
-    '</video>' +
-    (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
-    '</figure>'
-  : n.image
-    ? '<figure class="article-figure"><img src="' + esc(n.image) + '" alt="' +
-      esc(n.headline) + '" onerror="this.closest(\'figure\').remove()">' +
+    var content;
+    if (Array.isArray(n.blocks) && n.blocks.length) {
+      content = renderBlocks(n.blocks);
+    } else {
+      var paras = (n.body || []).map(function (p) { return '<p>' + linkify(p) + '</p>'; }).join('');
+      var pic = n.video
+    ? '<figure class="article-figure"><video controls playsinline preload="metadata">' +
+      '<source src="' + esc(n.video) + '" type="video/mp4">' +
+      'Your browser does not support video playback.' +
+      '</video>' +
       (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
       '</figure>'
-    : '';
+    : n.image
+      ? '<figure class="article-figure"><img src="' + esc(n.image) + '" alt="' +
+        esc(n.headline) + '" onerror="this.closest(\'figure\').remove()">' +
+        (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
+        '</figure>'
+      : '';
+      content = pic + paras;
+    }
     var others = stories().filter(function (s) { return s.id !== n.id; }).slice(0, 3);
     var more = others.length
       ? '<div class="section-head" style="margin-top:46px"><h2>More stories</h2></div>' +
@@ -263,7 +299,7 @@
       '<div class="news-date">' + esc(n.date) + '</div>' +
       '<h1>' + esc(n.headline) + '</h1>' +
       '<p class="article-lede">' + esc(n.summary) + '</p>' +
-      pic + paras +
+      content +
       '</article>' + more;
   }
 

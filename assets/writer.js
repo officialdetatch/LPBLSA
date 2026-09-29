@@ -11,17 +11,16 @@
   var DRAFT_KEY = 'lpbsa.writer.draft.v1';
   var list = [];
   var editingIndex = -1;
+  var formBlocks = [];
 
   var f = {
     id: document.getElementById('wId'),
     date: document.getElementById('wDate'),
     headline: document.getElementById('wHeadline'),
-    summary: document.getElementById('wSummary'),
-    image: document.getElementById('wImage'),
-    caption: document.getElementById('wCaption'),
-    body: document.getElementById('wBody')
+    summary: document.getElementById('wSummary')
   };
   var storyList = document.getElementById('wList');
+  var blocksEl = document.getElementById('wBlocks');
   var output = document.getElementById('wOutput');
   var formTitle = document.getElementById('wFormTitle');
 
@@ -53,16 +52,42 @@
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(list)); } catch (err) { /* ignore */ }
   }
 
+  function cloneBlock(b) {
+    if (b.type === 'image' || b.type === 'video') {
+      return { type: b.type, src: b.src || '', caption: b.caption || '' };
+    }
+    if (b.type === 'h') return { type: 'h', text: b.text || '' };
+    return { type: 'p', text: b.text || '' };
+  }
+  /* Stories written before blocks existed only have a top image/video and
+     a flat list of paragraphs. Used only to populate the edit form -
+     the story in the list itself is left exactly as it was until saved. */
+  function blocksFromLegacy(n) {
+    var blocks = [];
+    if (n.video) blocks.push({ type: 'video', src: n.video, caption: n.caption || '' });
+    else if (n.image) blocks.push({ type: 'image', src: n.image, caption: n.caption || '' });
+    (Array.isArray(n.body) ? n.body : (n.body ? [n.body] : [])).forEach(function (p) {
+      blocks.push({ type: 'p', text: p });
+    });
+    return blocks;
+  }
+
   function normalise(n, i) {
-    return {
+    var out = {
       id: n.id || slug(n.headline) || ('story-' + (i + 1)),
       date: n.date || '',
       headline: n.headline || '',
-      summary: n.summary || '',
-      image: n.image || '',
-      caption: n.caption || '',
-      body: Array.isArray(n.body) ? n.body : (n.body ? [n.body] : [])
+      summary: n.summary || ''
     };
+    if (Array.isArray(n.blocks) && n.blocks.length) {
+      out.blocks = n.blocks.map(cloneBlock);
+    } else {
+      out.image = n.image || '';
+      out.caption = n.caption || '';
+      if (n.video) out.video = n.video;
+      out.body = Array.isArray(n.body) ? n.body : (n.body ? [n.body] : []);
+    }
+    return out;
   }
 
   function start() {
@@ -74,11 +99,14 @@
     } else {
       list = live;
     }
+    renderFormBlocks();
     render();
   }
 
   function clearForm() {
     Object.keys(f).forEach(function (k) { f[k].value = ''; });
+    formBlocks = [];
+    renderFormBlocks();
     editingIndex = -1;
     formTitle.textContent = 'New story';
     document.getElementById('wSave').textContent = 'Add story';
@@ -90,14 +118,125 @@
     f.date.value = n.date;
     f.headline.value = n.headline;
     f.summary.value = n.summary;
-    f.image.value = n.image;
-    f.caption.value = n.caption;
-    f.body.value = n.body.join('\n\n');
+    formBlocks = (Array.isArray(n.blocks) && n.blocks.length ? n.blocks.map(cloneBlock) : blocksFromLegacy(n));
+    renderFormBlocks();
     editingIndex = i;
     formTitle.textContent = 'Editing: ' + n.headline;
     document.getElementById('wSave').textContent = 'Save changes';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  /* ---------- the block editor for the story currently in the form ---------- */
+  function flashSaved(el) {
+    el.classList.add('field-saved');
+    setTimeout(function () { el.classList.remove('field-saved'); }, 700);
+  }
+  function focusLastBlockField(selector) {
+    var els = blocksEl.querySelectorAll(selector);
+    if (els.length) els[els.length - 1].focus();
+  }
+  function blockRowHTML(b, i) {
+    var n = formBlocks.length;
+    var actions = '<div class="writer-row-actions">' +
+      '<button class="btn btn-ghost btn-small" data-up="' + i + '" ' + (i === 0 ? 'disabled' : '') + '>&uarr;</button>' +
+      '<button class="btn btn-ghost btn-small" data-down="' + i + '" ' + (i === n - 1 ? 'disabled' : '') + '>&darr;</button>' +
+      '<button class="btn btn-small btn-danger" data-del="' + i + '">Delete</button>' +
+      '</div>';
+    if (b.type === 'image' || b.type === 'video') {
+      var label = b.type === 'image' ? 'Image path' : 'Video path (.mp4)';
+      var ph = b.type === 'image' ? 'images/news/week2.jpg' : 'images/news/week2.mp4';
+      return '<div class="writer-row">' +
+        '<div class="writer-row-main">' +
+          '<div class="writer-grid">' +
+            '<div class="field" style="margin-bottom:0"><label>' + label + '</label>' +
+              '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="' + ph + '"></div>' +
+            '<div class="field" style="margin-bottom:0"><label>Caption (optional)</label>' +
+              '<input type="text" class="block-input" data-field="caption" data-idx="' + i + '" value="' + esc(b.caption) + '" placeholder="Optional caption"></div>' +
+          '</div>' +
+        '</div>' + actions +
+      '</div>';
+    }
+    if (b.type === 'h') {
+      return '<div class="writer-row">' +
+        '<div class="writer-row-main">' +
+          '<div class="field" style="margin-bottom:0"><label>Subtitle</label>' +
+            '<input type="text" class="block-input" data-field="text" data-idx="' + i + '" value="' + esc(b.text) + '" placeholder="A new section heading"></div>' +
+        '</div>' + actions +
+      '</div>';
+    }
+    return '<div class="writer-row">' +
+      '<div class="writer-row-main">' +
+        '<div class="field" style="margin-bottom:0"><label>Paragraph</label>' +
+          '<textarea class="block-input" data-field="text" data-idx="' + i + '" rows="3" placeholder="Write a paragraph. Any http(s) link typed here becomes clickable automatically.">' + esc(b.text) + '</textarea></div>' +
+      '</div>' + actions +
+    '</div>';
+  }
+  function renderFormBlocks() {
+    blocksEl.innerHTML = formBlocks.length
+      ? formBlocks.map(blockRowHTML).join('')
+      : '<p class="section-note">No content yet. Add a paragraph, subtitle, image or video below.</p>';
+  }
+
+  blocksEl.addEventListener('change', function (ev) {
+    var target = ev.target;
+    if (!target.classList.contains('block-input')) return;
+    var i = Number(target.getAttribute('data-idx'));
+    var field = target.getAttribute('data-field');
+    var block = formBlocks[i];
+    if (!block) return;
+    block[field] = target.value;
+    flashSaved(target);
+  });
+  blocksEl.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Enter') return;
+    var target = ev.target;
+    if (target.classList.contains('block-input') && target.tagName === 'INPUT') {
+      ev.preventDefault();
+      target.blur();
+    }
+  });
+  blocksEl.addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-up],button[data-down],button[data-del]');
+    if (!btn) return;
+    var i;
+    if ((i = btn.getAttribute('data-up')) !== null) {
+      i = Number(i);
+      if (i > 0) { formBlocks.splice(i - 1, 0, formBlocks.splice(i, 1)[0]); renderFormBlocks(); }
+      return;
+    }
+    if ((i = btn.getAttribute('data-down')) !== null) {
+      i = Number(i);
+      if (i < formBlocks.length - 1) { formBlocks.splice(i + 1, 0, formBlocks.splice(i, 1)[0]); renderFormBlocks(); }
+      return;
+    }
+    if ((i = btn.getAttribute('data-del')) !== null) {
+      i = Number(i);
+      if (!window.confirm('Remove this block?')) return;
+      formBlocks.splice(i, 1);
+      renderFormBlocks();
+    }
+  });
+
+  document.getElementById('wAddP').addEventListener('click', function () {
+    formBlocks.push({ type: 'p', text: '' });
+    renderFormBlocks();
+    focusLastBlockField('textarea.block-input');
+  });
+  document.getElementById('wAddH').addEventListener('click', function () {
+    formBlocks.push({ type: 'h', text: '' });
+    renderFormBlocks();
+    focusLastBlockField('input[data-field="text"]');
+  });
+  document.getElementById('wAddImg').addEventListener('click', function () {
+    formBlocks.push({ type: 'image', src: '', caption: '' });
+    renderFormBlocks();
+    focusLastBlockField('input[data-field="src"]');
+  });
+  document.getElementById('wAddVideo').addEventListener('click', function () {
+    formBlocks.push({ type: 'video', src: '', caption: '' });
+    renderFormBlocks();
+    focusLastBlockField('input[data-field="src"]');
+  });
 
   function render() {
     if (!list.length) {
@@ -142,18 +281,23 @@
   document.getElementById('wSave').addEventListener('click', function () {
     var headline = f.headline.value.trim();
     if (!headline) { toast('A story needs a headline.', true); return; }
+    var cleanBlocks = formBlocks.map(function (b) {
+      if (b.type === 'image' || b.type === 'video') {
+        return { type: b.type, src: (b.src || '').trim(), caption: (b.caption || '').trim() };
+      }
+      if (b.type === 'h') return { type: 'h', text: (b.text || '').trim() };
+      return { type: 'p', text: (b.text || '').trim() };
+    }).filter(function (b) {
+      return (b.type === 'image' || b.type === 'video') ? !!b.src : !!b.text;
+    });
+    var firstPara = cleanBlocks.filter(function (b) { return b.type === 'p'; })[0];
     var story = {
       id: (f.id.value.trim() || slug(headline)),
       date: f.date.value.trim(),
       headline: headline,
-      summary: f.summary.value.trim(),
-      image: f.image.value.trim(),
-      caption: f.caption.value.trim(),
-      body: f.body.value.split(/\n\s*\n/).map(function (p) {
-        return p.replace(/\s*\n\s*/g, ' ').trim();
-      }).filter(Boolean)
+      summary: f.summary.value.trim() || (firstPara ? firstPara.text : ''),
+      blocks: cleanBlocks
     };
-    if (!story.summary) story.summary = story.body[0] || '';
     if (editingIndex >= 0) {
       list[editingIndex] = story;
       toast('Story updated.');

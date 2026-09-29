@@ -61,15 +61,17 @@
       <div class="writer-note">
         This is the one-page story of the league that visitors see at
         <code>about.html</code>. Add the whole thing as a stack of blocks &mdash;
-        paragraphs and images, in any order you like. Reorder a block with the
-        <b>&uarr; &darr;</b> arrows, edit any text or image path directly, then
-        click elsewhere to save it. When you are done, press
-        <b>Download about-data.js</b> and drop the file into <code>assets/</code>,
-        replacing the old one. For an image block, upload the photo itself into
-        <code>images/</code> first (an <code>images/about/</code> folder keeps
-        things tidy) and point the Image path box at it, the same way news
-        photos work. Nothing changes on the public site until you replace the
-        file. Visitors never see this page unless you send them the link.
+        paragraphs, subtitles, images and videos, in any order you like. Reorder
+        a block with the <b>&uarr; &darr;</b> arrows, edit any text or file path
+        directly, then click elsewhere to save it. Any http(s) link typed into a
+        paragraph becomes a real clickable link automatically. When you are done,
+        press <b>Download about-data.js</b> and drop the file into
+        <code>assets/</code>, replacing the old one. For an image or video block,
+        upload the file itself into <code>images/</code> first (an
+        <code>images/about/</code> folder keeps things tidy) and point the path
+        box at it, the same way news photos work. Nothing changes on the public
+        site until you replace the file. Visitors never see this page unless you
+        send them the link.
       </div>
 
       <div class="writer-note hidden" id="amDraftNote">
@@ -101,7 +103,9 @@
       <div id="amBlocks"></div>
       <div class="news-edit-row" style="margin-top:14px">
         <button class="btn btn-small" id="amAddP">+ Add paragraph</button>
+        <button class="btn btn-small" id="amAddH">+ Add subtitle</button>
         <button class="btn btn-small" id="amAddImg">+ Add image</button>
+        <button class="btn btn-small" id="amAddVideo">+ Add video</button>
       </div>
 
       <div class="section-head" style="margin-top:34px"><h2>Your about-data.js</h2></div>

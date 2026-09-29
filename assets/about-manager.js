@@ -40,9 +40,10 @@
   }
 
   function normaliseBlock(b) {
-    if (b && b.type === 'image') {
-      return { type: 'image', src: b.src || '', caption: b.caption || '' };
+    if (b && (b.type === 'image' || b.type === 'video')) {
+      return { type: b.type, src: b.src || '', caption: b.caption || '' };
     }
+    if (b && b.type === 'h') return { type: 'h', text: b.text || '' };
     return { type: 'p', text: (b && b.text) || '' };
   }
   function normalise(about) {
@@ -83,22 +84,32 @@
       '<button class="btn btn-ghost btn-small" data-down="' + i + '" ' + (i === n - 1 ? 'disabled' : '') + '>&darr;</button>' +
       '<button class="btn btn-small btn-danger" data-del="' + i + '">Delete</button>' +
       '</div>';
-    if (b.type === 'image') {
+    if (b.type === 'image' || b.type === 'video') {
+      var label = b.type === 'image' ? 'Image path' : 'Video path (.mp4)';
+      var ph = b.type === 'image' ? 'images/about/photo.jpg' : 'images/about/clip.mp4';
       return '<div class="writer-row">' +
         '<div class="writer-row-main">' +
           '<div class="writer-grid">' +
-            '<div class="field" style="margin-bottom:0"><label>Image path</label>' +
-              '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="images/about/photo.jpg"></div>' +
+            '<div class="field" style="margin-bottom:0"><label>' + label + '</label>' +
+              '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="' + ph + '"></div>' +
             '<div class="field" style="margin-bottom:0"><label>Caption (optional)</label>' +
               '<input type="text" class="block-input" data-field="caption" data-idx="' + i + '" value="' + esc(b.caption) + '" placeholder="Optional caption"></div>' +
           '</div>' +
         '</div>' + actions +
       '</div>';
     }
+    if (b.type === 'h') {
+      return '<div class="writer-row">' +
+        '<div class="writer-row-main">' +
+          '<div class="field" style="margin-bottom:0"><label>Subtitle</label>' +
+            '<input type="text" class="block-input" data-field="text" data-idx="' + i + '" value="' + esc(b.text) + '" placeholder="A new section heading"></div>' +
+        '</div>' + actions +
+      '</div>';
+    }
     return '<div class="writer-row">' +
       '<div class="writer-row-main">' +
         '<div class="field" style="margin-bottom:0"><label>Paragraph</label>' +
-          '<textarea class="block-input" data-field="text" data-idx="' + i + '" rows="3">' + esc(b.text) + '</textarea></div>' +
+          '<textarea class="block-input" data-field="text" data-idx="' + i + '" rows="3" placeholder="Any http(s) link typed here becomes clickable automatically.">' + esc(b.text) + '</textarea></div>' +
       '</div>' + actions +
     '</div>';
   }
@@ -198,6 +209,20 @@
     updateOutput();
     var inputs = els.blocks.querySelectorAll('input.block-input[data-field="src"]');
     if (inputs.length) inputs[inputs.length - 1].focus();
+  });
+  document.getElementById('amAddH').addEventListener('click', function () {
+    state.blocks.push({ type: 'h', text: '' });
+    renderBlocks();
+    updateOutput();
+    var hInputs = els.blocks.querySelectorAll('input.block-input[data-field="text"]');
+    if (hInputs.length) hInputs[hInputs.length - 1].focus();
+  });
+  document.getElementById('amAddVideo').addEventListener('click', function () {
+    state.blocks.push({ type: 'video', src: '', caption: '' });
+    renderBlocks();
+    updateOutput();
+    var vInputs = els.blocks.querySelectorAll('input.block-input[data-field="src"]');
+    if (vInputs.length) vInputs[vInputs.length - 1].focus();
   });
 
   document.getElementById('amDownload').addEventListener('click', function () {

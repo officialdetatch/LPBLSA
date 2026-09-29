@@ -5,6 +5,88 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "resumen-de-la-semana",
+    "date": "Week 3 | Sept 29",
+    "headline": "Resumen de la Semana",
+    "summary": "La semana 3 dejó de todo, y la gran sorpresa fue Los Puntos de Piña llevándose el partido contra Hobbit con un marcador de 179.44 a 155.66.",
+    "blocks": [
+      {
+        "type": "image",
+        "src": "images/news/IMG_8715.jpeg",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "El héroe de la semana"
+      },
+      {
+        "type": "p",
+        "text": "El nombre de la semana fue Bijan Robinson. Terminó con 34.3 puntos, 17 puntos por encima de lo que se esperaba de él, y esa explosión fue justo lo que empujó a Los Puntos de Piña a la victoria. A veces no hace falta que todo el equipo rinda al mismo tiempo, con que un jugador se salga del molde así ya cambia el partido completo."
+      },
+      {
+        "type": "p",
+        "text": "Brock Purdy también aportó lo suyo con 31.3 puntos, así que la dupla QB-RB de Los Puntos de Piña fue la que decidió el juego."
+      },
+      {
+        "type": "h",
+        "text": "Tras su primera victoria, Detatch confirma que se viene una tiraera?"
+      },
+      {
+        "type": "image",
+        "src": "images/news/suffering-album.jpg",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "Tras la primera victoria, el manager de los Puntos de Piña, se le crecieron los animos y anuncia que esta escribiendo una tiraera para el resto de los managers.\n\nEl mismo confirma que se canso de que se le estuviera difamando en las redes y que no, no esta 0-3... No tenemos mas informacion de que o para que esta haciendo esto pero bueno, los mantendremos al tanto."
+      },
+      {
+        "type": "h",
+        "text": "Los que se quedaron cortos"
+      },
+      {
+        "type": "p",
+        "text": "Del lado de Hobbit, la noche fue para el olvido en varias posiciones. Jonathan Taylor apenas sumó 8.2 puntos, bien por debajo de lo proyectado, y Tetairoa McMillan se quedó en 2.7 puntos cuando se esperaba mucho más de él. Ese tipo de bajones son los que terminan costando un partido entero."
+      },
+      {
+        "type": "p",
+        "text": "Del otro lado de la liga, Drake Maye de Peter's Perfect Team tampoco tuvo su noche, apenas 3.8 puntos contra una proyección bastante más alta. Definitivamente hubo jugadores que se pudieron haber quedado en la banca esta semana."
+      },
+      {
+        "type": "h",
+        "text": "Top scorers de la semana"
+      },
+      {
+        "type": "p",
+        "text": "1. J. Gibbs (Mugiwaras De Caimito) — 37.9 pts\n2. B. Robinson (Los Puntos de Piña) — 34.3 pts\n3. B. Purdy (Los Puntos de Piña) — 31.3 pts\n4. J. Smith-Njigba (Sierra Linda Cameltoes) — 30.4 pts\n5. S. Darnold (free agent) — 27.7 pts"
+      },
+      {
+        "type": "p",
+        "text": "Cuando vimos que Sam Darnold estaba como free agent, por poco se nos cae la mandibula. Realmente alguien deberia, draftear al muchacho!"
+      },
+      {
+        "type": "h",
+        "text": "Cómo queda la tabla"
+      },
+      {
+        "type": "p",
+        "text": "1. Mugiwaras De Caimito (Daniel Heredia) — 2-0-0\n2. Hobbit (Jose Cruz) — 1-1-0\n3. Peter's Perfect Team (Peter Cruz) — 1-1-0\n4. Los Puntos de Piña (Christopher Ramirez) — 1-2-0\n5. Sierra Linda Cameltoes (George Sanchez) — 1-2-0"
+      },
+      {
+        "type": "p",
+        "text": "Con esta victoria, Los Puntos de Piña sale del último lugar y se mete de lleno en la pelea de la mitad de tabla."
+      },
+      {
+        "type": "h",
+        "text": "La Semana mas pareja esta por venir!"
+      },
+      {
+        "type": "p",
+        "text": "La próxima semana trae dos partidos bien parejos. Los Puntos de Piña se mide a Peter's Perfect Team con las probabilidades 50/50. Y arriba en la cima, Mugiwaras De Caimito se enfrenta a Hobbit, también con un 50/50 de por medio. Esto sera la batalla por Segundo y Tercer Lugar!!! No olviden hacer sus wire picks, y que ganen los mejores equipos!"
+      }
+    ]
+  },
+  {
     "id": "tenemos-nuevo-discord",
     "date": "Week 3 | Sept 25",
     "headline": "Tenemos nuevo Discord!",
@@ -115,8 +197,8 @@ window.LEAGUE_NEWS = [
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
   "Tenemos Discord nuevo! Ve a las noticias para el link",
-  "Detatch va a firmar a Pikachutec si pierde esta semana",
-  "El dolor que tenia Daniel era por que viajo en un avion con sillas plasticas",
-  "A Criture se le exploto una goma haciendo un Amazon y lo arreglo con tape negro",
-  "Joby Weeks dona 3 millones para la creacion del website official"
+  "No se creeran esta noticia pero si, Los Puntos de Piña GANARON.",
+  "A Josh McDaniels lo deberian despedir, ese cb es el cancer de Los Patriots",
+  "Los 3 millonnes de Joby Weeks fueron un scam, la FBI investiga el caso",
+  "La semana 4 sera la mejor semana de la temporada, todos los equipos a 50% odds!"
 ];

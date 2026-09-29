@@ -33,36 +33,32 @@ The public pages have no edit button and no way to change anything. Stories are
 read from assets/news.js, which lives on the server. Visitors can read it, but
 they cannot change what anyone else sees - only you can, by replacing that file.
 
-Two ways to write:
+Open news-writer.html on your own computer to write. Fill in the headline,
+date and summary, then build the story itself as a stack of blocks -
+paragraphs, subtitles, images and videos, in any order you like:
 
-1. news-writer.html (easiest). Open it on your own computer. Write the story in
-   the form, reorder or delete existing ones, then press "Download news.js" and
-   drop that file into assets/, replacing the old one. Upload, and the site is
-   updated. This page is not linked from the site's menu, so nobody finds it by
-   clicking around. If you would rather it never goes online at all, delete
-   news-writer.html and assets/writer.js before you upload - everything else
-   keeps working.
+- Add as many blocks as you want with the four "+ Add" buttons under the list.
+- Use the up/down arrows to reorder a block, and click into any box to edit
+  it directly - the same pattern as the other tools.
+- For an image or video, upload the file itself into images/ first (an
+  images/news/ folder keeps things tidy) and point the path box at it. Videos
+  play inline the same size no matter how big the source file is.
+- Any http(s) link typed straight into a paragraph - a Discord invite, a
+  tweet, anything - turns into a real clickable link automatically. You do
+  not need to write it as a link yourself.
 
-2. By hand. Open assets/news.js and add an entry at the top of the list:
+When you are done, press "Download news.js" and drop that file into assets/,
+replacing the old one. This page is not linked from the site's menu, so nobody
+finds it by clicking around. If you would rather it never goes online at all,
+delete news-writer.html and assets/writer.js before you upload - everything
+else keeps working.
 
-     {
-       id: "week-3-recap",
-       date: "Week 3 \u00b7 Sep 28",
-       headline: "Your headline",
-       summary: "One or two lines. This is all the home page shows.",
-       image: "",
-       body: [
-         "First paragraph.",
-         "Second paragraph."
-       ]
-     }
-
-   summary is what appears on the card; body is the full article you get after
-   clicking. Add as many paragraphs to body as you like.
-
-To put a photo in a story, save it to images/news/ and set
-image: "images/news/your-file.jpg". If the file is missing the story still
-renders without it.
+Stories written before this update still work exactly as they did - they are
+stored a little differently behind the scenes (a single photo and a plain
+list of paragraphs, instead of blocks), and news-writer.html understands
+both. The moment you open an old story to edit it, it is shown in the same
+block editor as everything else, and saving it upgrades it to the new
+format automatically - nothing to do on your end.
 
 The scrolling gold wire at the top reads window.LEAGUE_TICKER at the bottom of
 the same file. Empty that array and it falls back to your news headlines.
@@ -102,13 +98,14 @@ just one page, built from a stack of blocks.
 
 Open about-manager.html on your own computer. At the top, set the page
 title and the short gold intro line under it. Below that is the list of
-blocks - each one is either a paragraph or an image with an optional
-caption. Add as many as you like with the two "Add" buttons, use the
+blocks - paragraphs, subtitles, images and videos, the same four types as
+the news writer. Add as many as you like with the "Add" buttons, use the
 up/down arrows to put them in the order you want them to read, and click
-into any box to edit it directly. To add a photo, upload the image file
-itself into images/ first (an images/about/ folder keeps things tidy) and
-point the Image path box at wherever you put it, exactly like adding a
-photo to a news story.
+into any box to edit it directly. Any http(s) link typed into a paragraph
+becomes a real clickable link automatically. To add a photo or video,
+upload the file itself into images/ first (an images/about/ folder keeps
+things tidy) and point the path box at wherever you put it, exactly like a
+news story.
 
 When you are done, press Download about-data.js and drop the file into
 assets/, replacing the old one. Like the other tools, your work is saved in

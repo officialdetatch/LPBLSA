@@ -755,6 +755,21 @@ a.news-card:hover h3{ color:var(--gold-light); }
   color:#dbe2f2;
   margin:0 0 1.15em;
 }
+.article p a, .article-lede a{
+  color:var(--gold-light);
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.article p a:hover, .article-lede a:hover{ color:var(--gold); }
+.article-subhead{
+  font-family:var(--font-display);
+  font-size:1.25rem;
+  letter-spacing:.02em;
+  color:var(--gold-light);
+  margin:30px 0 12px;
+  padding-top:14px;
+  border-top:1px solid var(--navy-800);
+}
 .article-figure{
   margin:0 0 26px;
   border:1px solid var(--line);
