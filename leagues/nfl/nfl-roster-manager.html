@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Roster manager | La Premier Bundesliga Serie A</title>
-  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <title>NFL roster manager | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="NFL roster manager (private tool).">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="../../assets/style.css">
   
 </head>
-<body>
+<body data-root="../../" data-league="nfl">
   <header class="site-header">
     <div class="header-row">
-      <a class="brand" href="index.html">
+      <a class="brand" href="../../index.html">
         <span class="crest crest-circle">
           <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
-          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
           <span class="crest-fallback">LP</span>
         </span>
         <span class="brand-text">
@@ -28,20 +28,11 @@
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <nav class="site-nav" id="siteNav">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="news.html" data-nav="news">News</a>
-        <a href="teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
-        <a href="teams/peters.html" data-nav="peters">Peter&#x27;s</a>
-        <a href="teams/sierra.html" data-nav="sierra">Cameltoes</a>
-        <a href="teams/puntos.html" data-nav="puntos">Los Puntos</a>
-        <a href="teams/hobbit.html" data-nav="hobbit">Hobbit</a>
-        <a href="free-agents.html" data-nav="fa" class="active">Free agents</a>
-        <a href="about.html" data-nav="about">About</a>
-        <a href="contact.html" data-nav="contact">Contact</a>
-      </nav>
+      <nav class="site-nav" id="siteNav"></nav>
     </div>
   </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
 
   <div class="ticker" aria-label="League wire">
     <div class="ticker-label">League wire</div>
@@ -52,7 +43,7 @@
   <section class="hero" style="padding:38px 0 28px">
     <div class="wrap">
       <div class="hero-kicker">Private tool &middot; not linked from the site</div>
-      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">Roster <span class="accent">manager</span></h1>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">NFL roster <span class="accent">manager</span></h1>
     </div>
   </section>
 
@@ -65,11 +56,11 @@
         directly &mdash; click into any of those boxes, type the new number or
         tag, then click elsewhere (or hit Tab/Enter) to save it. Clear the
         Status box to remove a tag like Q once a player is healthy again.
-        When you are done, press <b>Download roster-data.js</b> and drop the file
-        into <code>assets/</code>, replacing the old one. Nothing changes on the
+        When you are done, press <b>Download nfl-roster-data.js</b> and drop the file
+        into <code>leagues/nfl/assets/</code>, replacing the old one. Nothing changes on the
         public site until you do. Visitors never see this page unless you send
-        them the link &mdash; delete <code>roster-manager.html</code> and
-        <code>assets/roster-manager.js</code> before uploading if you would
+        them the link &mdash; delete <code>leagues/nfl/nfl-roster-manager.html</code> and
+        <code>leagues/nfl/assets/nfl-roster-manager.js</code> before uploading if you would
         rather it never leaves your computer.
       </div>
 
@@ -77,9 +68,9 @@
         You have unsaved changes from a previous session, loaded below.
       </div>
 
-      <p class="section-note"><a href="news-writer.html">&rarr; Go to the news writer</a> to post a story,
-        <a href="standings-manager.html">go to the standings manager</a> to update the home page table, or
-        <a href="about-manager.html">go to the about page manager</a>.</p>
+      <p class="section-note"><a href="../../news-writer.html">&rarr; Go to the news writer</a> to post a story,
+        <a href="nfl-standings-manager.html">go to the NFL standings manager</a> to update the NFL table, or
+        <a href="../../about-manager.html">go to the about page manager</a>.</p>
 
       <div class="section-head"><h2>League snapshot</h2></div>
       <div class="writer-grid" id="rmSnapshot"></div>
@@ -146,10 +137,10 @@
         <option value="BYE">Bye week</option>
       </datalist>
 
-      <div class="section-head" style="margin-top:34px"><h2>Your roster-data.js</h2></div>
+      <div class="section-head" style="margin-top:34px"><h2>Your nfl-roster-data.js</h2></div>
       <textarea id="rmOutput" readonly spellcheck="false"></textarea>
       <div class="news-edit-row" style="margin-top:12px">
-        <button class="btn btn-solid btn-small" id="rmDownload">Download roster-data.js</button>
+        <button class="btn btn-solid btn-small" id="rmDownload">Download nfl-roster-data.js</button>
         <button class="btn btn-small" id="rmCopy">Copy to clipboard</button>
         <button class="btn btn-ghost btn-small" id="rmReset">Discard changes</button>
       </div>
@@ -164,10 +155,9 @@
     </div>
   </footer>
 
-  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
-  <script src="assets/news.js"></script>
-  <script src="assets/roster-data.js"></script>
-  <script src="assets/app.js"></script>
-  <script src="assets/roster-manager.js"></script>
+  <script src="../../assets/news.js"></script>
+  <script src="assets/nfl-roster-data.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="assets/nfl-roster-manager.js"></script>
 </body>
 </html>

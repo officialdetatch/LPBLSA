@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NFL Fantasy | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A football fantasy league.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" href="../../images/league-logo.png">
+  <link rel="apple-touch-icon" href="../../images/league-logo.png">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-active="leagues" data-league="nfl">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../index.html">
+        <span class="crest crest-circle">
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NFL Fantasy &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <div class="hero-kicker">NFL Fantasy &middot; 2026 season</div>
+        <h1>Cinco Equipos.<br><span class="accent">Un Solo Ganador.</span></h1>
+        <p>Pagina Oficial de La Liga mas dura de Fantasy.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>Mugiwaras De Caimito</b><span>Top of the table</span></div>
+          <div class="hero-stat"><b>360.38</b><span>Most points scored (MDC)</span></div>
+          <div class="hero-stat"><b>12</b><span>Weeks to survive</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Standings</h2>
+        <span class="section-note">El podio de los ganadores</span>
+      </div>
+      <div class="table-scroll">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>RK</th><th>Team</th>
+              <th class="num">W</th><th class="num">L</th><th class="num">T</th>
+              <th class="num">PCT</th><th class="num">GB</th>
+              <th class="num">PF</th><th class="num">PA</th>
+              <th class="num">Streak</th><th class="num">Playoff</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody" data-empty="No standings posted yet."></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Los Equipos</h2>
+        <a class="btn btn-small" href="nfl-free-agents.html">Free Agents</a>
+      </div>
+      <div id="teamsGrid" data-empty="Los equipos se publican pronto."></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Las Noticias</h2>
+        <a class="btn btn-small" href="../../news.html?sport=football">Todas las noticias</a>
+      </div>
+      <div class="news-grid" id="newsGrid" data-limit="3" data-league="football" data-empty="Todavia no hay noticias de NFL."></div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Cinco Equipos Un Ganador.</div>
+      <div>EST 2026</div>
+      <div class="footer-social" aria-label="Follow the league">
+        <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="../../images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="../../images/socials-logo/threads-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <img src="../../images/socials-logo/discord-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@lpblsa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../../images/socials-logo/tiktok-simplified-white-icon.png" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://x.com/lpblsa_onX" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../../images/socials-logo/x-social-media-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/news.js"></script>
+  <script src="assets/nfl-roster-data.js"></script>
+  <script src="assets/nfl-standings-data.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="../../assets/teams-view.js"></script>
+  <script src="../../assets/alerts.js"></script>
+  <script src="../../assets/fantasy-switcher.js"></script>
+</body>
+</html>

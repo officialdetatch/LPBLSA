@@ -11,6 +11,28 @@
   var DRAFT_KEY = 'lpbsa.writer.draft.v1';
   var list = [];
   var editingIndex = -1;
+
+  /* Which fantasy the story in the form belongs to. Stays on whatever you
+     picked last, so writing three basketball stories in a row is three
+     clicks fewer. Stories with no league are football (the original). */
+  var LEAGUES = ['football', 'basketball', 'soccer'];
+  var LEAGUE_LABEL = { football: 'NFL', basketball: 'NBA', soccer: 'UCL' };
+  var league = 'football';
+  var leagueRow = document.getElementById('wLeague');
+  function cleanLeague(v) { return LEAGUES.indexOf(v) !== -1 ? v : 'football'; }
+  function setLeague(v) {
+    league = cleanLeague(v);
+    if (!leagueRow) return;
+    Array.prototype.forEach.call(leagueRow.querySelectorAll('.chip'), function (c) {
+      c.classList.toggle('active', c.getAttribute('data-league') === league);
+    });
+  }
+  if (leagueRow) {
+    leagueRow.addEventListener('click', function (ev) {
+      var chip = ev.target.closest('.chip');
+      if (chip) setLeague(chip.getAttribute('data-league'));
+    });
+  }
   var formBlocks = [];
 
   var f = {
@@ -75,6 +97,7 @@
   function normalise(n, i) {
     var out = {
       id: n.id || slug(n.headline) || ('story-' + (i + 1)),
+      league: cleanLeague(n.league),
       date: n.date || '',
       headline: n.headline || '',
       summary: n.summary || ''
@@ -115,6 +138,7 @@
   function fillForm(i) {
     var n = list[i];
     f.id.value = n.id;
+    setLeague(n.league);
     f.date.value = n.date;
     f.headline.value = n.headline;
     f.summary.value = n.summary;
@@ -245,7 +269,7 @@
       storyList.innerHTML = list.map(function (n, i) {
         return '<div class="writer-row">' +
           '<div class="writer-row-main">' +
-            '<div class="news-date">' + esc(n.date) + (i === 0 ? ' &middot; top of the page' : '') + '</div>' +
+            '<div class="news-date"><span class="news-sport">' + esc(LEAGUE_LABEL[cleanLeague(n.league)]) + '</span>' + esc(n.date) + (i === 0 ? ' &middot; top of the page' : '') + '</div>' +
             '<b>' + esc(n.headline) + '</b>' +
             '<p class="section-note" style="margin:4px 0 0">' + esc(n.summary) + '</p>' +
           '</div>' +
@@ -291,8 +315,17 @@
       return (b.type === 'image' || b.type === 'video') ? !!b.src : !!b.text;
     });
     var firstPara = cleanBlocks.filter(function (b) { return b.type === 'p'; })[0];
+    var storyId = f.id.value.trim() || slug(headline);
+    /* Football and basketball stories share one list and one set of links,
+       so two stories may never use the same link name. */
+    var clash = list.some(function (s, idx) { return idx !== editingIndex && s.id === storyId; });
+    if (clash) {
+      toast('Another story already uses the link name "' + storyId + '". Change the "Link name" box.', true);
+      return;
+    }
     var story = {
-      id: (f.id.value.trim() || slug(headline)),
+      id: storyId,
+      league: league,
       date: f.date.value.trim(),
       headline: headline,
       summary: f.summary.value.trim() || (firstPara ? firstPara.text : ''),

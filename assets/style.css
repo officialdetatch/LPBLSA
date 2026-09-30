@@ -696,6 +696,18 @@ tr.rank-3{ background:linear-gradient(90deg, rgba(205,127,50,.12), transparent);
   transition:border-color .15s ease, color .15s ease, background-color .15s ease;
 }
 .social-link svg{ width:17px; height:17px; }
+.social-link img{
+  width:17px; height:17px; object-fit:contain; display:block;
+  opacity:.85;
+  transition:opacity .15s ease, transform .15s ease;
+}
+/* the icon files have different proportions; these sizes make them look even */
+.social-link[aria-label="Instagram"] img{ width:15px; height:15px; }
+.social-link[aria-label="Threads"] img,
+.social-link[aria-label="TikTok"] img,
+.social-link[aria-label="X"] img{ width:16px; height:16px; }
+.social-link[aria-label="Discord"] img{ width:19px; height:19px; }
+.social-link:hover img{ opacity:1; transform:scale(1.1); }
 .social-link:hover{
   color:var(--gold-light);
   border-color:var(--gold-dark);
@@ -1007,3 +1019,146 @@ body.pane-open{ overflow:hidden; }
 .loc-pill.loc-start{ color:var(--navy-950); background:var(--gold); border-color:transparent; }
 .loc-pill.loc-bench{ color:var(--mute); background:var(--navy-700); border-color:var(--line); }
 .loc-pill.loc-ir{ color:var(--gold-light); background:transparent; border-color:var(--gold-dark); }
+
+/* ---------- one league, several fantasies (news page + story badge) ---------- */
+.sport-chips{ margin-bottom:30px; }
+.sport-block{ margin-bottom:48px; }
+.sport-block:last-child{ margin-bottom:0; }
+.news-sport{
+  display:inline-block; margin-right:10px; padding:2px 8px;
+  font-family:var(--font-display); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold-ink); background:var(--gold); border-radius:var(--radius); vertical-align:middle;
+}
+
+/* ---------- Leagues dropdown in the navbar ---------- */
+.nav-drop{ position:relative; }
+.nav-drop-btn{
+  display:flex; align-items:center; gap:5px;
+  padding:10px 14px; background:none; border:0; border-bottom:3px solid transparent; cursor:pointer;
+  font-family:var(--font-display); font-size:.92rem; letter-spacing:.02em; color:var(--mute); white-space:nowrap;
+}
+.nav-drop-btn:hover, .nav-drop.open .nav-drop-btn{ color:var(--white); }
+.nav-drop-btn.active{ color:var(--white); border-bottom-color:var(--gold); }
+.nav-chev{ width:14px; height:14px; transition:transform .15s ease; }
+.nav-drop.open .nav-chev{ transform:rotate(180deg); }
+.nav-drop-menu{
+  display:none; list-style:none; margin:0; padding:6px;
+  position:absolute; top:100%; left:0; min-width:250px; z-index:60;
+  background:var(--navy-900); border:1px solid var(--gold-dark); border-top:3px solid var(--gold);
+  border-radius:0 0 var(--radius) var(--radius); box-shadow:var(--shadow-md);
+}
+.nav-drop.open .nav-drop-menu{ display:block; }
+@media (hover:hover) and (min-width:861px){
+  .nav-drop:hover .nav-drop-menu{ display:block; }
+  .nav-drop:hover .nav-chev{ transform:rotate(180deg); }
+  .nav-drop:hover .nav-drop-btn{ color:var(--white); }
+}
+.site-nav .nav-drop-menu a, .nav-soon{
+  display:flex; align-items:baseline; justify-content:space-between; gap:14px;
+  padding:11px 12px; border-bottom:0; border-radius:var(--radius);
+  font-family:var(--font-display); letter-spacing:.02em; color:var(--white); white-space:nowrap;
+}
+.nav-drop-menu b{ font-size:1.05rem; font-weight:500; letter-spacing:.06em; }
+.nav-drop-menu span span, .nav-drop-menu a span, .nav-soon span{
+  font-family:var(--font-body); font-size:.76rem; letter-spacing:0; color:var(--mute);
+}
+.site-nav .nav-drop-menu a:hover{ background:var(--navy-700); }
+.site-nav .nav-drop-menu a.active{ background:var(--navy-800); box-shadow:inset 3px 0 0 var(--gold); }
+.nav-soon{ opacity:.55; cursor:default; }
+.nav-soon:focus-visible{ outline:2px solid var(--gold-dark); }
+@media (max-width:860px){
+  .site-nav{ align-items:stretch; }
+  .nav-drop{ width:100%; }
+  .nav-drop-btn{ width:100%; justify-content:space-between; padding:12px 4px; border-bottom:1px solid var(--navy-800); }
+  .nav-drop-menu{ position:static; min-width:0; border:0; border-left:3px solid var(--gold-dark); border-radius:0;
+    box-shadow:none; background:transparent; margin:0 0 6px 4px; }
+  .site-nav .nav-drop-menu a, .nav-soon{ padding:12px 10px; border-bottom:0; }
+}
+
+/* ---------- team cards: league landing pages + the Teams page ---------- */
+.team-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(210px, 1fr)); gap:16px; }
+.team-card{
+  position:relative; display:flex; flex-direction:column; align-items:center; gap:12px;
+  padding:26px 14px 20px; text-align:center; color:var(--white);
+  background:linear-gradient(160deg, var(--navy-800), var(--navy-900));
+  border:1px solid var(--line); border-radius:var(--radius);
+  transition:transform .15s ease, border-color .15s ease;
+}
+a.team-card:hover, a.team-card:focus-visible{ transform:translateY(-4px); border-color:var(--gold); outline:none; }
+.team-card .crest{ --crest-size:92px; }
+.team-card .crest .crest-fallback{ font-size:30px; }
+.team-card-name{ font-family:var(--font-display); font-size:1.1rem; line-height:1.2; }
+.team-card-meta{ font-size:.78rem; color:var(--mute); letter-spacing:.06em; text-transform:uppercase; }
+.team-card-go{ font-size:.75rem; color:var(--gold-light); letter-spacing:.1em; text-transform:uppercase; }
+.team-card-rank{
+  position:absolute; top:10px; left:10px; min-width:28px; height:28px; padding:0 6px;
+  display:flex; align-items:center; justify-content:center; border-radius:14px;
+  font-family:var(--font-display); font-size:.85rem; color:var(--gold-ink); background:var(--gold);
+}
+.team-soon{
+  padding:34px 20px; text-align:center; color:var(--mute);
+  background:var(--navy-900); border:1px dashed var(--line); border-radius:var(--radius);
+}
+.team-soon b{ display:block; margin-bottom:6px; font-family:var(--font-display); font-size:1.15rem; color:var(--white); font-weight:500; }
+
+/* the Teams page: one carousel per league */
+.team-league{ margin-bottom:54px; }
+.team-league:last-child{ margin-bottom:0; }
+.carousel-ctl{ display:flex; gap:8px; }
+.carousel-ctl[hidden]{ display:none; }
+.carousel-btn{
+  width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:1.3rem; line-height:1;
+  color:var(--white); background:var(--navy-800); border:1px solid var(--line);
+}
+.carousel-btn:hover:not([disabled]){ border-color:var(--gold); color:var(--gold-light); }
+.carousel-btn[disabled]{ opacity:.35; cursor:default; }
+.carousel-track{
+  display:flex; gap:16px; overflow-x:auto; padding:6px 2px 14px;
+  scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:thin; scrollbar-color:var(--line) transparent;
+}
+.carousel-track:focus-visible{ outline:2px solid var(--gold-dark); outline-offset:4px; }
+.carousel-track .team-card{ flex:0 0 220px; scroll-snap-align:start; }
+.carousel-track .team-soon{ flex:1 1 auto; scroll-snap-align:start; }
+@media (max-width:600px){
+  .carousel-track .team-card{ flex-basis:68%; }
+  .team-grid{ grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); }
+}
+@media (prefers-reduced-motion:reduce){
+  .carousel-track{ scroll-behavior:auto; }
+  .team-card, .nav-chev{ transition:none; }
+}
+
+/* ---------- home page: standings tabs + league entry buttons ---------- */
+.standings-tabs{ margin:0 0 14px; }
+.standings-tab small{ font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; opacity:.8; margin-left:3px; }
+.standings-tab.soon, .standings-tab[disabled]{ opacity:.45; cursor:default; }
+.standings-tab.soon:hover{ color:var(--mute); border-color:var(--line); }
+.standings-panel[hidden]{ display:none; }
+.standings-sub{ margin:0 0 12px; }
+.hero-leagues{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.hero-leagues .btn[aria-disabled="true"]{ opacity:.5; cursor:default; pointer-events:none; }
+
+/* ---------- NBA draft countdown (leagues/nba/nba-landing-page.html) ---------- */
+.countdown-hero{ padding:clamp(54px, 10vw, 110px) 0 clamp(54px, 10vw, 100px); text-align:center; }
+.countdown-wrap{ max-width:760px; margin:0 auto; }
+.countdown-hero h1{ font-size:clamp(2.1rem, 6vw, 3.9rem); line-height:1.04; }
+.countdown-hero h1 .accent{ color:var(--gold); }
+.countdown-sub{
+  font-family:var(--font-display); letter-spacing:.08em;
+  color:var(--gold-light); font-size:clamp(1.05rem, 2.8vw, 1.45rem); margin:16px 0 0;
+}
+.countdown{ display:flex; justify-content:center; gap:clamp(8px, 2.2vw, 18px); margin-top:clamp(28px, 5vw, 44px); }
+.countdown-cell{
+  flex:0 1 128px; padding:clamp(14px, 3vw, 24px) 6px clamp(10px, 2vw, 16px);
+  background:var(--navy-800); border:1px solid var(--line); border-top:2px solid var(--gold);
+  border-radius:var(--radius); box-shadow:var(--shadow-md);
+}
+.countdown-cell b{
+  display:block; font-family:var(--font-display); font-weight:600; line-height:1;
+  font-size:clamp(2rem, 8vw, 3.9rem); color:var(--white); font-variant-numeric:tabular-nums;
+}
+.countdown-cell span{
+  display:block; margin-top:8px; font-size:clamp(.62rem, 1.8vw, .8rem); letter-spacing:.16em;
+  text-transform:uppercase; color:var(--mute);
+}
+.countdown-hero [hidden]{ display:none; }

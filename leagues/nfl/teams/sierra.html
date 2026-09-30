@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hobbit | La Premier Bundesliga Serie A</title>
+  <title>Sierra Linda Cameltoes | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A fantasy football league">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Your League Name">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="icon" type="image/png" href="../images/league-logo.png">
-  <link rel="apple-touch-icon" href="../images/league-logo.png">
-  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/png" href="../../../images/league-logo.png">
+  <link rel="apple-touch-icon" href="../../../images/league-logo.png">
+  <link rel="manifest" href="../../../manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../../../assets/style.css">
   
 </head>
-<body>
+<body data-root="../../../" data-active="teams">
   <header class="site-header">
     <div class="header-row">
-      <a class="brand" href="../index.html">
+      <a class="brand" href="../../../index.html">
         <span class="crest crest-circle">
           <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
-          <img src="../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <img src="../../../images/league-logo.png" alt="League crest" onerror="this.remove()">
           <span class="crest-fallback">LP</span>
         </span>
         <span class="brand-text">
@@ -34,19 +34,11 @@
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <nav class="site-nav" id="siteNav">
-        <a href="../index.html" data-nav="home">Home</a>
-        <a href="../about.html" data-nav="about">About</a>
-        <a href="../news.html" data-nav="news">News</a>
-        <a href="../teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
-        <a href="../teams/peters.html" data-nav="peters">Peter&#x27;s</a>
-        <a href="../teams/sierra.html" data-nav="sierra">Cameltoes</a>
-        <a href="../teams/puntos.html" data-nav="puntos">Los Puntos</a>
-        <a href="../teams/hobbit.html" data-nav="hobbit" class="active">Hobbit</a>
-        <a href="../contact.html" data-nav="contact">Contact</a>
-      </nav>
+      <nav class="site-nav" id="siteNav"></nav>
     </div>
   </header>
+  <script src="../../../assets/leagues.js"></script>
+  <script src="../../../assets/nav.js"></script>
 
   <div class="ticker" aria-label="League wire">
     <div class="ticker-label">Ultima Hora</div>
@@ -56,23 +48,23 @@
   <main>
   <section class="wrap team-hero">
     <span class="crest crest-lg">
-      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
-      <span class="crest-fallback">HOB</span>
+      <img src="../../../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
+      <span class="crest-fallback">SLC</span>
     </span>
     <div>
-      <h1>Hobbit</h1>
-      <div class="team-meta">Manager: Jose Cruz &middot; Ranked #2 of 5</div>
+      <h1>Sierra Linda Cameltoes</h1>
+      <div class="team-meta">Manager: George Sanchez &middot; Ranked #4 of 5</div>
       <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
-      <p class="team-bio">El verdadero "Rival" de Los Puntos de Piña, dado a su odio a la gente enana. Posiblemente draftio al mejor QB para fantasy</p>
+      <p class="team-bio">De Sierra Linda aunque no pueda decir Sierra bien. No lo hagan decir "tres tristes tigres..."</p>
       <div class="team-badges">
-        <span class="pill">Record <b>1-0-0</b></span>
-        <span class="pill">Points for <b>186.86</b></span>
-        <span class="pill">Points against <b>161.18</b></span>
+        <span class="pill">Record <b>1-1-0</b></span>
+        <span class="pill">Points for <b>285.64</b></span>
+        <span class="pill">Points against <b>292.02</b></span>
         <span class="pill">Streak <b>W1</b></span>
-        <span class="pill gold-pill">Playoff odds <b>93%</b></span>
-        <span class="pill gold-pill">Starters projected <b id="starters-projected-hobbit">&mdash;</b></span>
+        <span class="pill gold-pill">Playoff odds <b>81%</b></span>
+        <span class="pill gold-pill">Starters projected <b id="starters-projected-sierra">&mdash;</b></span>
       </div>
     </div>
   </section>
@@ -91,12 +83,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody id="body-starters-hobbit">
+          <tbody id="body-starters-sierra">
             <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Starters projected total</td>
-            <td class="num" id="total-starters-hobbit" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-starters-sierra" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -109,12 +101,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody id="body-bench-hobbit">
+          <tbody id="body-bench-sierra">
             <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Bench projected total</td>
-            <td class="num" id="total-bench-hobbit" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-bench-sierra" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -127,12 +119,12 @@
           <thead>
             <tr><th>Slot</th><th>Player</th><th class="num">Proj FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
           </thead>
-          <tbody id="body-ir-hobbit">
+          <tbody id="body-ir-sierra">
             <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
           </tbody>
           <tfoot>
             <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Injured reserve projected total</td>
-            <td class="num" id="total-ir-hobbit" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+            <td class="num" id="total-ir-sierra" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
           </tfoot>
         </table>
       </div>
@@ -148,114 +140,114 @@
         <table>
           <thead><tr><th>Week</th><th>Opponent</th><th>Venue</th></tr></thead>
           <tbody>
-          <tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 1</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
-            <td><span class="slot-badge">WK 2</span></td>
-            <td><a class="team-link" href="../teams/peters.html"><span class="crest">
+          <tr>
+            <td><span class="slot-badge">WK 1</span></td>
+            <td><a class="team-link" href="peters.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
+      <img src="../../../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
       <span class="crest-fallback">PPT</span>
     </span><span class="name">Peter&#x27;s Perfect Team</span></a></td>
-            <td style="color:var(--mute)">Away</td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 2</span></td>
+            <td><a class="team-link" href="puntos.html"><span class="crest crest-circle">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../../../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span><span class="name">Los Puntos de Pina</span></a></td>
+            <td style="color:var(--mute)">Home</td>
           </tr><tr>
             <td><span class="slot-badge">WK 3</span></td>
-            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
-      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
-      <span class="crest-fallback">LPP</span>
-    </span><span class="name">Los Puntos de Pina</span></a></td>
-            <td style="color:var(--mute)">Home</td>
-          </tr><tr>
-            <td><span class="slot-badge">WK 4</span></td>
-            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+            <td><a class="team-link" href="mugiwaras.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <img src="../../../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
       <span class="crest-fallback">MDC</span>
     </span><span class="name">Mugiwaras De Caimito</span></a></td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 4</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 5</span></td>
+            <td><a class="team-link" href="hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../../../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
             <td style="color:var(--mute)">Home</td>
           </tr><tr>
-            <td><span class="slot-badge">WK 5</span></td>
-            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
-      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
-      <span class="crest-fallback">SLC</span>
-    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
-            <td style="color:var(--mute)">Away</td>
-          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 6</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
-            <td><span class="slot-badge">WK 7</span></td>
-            <td><a class="team-link" href="../teams/peters.html"><span class="crest">
+            <td><span class="slot-badge">WK 6</span></td>
+            <td><a class="team-link" href="peters.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
+      <img src="../../../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
       <span class="crest-fallback">PPT</span>
     </span><span class="name">Peter&#x27;s Perfect Team</span></a></td>
-            <td style="color:var(--mute)">Home</td>
+            <td style="color:var(--mute)">Away</td>
+          </tr><tr>
+            <td><span class="slot-badge">WK 7</span></td>
+            <td><a class="team-link" href="puntos.html"><span class="crest crest-circle">
+      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../../../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <span class="crest-fallback">LPP</span>
+    </span><span class="name">Los Puntos de Pina</span></a></td>
+            <td style="color:var(--mute)">Away</td>
           </tr><tr>
             <td><span class="slot-badge">WK 8</span></td>
-            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
-      <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
-      <span class="crest-fallback">LPP</span>
-    </span><span class="name">Los Puntos de Pina</span></a></td>
-            <td style="color:var(--mute)">Away</td>
-          </tr><tr>
-            <td><span class="slot-badge">WK 9</span></td>
-            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+            <td><a class="team-link" href="mugiwaras.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <img src="../../../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
       <span class="crest-fallback">MDC</span>
     </span><span class="name">Mugiwaras De Caimito</span></a></td>
+            <td style="color:var(--mute)">Home</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 9</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 10</span></td>
+            <td><a class="team-link" href="hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../../../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
             <td style="color:var(--mute)">Away</td>
           </tr><tr>
-            <td><span class="slot-badge">WK 10</span></td>
-            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
-      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
-      <span class="crest-fallback">SLC</span>
-    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
-            <td style="color:var(--mute)">Home</td>
-          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 11</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
-            <td><span class="slot-badge">WK 12</span></td>
-            <td><a class="team-link" href="../teams/peters.html"><span class="crest">
+            <td><span class="slot-badge">WK 11</span></td>
+            <td><a class="team-link" href="peters.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
+      <img src="../../../images/peters.png" alt="Peter&#x27;s Perfect Team crest" onerror="this.remove()">
       <span class="crest-fallback">PPT</span>
     </span><span class="name">Peter&#x27;s Perfect Team</span></a></td>
-            <td style="color:var(--mute)">Away</td>
+            <td style="color:var(--mute)">Home</td>
           </tr><tr>
-            <td><span class="slot-badge">WK 13</span></td>
-            <td><a class="team-link" href="../teams/puntos.html"><span class="crest">
+            <td><span class="slot-badge">WK 12</span></td>
+            <td><a class="team-link" href="puntos.html"><span class="crest crest-circle">
       <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
+      <img src="../../../images/puntos.png" alt="Los Puntos de Pina crest" onerror="this.remove()">
       <span class="crest-fallback">LPP</span>
     </span><span class="name">Los Puntos de Pina</span></a></td>
             <td style="color:var(--mute)">Home</td>
           </tr><tr>
-            <td><span class="slot-badge">WK 14</span></td>
-            <td><a class="team-link" href="../teams/mugiwaras.html"><span class="crest">
+            <td><span class="slot-badge">WK 13</span></td>
+            <td><a class="team-link" href="mugiwaras.html"><span class="crest">
       <!-- TEAM LOGO: drop your file at images/mugiwaras.png (square, 400x400 works well).
            Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
+      <img src="../../../images/mugiwaras.png" alt="Mugiwaras De Caimito crest" onerror="this.remove()">
       <span class="crest-fallback">MDC</span>
     </span><span class="name">Mugiwaras De Caimito</span></a></td>
-            <td style="color:var(--mute)">Home</td>
-          </tr><tr>
-            <td><span class="slot-badge">WK 15</span></td>
-            <td><a class="team-link" href="../teams/sierra.html"><span class="crest">
-      <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
-           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
-      <img src="../images/sierra.png" alt="Sierra Linda Cameltoes crest" onerror="this.remove()">
-      <span class="crest-fallback">SLC</span>
-    </span><span class="name">Sierra Linda Cameltoes</span></a></td>
             <td style="color:var(--mute)">Away</td>
+          </tr><tr><td><span class="slot-badge" style="background:var(--navy-700);color:var(--mute)">WK 14</span></td><td colspan="2" style="color:var(--mute)">Bye week</td></tr><tr>
+            <td><span class="slot-badge">WK 15</span></td>
+            <td><a class="team-link" href="hobbit.html"><span class="crest">
+      <!-- TEAM LOGO: drop your file at images/hobbit.png (square, 400x400 works well).
+           Round logo? Add crest-circle to the class above. Pointed shield? Remove it. -->
+      <img src="../../../images/hobbit.png" alt="Hobbit crest" onerror="this.remove()">
+      <span class="crest-fallback">HOB</span>
+    </span><span class="name">Hobbit</span></a></td>
+            <td style="color:var(--mute)">Home</td>
           </tr>
           </tbody>
         </table>
@@ -270,22 +262,27 @@
       <div>EST 2026</div>
       <div class="footer-social" aria-label="Follow the league">
         <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>
+          <img src="../../../images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
         </a>
         <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" font-family="Arial, sans-serif">@</text></svg>
+          <img src="../../../images/socials-logo/threads-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
         </a>
         <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.2V16.5H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="17" cy="11" r="1" fill="currentColor" stroke="none"/></svg>
+          <img src="../../../images/socials-logo/discord-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@lpblsa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../../../images/socials-logo/tiktok-simplified-white-icon.png" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://x.com/lpblsa_onX" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../../../images/socials-logo/x-social-media-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
         </a>
       </div>
     </div>
   </footer>
 
-  <script>window.LPBSA_NEWS_BASE = "../news.html#"; window.LPBSA_NEWS_INDEX = "../news.html";</script>
-  <script src="../assets/news.js"></script>
-  <script src="../assets/roster-data.js"></script>
-  <script src="../assets/app.js"></script>
+  <script src="../../../assets/news.js"></script>
+  <script src="../assets/nfl-roster-data.js"></script>
+  <script src="../../../assets/app.js"></script>
   
 </body>
 </html>

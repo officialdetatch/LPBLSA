@@ -1,6 +1,6 @@
 /* ============================================================
    LEAGUE ROSTERS & FREE AGENTS
-   Generated with roster-manager.html
+   Generated with nfl-roster-manager.html
    ============================================================ */
 window.LEAGUE_TEAMS = [
   {
@@ -25,7 +25,8 @@ window.LEAGUE_TEAMS = [
     "slug": "puntos",
     "name": "Los Puntos de Pina",
     "crest": "images/puntos.png",
-    "initials": "LPP"
+    "initials": "LPP",
+    "shape": "circle"
   },
   {
     "slug": "hobbit",

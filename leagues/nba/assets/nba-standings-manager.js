@@ -1,15 +1,24 @@
 /* ============================================================
-   STANDINGS MANAGER  --  private tool, not linked from the public site.
-   Loads the current assets/standings-data.js, lets you reorder teams,
-   edit every column inline, add a team that is missing, or drop one
-   that is no longer in the league, then hands you a finished
-   standings-data.js to save over the old one. Nothing here touches
-   the live site until you replace that file yourself.
+   NBA STANDINGS MANAGER  --  private tool, not linked from the public site.
+   Powers leagues/nba/nba-standings-manager.html (and only that page).
+   Loads the current leagues/nba/assets/nba-standings-data.js, lets you
+   reorder teams, edit every column inline, add a team that is missing,
+   or drop one that is no longer in the league, then hands you a
+   finished nba-standings-data.js to save over the old one. Nothing here
+   touches the live site until you replace that file yourself.
+
+   This is the NBA's own copy. The NFL has its own in
+   leagues/nfl/assets/nfl-standings-manager.js - change one, the other
+   is not affected.
    ============================================================ */
 (function () {
   'use strict';
 
-  var DRAFT_KEY = 'lpbsa.standings.draft.v1';
+  /* This league's settings - the only lines that differ from the other league's copy. */
+  var DRAFT_KEY = 'lpbsa.nba.standings.draft.v1';                /* where your unsaved edits are kept in this browser */
+  var DATA_PATH = 'leagues/nba/assets/nba-standings-data.js';    /* the file this tool replaces (shown in messages) */
+  var OUT_NAME = 'nba-standings-data.js';                        /* the name of the file it downloads */
+  var NO_TIES = true;                                            /* true = no T (ties) column */
   var NUM_FIELDS = ['w', 'l', 't', 'pf', 'pa'];
   var TEXT_FIELDS = ['pct', 'gb', 'streak', 'playoff'];
   var list = [];
@@ -22,7 +31,7 @@
     addBtn: document.getElementById('smAddBtn'),
     draftNote: document.getElementById('smDraftNote')
   };
-  if (!els.body) return; /* this script only runs on standings-manager.html */
+  if (!els.body) return; /* this script only runs on nba-standings-manager.html */
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
@@ -82,11 +91,11 @@
   function buildFile() {
     var header = [
       '/* ============================================================',
-      '   LEAGUE STANDINGS',
+      '   NBA LEAGUE STANDINGS',
       '   The ORDER of this list is the rank -- the first team is 1st place,',
       '   the last is last place. Reorder, add or edit teams with',
-      '   standings-manager.html rather than editing this file by hand.',
-      '   Generated with standings-manager.html',
+      '   nba-standings-manager.html rather than editing this file by hand.',
+      '   Generated with nba-standings-manager.html',
       '   ============================================================ */'
     ].join('\n');
     return header + '\nwindow.LEAGUE_STANDINGS = ' + JSON.stringify(list, null, 2) + ';\n';
@@ -95,7 +104,7 @@
   function rowHTML(row, i) {
     var rank = i + 1;
     var t = findTeam(row.team) || { slug: row.team, name: row.team || '(unknown team)' };
-    var crestImg = t.crest ? '<img src="' + esc(t.crest) + '" alt="" onerror="this.remove()">' : '';
+    var crestImg = t.crest ? '<img src="' + esc((window.LPBSA_ASSET_BASE || '') + t.crest) + '" alt="" onerror="this.remove()">' : '';
     var initials = t.initials || String(t.name || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
     function numInput(field, value) {
       return '<input type="number" step="0.1" inputmode="decimal" class="stat-input" data-field="' + field +
@@ -111,12 +120,12 @@
         '<button class="btn btn-ghost btn-small" data-up="' + i + '" ' + (i === 0 ? 'disabled' : '') + '>&uarr;</button>' +
         '<button class="btn btn-ghost btn-small" data-down="' + i + '" ' + (i === list.length - 1 ? 'disabled' : '') + '>&darr;</button>' +
       '</td>' +
-      '<td><span class="team-link" style="cursor:default"><span class="crest">' + crestImg +
+      '<td><span class="team-link" style="cursor:default"><span class="crest' + (t.shape === 'circle' ? ' crest-circle' : '') + '">' + crestImg +
         '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
         '<span class="name">' + esc(t.name) + '</span></span></td>' +
       '<td class="num">' + numInput('w', row.w) + '</td>' +
       '<td class="num">' + numInput('l', row.l) + '</td>' +
-      '<td class="num">' + numInput('t', row.t) + '</td>' +
+      (NO_TIES ? '' : '<td class="num">' + numInput('t', row.t) + '</td>') +
       '<td class="num">' + textInput('pct', row.pct, 56) + '</td>' +
       '<td class="num">' + textInput('gb', row.gb, 56) + '</td>' +
       '<td class="num">' + numInput('pf', row.pf) + '</td>' +
@@ -144,7 +153,9 @@
   function render() {
     els.body.innerHTML = list.length
       ? list.map(rowHTML).join('')
-      : '<tr><td colspan="13" class="section-note">No teams in the standings yet. Add one below.</td></tr>';
+      : '<tr><td colspan="' + (NO_TIES ? 12 : 13) + '" class="section-note">' + (teams().length
+          ? 'No teams in the standings yet. Add one below.'
+          : 'No teams set up yet. Teams come from the teams-data.js file - add them there first, then they show up here.') + '</td></tr>';
     renderAddPanel();
     els.output.value = buildFile();
     saveDraft();
@@ -237,19 +248,19 @@
     var blob = new Blob([buildFile()], { type: 'text/javascript' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'standings-data.js';
+    a.download = OUT_NAME;
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-    toast('Downloaded. Move it into assets/ replacing the old one.');
+    toast('Downloaded. Move it to ' + DATA_PATH.replace(/[^\/]+$/, '') + ' replacing the old one.');
   });
 
   document.getElementById('smCopy').addEventListener('click', function () {
     var code = buildFile();
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(code).then(
-        function () { toast('Copied. Paste it over assets/standings-data.js'); },
+        function () { toast('Copied. Paste it over ' + DATA_PATH); },
         function () { els.output.select(); toast('Press Ctrl/Cmd + C to copy.'); }
       );
     } else {

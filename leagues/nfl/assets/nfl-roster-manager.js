@@ -1,14 +1,21 @@
 /* ============================================================
-   ROSTER MANAGER  --  private tool, not linked from the public site.
+   NFL ROSTER MANAGER  --  private tool, not linked from the public site.
+   Powers leagues/nfl/nfl-roster-manager.html (and only that page).
    Search any player, then draft them from free agency, drop them
    back, start them, bench them, IR them, or trade them to another
-   team. When you are done, download a finished roster-data.js and
-   save it over the old one.
+   team. When you are done, download a finished nfl-roster-data.js and
+   save it over the old one in leagues/nfl/assets/.
+
+   This is the NFL's own copy. The NBA has its own in
+   leagues/nba/assets/nba-roster-manager.js - change one, the other
+   is not affected.
    ============================================================ */
 (function () {
   'use strict';
 
-  var DRAFT_KEY = 'lpbsa.roster.draft.v1';
+  var DRAFT_KEY = 'lpbsa.roster.draft.v1';   /* where your unsaved edits are kept in this browser */
+  var DATA_PATH = 'leagues/nfl/assets/nfl-roster-data.js';   /* the file this tool replaces */
+  var OUT_NAME = 'nfl-roster-data.js';      /* the name of the file it downloads */
   var TEAMS = window.LEAGUE_TEAMS || [];
   var SLOTS = window.STARTER_SLOTS || [];
   var state = null; /* { rosters: {...}, freeAgents: [...] } */
@@ -278,8 +285,8 @@
   function buildFile() {
     var header = [
       '/* ============================================================',
-      '   LEAGUE ROSTERS & FREE AGENTS',
-      '   Generated with roster-manager.html',
+      '   NFL ROSTERS & FREE AGENTS',
+      '   Generated with nfl-roster-manager.html',
       '   ============================================================ */'
     ].join('\n');
     return header +
@@ -406,7 +413,7 @@
     var code = buildFile();
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(code).then(
-        function () { toast('Copied. Paste it over assets/roster-data.js'); },
+        function () { toast('Copied. Paste it over ' + DATA_PATH); },
         function () { els.output.select(); toast('Press Ctrl/Cmd + C to copy.'); }
       );
     } else {
@@ -418,12 +425,12 @@
     var blob = new Blob([buildFile()], { type: 'text/javascript' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'roster-data.js';
+    a.download = OUT_NAME;
     document.body.appendChild(a);
     a.click();
     a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-    toast('Downloaded. Move it into assets/ replacing the old one.');
+    toast('Downloaded. Move it into ' + DATA_PATH.replace(/[^\/]+$/, '') + ' replacing the old one.');
   });
   document.getElementById('rmReset').addEventListener('click', function () {
     if (!window.confirm('Throw away your unsaved changes and reload what is currently on the site?')) return;

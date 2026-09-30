@@ -6,6 +6,10 @@
 
   var LS_WATCH = 'lpbsa.watch.v1';
 
+  /* On a league's own pages (<body data-league="nba" data-root="../../">) this
+     sets the paths and options below; it does nothing on the older pages. */
+  if (window.LPBSA_applyLeague) window.LPBSA_applyLeague();
+
   /* Where a story links to. The single-file build overrides this. */
   var NEWS_BASE = window.LPBSA_NEWS_BASE || 'news.html#';
   var NEWS_INDEX = window.LPBSA_NEWS_INDEX || 'news.html';
@@ -18,6 +22,19 @@
   function slug(s) {
     return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   }
+
+  /* Which fantasy a story belongs to. A story with no "league" is football,
+     so every story written before the basketball expansion still works. */
+  var SPORTS = {
+    football:   { label: 'NFL', full: 'NFL Fantasy' },
+    basketball: { label: 'NBA', full: 'NBA Fantasy' },
+    soccer:     { label: 'UCL', full: 'UCL Fantasy' }
+  };
+  var SPORT_ORDER = ['football', 'basketball', 'soccer'];
+  /* the league list in assets/leagues.js, when loaded, is the source of the names */
+  (window.LPBSA_LEAGUES || []).forEach(function (L) {
+    if (SPORTS[L.story]) SPORTS[L.story] = { label: L.short, full: L.name };
+  });
 
   /* Turn any http(s)/www link typed in plain text into a real clickable
      link. Runs on already-escaped text, so it is safe against markup. */
@@ -59,6 +76,7 @@
       var copy = {};
       for (var k in n) { if (Object.prototype.hasOwnProperty.call(n, k)) copy[k] = n[k]; }
       copy.id = copy.id || slug(copy.headline) || ('story-' + (i + 1));
+      copy.league = SPORTS[copy.league] ? copy.league : 'football';
       copy.body = Array.isArray(copy.body) ? copy.body : (copy.body ? [copy.body] : []);
       copy.summary = copy.summary || copy.body[0] || '';
       return copy;
@@ -68,6 +86,12 @@
     var all = stories();
     for (var i = 0; i < all.length; i++) { if (all[i].id === id) return all[i]; }
     return null;
+  }
+  function storiesFor(league) {
+    return stories().filter(function (s) { return s.league === league; });
+  }
+  function sportBadge(n) {
+    return '<span class="news-sport">' + esc(SPORTS[n.league].label) + '</span>';
   }
 
   /* ---------- mobile menu ---------- */
@@ -83,9 +107,15 @@
   /* ---------- scrolling wire ---------- */
   var track = document.getElementById('tickerTrack');
   if (track) {
-    var items = (window.LEAGUE_TICKER || []).slice();
-    if (!items.length) items = stories().map(function (n) { return n.headline; });
-    if (!items.length) items = ['La Premier Bundesliga Serie A'];
+    /* A page can pin its wire to one fantasy with data-league="basketball".
+       It then shows that fantasy's headlines instead of the hand-written
+       LEAGUE_TICKER lines; data-fallback is the text shown when it has none. */
+    var tickerLeague = track.getAttribute('data-league');
+    var items = tickerLeague ? [] : (window.LEAGUE_TICKER || []).slice();
+    if (!items.length) {
+      items = (tickerLeague ? storiesFor(tickerLeague) : stories()).map(function (n) { return n.headline; });
+    }
+    if (!items.length) items = [track.getAttribute('data-fallback') || 'La Premier Bundesliga Serie A'];
     var strip = items.map(function (t) {
       return '<span class="ticker-item">' + esc(t) + '</span>';
     }).join('');
@@ -93,9 +123,9 @@
   }
 
   /* ---------- news cards (home page) ---------- */
-  function cardHTML(n) {
+  function cardHTML(n, withBadge) {
     return '<a class="news-card" href="' + NEWS_BASE + encodeURIComponent(n.id) + '">' +
-      '<div class="news-date">' + esc(n.date) + '</div>' +
+      '<div class="news-date">' + (withBadge === true ? sportBadge(n) : '') + esc(n.date) + '</div>' +
       '<h3>' + esc(n.headline) + '</h3>' +
       '<p>' + esc(n.summary) + '</p>' +
       '<span class="news-more">Read the story &rarr;</span>' +
@@ -105,11 +135,13 @@
   var grid = document.getElementById('newsGrid');
   if (grid) {
     var limit = parseInt(grid.getAttribute('data-limit'), 10);
-    var list = stories();
+    var gridLeague = grid.getAttribute('data-league');
+    var list = gridLeague ? storiesFor(gridLeague) : stories();
     if (limit > 0) list = list.slice(0, limit);
+    var gridBadges = grid.getAttribute('data-badges') === '1';
     grid.innerHTML = list.length
-      ? list.map(cardHTML).join('')
-      : '<p class="section-note">No stories posted yet. Add one in assets/news.js.</p>';
+      ? list.map(function (n) { return cardHTML(n, gridBadges); }).join('')
+      : '<p class="section-note">' + esc(grid.getAttribute('data-empty') || 'No stories posted yet. Add one in assets/news.js.') + '</p>';
   }
 
   /* ---------- standings table (home page) ---------- */
@@ -123,25 +155,38 @@
     var c = String(s || '').trim().charAt(0).toUpperCase();
     return c === 'W' ? 'streak-w' : c === 'L' ? 'streak-l' : '';
   }
-  function findTeam(teamSlug) {
-    var teams = window.LEAGUE_TEAMS || [];
+  function findTeam(teamSlug, list) {
+    var teams = list || window.LEAGUE_TEAMS || [];
     for (var i = 0; i < teams.length; i++) { if (teams[i].slug === teamSlug) return teams[i]; }
     return null;
   }
-  function standingsRowHTML(row, i) {
+  /* ctx is optional: the home page draws several leagues' tables, so it hands in
+     each league's own teams and options. Without it the page-wide settings below apply. */
+  function standingsRowHTML(row, i, ctx) {
+    ctx = ctx || {};
     var rank = i + 1;
-    var t = findTeam(row.team) || { slug: row.team, name: row.team };
+    var t = findTeam(row.team, ctx.teams) || { slug: row.team, name: row.name || row.team };
+    /* Other fantasies can tune the table before this script runs:
+         LPBSA_TEAM_LINKS = false   team pages do not exist yet (no links)
+         LPBSA_TEAM_BASE            folder of the team pages (default leagues/nfl/teams/)
+         LPBSA_NO_TIES = true       hide the T column (basketball has no ties) */
+    var linked = ctx.linked !== undefined ? ctx.linked : window.LPBSA_TEAM_LINKS !== false;
+    var teamBase = ctx.teamBase != null ? ctx.teamBase : (window.LPBSA_TEAM_BASE || 'leagues/nfl/teams/');
+    var assetBase = ctx.assetBase != null ? ctx.assetBase : (window.LPBSA_ASSET_BASE || '');
+    var noTies = ctx.noTies !== undefined ? ctx.noTies : !!window.LPBSA_NO_TIES;
     var initials = t.initials || String(t.name || '').toUpperCase().replace(/[^A-Z]/g, '').slice(0, 3);
-    var crestImg = t.crest ? '<img src="' + esc(t.crest) + '" alt="' + esc(t.name) + ' crest" onerror="this.remove()">' : '';
+    var crestPath = t.crest && !/^(https?:)?\/\//i.test(t.crest) && t.crest.charAt(0) !== '/'
+      ? assetBase + t.crest : t.crest;
+    var crestImg = t.crest ? '<img src="' + esc(crestPath) + '" alt="' + esc(t.name) + ' crest" onerror="this.remove()">' : '';
     var streakText = row.streak ? '<span class="' + streakClass(row.streak) + '">' + esc(row.streak) + '</span>' : '--';
     return '<tr class="' + standingsRowClass(rank) + '">' +
       '<td><div class="rk-cell"><span class="medal ' + medalClass(rank) + '">' + rank + '</span></div></td>' +
-      '<td><a class="team-link" href="teams/' + esc(t.slug) + '.html">' +
-      '<span class="crest">' + crestImg + '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
-      '<span class="name">' + esc(t.name) + '</span></a></td>' +
+      '<td>' + (linked ? '<a class="team-link" href="' + esc(teamBase) + esc(t.slug) + '.html">' : '<span class="team-link">') +
+      '<span class="crest' + (t.shape === 'circle' ? ' crest-circle' : '') + '">' + crestImg + '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
+      '<span class="name">' + esc(t.name) + '</span>' + (linked ? '</a>' : '</span>') + '</td>' +
       '<td class="num">' + esc(row.w) + '</td>' +
       '<td class="num">' + esc(row.l) + '</td>' +
-      '<td class="num">' + esc(row.t) + '</td>' +
+      (noTies ? '' : '<td class="num">' + esc(row.t) + '</td>') +
       '<td class="num">' + esc(row.pct) + '</td>' +
       '<td class="num">' + esc(row.gb) + '</td>' +
       '<td class="num">' + esc(row.pf) + '</td>' +
@@ -150,12 +195,17 @@
       '<td class="num">' + esc(row.playoff) + '</td>' +
       '</tr>';
   }
+  /* the same rows, for pages that show more than one league's table (see standings-tabs.js) */
+  window.LPBSA_standingsRowsHTML = function (rows, ctx) {
+    return (rows || []).map(function (r, i) { return standingsRowHTML(r, i, ctx); }).join('');
+  };
   var standingsBody = document.getElementById('standingsBody');
   if (standingsBody) {
     var standingsRows = window.LEAGUE_STANDINGS || [];
     standingsBody.innerHTML = standingsRows.length
-      ? standingsRows.map(standingsRowHTML).join('')
-      : '<tr><td colspan="11" class="section-note">No standings posted yet. Add one in assets/standings-data.js.</td></tr>';
+      ? standingsRows.map(function (r, i) { return standingsRowHTML(r, i); }).join('')
+      : '<tr><td colspan="' + (window.LPBSA_NO_TIES ? 10 : 11) + '" class="section-note">' +
+        esc(standingsBody.getAttribute('data-empty') || 'No standings posted yet. Add them with the standings manager.') + '</td></tr>';
   }
 
   /* ---------- about page ---------- */
@@ -289,26 +339,52 @@
       : '';
       content = pic + paras;
     }
-    var others = stories().filter(function (s) { return s.id !== n.id; }).slice(0, 3);
+    var others = storiesFor(n.league).filter(function (s) { return s.id !== n.id; }).slice(0, 3);
     var more = others.length
       ? '<div class="section-head" style="margin-top:46px"><h2>More stories</h2></div>' +
         '<div class="news-grid">' + others.map(cardHTML).join('') + '</div>'
       : '';
     return '<a class="back-link" href="' + NEWS_INDEX + '">&larr; All news</a>' +
       '<article class="article">' +
-      '<div class="news-date">' + esc(n.date) + '</div>' +
+      '<div class="news-date">' + sportBadge(n) + esc(n.date) + '</div>' +
       '<h1>' + esc(n.headline) + '</h1>' +
       '<p class="article-lede">' + esc(n.summary) + '</p>' +
       content +
       '</article>' + more;
   }
 
+  /* The news page is split by fantasy: a row of filter chips, then one
+     section per fantasy. Football and Basketball always show; Soccer only
+     appears once a soccer story exists. news.html?sport=basketball shows
+     just that one. */
+  function pickedSport() {
+    var m = /[?&]sport=([a-z]+)/.exec(location.search);
+    return m && SPORTS[m[1]] ? m[1] : '';
+  }
+  function sportSectionHTML(key) {
+    var list = storiesFor(key);
+    var body = list.length
+      ? '<div class="news-grid">' + list.map(cardHTML).join('') + '</div>'
+      : '<p class="section-note">Aun no hay noticias de ' + esc(SPORTS[key].label) + '.</p>';
+    return '<div class="sport-block" id="news-' + key + '">' +
+      '<div class="section-head"><h2>' + esc(SPORTS[key].full) + '</h2>' +
+      '<span class="section-note">' + list.length + (list.length === 1 ? ' noticia' : ' noticias') + '</span></div>' +
+      body + '</div>';
+  }
   function indexHTML() {
-    var all = stories();
-    if (!all.length) {
+    if (!stories().length) {
       return '<p class="section-note">No stories posted yet. Add one in assets/news.js.</p>';
     }
-    return '<div class="news-grid">' + all.map(cardHTML).join('') + '</div>';
+    var picked = pickedSport();
+    var shown = SPORT_ORDER.filter(function (k) {
+      return k === 'football' || k === 'basketball' || storiesFor(k).length;
+    });
+    function chip(key, label) {
+      return '<button type="button" class="chip sport-chip' + (key === picked ? ' active' : '') + '" data-sport="' + key + '">' + esc(label) + '</button>';
+    }
+    var chips = '<div class="chip-row sport-chips">' + chip('', 'Todas') +
+      shown.map(function (k) { return chip(k, SPORTS[k].label); }).join('') + '</div>';
+    return chips + (picked ? [picked] : shown).map(sportSectionHTML).join('');
   }
 
   var newsPage = document.getElementById('newsPage');
@@ -330,6 +406,14 @@
       window.scrollTo(0, 0);
     };
     window.addEventListener('hashchange', fromHash);
+    window.addEventListener('popstate', fromHash);
+    newsPage.addEventListener('click', function (ev) {
+      var chip = ev.target.closest('.sport-chip');
+      if (!chip) return;
+      var sp = chip.getAttribute('data-sport');
+      try { history.pushState(null, '', NEWS_INDEX + (sp ? '?sport=' + sp : '')); } catch (e) { /* file:// quirks */ }
+      window.LPBSA_renderNews('');
+    });
     fromHash();
   }
 

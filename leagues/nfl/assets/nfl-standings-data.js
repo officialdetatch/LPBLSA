@@ -1,9 +1,9 @@
 /* ============================================================
-   LEAGUE STANDINGS
+   NFL LEAGUE STANDINGS
    The ORDER of this list is the rank -- the first team is 1st place,
    the last is last place. Reorder, add or edit teams with
-   standings-manager.html rather than editing this file by hand.
-   Generated with standings-manager.html
+   nfl-standings-manager.html rather than editing this file by hand.
+   Generated with nfl-standings-manager.html
    ============================================================ */
 window.LEAGUE_STANDINGS = [
   {

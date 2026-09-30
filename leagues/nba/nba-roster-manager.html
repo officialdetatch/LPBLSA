@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NBA roster manager | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="NBA roster manager (private tool).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+  
+</head>
+<body data-root="../../" data-league="nba">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">League wire</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:38px 0 28px">
+    <div class="wrap">
+      <div class="hero-kicker">Private tool &middot; not linked from the site</div>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">NBA roster <span class="accent">manager</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:34px">
+    <div class="wrap">
+      <div class="writer-note">
+        Search a player below and pick an action &mdash; draft them off free agency,
+        drop them, bench them, start them, or trade them to another team. In the
+        same row you can also edit their <b>Status, Proj FPTS, AVG and LAST</b>
+        directly &mdash; click into any of those boxes, type the new number or
+        tag, then click elsewhere (or hit Tab/Enter) to save it. Clear the
+        Status box to remove a tag like Q once a player is healthy again.
+        When you are done, press <b>Download nba-roster-data.js</b> and drop the file
+        into <code>leagues/nba/assets/</code>, replacing the old one. Nothing changes on the
+        public site until you do. Visitors never see this page unless you send
+        them the link &mdash; delete <code>leagues/nba/nba-roster-manager.html</code> and
+        <code>leagues/nba/assets/nba-roster-manager.js</code> before uploading if you would
+        rather it never leaves your computer.
+      </div>
+
+      <div class="writer-note hidden" id="rmDraftNote">
+        You have unsaved changes from a previous session, loaded below.
+      </div>
+
+      <p class="section-note"><a href="../../news-writer.html">&rarr; Go to the news writer</a> to post a story,
+        <a href="nba-standings-manager.html">go to the NBA standings manager</a> to update the NBA table, or
+        <a href="../../about-manager.html">go to the about page manager</a>.</p>
+
+      <div class="section-head"><h2>League snapshot</h2></div>
+      <div class="writer-grid" id="rmSnapshot"></div>
+
+      <div class="editor-panel" style="margin-top:26px">
+        <h3>Add a brand new free agent</h3>
+        <p class="section-note" style="margin-top:0">For a waiver-wire name that is not on the free-agent board yet.</p>
+        <div class="writer-grid">
+          <div class="field">
+            <label for="rmNewName">Player name</label>
+            <input id="rmNewName" type="text" placeholder="Player name">
+          </div>
+          <div class="field">
+            <label for="rmNewPos">Position</label>
+            <select id="rmNewPos"><option>PG</option><option>SG</option><option>SF</option><option>PF</option><option>C</option></select>
+          </div>
+          <div class="field">
+            <label for="rmNewTeam">NBA team (abbreviation)</label>
+            <input id="rmNewTeam" type="text" placeholder="MIA" maxlength="4">
+          </div>
+        </div>
+        <div class="writer-grid">
+          <div class="field">
+            <label for="rmNewFpts">Proj FPTS (optional)</label>
+            <input id="rmNewFpts" type="number" step="0.1" placeholder="80.0">
+          </div>
+          <div class="field">
+            <label for="rmNewAvg">Avg (optional)</label>
+            <input id="rmNewAvg" type="number" step="0.1" placeholder="8.0">
+          </div>
+          <div class="field">
+            <label for="rmNewLast">Last (optional)</label>
+            <input id="rmNewLast" type="number" step="0.1" placeholder="6.5">
+          </div>
+        </div>
+        <button class="btn btn-solid btn-small" id="rmNewAdd">Add to free agents</button>
+      </div>
+
+      <div class="section-head" style="margin-top:34px">
+        <h2>Every player</h2>
+        <span class="section-note">Free agents and every roster in one list.</span>
+      </div>
+      <div class="fa-toolbar">
+        <input class="fa-search" id="rmSearch" type="search" placeholder="Search any player, on any team or free agent">
+      </div>
+      <div class="chip-row" id="rmChips"></div>
+      <p class="fa-count" id="rmCount"></p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th>Player</th><th>Currently</th><th>Status</th>
+            <th class="num">Proj FPTS</th><th class="num">AVG</th><th class="num">LAST</th>
+            <th>Action</th>
+          </tr></thead>
+          <tbody id="rmBody"></tbody>
+        </table>
+      </div>
+      <datalist id="rmStatusOptions">
+        <option value="Q">Questionable</option>
+        <option value="D">Doubtful</option>
+        <option value="IR">Injured reserve</option>
+        <option value="OUT">Out</option>
+        <option value="SUSP">Suspended</option>
+        <option value="DTD">Day-to-day</option>
+      </datalist>
+
+      <div class="section-head" style="margin-top:34px"><h2>Your nba-roster-data.js</h2></div>
+      <textarea id="rmOutput" readonly spellcheck="false"></textarea>
+      <div class="news-edit-row" style="margin-top:12px">
+        <button class="btn btn-solid btn-small" id="rmDownload">Download nba-roster-data.js</button>
+        <button class="btn btn-small" id="rmCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="rmReset">Discard changes</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; NBA Fantasy.</div>
+      <div>NBA roster tool.</div>
+    </div>
+  </footer>
+
+  <script src="../../assets/news.js"></script>
+  <script src="assets/nba-teams-data.js"></script>
+  <script src="assets/nba-roster-data.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="assets/nba-roster-manager.js"></script>
+</body>
+</html>

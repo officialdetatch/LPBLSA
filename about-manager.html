@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/style.css">
   
 </head>
-<body>
+<body data-root="">
   <header class="site-header">
     <div class="header-row">
       <a class="brand" href="index.html">
@@ -28,20 +28,11 @@
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
-      <nav class="site-nav" id="siteNav">
-        <a href="index.html" data-nav="home">Home</a>
-        <a href="news.html" data-nav="news">News</a>
-        <a href="teams/mugiwaras.html" data-nav="mugiwaras">Mugiwaras</a>
-        <a href="teams/peters.html" data-nav="peters">Peter&#x27;s</a>
-        <a href="teams/sierra.html" data-nav="sierra">Cameltoes</a>
-        <a href="teams/puntos.html" data-nav="puntos">Los Puntos</a>
-        <a href="teams/hobbit.html" data-nav="hobbit">Hobbit</a>
-        <a href="free-agents.html" data-nav="fa">Free agents</a>
-        <a href="about.html" data-nav="about" class="active">About</a>
-        <a href="contact.html" data-nav="contact">Contact</a>
-      </nav>
+      <nav class="site-nav" id="siteNav"></nav>
     </div>
   </header>
+  <script src="assets/leagues.js"></script>
+  <script src="assets/nav.js"></script>
 
   <div class="ticker" aria-label="League wire">
     <div class="ticker-label">League wire</div>
@@ -80,8 +71,10 @@
 
       <p class="section-note">
         <a href="news-writer.html">&rarr; Go to the news writer</a>,
-        <a href="roster-manager.html">the roster manager</a>, or
-        <a href="standings-manager.html">the standings manager</a>.
+        the NFL <a href="leagues/nfl/nfl-roster-manager.html">roster</a> or
+        <a href="leagues/nfl/nfl-standings-manager.html">standings</a> manager, or the NBA
+        <a href="leagues/nba/nba-roster-manager.html">roster</a> or
+        <a href="leagues/nba/nba-standings-manager.html">standings</a> manager.
       </p>
 
       <div class="editor-panel">

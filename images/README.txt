@@ -11,6 +11,7 @@ nothing looks broken while you are still collecting logos.
   puntos.png         Los Puntos de Pina
   hobbit.png         Hobbit
   commissioner.jpg   your photo inside the commissioner pane
+  leagues/nfl.png, nba.png, ucl.png   the round league logos in the "otro Fantasy" bubble
 
 Square images work best (400x400 or larger). PNG with a transparent
 background looks sharpest against the navy.

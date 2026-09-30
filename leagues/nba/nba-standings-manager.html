@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NBA standings manager | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="NBA standings manager (private tool).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+  
+</head>
+<body data-root="../../" data-league="nba">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">League wire</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:38px 0 28px">
+    <div class="wrap">
+      <div class="hero-kicker">Private tool &middot; not linked from the site</div>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">NBA standings <span class="accent">manager</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:34px">
+    <div class="wrap">
+      <div class="writer-note">
+        This is the standings table from the NBA landing page &mdash; one row per team, in
+        rank order. Use the <b>&uarr; &darr;</b> arrows to move a team to a
+        different place in the table, and click into any of the number or text
+        boxes to edit W, L, PCT, GB, PF, PA, Streak or Playoff &mdash; type
+        the new value, then click elsewhere (or hit Tab/Enter) to save it. When
+        you are done, press <b>Download nba-standings-data.js</b> and drop the file
+        into <code>leagues/nba/assets/</code>, replacing the old one. Nothing changes on the
+        public site until you do. Visitors never see this page unless you send
+        them the link &mdash; delete <code>leagues/nba/nba-standings-manager.html</code> and
+        <code>leagues/nba/assets/nba-standings-manager.js</code> before uploading if you would
+        rather it never leaves your computer.
+      </div>
+
+      <div class="writer-note hidden" id="smDraftNote">
+        You have unsaved changes from a previous session, loaded below.
+      </div>
+
+      <p class="section-note">
+        <a href="../../news-writer.html">&rarr; Go to the news writer</a> to post a story (pick <b>NBA</b> as the fantasy), or
+        <a href="nba-roster-manager.html">go to the NBA roster manager</a>, or
+        <a href="../nfl/nfl-standings-manager.html">go to the NFL standings manager</a>.
+      </p>
+
+      <div class="editor-panel hidden" id="smAddPanel">
+        <h3>Add a team to the standings</h3>
+        <p class="section-note" style="margin-top:0">
+          Every team in <code>leagues/nba/assets/nba-teams-data.js</code> should have a row here. These are missing:
+        </p>
+        <div class="writer-grid">
+          <div class="field">
+            <label for="smAddSelect">Team</label>
+            <select id="smAddSelect"></select>
+          </div>
+        </div>
+        <button class="btn btn-solid btn-small" id="smAddBtn">Add to bottom of table</button>
+      </div>
+
+      <div class="section-head" style="margin-top:34px">
+        <h2>Standings</h2>
+        <span class="section-note">Top row is 1st place.</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr>
+            <th>RK</th><th>Move</th><th>Team</th>
+            <th class="num">W</th><th class="num">L</th>
+            <th class="num">PCT</th><th class="num">GB</th>
+            <th class="num">PF</th><th class="num">PA</th>
+            <th class="num">Streak</th><th class="num">Playoff</th><th></th>
+          </tr></thead>
+          <tbody id="smBody"></tbody>
+        </table>
+      </div>
+
+      <div class="section-head" style="margin-top:34px"><h2>Your nba-standings-data.js</h2></div>
+      <textarea id="smOutput" readonly spellcheck="false"></textarea>
+      <div class="news-edit-row" style="margin-top:12px">
+        <button class="btn btn-solid btn-small" id="smDownload">Download nba-standings-data.js</button>
+        <button class="btn btn-small" id="smCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="smReset">Discard changes</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; NBA Fantasy.</div>
+      <div>NBA standings tool.</div>
+    </div>
+  </footer>
+
+  <script src="../../assets/news.js"></script>
+  <script src="assets/nba-teams-data.js"></script>
+  <script src="assets/nba-standings-data.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="assets/nba-standings-manager.js"></script>
+</body>
+</html>

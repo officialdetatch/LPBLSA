@@ -31,6 +31,13 @@ const COPY = {
   unsubscribe: 'Cancelar suscripción',
 };
 
+/* Football emails keep the plain kicker; other fantasies say which one it is. */
+const LEAGUE_LABEL = { basketball: 'NBA', soccer: 'UCL' };
+function kickerFor(story) {
+  const label = LEAGUE_LABEL[story.league];
+  return label ? `${COPY.kicker} \u00b7 ${label}` : COPY.kicker;
+}
+
 /* ---------- settings (mostly from GitHub repo Variables) ---------- */
 const API = (env.BREVO_API_BASE || 'https://api.brevo.com/v3').replace(/\/+$/, '');
 const MODE = (env.MODE || 'send').trim();
@@ -68,6 +75,7 @@ function loadNews(source, label) {
     const firstImage = blocks.find((b) => b && b.type === 'image' && b.src);
     return {
       id: n.id || slug(n.headline) || ('story-' + (i + 1)),
+      league: n.league || 'football',
       date: n.date || '',
       headline: n.headline || '',
       summary: n.summary || body[0] || (firstPara && firstPara.text) || '',
@@ -119,7 +127,7 @@ function buildEmail(story, url, imageUrl) {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#050b1a;"><tr><td align="center" style="padding:24px 12px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#0a1730;border:1px solid #28407a;">
 <tr><td style="height:4px;background:#d4af37;font-size:0;line-height:0;">&nbsp;</td></tr>
-<tr><td style="padding:22px 28px 2px;font-family:${font};font-size:12px;letter-spacing:2px;color:#d4af37;text-transform:uppercase;">${esc(COPY.kicker)}</td></tr>
+<tr><td style="padding:22px 28px 2px;font-family:${font};font-size:12px;letter-spacing:2px;color:#d4af37;text-transform:uppercase;">${esc(kickerFor(story))}</td></tr>
 <tr><td style="padding:0 28px 18px;font-family:${font};font-size:14px;letter-spacing:1px;color:#a9b4cf;text-transform:uppercase;">La Premier Bundesliga Serie A</td></tr>
 ${hero}
 <tr><td style="padding:24px 28px 0;font-family:${font};font-size:12px;letter-spacing:1px;color:#d4af37;text-transform:uppercase;">${esc(story.date)}</td></tr>

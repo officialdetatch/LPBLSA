@@ -5,28 +5,58 @@ Open index.html in any browser. To put it online, upload this whole folder to
 any static host (Netlify drop, GitHub Pages, Cloudflare Pages, your own server).
 Keep the folder structure intact.
 
-## Files
-  index.html            landing page: news wire, latest 3 stories, standings
+## Files - where everything lives
+
+Rule of thumb: the main folders hold what the WHOLE website needs. Anything that
+belongs to one league lives in that league's folder and starts with its name
+(nfl-... or nba-...), so you always know which league a file is for.
+
+  THE WHOLE SITE (root)
+  index.html            league-neutral home: league buttons, latest 3 stories, tabbed Standings
   news.html             all stories, and the full article view
-  free-agents.html      searchable top 100 free agent board
-  teams/<team>.html     one page per club: crest, roster, schedule
+  teams.html            the Teams page: a carousel of cards per league
   about.html            the league's story - one page, see below
   contact.html          "join us / ask a question" page with a contact form
   news-writer.html      YOUR private tool for writing news (see below)
-  roster-manager.html   YOUR private tool for rosters and free agents (see below)
-  standings-manager.html YOUR private tool for the standings table (see below)
   about-manager.html    YOUR private tool for the About page (see below)
-  assets/news.js        the stories themselves - the only file you edit to post
-  assets/roster-data.js every team's roster and the free agent board - edited via roster-manager.html, not by hand
-  assets/standings-data.js the standings table on the home page - edited via standings-manager.html, not by hand
-  assets/about-data.js  the About page's title, intro and content blocks - edited via about-manager.html, not by hand
-  assets/style.css      all colours, type and layout
-  assets/app.js         menu, ticker, news rendering, standings, roster tables, free agent filters, about page, contact form
-  assets/writer.js      powers news-writer.html only
-  assets/roster-manager.js  powers roster-manager.html only
-  assets/standings-manager.js  powers standings-manager.html only
-  assets/about-manager.js  powers about-manager.html only
+  assets/               what holds the website together, shared by every league:
+    style.css             all colours, type and layout
+    app.js                menu, ticker, news, standings rows, roster tables, about page, contact form
+    leagues.js            the list of leagues everything reads from (open a new league here)
+    nav.js                draws the navbar on every page
+    news.js               the stories themselves - the only file you edit to post
+    about-data.js         the About page content - edited via about-manager.html
+    writer.js, about-manager.js   power news-writer.html / about-manager.html
+    alerts.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
   images/               your logos go here (see images/README.txt)
+    leagues/              the round NFL / NBA / UCL logos used by the "otro Fantasy" bubble
+  audio/                the commissioner theme (see audio/README.txt)
+
+  NFL  (leagues/nfl/)
+  nfl-landing-page.html        the NFL home: standings, teams in rank order, NFL news
+  nfl-free-agents.html         searchable top 100 free agent board
+  nfl-roster-manager.html      YOUR private tool for NFL rosters and free agents
+  nfl-standings-manager.html   YOUR private tool for the NFL standings table
+  teams/<team>.html            one page per NFL club: crest, roster, schedule
+  assets/nfl-roster-data.js        every NFL roster + the free agent board (edited via the roster manager)
+  assets/nfl-roster-manager.js     powers nfl-roster-manager.html only
+  assets/nfl-standings-data.js     the NFL table (edited via the standings manager)
+  assets/nfl-standings-manager.js  powers nfl-standings-manager.html only
+
+  NBA  (leagues/nba/) - the same set, for basketball
+  nba-landing-page.html        the NBA home - right now only the draft countdown (see below)
+  nba-roster-manager.html      YOUR private tool for NBA rosters
+  nba-standings-manager.html   YOUR private tool for the NBA table
+  teams/  images/              NBA team pages and crests, later
+  assets/nba-countdown.js          the draft-night timer on the NBA page
+  assets/nba-teams-data.js         the NBA teams (empty until they exist)
+  assets/nba-roster-data.js        NBA rosters + free agents (empty until they exist)
+  assets/nba-roster-manager.js     powers nba-roster-manager.html only
+  assets/nba-standings-data.js     the NBA table
+  assets/nba-standings-manager.js  powers nba-standings-manager.html only
+
+  The NFL and NBA tools are separate copies on purpose: changing one never
+  touches the other.
 
 ## Posting news - you are the only editor
 The public pages have no edit button and no way to change anything. Stories are
@@ -63,14 +93,14 @@ format automatically - nothing to do on your end.
 The scrolling gold wire at the top reads window.LEAGUE_TICKER at the bottom of
 the same file. Empty that array and it falls back to your news headlines.
 
-## Updating standings - standings-manager.html
+## Updating standings - nfl-standings-manager.html
 Standings are no longer plain HTML you edit by hand. They live in
-assets/standings-data.js and you edit that file using
-standings-manager.html - never by editing the table in index.html
-directly, since app.js overwrites it with whatever standings-data.js says
+leagues/nfl/assets/nfl-standings-data.js and you edit that file using
+nfl-standings-manager.html - never by editing the table in index.html
+directly, since app.js overwrites it with whatever nfl-standings-data.js says
 every time the page loads.
 
-Open standings-manager.html on your own computer. Every team is a row, in
+Open leagues/nfl/nfl-standings-manager.html on your own computer. Every team is a row, in
 rank order - the top row is 1st place. Use the up/down arrows in the Move
 column to move a team to a different place in the table (a week's results
 flipping two teams is just two clicks), and click into any of the W, L, T,
@@ -85,8 +115,8 @@ moment you replace it. Like the other two tools, this page is not linked
 from the site's menu, your work is saved in the browser if you close the
 tab mid-session, and there are links to jump to the roster manager or news
 writer. If you would rather it never goes online at all, delete
-standings-manager.html and assets/standings-manager.js before you upload -
-the home page keeps working off whatever assets/standings-data.js already
+leagues/nfl/nfl-standings-manager.html and leagues/nfl/assets/nfl-standings-manager.js before you upload -
+the home page keeps working off whatever leagues/nfl/assets/nfl-standings-data.js already
 says, it just loses the tool that edits it.
 
 ## About page - about-manager.html
@@ -138,14 +168,14 @@ submissions a month, which should be more than enough for a league contact
 form; if you ever want a different inbox, redo the steps above with the new
 address and swap in the new endpoint.
 
-## Managing rosters and free agents - roster-manager.html
+## Managing rosters and free agents - nfl-roster-manager.html
 Rosters and the free agent board are no longer baked into each team page by
-hand. They all read from one file, assets/roster-data.js, and you edit that
-file using roster-manager.html - never by editing the tables in teams/*.html
-or free-agents.html directly, since app.js overwrites whatever is in those
-tables with what roster-data.js says every time the page loads.
+hand. They all read from one file, leagues/nfl/assets/nfl-roster-data.js, and you edit that
+file using nfl-roster-manager.html - never by editing the tables in leagues/nfl/teams/*.html
+or nfl-free-agents.html directly, since app.js overwrites whatever is in those
+tables with what nfl-roster-data.js says every time the page loads.
 
-Open roster-manager.html on your own computer. Type a player's name - free
+Open leagues/nfl/nfl-roster-manager.html on your own computer. Type a player's name - free
 agent or already rostered, it does not matter - and a dropdown next to them
 offers every move that is actually legal given where they are right now:
 
@@ -171,24 +201,32 @@ moves a player into the team's IR roster slot; the Status box just controls
 the small badge shown next to their name on the public pages, and you can set
 either one independently of the other.
 
-Every move updates a "Your roster-data.js" box live. When you are done,
+Every move updates a "Your nfl-roster-data.js" box live. When you are done,
 press Download, and drop the file into assets/, replacing the old one -
 every page that shows a roster or the free agent list picks it up
 immediately. Like news-writer.html, this page is not linked from the site's
 menu, your work is saved in the browser if you close the tab mid-session,
 and there is a small link between the two tools so you can jump between
 posting news and managing the roster. If you would rather it never goes
-online at all, delete roster-manager.html and assets/roster-manager.js
+online at all, delete leagues/nfl/nfl-roster-manager.html and leagues/nfl/assets/nfl-roster-manager.js
 before you upload - the team and free agent pages keep working off whatever
-assets/roster-data.js already says, they just lose the tool that edits it.
+leagues/nfl/assets/nfl-roster-data.js already says, they just lose the tool that edits it.
 
 ## Footer social links
-Every page's footer has three round icons - Instagram, Threads and Discord -
-linking to the league's official pages. They are plain HTML, the same three
-links repeated in every file, so if a URL ever changes, search the project
-for that link (for example discord.gg) and replace it everywhere it
-appears. The icons themselves are inline SVG code sitting right next to the
-links, not image files, so there is nothing to upload for these.
+Every page's footer has five round icons - Instagram, Threads, Discord, TikTok
+and X - linking to the league's official pages:
+  Instagram   instagram.com/lpblsa
+  Threads     threads.com/@lpblsa
+  Discord     the discord.gg invite link
+  TikTok      tiktok.com/@lpblsa
+  X           x.com/lpblsa_onX
+They are plain HTML, the same five links repeated in every page, so if a URL
+ever changes, search the project for that link (for example discord.gg) and
+replace it everywhere it appears (10 pages: index, news, about, contact and
+free-agents, plus the 5 team pages under leagues/nfl/teams/).
+The icons are the white image files in images/socials-logo/. To swap one,
+replace the file there and keep the same file name. The small size tweaks
+that keep them looking even live in assets/style.css under .social-link img.
 
 ## Badge shapes
 Every crest can be a pointed shield or a circle. The league logo in the header
@@ -196,6 +234,11 @@ is already round. To flip one, add or remove the class crest-circle:
 
   <span class="crest crest-lg">                 pointed shield
   <span class="crest crest-circle crest-lg">    circle
+
+For the teams that come from data (standings tables, team cards, the managers), add
+"shape": "circle" to the team in nfl-roster-data.js / nba-teams-data.js - that is how
+Los Puntos de Pina is set up. The pages in leagues/nfl/teams/ are written out by hand,
+so there it is the crest-circle class, as above.
 
 To make them all round at once, see the "WANT EVERY BADGE ROUND?" block near
 the top of assets/style.css.
@@ -206,11 +249,11 @@ Rewrite it directly in that team's html file. There is a comment right above
 it so you can find it quickly.
 
 ## The commissioner pane
-teams/puntos.html has extra pieces the other teams do not:
+leagues/nfl/teams/puntos.html has extra pieces the other teams do not:
 
   - a gold "Meet the commissioner" button, and a clickable crest
   - a full-screen pane with THE COMMISSIONER in large gold type, your photo,
-    your bio and your decrees. Edit that text inside teams/puntos.html, in the
+    your bio and your decrees. Edit that text inside leagues/nfl/teams/puntos.html, in the
     block marked COMMISSIONER BIO.
   - your photo: save it as images/commissioner.jpg
   - an anthem: save your sound file as audio/commissioner-theme.mp3
@@ -291,3 +334,110 @@ Try dry-run first, then test, and only then rely on the automatic sending.
     people, the extra ones need a paid plan or a resend the next day.
   - Never put subscriber emails in this repo - it is public. Brevo holds them.
   - If a run fails, GitHub emails you; the log says why in plain words.
+
+## One league, several fantasies (NFL + NBA + UCL)
+The site is ONE league with one fantasy per sport:
+
+  NFL   football     live      (the original site)
+  NBA   basketball   live      (teams and rosters still to come)
+  UCL   UEFA Champions League  next year - greyed out in the menu, does nothing when clicked
+
+### The navbar (same on every page)
+Home, About, News, Leagues (a menu: NFL / NBA / UCL), Teams, Contact.
+It is NOT written into each page any more. assets/nav.js draws it, from the
+league list in assets/leagues.js, so changing the menu or opening a league is
+one edit. Each page only carries an empty <nav id="siteNav"> plus attributes on
+<body> that say where it is:
+
+  data-root    how far up the site root is ("" or "../" or "../../")
+  data-active  the tab to light up: home about news leagues teams contact
+  data-league  on a league's own pages: nfl / nba / ucl
+
+### The folders
+See "Files - where everything lives" at the top. In short: the root and assets/ hold
+what the whole site needs; leagues/nfl/ and leagues/nba/ each hold that league's
+landing page, its two private managers, its data files and its team pages, all named
+nfl-... / nba-... so you can never mix them up.
+
+Colours, fonts and layout are shared - every league page loads the same
+assets/style.css, assets/app.js and assets/news.js, so a change there changes
+all of them.
+
+### The Teams page
+teams.html shows every team as a card - crest, name, and a link to its
+page when it has one - in a scrolling carousel per league (arrows appear when a
+row is wider than the screen). A team with no crest picture shows its initials on
+a round badge. NBA says "Equipos por confirmar" until teams exist, and UCL says it is
+available next year.
+
+### The home page (index.html)
+It no longer belongs to one sport. It has the news wire, league buttons (NFL / NBA,
+UCL greyed out), the latest 3 stories from every league (each with a small NFL / NBA /
+UCL badge), and one "Standings" section with a tab per league. Each tab shows that
+league's own table and a "Ver la liga" link. The UCL tab is greyed and does nothing
+until UCL is set to live in assets/leagues.js. The old hero numbers (top of the table,
+most points, weeks to survive) now live on the NFL page, leagues/nfl/nfl-landing-page.html.
+Standings still come from each league's own <league>-standings-data.js - nothing changed for
+the managers. assets/standings-tabs.js draws the tabs, assets/hero-leagues.js the buttons.
+
+### League landing pages
+Each has the standings table, then the teams as cards in standings order (a gold
+rank badge on each), then that league's latest news. Open a new league by copying
+leagues/nba/ and changing its data.
+
+### News: one list, split by league
+All stories - NFL, NBA, UCL - are still written in news-writer.html and saved into
+the ONE assets/news.js. The writer has a "League" picker at the top of the form;
+each story is stored with a "league" value (football / basketball / soccer - kept
+as before so old stories still work; a story with no league counts as NFL).
+
+  - news.html shows buttons (Todas / NFL / NBA) and one section per league.
+    news.html?sport=basketball opens with only that league. A UCL section appears
+    by itself once the first UCL story is posted.
+  - The home page shows the latest stories from every league, each with its badge.
+    A league's landing page shows only its own.
+  - Two stories cannot share a "Link name" - the writer refuses, because the
+    links and the email alerts use that name.
+  - Email alerts work as before. An NBA story's email says "Noticias de la liga - NBA".
+
+### NBA standings and rosters
+Open leagues/nba/nba-standings-manager.html on your own computer. It works like the NFL
+one (arrows to reorder, click a box to edit) without the T column, since basketball
+has no ties. Press Download, then drop the file (it is named nba-standings-data.js)
+into leagues/nba/assets/ replacing the old one. The manager lists the teams found in
+leagues/nba/assets/nba-teams-data.js, so add the teams there first (the file explains
+the format).
+
+leagues/nba/nba-roster-manager.html is the NBA twin of the NFL roster manager: draft
+players from free agency, bench, start, drop or trade them. It downloads
+nba-roster-data.js for leagues/nba/assets/. The starting positions in that file
+(PG SG SF PF C G F UTIL UTIL UTIL) are only a placeholder - change NBA_STARTER_SLOTS to
+the league's real lineup before you start. The NBA rosters are not shown on any public
+page yet; that comes with the NBA team pages.
+
+### When the NBA teams and rosters arrive
+Fill in leagues/nba/assets/nba-teams-data.js - they appear on the NBA page, the Teams
+page and both NBA managers at once. Individual NBA team pages are not built yet. When
+they exist, set  teamPages: 'leagues/nba/teams/'  for the nba league in assets/leagues.js
+and the team names become links.
+
+### The NBA countdown page
+Until the NBA teams are ready, leagues/nba/nba-landing-page.html shows only a countdown:
+"La expansion fue confirmada - NBA DRAFT este Domingo a las 9PM", with a timer to
+Sunday 4 Oct 2026, 9PM New York time. The moment the timer hits zero the page swaps
+itself (no reload) to "ESTAMOS TRABAJANDO EN EDITAR LOS EQUIPOS - CHECK PRONTO!", and
+anyone opening the page after that sees that message straight away.
+
+  - The draft time is one line on the page: data-target="2026-10-04T21:00:00-04:00"
+    (year-month-day, T, hour:min:sec, then the New York offset: -04:00 while clocks
+    are on summer time, -05:00 in winter). Change it there to move the draft.
+  - The old NBA page (hero, standings, teams, news) is still in the file, switched off
+    inside one big HTML comment. The comment itself says how to bring it back: delete the
+    countdown section, remove the comment start and end lines, and uncomment the three
+    scripts at the bottom.
+  - The home page, the Teams page, the menu and the bubble still point at this page.
+
+### The bubble logos
+The "Quieres ver la info de otro Fantasy?" bubble shows images/leagues/nfl.png,
+nba.png and ucl.png (set by the logo field of each league in assets/leagues.js). To
+change one, replace that file and keep the name (256x256 is plenty).

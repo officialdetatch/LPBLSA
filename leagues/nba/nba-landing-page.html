@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NBA Fantasy | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A basketball fantasy league.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" href="../../images/league-logo.png">
+  <link rel="apple-touch-icon" href="../../images/league-logo.png">
+  <link rel="manifest" href="../../manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-active="leagues" data-league="nba">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../index.html">
+        <span class="crest crest-circle">
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <audio autoplay loop>
+    <source src="../../audio/commissioner-theme.mp3" type="audio/mpeg">
+  </audio>
+  <!-- ===== DRAFT COUNTDOWN (live until the NBA teams are ready) ===== -->
+  <section class="hero countdown-hero">
+    <div class="wrap">
+      <div class="countdown-wrap">
+        <div class="hero-kicker">NBA Fantasy &middot; 2026 season</div>
+
+        <div id="nbaBefore">
+          <h1>La expansi&oacute;n fue <span class="accent">confirmada</span></h1>
+          <p class="countdown-sub">NBA DRAFT este Domingo a las 9PM.</p>
+          <!-- To move the draft, change data-target: year-month-day T hour:min:sec, then the New York offset (-04:00 summer time, -05:00 winter) -->
+          <div class="countdown" id="nbaCountdown" data-target="2026-10-04T21:00:00-04:00" role="timer" aria-label="Tiempo para el NBA Draft">
+            <div class="countdown-cell"><b data-unit="d">--</b><span>D&iacute;as</span></div>
+            <div class="countdown-cell"><b data-unit="h">--</b><span>Horas</span></div>
+            <div class="countdown-cell"><b data-unit="m">--</b><span>Min</span></div>
+            <div class="countdown-cell"><b data-unit="s">--</b><span>Seg</span></div>
+          </div>
+        </div>
+
+        <div id="nbaAfter" hidden>
+          <h1>ESTAMOS TRABAJANDO EN <span class="accent">EDITAR LOS EQUIPOS</span></h1>
+          <p class="countdown-sub">CHECK PRONTO!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- ===== NBA PAGE CONTENT - SWITCHED OFF UNTIL THE TEAMS ARE READY =====
+       To bring it back: delete the DRAFT COUNTDOWN section above, then delete
+       the comment opener at the very top of this block (the line that says
+       SWITCHED OFF) and the comment closer on the last line of the block.
+       Do the same for the scripts commented out at the bottom of the page.
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <div class="hero-kicker">NBA Fantasy &middot; 2026 season</div>
+        <h1>La Misma Liga.<br><span class="accent">Ahora en la Duela.</span></h1>
+        <p>Pagina Oficial del Fantasy Basketball de La Premier Bundesliga Serie A.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Standings</h2>
+        <span class="section-note">El podio de los ganadores</span>
+      </div>
+      <div class="table-scroll">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>RK</th><th>Team</th>
+              <th class="num">W</th><th class="num">L</th>
+              <th class="num">PCT</th><th class="num">GB</th>
+              <th class="num">PF</th><th class="num">PA</th>
+              <th class="num">Streak</th><th class="num">Playoff</th>
+            </tr>
+          </thead>
+          <tbody id="standingsBody" data-empty="Los equipos y la tabla se publican cuando arranque la temporada."></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Los Equipos</h2>
+        
+      </div>
+      <div id="teamsGrid" data-empty="Los equipos se anuncian cuando arranque la temporada."></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Las Noticias</h2>
+        <a class="btn btn-small" href="../../news.html?sport=basketball">Todas las noticias</a>
+      </div>
+      <div class="news-grid" id="newsGrid" data-limit="3" data-league="basketball" data-empty="Todavia no hay noticias de NBA. Pronto!"></div>
+    </div>
+  </section>
+
+  ===== end of switched-off NBA content ===== -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; NBA Fantasy.</div>
+      <div>EST 2026</div>
+      <div class="footer-social" aria-label="Follow the league">
+        <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="../../images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="../../images/socials-logo/threads-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <img src="../../images/socials-logo/discord-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@lpblsa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../../images/socials-logo/tiktok-simplified-white-icon.png" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://x.com/lpblsa_onX" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../../images/socials-logo/x-social-media-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/news.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="assets/nba-countdown.js"></script>
+  <!-- SWITCHED OFF with the page content above - bring these back with it:
+  <script src="assets/nba-teams-data.js"></script>
+  <script src="assets/nba-standings-data.js"></script>
+  <script src="../../assets/teams-view.js"></script>
+  ===== -->
+  <script src="../../assets/alerts.js"></script>
+  <script src="../../assets/fantasy-switcher.js"></script>
+</body>
+</html>

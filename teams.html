@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>News | La Premier Bundesliga Serie A</title>
+  <title>Teams | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A one fantasy league, several sports (NFL, NBA, UCL).">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/style.css">
   
 </head>
-<body data-root="" data-active="news">
+<body data-root="" data-active="teams">
   <header class="site-header">
     <div class="header-row">
       <a class="brand" href="index.html">
@@ -48,14 +48,14 @@
   <main>
   <section class="hero" style="padding:44px 0 34px">
     <div class="wrap">
-      <div class="hero-kicker">Rincon del Vago</div>
-      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem)">Noticias<span class="accent"> de la Liga</span></h1>
-      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Reportes o cualquier cosa relevante las pondremos aqui</p>
+      <div class="hero-kicker">Todos los equipos</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem)">Los <span class="accent">Equipos</span></h1>
+      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Cada equipo de cada liga, separado por NFL, NBA y UCL.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap" id="newsPage"></div>
+    <div class="wrap" id="teamsPage"></div>
   </section>
   </main>
 
@@ -83,10 +83,11 @@
     </div>
   </footer>
 
-  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
   <script src="assets/news.js"></script>
+  <script src="leagues/nfl/assets/nfl-roster-data.js"></script>
+  <script src="leagues/nba/assets/nba-teams-data.js"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/teams-view.js"></script>
   <script src="assets/alerts.js"></script>
-  
 </body>
 </html>

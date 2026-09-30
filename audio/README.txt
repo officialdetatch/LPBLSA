@@ -8,7 +8,7 @@ It plays on the Los Puntos de Pina page and loops until the visitor
 leaves the page or presses the button in the bottom right corner.
 
 Using a different name or format (.m4a, .ogg, .wav)? Open
-teams/puntos.html, find the line starting with <audio, and change the
+leagues/nfl/teams/puntos.html, find the line starting with <audio, and change the
 src to match your file.
 
 Note on browsers: Chrome, Safari and Firefox all refuse to play sound
