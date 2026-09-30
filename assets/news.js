@@ -5,6 +5,23 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "gracias-por-elegirnos",
+    "date": "",
+    "headline": "Gracias por Elegirnos!",
+    "summary": "Si llegaste aqui solo tenemos una cosa que decir",
+    "blocks": [
+      {
+        "type": "video",
+        "src": "images/news/f514e02e07504d188dc4e86c1d79219e.mov",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "GRACIAS!"
+      }
+    ]
+  },
+  {
     "id": "resumen-de-la-semana",
     "date": "Week 3 | Sept 29",
     "headline": "Resumen de la Semana",
@@ -229,8 +246,8 @@ window.LEAGUE_NEWS = [
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
   "Tenemos Discord nuevo! Ve a las noticias para el link",
+  "No seas Fari Fari! Subscribete a nuestro newsletter para recibir noticias si no sabes contactanos",
   "No se creeran esta noticia pero si, Los Puntos de Piña GANARON.",
-  "A Josh McDaniels lo deberian despedir, ese cb es el cancer de Los Patriots",
   "Los 3 millonnes de Joby Weeks fueron un scam, la FBI investiga el caso",
   "La semana 4 sera la mejor semana de la temporada, todos los equipos a 50% odds!"
 ];
