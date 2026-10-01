@@ -13,12 +13,16 @@
      Threads    <blockquote class="text-post-media">     + threads embed.js
      X.com      <blockquote class="twitter-tweet">       + platform.twitter.com/widgets.js
      Instagram  <blockquote class="instagram-media">     + instagram.com/embed.js
-     TikTok     <blockquote class="tiktok-embed">        + tiktok.com/embed.js
+     TikTok     a play button; the video loads from tiktok.com/embed/v2 only when someone presses it
 
    Good to know
    - The platforms' scripts are only fetched once the Socials section is close
      to the screen, and only for the platforms that are actually posted, so the
      top of the home page loads just as fast as before.
+   - TikTok is click-to-play on purpose: its embed servers sometimes answer with an
+     "overload-protect triggered" error, and a page that loads the video by itself would
+     show that error as a big empty box. The card shows a clean play button instead, and
+     under the video there is always an "open it on TikTok" link.
    - If a platform's script cannot load (an ad blocker, no connection, a post that
      was deleted or is private), the card keeps a plain "Ver la publicacion"
      link to the post, so there is never an empty hole.
@@ -41,7 +45,9 @@
   var TEXT = {
     open: 'Abrir',
     openIn: 'Ver la publicación en ',
-    empty: 'Aún no hemos publicado en redes.'      /* shown when there is no post to show */
+    empty: 'Aún no hemos publicado en redes.',     /* shown when there is no post to show */
+    play: 'Toca para ver el video',
+    noLoad: '¿No carga? Ábrelo en TikTok'
   };
 
   /* The four platforms. "menu" is the name in the writer's drop-down, "label" the name on the card.
@@ -58,8 +64,7 @@
   var SCRIPTS = {
     threads:   ['https://www.threads.com/embed.js', 'https://www.threads.net/embed.js'],
     x:         ['https://platform.twitter.com/widgets.js'],
-    instagram: ['https://www.instagram.com/embed.js'],
-    tiktok:    ['https://www.tiktok.com/embed.js']
+    instagram: ['https://www.instagram.com/embed.js']       /* TikTok needs no script: see tiktokFrame() */
   };
 
   function esc(s) {
@@ -188,7 +193,17 @@
       '.soc-body>*{max-width:100%;min-width:0}',
       '.soc-body blockquote{margin:0;padding:0;border:0;background:none;width:100%;quotes:none}',
       '.soc-body blockquote::before,.soc-body blockquote::after{content:none}',
-      '.soc-body blockquote.instagram-media,.soc-body blockquote.tiktok-embed{min-width:0 !important}',
+      '.soc-body blockquote.instagram-media{min-width:0 !important}',
+      '.soc-tt{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}',
+      '.soc-tt-play{width:100%;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;',
+        'background:rgba(255,255,255,.03);border:1px dashed var(--gold-dark,#a98a28);border-radius:var(--radius,3px);',
+        'font-family:var(--font-display,inherit);font-size:.86rem;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-light,#f0d77a)}',
+      '.soc-tt-play:hover,.soc-tt-play:focus-visible{border-style:solid;color:var(--white,#fff)}',
+      '.soc-tt-ico{display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;padding-left:4px;',
+        'background:var(--gold,#d4af37);color:var(--navy-950,#050b18);font-size:1.15rem}',
+      '.soc-tt-open{font-size:.8rem;color:var(--mute,#8fa3c4);text-decoration:none;text-align:center}',
+      '.soc-tt-open:hover{color:var(--gold-light,#f0d77a)}',
+      '.soc-tt-frame{display:block;width:100%;max-width:605px;height:739px;border:0;border-radius:var(--radius,3px);background:#fff}',
       '.soc-body .twitter-tweet,.soc-body .twitter-tweet-rendered{margin:0 auto !important}',
       '.soc-body iframe{max-width:100%}',
       '.soc-body blockquote section{margin:0;padding:0}',
@@ -223,8 +238,28 @@
       return '<blockquote class="text-post-media" data-text-post-version="0" data-text-post-permalink="' + esc(p.url) +
         '" id="ig-tp-' + esc(p.id) + '">' + link(p.url) + '</blockquote>';
     }
-    return '<blockquote class="tiktok-embed" data-embed-from="oembed" cite="' + esc(p.url) + '" data-video-id="' + esc(p.id) +
-      '"><section>' + link(p.url) + '</section></blockquote>';
+    /* TikTok: a play button; the video itself is only fetched when someone presses it */
+    return '<div class="soc-tt" data-tt-id="' + esc(p.id) + '">' +
+      '<button type="button" class="soc-tt-play"><span class="soc-tt-ico" aria-hidden="true">&#9654;</span>' +
+        esc(TEXT.play) + '</button>' +
+      '<a class="soc-tt-open" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' +
+        esc(TEXT.openIn + name) + ' &#8599;</a>' +
+    '</div>';
+  }
+
+  /* Pressing a TikTok card's play button swaps it for TikTok's own player (the same address its
+     embed script uses), with a link to open the video on TikTok kept underneath. */
+  function tiktokFrame(ev) {
+    var btn = ev.target && ev.target.closest ? ev.target.closest('.soc-tt-play') : null;
+    if (!btn) return;
+    var box = btn.closest('.soc-tt');
+    var id = box && box.getAttribute('data-tt-id');
+    if (!/^\d{8,25}$/.test(id || '')) return;
+    var open = box.querySelector('.soc-tt-open');
+    var href = open ? open.getAttribute('href') : 'https://www.tiktok.com/';
+    box.innerHTML = '<iframe class="soc-tt-frame" src="https://www.tiktok.com/embed/v2/' + id + '" title="TikTok" ' +
+      'allow="encrypted-media; fullscreen; autoplay" allowfullscreen scrolling="no"></iframe>' +
+      '<a class="soc-tt-open" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(TEXT.noLoad) + ' &#8599;</a>';
   }
 
   function cardHTML(p) {
@@ -269,7 +304,7 @@
       } else if (platform === 'instagram') {
         if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
       } else if (!fresh) {
-        /* Threads and TikTok have no "do it again" call: running their script again does it. */
+        /* Threads has no "do it again" call: running its script again does it. */
         var old = document.querySelectorAll('script[data-soc-embed][data-soc-for="' + platform + '"]');
         Array.prototype.forEach.call(old, function (o) { o.remove(); });
         var s = document.createElement('script');
@@ -302,7 +337,9 @@
   function loadEmbeds(host, list, lazy) {
     if (host._socObserver) { host._socObserver.disconnect(); host._socObserver = null; }
     var used = [];
-    list.forEach(function (p) { if (used.indexOf(p.platform) === -1) used.push(p.platform); });
+    list.forEach(function (p) {
+      if (SCRIPTS[p.platform] && used.indexOf(p.platform) === -1) used.push(p.platform);     /* TikTok has no script */
+    });
     if (!used.length) return;
     var go = function () { used.forEach(function (pf) { boot(pf, host); }); };
     if (lazy && 'IntersectionObserver' in window) {
@@ -328,6 +365,7 @@
     if (opts.limit > 0) list = list.slice(0, opts.limit);
     injectCSS();
     host.classList.add('soc-grid');
+    if (!host._socBound) { host.addEventListener('click', tiktokFrame); host._socBound = true; }
     host.innerHTML = list.map(cardHTML).join('');
     host.setAttribute('data-count', String(list.length));
     loadEmbeds(host, list, opts.lazy !== false);
