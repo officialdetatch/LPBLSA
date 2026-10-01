@@ -28,6 +28,8 @@ belongs to one league lives in that league's folder and starts with its name
     about-data.js         the About page content - edited via about-manager.html
     writer.js, about-manager.js   power news-writer.html / about-manager.html
     alerts.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
+    rules-view.js         draws a league's Reglas page from its rules-data file
+    playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
   images/               your logos go here (see images/README.txt)
     leagues/              the round NFL / NBA / UCL logos used by the "otro Fantasy" bubble
   audio/                the commissioner theme (see audio/README.txt)
@@ -42,6 +44,12 @@ belongs to one league lives in that league's folder and starts with its name
   assets/nfl-roster-manager.js     powers nfl-roster-manager.html only
   assets/nfl-standings-data.js     the NFL table (edited via the standings manager)
   assets/nfl-standings-manager.js  powers nfl-standings-manager.html only
+  nfl-rules.html               the NFL Reglas page
+  nfl-playoffs.html            the NFL Playoffs page: the bracket, who is out
+  nfl-playoffs-manager.html    YOUR private tool for the NFL bracket
+  assets/nfl-rules-data.js         the NFL rules (from the football rules sheet)
+  assets/nfl-playoffs-data.js      who is seeded and who advanced (edited via the playoffs manager)
+  assets/nfl-playoffs-manager.js   powers nfl-playoffs-manager.html only
 
   NBA  (leagues/nba/) - the same set, for basketball
   nba-landing-page.html        the NBA home - right now only the draft countdown (see below)
@@ -54,6 +62,12 @@ belongs to one league lives in that league's folder and starts with its name
   assets/nba-roster-manager.js     powers nba-roster-manager.html only
   assets/nba-standings-data.js     the NBA table
   assets/nba-standings-manager.js  powers nba-standings-manager.html only
+  nba-rules.html               the NBA Reglas page
+  nba-playoffs.html            the NBA Playoffs page: the bracket, who is out
+  nba-playoffs-manager.html    YOUR private tool for the NBA bracket
+  assets/nba-rules-data.js         the NBA rules (from the basketball rules sheet)
+  assets/nba-playoffs-data.js      who is seeded and who advanced (edited via the playoffs manager)
+  assets/nba-playoffs-manager.js   powers nba-playoffs-manager.html only
 
   The NFL and NBA tools are separate copies on purpose: changing one never
   touches the other.
@@ -343,14 +357,16 @@ The site is ONE league with one fantasy per sport:
   UCL   UEFA Champions League  next year - greyed out in the menu, does nothing when clicked
 
 ### The navbar (same on every page)
-Home, About, News, Leagues (a menu: NFL / NBA / UCL), Teams, Contact.
+Home, About, Reglas, News, Leagues, Playoffs, Teams, Contact. Reglas, Leagues and Playoffs are
+hover menus (tap on a phone) listing NFL / NBA / UCL; UCL is greyed out and does nothing.
+Below 1100px wide the whole bar folds into the menu button.
 It is NOT written into each page any more. assets/nav.js draws it, from the
 league list in assets/leagues.js, so changing the menu or opening a league is
 one edit. Each page only carries an empty <nav id="siteNav"> plus attributes on
 <body> that say where it is:
 
   data-root    how far up the site root is ("" or "../" or "../../")
-  data-active  the tab to light up: home about news leagues teams contact
+  data-active  the tab to light up: home about reglas news leagues playoffs teams contact
   data-league  on a league's own pages: nfl / nba / ucl
 
 ### The folders
@@ -369,6 +385,55 @@ page when it has one - in a scrolling carousel per league (arrows appear when a
 row is wider than the screen). A team with no crest picture shows its initials on
 a round badge. NBA says "Equipos por confirmar" until teams exist, and UCL says it is
 available next year.
+
+### The Reglas pages
+Each league has its own rules page in its own folder: leagues/nfl/nfl-rules.html and
+leagues/nba/nba-rules.html. The navbar's Reglas menu (next to About) lists them; UCL is
+greyed out until it has rules. The headline is "Las reglas son las reglas." The page shows
+Basics and Roster as tiles (one tile per position), the scoring lists, and for the NBA the
+Games Played limit - with "Secciones" jump links at the top.
+
+The rules themselves are copied straight from your two rules spreadsheets into
+leagues/nfl/assets/nfl-rules-data.js and leagues/nba/assets/nba-rules-data.js (the .xlsx
+files are not part of the website). To change a rule, edit the number or text in that file
+and save - the top of each file explains the little format. assets/rules-view.js draws the
+page. When UCL opens: set it to 'live' in assets/leagues.js and give it a  rules  page
+(see the fields listed at the top of leagues.js), copying leagues/nba/nba-rules.html and
+leagues/nba/assets/nba-rules-data.js (change LPBSA_RULES.nba to LPBSA_RULES.ucl in the copy).
+
+To change the headline or the line under it, edit the hero at the top of nfl-rules.html /
+nba-rules.html.
+
+### The Playoffs pages (and their managers)
+Everything playoff-related for a league lives in that league's folder:
+
+  leagues/nfl/nfl-playoffs.html            the public page: the bracket, the champion, who is out
+  leagues/nfl/nfl-playoffs-manager.html    YOUR private tool (not linked anywhere)
+  leagues/nfl/assets/nfl-playoffs-data.js  the data the page reads (the manager writes it)
+  (and the same three with nba- in leagues/nba/)
+
+The only shared piece is assets/playoffs-view.js, which draws the bracket and works out
+who advances; the page and the manager both use it, so the manager shows exactly what
+visitors will see. The Playoffs menu in the navbar links to each league's page.
+
+Two bracket shapes, taken from the league's bracket pictures:
+  4 teams   ROUND 1 (No.1 v No.4, No.2 v No.3) -> CHAMP          (NFL: 5 teams, top 4 qualify)
+  6 teams   ROUND 1 (No.1 and No.2 have a BYE; No.4 v No.5; No.3 v No.6) -> ROUND 2 -> CHAMP   (NBA: 10 teams, top 6)
+The NFL is set to 4 and the NBA to 6; the manager has a "Bracket" box if that ever changes.
+
+How to run the playoffs with the manager (open leagues/nfl/nfl-playoffs-manager.html from
+your folder):
+  1. Seeds - pick who is No. 1, No. 2 ... or press "Fill from standings" to take the top
+     of the table. Any team of the league that is not seeded shows as "Fuera de playoffs".
+  2. Results - as each game is played, click the team that won. It moves to the next round
+     and the other team is marked OUT and listed under "Eliminados". Click the winner
+     again to undo. A BYE moves the seed forward by itself. Click the winner of the
+     final and the champion banner appears.
+  3. Press "Download nfl-playoffs-data.js", drop it into leagues/nfl/assets/ replacing the
+     old one, and push. Nothing changes on the site until you do. Unsaved work is kept in
+     your browser, so you can close the tab and come back.
+Changing a seed removes only the results that depended on it. Nobody is ever typed in as
+"eliminated" - it follows from who advanced. The data file's top explains the format.
 
 ### The home page (index.html)
 It no longer belongs to one sport. It has the news wire, league buttons (NFL / NBA,
@@ -410,10 +475,10 @@ the format).
 
 leagues/nba/nba-roster-manager.html is the NBA twin of the NFL roster manager: draft
 players from free agency, bench, start, drop or trade them. It downloads
-nba-roster-data.js for leagues/nba/assets/. The starting positions in that file
-(PG SG SF PF C G F UTIL UTIL UTIL) are only a placeholder - change NBA_STARTER_SLOTS to
-the league's real lineup before you start. The NBA rosters are not shown on any public
-page yet; that comes with the NBA team pages.
+nba-roster-data.js for leagues/nba/assets/. The starting lineup in that file is the
+league's real one from the rules sheet - 9 starters: PG SG SF PF C G F UTIL UTIL
+(NBA_STARTER_SLOTS). The NBA rosters are not shown on any public page yet; that comes
+with the NBA team pages.
 
 ### When the NBA teams and rosters arrive
 Fill in leagues/nba/assets/nba-teams-data.js - they appear on the NBA page, the Teams

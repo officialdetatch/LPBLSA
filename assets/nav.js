@@ -5,13 +5,14 @@
 
    A page tells it where it is with attributes on <body>:
      data-root    how far up the site root is   ("" , "../" or "../../")
-     data-active  which tab to light up:  home  about  news  leagues
-                  teams  contact   (leave off for the private tools)
+     data-active  which tab to light up:  home  about  reglas  news  leagues
+                  playoffs  teams  contact   (leave off for the private tools)
      data-league  on a league's own pages: nfl / nba / ucl - lights up
                   that league inside the Leagues menu
 
-   The Leagues menu is built from assets/leagues.js. A league that is
-   still 'soon' shows greyed out and does nothing when clicked.
+   The Reglas, Leagues and Playoffs menus are all built from assets/leagues.js
+   (its home / rules / playoffs fields). A league that is still 'soon' - or has no
+   page of that kind yet - shows greyed out and does nothing when clicked.
    ============================================================ */
 (function () {
   'use strict';
@@ -38,41 +39,65 @@
   var chevron = '<svg class="nav-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 
-  var menu = leagues.map(function (L) {
-    if (L.status !== 'live' || !L.home) {
-      return '<li><span class="nav-soon" tabindex="0" role="link" aria-disabled="true">' +
-        '<b>' + esc(L.short) + '</b><span>' + esc(L.name) + ' &middot; Pronto</span></span></li>';
-    }
-    return '<li><a href="' + esc(root + L.home) + '"' + (current === L.key ? ' class="active" aria-current="page"' : '') + '>' +
-      '<b>' + esc(L.short) + '</b><span>' + esc(L.sport) + '</span></a></li>';
-  }).join('');
+  /* One hover menu. `field` is the league field it links to (home / rules / playoffs);
+     a league that is still 'soon', or has no page of that kind yet, shows greyed out. */
+  function dropdown(key, label, field) {
+    var items = leagues.map(function (L) {
+      if (L.status !== 'live' || !L[field]) {
+        return '<li><span class="nav-soon" tabindex="0" role="link" aria-disabled="true">' +
+          '<b>' + esc(L.short) + '</b><span>' + esc(L.name) + ' &middot; Pronto</span></span></li>';
+      }
+      var here = key === 'leagues'
+        ? (current === L.key && active !== 'reglas' && active !== 'playoffs')
+        : (active === key && current === L.key);
+      return '<li><a href="' + esc(root + L[field]) + '"' + (here ? ' class="active" aria-current="page"' : '') + '>' +
+        '<b>' + esc(L.short) + '</b><span>' + esc(L.sport) + '</span></a></li>';
+    }).join('');
+    return '<div class="nav-drop" data-drop="' + key + '">' +
+      '<button type="button" class="nav-drop-btn' + (active === key ? ' active' : '') + '" ' +
+        'aria-haspopup="true" aria-expanded="false" aria-controls="navDropMenu-' + key + '">' + esc(label) + ' ' + chevron + '</button>' +
+      '<ul class="nav-drop-menu" id="navDropMenu-' + key + '">' + items + '</ul>' +
+    '</div>';
+  }
 
   nav.innerHTML =
     link('home', 'Home', 'index.html') +
     link('about', 'About', 'about.html') +
+    dropdown('reglas', 'Reglas', 'rules') +
     link('news', 'News', 'news.html') +
-    '<div class="nav-drop" id="navDrop">' +
-      '<button type="button" class="nav-drop-btn' + (active === 'leagues' ? ' active' : '') + '" id="navDropBtn" ' +
-        'aria-haspopup="true" aria-expanded="false" aria-controls="navDropMenu">Leagues ' + chevron + '</button>' +
-      '<ul class="nav-drop-menu" id="navDropMenu">' + menu + '</ul>' +
-    '</div>' +
+    dropdown('leagues', 'Leagues', 'home') +
+    dropdown('playoffs', 'Playoffs', 'playoffs') +
     link('teams', 'Teams', 'teams.html') +
     link('contact', 'Contact', 'contact.html');
 
-  /* ---------- open / close the Leagues menu ---------- */
-  var drop = document.getElementById('navDrop');
-  var btn = document.getElementById('navDropBtn');
-  function setOpen(open) {
+  /* ---------- open / close the menus (hover on a computer, tap on a phone) ---------- */
+  var drops = Array.prototype.slice.call(nav.querySelectorAll('.nav-drop'));
+  function setOpen(drop, open) {
     drop.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    drop.querySelector('.nav-drop-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
   }
-  btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!drop.classList.contains('open')); });
-  document.addEventListener('click', function (e) { if (!drop.contains(e.target)) setOpen(false); });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && drop.classList.contains('open')) { setOpen(false); btn.focus(); }
+  function closeAll(except) {
+    drops.forEach(function (d) { if (d !== except) setOpen(d, false); });
+  }
+  drops.forEach(function (drop) {
+    var btn = drop.querySelector('.nav-drop-btn');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !drop.classList.contains('open');
+      closeAll(drop);
+      setOpen(drop, open);
+    });
+    /* a league that is not open yet does nothing - not even a jump to the top of the page */
+    drop.addEventListener('click', function (e) {
+      if (e.target.closest('.nav-soon')) e.preventDefault();
+    });
   });
-  /* UCL (and anything else that is 'soon') does nothing - not even a jump to the top of the page. */
-  drop.addEventListener('click', function (e) {
-    if (e.target.closest('.nav-soon')) e.preventDefault();
+  document.addEventListener('click', function (e) {
+    if (!nav.contains(e.target)) closeAll(null);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openOne = drops.filter(function (d) { return d.classList.contains('open'); })[0];
+    if (openOne) { closeAll(null); openOne.querySelector('.nav-drop-btn').focus(); }
   });
 })();

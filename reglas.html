@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About | La Premier Bundesliga Serie A</title>
-  <meta name="description" content="La Premier Bundesliga Serie A one fantasy league, several sports (NFL, NBA, UCL).">
+  <title>Reglas | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="Las reglas de La Premier Bundesliga Serie A: NFL, NBA y UCL. Las reglas son las reglas.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="assets/style.css">
   
 </head>
-<body data-root="" data-active="about">
+<body data-root="" data-active="reglas">
   <header class="site-header">
     <div class="header-row">
       <a class="brand" href="index.html">
@@ -46,25 +46,23 @@
   </div>
 
   <main>
-  <section class="hero" style="padding:44px 0 34px">
+  <section class="hero rules-hero" style="padding:44px 0 34px">
     <div class="wrap">
-      <div class="hero-kicker">La Liga</div>
-      <h1 id="aboutTitle" style="font-size:clamp(1.8rem,4vw,2.8rem)">About</h1>
-      <p id="aboutLede" style="color:var(--gold-light);max-width:60ch;margin:12px 0 0"></p>
+      <div class="hero-kicker">El reglamento</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem)">Las reglas son <span class="accent">las reglas.</span></h1>
+      <p style="color:var(--mute);max-width:60ch;margin:12px 0 0">Leelas antes de quejarte con el comisionado. Escoge tu liga.</p>
     </div>
   </section>
 
   <section class="section">
-    <div class="wrap">
-      <div class="article" id="aboutBody" style="max-width:70ch"></div>
-    </div>
+    <div class="wrap" id="rulesPage"></div>
   </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
       <div>La Premier Bundesliga Serie A &middot; Una Liga. Todos los Deportes.</div>
-      <div>EST 2026</div>
+      <div>EST. 2026</div>
       <div class="footer-social" aria-label="Follow the league">
         <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <img src="images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
@@ -85,9 +83,11 @@
     </div>
   </footer>
 
-  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
   <script src="assets/news.js"></script>
-  <script src="assets/about-data.js"></script>
+  <script src="leagues/nfl/assets/nfl-rules-data.js"></script>
+  <script src="leagues/nba/assets/nba-rules-data.js"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/rules-view.js"></script>
+  <script src="assets/alerts.js"></script>
 </body>
 </html>

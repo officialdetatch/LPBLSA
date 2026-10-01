@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Socials writer | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    /* only this page uses these, so they live here and style.css stays as it is */
+    .sw-add{ display:grid; grid-template-columns:170px 1fr auto; gap:12px; align-items:end; }
+    .sw-add .field{ margin-bottom:0; }
+    .sw-hint{ margin:10px 0 0; font-size:.9rem; color:var(--mute); overflow-wrap:anywhere; }
+    .sw-hint.ok{ color:var(--win); }
+    .sw-hint.bad{ color:var(--loss); }
+    .sw-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px; }
+    .sw-chip{ font-family:var(--font-display); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+      padding:2px 9px; border:1px solid var(--gold-dark); color:var(--gold-light); border-radius:var(--radius); }
+    .sw-url{ display:block; overflow-wrap:anywhere; color:var(--white); text-decoration:none; font-size:.92rem; }
+    .sw-url:hover{ color:var(--gold-light); text-decoration:underline; }
+    .writer-row.sw-over{ opacity:.6; }
+    .sw-show{ max-width:220px; }
+    @media (max-width:760px){ .sw-add{ grid-template-columns:1fr; } .sw-add .btn{ width:100%; } }
+  </style>
+</head>
+<body data-root="">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">Fantasy football &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="assets/leagues.js"></script>
+  <script src="assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">League wire</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:38px 0 28px">
+    <div class="wrap">
+      <div class="hero-kicker">Private tool &middot; not linked from the site</div>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">Socials <span class="accent">writer</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:34px">
+    <div class="wrap">
+      <div class="writer-note">
+        Put posts from <b>Threads</b>, <b>X.com</b>, <b>Instagram</b> and <b>TikTok</b> in the
+        <b>Socials</b> section at the bottom of the home page. Open the post on its own page, copy its
+        address from the address bar (or use the platform's <b>Share &rarr; Copy link</b>), and paste it in the
+        box below. The drop-down picks the platform from the link for you &mdash; just check it says the right
+        one &mdash; and press <b>Add post</b>. The newest post goes first; use the <b>&uarr; &darr;</b> arrows to
+        reorder, and <b>Remove</b> takes one off. The preview at the bottom is the real thing, so what you see
+        there is what visitors will see. Last step: press <b>Download socials-data.js</b> and drop the file into
+        <code>assets/</code>, replacing the old one. Nothing changes on the public site until you do.
+        <br><br>
+        Posts have to be public. A TikTok link needs the long address (the one with <code>/video/</code> and a
+        number), not the short <code>vm.tiktok.com</code> one. Visitors never see this page unless you send them
+        the link &mdash; delete <code>socials-writer.html</code> and <code>assets/socials-writer.js</code> before
+        uploading if you would rather it never leaves your computer.
+      </div>
+
+      <div class="writer-note hidden" id="swDraftNote">
+        You have unsaved changes from a previous session, loaded below.
+      </div>
+
+      <p class="section-note"><a href="news-writer.html">&rarr; News writer</a> &middot;
+        <a href="about-manager.html">About page manager</a></p>
+
+      <div class="editor-panel">
+        <h3>Add a post</h3>
+        <div class="sw-add">
+          <div class="field">
+            <label for="swPlatform">Platform</label>
+            <select id="swPlatform" class="sort-select"></select>
+          </div>
+          <div class="field">
+            <label for="swUrl">Link to the post</label>
+            <input id="swUrl" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.instagram.com/p/...">
+          </div>
+          <button type="button" class="btn btn-solid" id="swAdd">Add post</button>
+        </div>
+        <p class="sw-hint" id="swHint"></p>
+      </div>
+
+      <div class="section-head"><h2>Posts</h2>
+        <span class="section-note">Top of the list shows first.</span>
+      </div>
+      <div class="field sw-show" style="margin-bottom:16px">
+        <label for="swShow">Show on the home page</label>
+        <select id="swShow" class="sort-select"></select>
+      </div>
+      <div id="swList"></div>
+
+      <div class="section-head" style="margin-top:34px"><h2>Preview</h2>
+        <span class="section-note">How the Socials section will look. A post that is private or was deleted shows only a plain link.</span>
+      </div>
+      <div id="socialsPreview"></div>
+
+      <div class="section-head" style="margin-top:34px"><h2>Your socials-data.js</h2></div>
+      <textarea id="wOutput" readonly spellcheck="false"></textarea>
+      <div class="news-edit-row" style="margin-top:12px">
+        <button class="btn btn-solid btn-small" id="swDownload">Download socials-data.js</button>
+        <button class="btn btn-small" id="swCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="swReset">Discard changes</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; five clubs, one crown.</div>
+      <div>Standings, rosters and projections from the league export.</div>
+    </div>
+  </footer>
+
+  <script>window.LPBSA_NEWS_BASE = "news.html#"; window.LPBSA_NEWS_INDEX = "news.html";</script>
+  <script src="assets/news.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/socials-data.js"></script>
+  <script src="assets/socials-view.js"></script>
+  <script src="assets/socials-writer.js"></script>
+</body>
+</html>

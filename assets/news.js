@@ -5,7 +5,34 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "draft-confirmado",
+    "league": "basketball",
+    "date": "",
+    "headline": "Draft Confirmado",
+    "summary": "Luego de que el cheque de Joby Weeks cleario, pudimos hacer expansion y la liga de NBA va!",
+    "blocks": [
+      {
+        "type": "h",
+        "text": "Realmente, pensamos que era un scam, pero el cheque cayo en la cuenta y pudimos hacer la expansion para NBA!"
+      },
+      {
+        "type": "image",
+        "src": "images/leagues/nba.png",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "El draft esta proyectado para el Domingo 11 de 2026, y se llevara a cabo a las 9:00PM."
+      },
+      {
+        "type": "p",
+        "text": "Las reglas se encuentran disponible en nuestra pagina, y a su vez en el discord: https://discord.gg/BN3yCCYXz5. Solo asegura que cuando des join elijas el rol, 🏀League Prospect para acceder al canal."
+      }
+    ]
+  },
+  {
     "id": "gracias-por-elegirnos",
+    "league": "football",
     "date": "",
     "headline": "Gracias por Elegirnos!",
     "summary": "Si llegaste aqui solo tenemos una cosa que decir",
@@ -23,6 +50,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "resumen-de-la-semana",
+    "league": "football",
     "date": "Week 3 | Sept 29",
     "headline": "Resumen de la Semana",
     "summary": "La semana 3 dejó de todo, y la gran sorpresa fue Los Puntos de Piña llevándose el partido contra Hobbit con un marcador de 179.44 a 155.66.",
@@ -137,6 +165,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "tenemos-nuevo-discord",
+    "league": "football",
     "date": "Week 3 | Sept 25",
     "headline": "Tenemos nuevo Discord!",
     "summary": "La Premier Bundesliga Serie A ya tiene nuevo servidor de Discord!",
@@ -150,6 +179,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "llegaron-los-refuerzos",
+    "league": "football",
     "date": "Week 3 | Sept 24",
     "headline": "Llegaron Los Refuerzos",
     "summary": "Ante lo que se veía venir como la peor semana de la temporada, Los Puntos de Piña no se quedaron de brazos cruzados.",
@@ -168,6 +198,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "de-vuelta-a-la-vuelta",
+    "league": "football",
     "date": "Week 3 | Sept 22",
     "headline": "De Vuelta a la Vuelta",
     "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
@@ -184,6 +215,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "los-hobbits-ya-no-son-virgen",
+    "league": "football",
     "date": "Week 3 | Sept 22",
     "headline": "Los Hobbits ya no son Virgen",
     "summary": "Dice la cancion \"Do you remember the 21st night of September\" Pues Hobbit si se recordaran, ya que entran al scoreboard oficial obteniendo su primera victoria!",
@@ -199,6 +231,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "los-puntos-de-pi-a-malditos",
+    "league": "football",
     "date": "Week 2 | Sept 20",
     "headline": "Los Puntos de Piña... Malditos? 😱",
     "summary": "Dos semanas de temporada y ya parece que hay una maldición encima de este equipo. Vamos a repasar el desastre punto por punto porque la cosa se está poniendo seria.",
@@ -220,6 +253,7 @@ window.LEAGUE_NEWS = [
   },
   {
     "id": "game-of-the-week-alert",
+    "league": "football",
     "date": "Week 2 | Sept 17",
     "headline": "Game of the Week Alert",
     "summary": "Con unos odds de 51/49 Sierra Linda Camel Toes vs Los Puntos De Piña prometen un banger!",
@@ -247,7 +281,7 @@ window.LEAGUE_NEWS = [
 window.LEAGUE_TICKER = [
   "Tenemos Discord nuevo! Ve a las noticias para el link",
   "No seas Fari Fari! Subscribete a nuestro newsletter para recibir noticias si no sabes contactanos",
-  "No se creeran esta noticia pero si, Los Puntos de Piña GANARON.",
-  "Los 3 millonnes de Joby Weeks fueron un scam, la FBI investiga el caso",
-  "La semana 4 sera la mejor semana de la temporada, todos los equipos a 50% odds!"
+  "La semana 4 de NFL empieza hoy! Hagan sus cambios!",
+  "El cheque de Joby Weeks cleario, pudimos hacer expansion y la liga de NBA va! Draft: 10/11/2026 a las 9PM.",
+  "Todavia Daniel no sabe lo que es un pueico. Se le dijo que era un animai, un sei vivo, y nada. Creemos que es analfabeta."
 ];

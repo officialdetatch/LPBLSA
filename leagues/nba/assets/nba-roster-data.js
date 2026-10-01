@@ -6,10 +6,10 @@
    nba-teams-data.js, in this same folder.
 
    NBA_STARTER_SLOTS is the list of starting spots every team has, in order.
-   The positions below are only a placeholder - change them to match the
-   league's real lineup before you start.
+   These are the league's real 9 starters, from the rules sheet: PG, SG, SF, PF, C,
+   then one G (any guard), one F (any forward) and two UTIL (anyone).
    ============================================================ */
-window.NBA_STARTER_SLOTS = ["PG","SG","SF","PF","C","G","F","UTIL","UTIL","UTIL"];
+window.NBA_STARTER_SLOTS = ["PG","SG","SF","PF","C","G","F","UTIL","UTIL"];
 
 window.NBA_ROSTERS = {};
 

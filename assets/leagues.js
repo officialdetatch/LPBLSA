@@ -25,17 +25,22 @@
      teamPages  folder of its individual team pages, from the site root
                 ('' = none yet, so team names are not links)
      noTies     true = hide the T column in its standings
+     rules      the league's Reglas page, from the site root. The Reglas menu in
+                the navbar lists it; a league without one shows greyed out
+     playoffs   the league's Playoffs page, from the site root (same idea)
    ============================================================ */
 window.LPBSA_LEAGUES = [
   {
     key: 'nfl', short: 'NFL', name: 'NFL Fantasy', sport: 'Football', story: 'football',
     status: 'live', home: 'leagues/nfl/nfl-landing-page.html', logo: 'images/leagues/nfl.png',
-    assetRoot: '', teamPages: 'leagues/nfl/teams/', noTies: false
+    assetRoot: '', teamPages: 'leagues/nfl/teams/', noTies: false,
+    rules: 'leagues/nfl/nfl-rules.html', playoffs: 'leagues/nfl/nfl-playoffs.html'
   },
   {
     key: 'nba', short: 'NBA', name: 'NBA Fantasy', sport: 'Basketball', story: 'basketball',
     status: 'live', home: 'leagues/nba/nba-landing-page.html', logo: 'images/leagues/nba.png',
-    assetRoot: 'leagues/nba/', teamPages: '', noTies: true
+    assetRoot: 'leagues/nba/', teamPages: '', noTies: true,
+    rules: 'leagues/nba/nba-rules.html', playoffs: 'leagues/nba/nba-playoffs.html'
   },
   {
     key: 'ucl', short: 'UCL', name: 'UEFA Champions League', sport: 'Soccer', story: 'soccer',

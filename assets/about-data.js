@@ -9,27 +9,61 @@ window.LEAGUE_ABOUT = {
   "blocks": [
     {
       "type": "p",
-      "text": "Fundada en 2026 por Christopher (alias Detatch), La Premier Bundesliga Serie A nace como una liga para poder disfrutar más el season de la NFL. Siendo 5 founding fathers, la liga celebró su primer draft el 30 de agosto.\n\nTeniendo un tipo de reglas distintas a las normales para dar un poco más de competencia, aquí te dejamos un resumen de cómo funciona todo. El get to know las reglas de esto. Si no entiendes, eres pato."
+      "text": "Se dice que los inicios de la liga son desconocidos, pero recursos históricos afirman haber encontrado rasgos que confirman que el nombre proviene del fenecido Cristóbal Ramiro de la Ribera, conde español de la Ribera. En los mismos se encontraron monografías sobre el nombre portador de nuestra liga."
+    },
+    {
+      "type": "image",
+      "src": "images/0A075B2D-0C23-47EB-9C74-E2342D2C3E88.png",
+      "caption": ""
+    },
+    {
+      "type": "h",
+      "text": "Fundación: Principios de 2026"
     },
     {
       "type": "p",
-      "text": "El Roster\n\n12 jugadores en el starting lineup: 1 QB, 2 RB, 3 WR, 1 TE, 2 FLEX, 1 OP/Superflex (cualquier offensive player, así que podrías tener hasta 2 QB en la misma semana bien a lo loco), 1 D/ST y 1 K.\n\nAdemás tienes 6 espacios de banca y 1 de Injured Reserve. En el draft el máximo por posición es 3 QB, 6 RB, 7 WR, 3 TE, 2 D/ST y 2 K."
+      "text": "A principios de 2026, la liga fue fundada por Chris Ramirez, mejor conocido como Detatch. La misma fue pensada con el objetivo de atraer amigos y familiares al deporte en tono de competencia. En colaboración con su socio creativo Daniel, alias Surf, se fundó La Premier Bundesliga Serie A. La misma es una liga de fantasía con un twist moderno, dando algo refrescante y 100 % competitivo a todos los miembros."
+    },
+    {
+      "type": "image",
+      "src": "images/league-logo",
+      "caption": ""
     },
     {
       "type": "p",
-      "text": "Puntuación ofensiva\n\nLo básico: yardas de pase valen 0.04 por yarda, TD de pase 4 puntos e intercepción -2. Las yardas de carrera y de recepción valen 0.1 cada una, con 6 puntos por touchdown en ambos casos, y las recepciones también suman 0.5 puntos cada una (PPR). Las conversiones de 2 puntos valen 2, sin importar cómo se hagan."
+      "text": "Como toda organización, la misma tuvo tropiezos al momento de conseguir firmas e interesados. No fue hasta principios de agosto que se concretó el primer pacto y se creó la división de Fútbol Americano. La división consta de 5 equipos, los cuales, al día de hoy, batallan para convertirse en los primeros campeones de la división."
+    },
+    {
+      "type": "h",
+      "text": "Una Rápida Expansión"
     },
     {
       "type": "p",
-      "text": "Kicking\n\nLos puntos más fáciles de la liga, siempre y cuando no te toque el kicker de los Patriots. Los goles de campo suben de valor entre más largos sean (3 puntos de 0-39 yardas hasta 6 puntos de 60+, cosa que básicamente solo hace el kicker de Jacksonville), y fallar un gol de campo te cuesta -1."
+      "text": "Luego de concretar el draft de la liga de NFL, socios y dueños de equipo confirmaron interés en una expansión a otros deportes, y las miras fueron el baloncesto y el fútbol. Aunque solo significó más trabajo, la expansión fue confirmada semanas después, fundándose con esto 2 divisiones nuevas:"
     },
     {
       "type": "p",
-      "text": "Defensa y Special Teams\n\nAquí se premia el trabajo sucio: sacks, intercepciones, fumbles recuperados, safeties y bloqueos valen entre 1 y 2 puntos cada uno. También hay bonos grandes por touchdowns de la defensa o special teams (kickoff return, punt return, fumble return, pick six), todos valiendo 6 puntos.\n\nLo interesante está en los puntos y yardas permitidas. Entre menos le anotes al rival, más puntos ganas (hasta +5 si los dejas en cero), y entre más te anoten, más pierdes (hasta -5 si te meten 46 o más, cosa que solo pasa si tienes la defensa de los Cowboys). Con las yardas permitidas pasa lo mismo: menos de 100 yardas te da +5, pero si te pasan de 550, perdiste con todo (-7)."
+      "text": "LPBLSA - BASKETBALL"
     },
     {
       "type": "p",
-      "text": "Bienvenidos a La Premier Bundesliga Serie A. Aquí las reglas son distintas, la competencia es real, y si no las entiendes, eres fari fari."
+      "text": "Y"
+    },
+    {
+      "type": "p",
+      "text": "LPBLSA - SOCCER, la cual, debido a los fondos, se iniciará en 2027"
+    },
+    {
+      "type": "h",
+      "text": "El Futuro Prometedor"
+    },
+    {
+      "type": "p",
+      "text": "Los planes a futuro solo confirman expansiones para atraer más equipos y, como se mencionó antes, el inicio de la división LPBLSA - SOCCER."
+    },
+    {
+      "type": "p",
+      "text": "Estamos felices de que sean parte de esta liga y espacio, y esperamos que sigan disfrutando de este, su hogar, La Premier Bundesliga Serie A."
     }
   ]
 };

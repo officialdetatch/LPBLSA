@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NBA playoffs manager | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="NBA playoffs manager (private tool).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body data-root="../../" data-league="nba">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../assets/leagues.js"></script>
+  <script src="../../assets/nav.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <main>
+  <section class="hero" style="padding:38px 0 28px">
+    <div class="wrap">
+      <div class="hero-kicker">Private tool &middot; not linked from the site</div>
+      <h1 style="font-size:clamp(1.6rem,3.5vw,2.3rem)">NBA playoffs <span class="accent">manager</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:34px">
+    <div class="wrap">
+      <div class="writer-note">
+        This runs the bracket on the <a href="nba-playoffs.html">NBA Playoffs page</a>.
+        <b>1.</b> Pick who is seeded No. 1, No. 2 and so on (or press <b>Fill from standings</b> to take them
+        straight from the table). <b>2.</b> As each game is played, click the team that won in the bracket below
+        &mdash; it moves on to the next round and the other team is marked eliminated. Click the winner again to
+        undo it. The teams that did not get a seed show as <i>Fuera de playoffs</i> on the page.
+        When you are done, press <b>Download nba-playoffs-data.js</b> and drop the file into
+        <code>leagues/nba/assets/</code>, replacing the old one. Nothing changes on the public site until you do.
+        Visitors never see this page unless you send them the link &mdash; delete
+        <code>leagues/nba/nba-playoffs-manager.html</code> and
+        <code>leagues/nba/assets/nba-playoffs-manager.js</code> before uploading if you would rather it never
+        leaves your computer.
+      </div>
+
+      <div class="writer-note hidden" id="pmDraftNote">
+        You have unsaved changes from a previous session, loaded below.
+      </div>
+
+      <p class="section-note">
+        <a href="nba-standings-manager.html">&rarr; NBA standings manager</a> &middot;
+        <a href="../nfl/nfl-playoffs-manager.html">NFL playoffs manager</a> &middot;
+        <a href="../../news-writer.html">news writer</a>
+      </p>
+
+      <div class="section-head" style="margin-top:30px">
+        <h2>1. Seeds</h2>
+        <span class="section-note">Who made the playoffs, and where they are seeded.</span>
+      </div>
+      <div class="editor-panel">
+        <div class="pm-format">
+          <label for="pmFormat">Bracket</label>
+          <select id="pmFormat" class="sort-select">
+            <option value="4">4 teams &middot; ROUND 1 &rarr; CHAMP</option>
+            <option value="6">6 teams &middot; ROUND 1 (byes for No. 1 and 2) &rarr; ROUND 2 &rarr; CHAMP</option>
+          </select>
+        </div>
+        <div class="pm-seeds" id="pmSeeds"></div>
+        <div class="news-edit-row">
+          <button class="btn btn-small" id="pmFill">Fill from standings</button>
+          <button class="btn btn-ghost btn-small" id="pmClearSeeds">Clear seeds</button>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:34px">
+        <h2>2. Results</h2>
+        <span class="section-note">Click the team that won each game.</span>
+      </div>
+      <div id="pmBracket"></div>
+      <div class="news-edit-row" style="margin-top:14px">
+        <button class="btn btn-ghost btn-small" id="pmClearResults">Clear results</button>
+      </div>
+
+      <div class="section-head" style="margin-top:34px"><h2>3. Who is out</h2></div>
+      <div id="pmSummary"></div>
+
+      <div class="section-head pm-out"><h2>Your nba-playoffs-data.js</h2></div>
+      <textarea id="pmOutput" readonly spellcheck="false"></textarea>
+      <div class="news-edit-row" style="margin-top:12px">
+        <button class="btn btn-solid btn-small" id="pmDownload">Download nba-playoffs-data.js</button>
+        <button class="btn btn-small" id="pmCopy">Copy to clipboard</button>
+        <button class="btn btn-ghost btn-small" id="pmReset">Discard changes</button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; NBA Fantasy.</div>
+      <div>NBA playoffs tool.</div>
+    </div>
+  </footer>
+
+  <script src="../../assets/news.js"></script>
+  <script src="assets/nba-teams-data.js"></script>
+  <script src="assets/nba-standings-data.js"></script>
+  <script src="assets/nba-playoffs-data.js"></script>
+  <script src="../../assets/app.js"></script>
+  <script src="../../assets/playoffs-view.js"></script>
+  <script src="assets/nba-playoffs-manager.js"></script>
+</body>
+</html>
