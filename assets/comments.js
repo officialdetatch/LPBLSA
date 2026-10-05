@@ -32,10 +32,13 @@
      (</>) > "SDK setup and configuration" > Config. Copy these four values.
      (These are not secrets - they only say WHICH project to talk to. The
      rules in firestore.rules are what protect your data.)              */
-  var FIREBASE_CONFIG = {
+  /* If assets/firebase-config.js is loaded (it is, on news.html) its values win, so the project
+     address lives in one place. The values below are only the fallback. */
+  var FIREBASE_CONFIG = window.LPBSA_FIREBASE || {
     apiKey: 'AIzaSyCa8_nANLmB2rHpY1ZEFoko6NPT-xdv3VQ',
     authDomain: 'lpblsa.firebaseapp.com',
     projectId: 'lpblsa',
+    messagingSenderId: '318390622492',
     appId: '1:318390622492:web:2de36d08a07004bf7302d9'
   };
 
@@ -55,6 +58,7 @@
     many: ' comentarios',
     loggedOut: 'Inicia sesión para comentar y responder.',
     enter: 'Entrar',
+    create: 'Crear cuenta',
     leave: 'Salir',
     as: 'Comentando como ',
     placeholder: 'Escribe tu comentario...',
@@ -75,7 +79,7 @@
     modalUp: 'Crear cuenta',
     modalReset: 'Recuperar contraseña',
     google: 'Continuar con Google',
-    googleHint: 'Si Google no abre (pasa dentro de Instagram o Discord), usa tu correo.',
+    googleHint: 'Con Google entras directo, sin crear cuenta. Si Google no abre (pasa dentro de Instagram o Discord), usa tu correo.',
     or: 'o con tu correo',
     name: 'Tu nombre',
     namePh: 'Como te conoce la liga',
@@ -123,13 +127,17 @@
     var cfg = FIREBASE_CONFIG, auth, db, loading, listeners = [], settled = false;
 
     function script(src) {
-      return new Promise(function (resolve, reject) {
-        var s = document.createElement('script');
-        s.src = src; s.async = false;
-        s.onload = resolve;
-        s.onerror = function () { reject(new Error('sdk')); };
-        document.head.appendChild(s);
-      });
+      var map = window.__lpbsaScripts = window.__lpbsaScripts || {}; /* shared with push.js so nothing loads twice */
+      if (!map[src]) {
+        map[src] = new Promise(function (resolve, reject) {
+          var s = document.createElement('script');
+          s.src = src; s.async = false;
+          s.onload = resolve;
+          s.onerror = function () { delete map[src]; reject(new Error('sdk')); };
+          document.head.appendChild(s);
+        });
+      }
+      return map[src];
     }
     function who(u) { return u ? { uid: u.uid, name: u.displayName || '', email: u.email || '' } : null; }
     function emit(u) { settled = true; var w = who(u); listeners.forEach(function (cb) { cb(w); }); }
@@ -142,7 +150,10 @@
         loading = script(base + 'firebase-app-compat.js').then(function () {
           return Promise.all([script(base + 'firebase-auth-compat.js'), script(base + 'firebase-firestore-compat.js')]);
         }).then(function () {
-          firebase.initializeApp(cfg);
+          if (!firebase.apps.length) {
+            firebase.initializeApp({ apiKey: cfg.apiKey, authDomain: cfg.authDomain, projectId: cfg.projectId,
+              appId: cfg.appId, messagingSenderId: cfg.messagingSenderId });
+          }
           auth = firebase.auth();
           db = firebase.firestore();
           auth.onAuthStateChanged(emit);
@@ -293,7 +304,15 @@
     '.cm-or::before,.cm-or::after{content:"";flex:1;height:1px;background:var(--line);}' +
     '.cm-modal .field{margin-bottom:12px;}' +
     '.cm-modal .field input{font-size:16px;}' +
-    '.cm-switch{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;margin-top:14px;}' +
+    '.cm-switch{display:flex;flex-direction:column;align-items:stretch;gap:12px;margin-top:16px;}' +
+    '.cm-cta{width:100%;padding:15px 14px;cursor:pointer;text-align:center;font-family:var(--font-body);font-size:1.05rem;font-weight:700;' +
+      'color:var(--gold-light);background:rgba(212,175,55,.14);border:2px solid var(--gold);border-radius:var(--radius);' +
+      'transition:background .15s ease,color .15s ease;}' +
+    '.cm-cta:hover,.cm-cta:focus-visible{background:var(--gold);color:var(--gold-ink);}' +
+    '.cm-cta-soft{font-size:.95rem;font-weight:600;color:var(--white);background:none;border:1px solid var(--line);}' +
+    '.cm-cta-soft:hover,.cm-cta-soft:focus-visible{background:var(--navy-700);color:var(--white);border-color:var(--gold);}' +
+    '.cm-forgot{align-self:center;font-size:.92rem;text-decoration:underline;padding:6px 4px;}' +
+    '.cm-bar-btns{display:flex;gap:10px;flex-wrap:wrap;}' +
     '@media (prefers-reduced-motion:no-preference){.cm-modal{animation:cmPop .25s ease both;}' +
       '@keyframes cmPop{from{opacity:0;transform:translateY(10px) scale(.97);}to{opacity:1;transform:none;}}}';
   document.head.appendChild(css);
@@ -343,12 +362,12 @@
       (mode === 'up' ? COPY.submitUp : mode === 'reset' ? COPY.submitReset : COPY.submitIn) + '</button>' +
       '<p class="cm-msg" id="cmMMsg" role="alert"></p></form><div class="cm-switch">';
     if (mode === 'in') {
-      body += '<button type="button" class="cm-link" data-go="up">' + COPY.toUp + '</button>' +
-        '<button type="button" class="cm-link" data-go="reset">' + COPY.forgot + '</button>';
+      body += '<button type="button" class="cm-cta" data-go="up">' + COPY.toUp + '</button>' +
+        '<button type="button" class="cm-link cm-forgot" data-go="reset">' + COPY.forgot + '</button>';
     } else if (mode === 'up') {
-      body += '<button type="button" class="cm-link" data-go="in">' + COPY.toIn + '</button>';
+      body += '<button type="button" class="cm-cta cm-cta-soft" data-go="in">' + COPY.toIn + '</button>';
     } else {
-      body += '<button type="button" class="cm-link" data-go="in">' + COPY.back + '</button>';
+      body += '<button type="button" class="cm-cta cm-cta-soft" data-go="in">' + COPY.back + '</button>';
     }
     body += '</div>';
     modal.querySelector('#cmMBody').innerHTML = body;
@@ -452,7 +471,8 @@
         updateCount();
       } else {
         bar.innerHTML = '<span class="cm-bar-text">' + COPY.loggedOut + '</span>' +
-          '<button type="button" class="btn btn-solid btn-small" data-act="in">' + COPY.enter + '</button>';
+          '<span class="cm-bar-btns"><button type="button" class="btn btn-ghost" data-act="in">' + COPY.enter + '</button>' +
+          '<button type="button" class="btn btn-solid" data-act="up">' + COPY.create + '</button></span>';
         wrap.innerHTML = '';
         replyTo = null;
       }
@@ -533,6 +553,7 @@
       if (!b) return;
       var act = b.getAttribute('data-act'), id = b.getAttribute('data-id');
       if (act === 'in') { openModal('in'); return; }
+      if (act === 'up') { openModal('up'); return; }
       if (act === 'out') { backend.signOut(); return; }
       if (act === 'reply') {
         replyTo = id; replyDraft = b.getAttribute('data-at') ? '@' + b.getAttribute('data-at') + ' ' : '';

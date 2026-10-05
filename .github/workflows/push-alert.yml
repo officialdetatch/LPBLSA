@@ -1,0 +1,50 @@
+# Sends a PUSH NOTIFICATION to subscribed phones/computers when a NEW story is added to assets/news.js.
+# It runs next to the email alert (news-alert.yml); each one works on its own.
+# Setup steps are in PUSH-SETUP.md.
+name: News push notification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - assets/news.js
+  workflow_dispatch:
+    inputs:
+      story_id:
+        description: "Story id from assets/news.js (e.g. resumen-de-la-semana)"
+        required: true
+      mode:
+        description: "dry-run = only count who would get it | test = send only to the newest device (yours) | send = notify everyone"
+        type: choice
+        options: [dry-run, test, send]
+        default: dry-run
+      force:
+        description: "Send even if this story was already notified"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: push-alert
+  cancel-in-progress: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Send push notification
+        run: node scripts/send-push-alert.mjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          BEFORE_SHA: ${{ github.event.before }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'send' }}
+          STORY_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.story_id || '' }}
+          FORCE: ${{ inputs.force }}

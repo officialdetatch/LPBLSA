@@ -15,6 +15,9 @@
 //     delete any.
 //   - The commissioner (someone with a document in "admins" under their own id) can block a
 //     person (a document in "banned" with their id). A blocked person can no longer post.
+//   - Push notifications: a visitor's browser can add, update or remove ITS OWN device record in
+//     "pushTokens" (only a long, unguessable address they already hold). Nobody can read that list
+//     from the website; only the GitHub sender can (with its private key).
 //   - Everything else is closed.
 
 rules_version = '2';
@@ -64,6 +67,33 @@ service cloud.firestore {
     match /admins/{userId} {
       allow get: if signedIn() && request.auth.uid == userId;
       allow list, write: if false;
+    }
+
+    // Devices that turned on push notifications. The id of each record IS the device's address
+    // (a long random token), so changing or removing a record needs that address. Reading is closed
+    // to everyone here; the GitHub sender reads the list with its own private key, which bypasses
+    // these rules. "sports" says which fantasies the person wants (football / basketball / soccer).
+    match /pushTokens/{token} {
+      allow read: if false;
+
+      allow create: if request.resource.data.keys().hasOnly(['token', 'sports', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['token', 'sports', 'updatedAt'])
+        && request.resource.data.token == token
+        && token.size() >= 50 && token.size() <= 4096
+        && request.resource.data.sports is list
+        && request.resource.data.sports.size() >= 1
+        && request.resource.data.sports.size() <= 6
+        && request.resource.data.sports.hasOnly(['football', 'basketball', 'soccer'])
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['sports', 'updatedAt'])
+        && request.resource.data.sports is list
+        && request.resource.data.sports.size() >= 1
+        && request.resource.data.sports.size() <= 6
+        && request.resource.data.sports.hasOnly(['football', 'basketball', 'soccer'])
+        && request.resource.data.updatedAt == request.time;
+
+      allow delete: if true;
     }
 
     // The block list. Only a commissioner can see or change it.

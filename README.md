@@ -27,7 +27,7 @@ belongs to one league lives in that league's folder and starts with its name
     news.js               the stories themselves - the only file you edit to post
     about-data.js         the About page content - edited via about-manager.html
     writer.js, about-manager.js   power news-writer.html / about-manager.html
-    alerts.js, comments.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
+    alerts.js, comments.js, firebase-config.js, push.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
     rules-view.js         draws a league's Reglas page from its rules-data file
     playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
   images/               your logos go here (see images/README.txt)
@@ -501,6 +501,15 @@ anyone opening the page after that sees that message straight away.
     countdown section, remove the comment start and end lines, and uncomment the three
     scripts at the bottom.
   - The home page, the Teams page, the menu and the bubble still point at this page.
+
+### Push notifications (the bell)
+A bell in the header of every public page lets visitors turn on push notifications and choose NFL and/or NBA.
+On an iPhone it shows the "add to Home Screen" steps first, because Apple requires that. The pieces:
+assets/push.js (the bell and window), assets/firebase-config.js (the Firebase project address + the web push key),
+firebase-messaging-sw.js (must stay at the site root), and the GitHub Action push-alert.yml with
+scripts/send-push-alert.mjs, which sends a notification when you add a NEW story to assets/news.js (same
+"is it new?" rule as the email alert). It stays hidden until vapidKey is filled in
+in assets/firebase-config.js. Full setup and testing: PUSH-SETUP.md.
 
 ### Comments and login (news stories)
 Under every news story there is a "Comentarios" section: visitors log in (Google or email +
