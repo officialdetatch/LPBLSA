@@ -502,10 +502,12 @@ anyone opening the page after that sees that message straight away.
     scripts at the bottom.
   - The home page, the Teams page, the menu and the bubble still point at this page.
 
-### Push notifications (the bell)
-A bell in the header of every public page lets visitors turn on push notifications and choose NFL and/or NBA.
-On an iPhone it shows the "add to Home Screen" steps first, because Apple requires that. The pieces:
-assets/push.js (the bell and window), assets/firebase-config.js (the Firebase project address + the web push key),
+### Push notifications (the card, the bell and the menu item)
+A few seconds after a page opens, a notification-style card slides in from the top asking to turn on push
+notifications (one tap; "Ahora no" hides it for a week). A bell in the header (computers) and a
+"Notificaciones" item at the bottom of the menu (phones and tablets) open the window where visitors choose
+NFL and/or NBA or turn it off. On an iPhone it shows the "add to Home Screen" steps first, because Apple
+requires that. The pieces: assets/push.js (the card, bell and window), assets/firebase-config.js (the Firebase project address + the web push key),
 firebase-messaging-sw.js (must stay at the site root), and the GitHub Action push-alert.yml with
 scripts/send-push-alert.mjs, which sends a notification when you add a NEW story to assets/news.js (same
 "is it new?" rule as the email alert). It stays hidden until vapidKey is filled in

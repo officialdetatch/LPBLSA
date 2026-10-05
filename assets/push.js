@@ -1,8 +1,12 @@
 /* Push notifications: the little bell.
-   Adds a bell button to the header of every public page. Tapping it opens a window where a
-   visitor can turn on notifications ("Activar") so their phone or computer gets a message
-   every time a new story is published, and choose which fantasy they care about.
-   On the news page a slim banner also invites people to turn them on.
+   Three ways in, all leading to the same place:
+     1. A notification-style card slides in from the top a few seconds after a page opens and asks
+        "Activar notificaciones?". One tap turns them on (for every fantasy; they can narrow it later).
+        It remembers "Ahora no" for a week and never shows again once notifications are on.
+     2. A bell button in the header on computers.
+     3. A "Notificaciones" item at the bottom of the menu on phones and tablets.
+   The window behind the bell is where a visitor turns notifications on or off and picks which fantasy
+   they care about (NFL / NBA).
 
    The hard case is the iPhone. Apple only lets a website send notifications once it has been
    added to the Home Screen, so on an iPhone the bell shows a short step-by-step guide for that
@@ -19,7 +23,8 @@
 
   var CFG = window.LPBSA_FIREBASE || {};
   var SDK_VERSION = '10.14.1';   /* keep the same as in firebase-messaging-sw.js */
-  var BANNER_DAYS = 14;          /* after closing the news-page banner, wait this long before showing it again */
+  var PROMPT_DELAY_MS = 6000;    /* how long after a page opens the card slides in                  */
+  var PROMPT_DAYS = 7;           /* after "Ahora no", wait this many days before asking again       */
 
   /* The words shown on the page (edit freely). */
   var COPY = {
@@ -41,10 +46,16 @@
     failed: 'No se pudo activar. Inténtalo de nuevo. Si usas Brave u otro navegador muy privado, prueba con Chrome o Safari.',
     saveFailed: 'No se pudo guardar. Revisa tu conexión e inténtalo de nuevo.',
     close: 'Cerrar',
-    banner: 'Recibe las noticias en tu teléfono.',
-    bannerBtn: 'Activar',
-    bannerBtnIos: 'Cómo activarlas',
-    bannerNo: 'Cerrar aviso',
+    navLink: 'Notificaciones',
+    promptTitle: 'Activa las notificaciones',
+    promptText: 'Te avisamos al instante cuando publiquemos una noticia.',
+    promptTextIos: 'Instala la p\u00e1gina en tu iPhone para recibir avisos de cada noticia.',
+    promptYes: 'Activar',
+    promptHow: 'C\u00f3mo hacerlo',
+    promptLater: 'Ahora no',
+    promptWorking: 'Activando...',
+    promptDone: '\u00a1Listo! Te avisaremos cuando haya noticias.',
+    promptPick: 'Elegir deportes',
     read: 'Leer',
     copy: 'Copiar enlace',
     copied: 'Enlace copiado. Pégalo en tu navegador.',
@@ -64,7 +75,7 @@
     stepSafari: 'Abre esta página en <strong>Safari</strong>.',
     stepShare: 'Toca el botón <strong>Compartir</strong> {share} (abajo en el centro; en iPad, arriba a la derecha).',
     stepAdd: 'Baja en el menú y toca <strong>Agregar a pantalla de inicio</strong> {add}. Luego toca <strong>Agregar</strong>.',
-    stepOpen: 'Abre <strong>LPBLSA</strong> desde el ícono nuevo en tu pantalla de inicio (no desde Safari), toca la campana {bell} y pulsa <strong>Activar</strong>.'
+    stepOpen: 'Abre <strong>LPBLSA</strong> desde el ícono nuevo en tu pantalla de inicio (no desde Safari). Arriba te saldrá un aviso: pulsa <strong>Activar</strong>. Si no lo ves, abre el menú y toca <strong>Notificaciones</strong> {bell}.'
   };
 
   /* ---------- the device we are on ---------- */
@@ -238,9 +249,12 @@
     '.pn-bell.pn-on svg{fill:currentColor;}' +
     '.pn-dot{position:absolute;top:-4px;right:-4px;width:12px;height:12px;border-radius:50%;background:var(--gold);' +
       'border:2px solid var(--navy-950);}' +
-    '.header-row.has-bell .site-nav{margin-left:8px;}' +
-    '@media (max-width:1100px){.pn-bell{order:1;}.header-row.has-bell .nav-toggle{margin-left:0;order:2;}' +
-      '.header-row.has-bell .site-nav{order:5;margin-left:0;}}' +
+    /* on phones and tablets the bell would crowd the header, so it lives inside the menu instead */
+    '.site-nav a.pn-navlink{display:none;}' +
+    '@media (max-width:1100px){.pn-bell{display:none;}' +
+      '.site-nav a.pn-navlink{display:flex;align-items:center;gap:10px;color:var(--gold-light);}' +
+      '.pn-navlink svg{width:20px;height:20px;flex:0 0 20px;}' +
+      '.pn-navlink.pn-on svg{fill:currentColor;}}' +
     /* window */
     '.pn-back{position:fixed;inset:0;z-index:1010;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(2,6,18,.74);}' +
     '.pn-back[hidden]{display:none;}' +
@@ -277,14 +291,28 @@
     '.pn-steps li::before{content:counter(pn);flex:0 0 28px;height:28px;border-radius:50%;background:var(--gold);color:var(--gold-ink);' +
       'font-family:var(--font-display);font-size:1rem;display:flex;align-items:center;justify-content:center;}' +
     '.pn-ico{display:inline-block;vertical-align:-5px;width:22px;height:22px;color:var(--gold-light);}' +
-    /* news-page banner */
-    '.pn-banner{background:var(--navy-900);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}' +
-    '.pn-banner .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;}' +
-    '.pn-banner svg.pn-bi{width:22px;height:22px;color:var(--gold);flex:0 0 22px;}' +
-    '.pn-banner span.pn-bt{flex:1;min-width:180px;font-weight:600;}' +
-    '.pn-banner .btn{padding:8px 16px;}' +
-    '.pn-banner-x{width:32px;height:32px;border:0;background:none;color:var(--mute);font-size:1.4rem;line-height:1;cursor:pointer;}' +
-    '.pn-banner-x:hover{color:var(--white);}' +
+    /* the card that slides in from the top */
+    '.pn-prompt{position:fixed;top:12px;left:50%;z-index:1005;width:min(420px,calc(100vw - 24px));transform:translateX(-50%);' +
+      'display:flex;gap:12px;align-items:flex-start;padding:14px 14px 14px 14px;background:linear-gradient(160deg,var(--navy-700),var(--navy-900) 70%);' +
+      'border:1px solid var(--gold);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.6);}' +
+    '.pn-prompt[hidden]{display:none;}' +
+    '.pn-p-logo{flex:0 0 44px;width:44px;height:44px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;' +
+      'background:var(--navy-950);border:1px solid var(--gold-dark);color:var(--gold);}' +
+    '.pn-p-logo img{width:100%;height:100%;object-fit:cover;}' +
+    '.pn-p-logo svg{width:22px;height:22px;}' +
+    '.pn-p-main{flex:1;min-width:0;padding-right:18px;}' +
+    '.pn-p-main strong{display:block;font-size:1rem;line-height:1.25;color:var(--white);}' +
+    '.pn-p-main p{margin:3px 0 0;font-size:.88rem;line-height:1.4;color:var(--mute);}' +
+    '.pn-p-btns{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap;}' +
+    '.pn-p-yes{padding:9px 18px;cursor:pointer;font-family:var(--font-body);font-size:.92rem;font-weight:700;color:var(--gold-ink);background:var(--gold);border:0;border-radius:var(--radius);}' +
+    '.pn-p-yes:hover,.pn-p-yes:focus-visible{background:var(--gold-light);}' +
+    '.pn-p-yes[disabled]{opacity:.6;cursor:default;}' +
+    '.pn-p-no{padding:9px 12px;cursor:pointer;font-family:var(--font-body);font-size:.9rem;color:var(--mute);background:none;border:0;}' +
+    '.pn-p-no:hover,.pn-p-no:focus-visible{color:var(--white);}' +
+    '.pn-p-x{position:absolute;top:6px;right:8px;width:28px;height:28px;border:0;background:none;color:var(--mute);font-size:1.4rem;line-height:1;cursor:pointer;}' +
+    '.pn-p-x:hover{color:var(--white);}' +
+    '.pn-p-ok{display:flex;gap:8px;align-items:center;color:var(--gold-light);font-weight:700;}' +
+    '.pn-p-ok svg{width:20px;height:20px;flex:0 0 20px;}' +
     /* note shown while the site is open when a notification arrives */
     '.pn-toast{position:fixed;left:18px;bottom:18px;z-index:950;width:min(360px,calc(100vw - 100px));padding:14px 16px;cursor:pointer;' +
       'background:var(--white);color:var(--navy-950);border-radius:var(--radius);border-left:5px solid var(--gold);' +
@@ -293,7 +321,9 @@
     '.pn-toast span{display:block;font-size:.85rem;color:#44506f;margin-top:3px;}' +
     '.pn-toast em{display:block;font-style:normal;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dark);margin-top:6px;}' +
     '@media (prefers-reduced-motion:no-preference){.pn-modal{animation:pnPop .25s ease both;}' +
-      '@keyframes pnPop{from{opacity:0;transform:translateY(10px) scale(.97);}to{opacity:1;transform:none;}}}';
+      '.pn-prompt{animation:pnDrop .45s cubic-bezier(.2,.9,.3,1.2) both;}' +
+      '@keyframes pnPop{from{opacity:0;transform:translateY(10px) scale(.97);}to{opacity:1;transform:none;}}' +
+      '@keyframes pnDrop{from{opacity:0;transform:translate(-50%,-24px);}to{opacity:1;transform:translate(-50%,0);}}}';
   document.head.appendChild(css);
 
   var I_BELL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
@@ -314,14 +344,34 @@
   bell.title = COPY.bell;
   bell.setAttribute('aria-haspopup', 'dialog');
   var toggle = row.querySelector('.nav-toggle');
-  row.classList.add('has-bell');
   row.insertBefore(bell, toggle || null);
+
+  /* on phones the same thing lives at the bottom of the menu */
+  var navEl = document.getElementById('siteNav');
+  var navLink = null;
+  if (navEl) {
+    navLink = document.createElement('a');
+    navLink.href = '#';
+    navLink.setAttribute('role', 'button');
+    navEl.appendChild(navLink);
+    navLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      navEl.classList.remove('open');
+      var t = document.getElementById('navToggle');
+      if (t) t.setAttribute('aria-expanded', 'false');
+      open();
+    });
+  }
 
   var SEEN = 'lpblsa.push.seen';
   function drawBell() {
     var on = view() === 'on';
     bell.className = 'pn-bell' + (on ? ' pn-on' : '');
     bell.innerHTML = I_BELL + (!on && !lsGet(SEEN) ? '<span class="pn-dot" aria-hidden="true"></span>' : '');
+    if (navLink) {
+      navLink.className = 'pn-navlink' + (on ? ' pn-on' : '');
+      navLink.innerHTML = I_BELL + '<span>' + COPY.navLink + '</span>';
+    }
   }
   drawBell();
 
@@ -394,6 +444,7 @@
     if (!modal) build();
     opener = document.activeElement;
     lsSet(SEEN, '1');
+    hidePrompt(false);
     render();
     modal.hidden = false;
     if (view() === 'ready' && backend.preload) backend.preload(); /* warm up so Activar is quick */
@@ -472,30 +523,72 @@
     later(attach);
   }
 
-  /* ---------- the invitation on the news page ---------- */
-  function banner() {
-    if (document.body.getAttribute('data-active') !== 'news') return;
+  /* ---------- the card that slides in ---------- */
+  var PROMPT_KEY = 'lpblsa.push.prompt';   /* when they said "Ahora no" */
+  var SHOWN_KEY = 'lpblsa.push.shown';     /* when the card last appeared, so it never nags on every page */
+  var promptEl = null;
+  function promptDue() {
     var st = view();
-    if (st !== 'ready' && st !== 'ios-install') return;
-    var last = Number(lsGet('lpblsa.push.banner') || 0);
-    if (last && Date.now() - last < BANNER_DAYS * 86400000) return;
-    var hero = document.querySelector('main > section.hero');
-    if (!hero) return;
+    if (st !== 'ready' && st !== 'ios-install') return false;   /* on already, blocked, or this browser cannot */
+    if (lsGet(SEEN)) return false;                              /* they already found the bell or the menu item */
+    var last = Number(lsGet(PROMPT_KEY) || 0);
+    if (last && Date.now() - last < PROMPT_DAYS * 86400000) return false;
+    var shown = Number(lsGet(SHOWN_KEY) || 0);
+    return !(shown && Date.now() - shown < 86400000);        /* ignored it? leave them alone for a day */
+  }
+  function hidePrompt(remember) {
+    if (promptEl && promptEl.parentNode) promptEl.parentNode.removeChild(promptEl);
+    promptEl = null;
+    if (remember) lsSet(PROMPT_KEY, String(Date.now()));
+  }
+  function showPrompt() {
+    if (promptEl || !promptDue()) return;
+    if (modal && !modal.hidden) return;
+    var ios = view() === 'ios-install';
+    var logo = SCRIPT_SRC ? new URL('../images/league-logo.png', SCRIPT_SRC).href : '';
     var el = document.createElement('div');
-    el.className = 'pn-banner';
-    el.innerHTML = '<div class="wrap">' + I_BELL.replace('<svg ', '<svg class="pn-bi" ') +
-      '<span class="pn-bt">' + COPY.banner + '</span>' +
-      '<button type="button" class="btn btn-solid" data-pn="open">' + (st === 'ios-install' ? COPY.bannerBtnIos : COPY.bannerBtn) + '</button>' +
-      '<button type="button" class="pn-banner-x" data-pn="x" aria-label="' + COPY.bannerNo + '">&times;</button></div>';
-    hero.insertAdjacentElement('afterend', el);
+    el.className = 'pn-prompt';
+    el.setAttribute('role', 'status');
+    el.innerHTML =
+      '<span class="pn-p-logo">' + (logo ? '<img src="' + esc(logo) + '" alt="">' : I_BELL) + '</span>' +
+      '<div class="pn-p-main"><strong>' + COPY.promptTitle + '</strong>' +
+      '<p>' + (ios ? COPY.promptTextIos : COPY.promptText) + '</p>' +
+      '<div class="pn-p-btns"><button type="button" class="pn-p-yes" data-p="yes">' + (ios ? COPY.promptHow : COPY.promptYes) + '</button>' +
+      '<button type="button" class="pn-p-no" data-p="no">' + COPY.promptLater + '</button></div></div>' +
+      '<button type="button" class="pn-p-x" data-p="no" aria-label="' + COPY.close + '">&times;</button>';
+    var img = el.querySelector('img');
+    if (img) img.addEventListener('error', function () { el.querySelector('.pn-p-logo').innerHTML = I_BELL; });
+    document.body.appendChild(el);
+    promptEl = el;
+    lsSet(SHOWN_KEY, String(Date.now()));
     el.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-pn]');
+      var b = e.target.closest('[data-p]');
       if (!b) return;
-      if (b.getAttribute('data-pn') === 'x') { lsSet('lpblsa.push.banner', String(Date.now())); el.parentNode.removeChild(el); return; }
-      open();
+      var act = b.getAttribute('data-p');
+      if (act === 'no') { hidePrompt(true); return; }
+      if (act === 'pick') { hidePrompt(false); open(); return; }
+      /* act === 'yes' */
+      if (ios) { hidePrompt(false); open(); return; }
+      b.disabled = true; b.textContent = COPY.promptWorking;
+      backend.enable(backend.sports()).then(function () {
+        drawBell(); attach();
+        el.querySelector('.pn-p-main').innerHTML = '<div class="pn-p-ok">' + I_CHECK + '<span>' + COPY.promptDone + '</span></div>' +
+          '<div class="pn-p-btns"><button type="button" class="pn-p-no" data-p="pick">' + COPY.promptPick + '</button></div>';
+        setTimeout(function () { if (promptEl === el) hidePrompt(false); }, 8000);
+      }, function (err) {
+        if (err && err.code === 'permission') { hidePrompt(true); open(); return; } /* they said no: show how to undo it */
+        b.disabled = false; b.textContent = COPY.promptYes;
+        el.querySelector('.pn-p-main p').textContent = COPY.failed;
+      });
     });
   }
-  /* this file loads above the page content, so wait until the page body exists */
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', banner);
-  else banner();
+  /* wait for the email signup pop-up (home page) to be closed, so two things never fight for attention */
+  function whenClear(tries) {
+    if (document.getElementById('alertsPopBackdrop') && tries < 240) {
+      setTimeout(function () { whenClear(tries + 1); }, 500);
+      return;
+    }
+    showPrompt();
+  }
+  if (promptDue()) setTimeout(function () { whenClear(0); }, PROMPT_DELAY_MS);
 })();

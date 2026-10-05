@@ -201,6 +201,15 @@ h1,h2,h3,h4{
   .header-row{ flex-wrap:wrap; }
 }
 
+/* small phones: trim the header a little so the menu button stays beside the name instead of dropping to its own row */
+@media (max-width:420px){
+  .header-row{ padding-left:14px; padding-right:14px; gap:10px; }
+  .brand{ gap:10px; }
+}
+@media (max-width:380px){
+  .brand-name{ font-size:.95rem; }
+}
+
 /* ---------- news ticker ---------- */
 .ticker{
   background:var(--gold);

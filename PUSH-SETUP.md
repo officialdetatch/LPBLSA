@@ -1,18 +1,21 @@
 # Push notifications: one-time setup (about 15 minutes)
 
-What you get: a bell in the header. People tap it, choose NFL and/or NBA, and press **Activar**. From then
-on, every time you publish a NEW story, their phone or computer shows a notification, and tapping it opens
-the story. The email alert keeps working next to it.
+What you get: a few seconds after a page opens, a small card slides in from the top (it looks like a notification)
+asking "Activa las notificaciones". One tap on **Activar** and they are in. It also asks only once: **Ahora no**
+hides it for a week, and it never shows again once someone has turned notifications on. There is also a bell in
+the header on computers and a **Notificaciones** item at the bottom of the menu on phones and tablets, where
+people can pick NFL and/or NBA or turn them off. From then on, every time you publish a NEW story, their phone or
+computer shows a notification, and tapping it opens the story. The email alert keeps working next to it.
 
 How it fits together:
 
-- **The site** (this repo) shows the bell and saves each device's "address" in your Firebase database.
+- **The site** (this repo) shows the card, the bell and the menu item, and saves each device's "address" in your Firebase database.
 - **`firebase-messaging-sw.js`** (at the top of the site) is the small file the browser runs in the background so
   a notification can appear even when the site is closed.
 - **A GitHub Action** (`push-alert.yml`) notices a new story when you push `assets/news.js` and sends the push
   through Firebase (free). It is the twin of your email alert and decides "is this story new?" the same way.
 
-Until you finish steps 2 and 3, the bell is hidden and nothing changes on the live site, so it is safe to push
+Until you finish step 2, the card, the bell and the menu item are hidden and nothing changes on the live site, so it is safe to push
 the files first.
 
 Google changes the Firebase console's wording now and then. If a button is named slightly differently, look
@@ -54,10 +57,13 @@ Push all the new and changed files. `firebase-messaging-sw.js` **must** end up a
 
 ## 5. Turn notifications on for yourself
 
-- **Android / computer:** open the site, tap the bell, choose your sports, press **Activar notificaciones**, and allow
-  the browser's question. A welcome notification appears right away.
-- **iPhone / iPad:** the bell shows the 4-step guide. Install the site to the Home Screen (Safari > Share > *Agregar a
-  pantalla de inicio*), open it **from the new icon**, tap the bell, press **Activar**. Needs iOS 16.4 or newer.
+- **Android / computer:** open the site and wait a few seconds for the card (or use the bell on a computer, or the
+  **Notificaciones** item in the menu on a phone), press **Activar**, and allow the browser's question. A welcome
+  notification appears right away. The card is hidden for a week after **Ahora no** and for a day after you ignore it;
+  to see it again while testing, clear the site's data in the browser (or use a private window).
+- **iPhone / iPad:** the card says **Cómo hacerlo** and shows the 4-step guide. Install the site to the Home Screen
+  (Safari > Share > *Agregar a pantalla de inicio*), open it **from the new icon**, and the card appears again
+  with **Activar** (or use the menu > **Notificaciones**). Needs iOS 16.4 or newer.
 
 ## 6. Test the sending
 
@@ -78,9 +84,9 @@ about a minute or two later, after the live site shows the story. Editing an old
 
 - **People choose their fantasy.** A football story only goes to people who ticked NFL, a basketball story to NBA.
 - **iPhones need the install step.** That is Apple's rule, not ours. Anyone who will not install the site can keep using the email alert.
-- **Instagram / Discord / WhatsApp browsers** cannot do notifications. The bell tells people to open the link in Safari or Chrome.
+- **Instagram / Discord / WhatsApp browsers** cannot do notifications. The panel tells people to open the link in Safari or Chrome (the card does not appear there).
 - **Devices clean themselves up.** If a phone is gone (uninstalled, data cleared), the sender removes it from the list the next time.
-- **Turning off:** the bell > **Desactivar notificaciones** removes that device.
+- **Turning off:** the bell (or menu > **Notificaciones**) > **Desactivar notificaciones** removes that device.
 - **Cost:** free. Firebase Cloud Messaging has no charge, and the sender takes seconds of GitHub's free time.
 - **Where the list lives:** Firestore > `pushTokens` (one record per device). You will see long random ids and no names; that is expected.
   A record named after a story in `pushSent` just remembers "this story was already announced".
@@ -89,7 +95,8 @@ about a minute or two later, after the live site shows the story. Editing an old
 
 | What you see | What to check |
 |---|---|
-| No bell on the site | `vapidKey` is filled in and pushed; hard-refresh the page. |
+| No bell, card or menu item on the site | `vapidKey` is filled in and pushed; hard-refresh the page. |
+| The card never shows up | It waits ~6 seconds, hides for a week after **Ahora no**, and is skipped when notifications are already on or blocked, inside Instagram/Discord browsers, or after someone opened the panel once. Try a private window. |
 | Press **Activar** and get "No se pudo activar" | The rules from step 1 are published; `firebase-messaging-sw.js` is at the site's top level; you are not in a private window; in **Brave**, turn on "Use Google services for push messaging" in Settings > Privacy. |
 | Bell is there but no notification arrives | Run the Action in `test` mode and read the log lines. On iPhone, check Settings > Notifications > LPBLSA and any Focus mode. |
 | The Action is red: "Google refused" | The secret came from this same Firebase project, and **Firebase Cloud Messaging API (V1)** is Enabled (step 2.2). |
