@@ -17,15 +17,27 @@
    that picture file (keep the name). If a picture is missing, a built-in
    football / basketball / soccer ball icon is drawn instead.
 
+   THE COFFEE ROW
+   Under the league tiles there is one wide "Invitame un cafe" button that opens
+   the Buy Me a Coffee page in a new tab. Its address is the  coffeeUrl  line
+   in CONFIG below - paste your page there (https://buymeacoffee.com/yourname).
+   While coffeeUrl is empty the row shows a greyed "Pronto" instead of a link,
+   so a visitor can never land on a wrong page. Set  coffee: false  to remove
+   the row (and put the old wording back in  prompt).
+
    To open UCL, set its status to 'live' (and give it a home) in
    assets/leagues.js - this bubble follows automatically.                    */
 (function () {
   'use strict';
 
   var CONFIG = {
-    prompt: 'Quieres ver la info de otro Fantasy?',
+    prompt: 'Quieres ver la info de otro Fantasy, o comprarme un café?',
     title: 'Elige tu Fantasy',
     hint: 'La misma liga, otro deporte.',
+    coffee: true,           /* false = no coffee row                           */
+    coffeeUrl: 'https://buymeacoffee.com/cmramirez.dev',          /* your Buy Me a Coffee page                       */
+    coffeeLabel: 'Invitame un café',
+    coffeeSub: 'Si te gusta la página, apoya el trabajo',
     delayMs: 2500,          /* how long after load the speech bubble pops out   */
     rememberDismiss: true,  /* true = once closed, the speech bubble stays away */
                             /*        for the rest of that browser visit        */
@@ -88,6 +100,13 @@
     '<circle cx="8.500" cy="11.500" r=".6" fill="currentColor"/><circle cx="12" cy="11.500" r=".6" fill="currentColor"/>' +
     '<circle cx="15.500" cy="11.500" r=".6" fill="currentColor"/></svg>';
 
+  var CUP =
+    '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M9 19h25v9a11 11 0 0 1-11 11h-3A11 11 0 0 1 9 28z" fill="var(--gold)" stroke="var(--gold-ink)"/>' +
+    '<path d="M34 22h2.500a5 5 0 0 1 0 10H33" stroke="var(--gold-light)"/>' +
+    '<path d="M6 43h31" stroke="var(--gold-light)"/>' +
+    '<path d="M16 6c-2 2.500 2 4 0 7M23 6c-2 2.500 2 4 0 7M30 6c-2 2.500 2 4 0 7" stroke="var(--mute)"/></svg>';
+
   /* ---------- styles ---------- */
   var css = document.createElement('style');
   css.textContent =
@@ -136,10 +155,21 @@
     '.fs-go{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);padding:3px 0;}' +
     '.fs-soon{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);' +
       'border:1px solid var(--gold-dark);border-radius:20px;padding:2px 9px;}' +
+    /* coffee row */
+    '.fs-coffee{display:flex;align-items:center;gap:14px;margin-top:12px;padding:12px 16px;text-align:left;' +
+      'text-decoration:none;color:var(--white);background:var(--navy-950);border:1px dashed var(--gold);' +
+      'border-radius:var(--radius);transition:transform .15s ease,border-color .15s ease;}' +
+    'a.fs-coffee:hover,a.fs-coffee:focus-visible{transform:translateY(-3px);border-style:solid;outline:none;}' +
+    '.fs-coffee.soon{opacity:.72;cursor:default;}' +
+    '.fs-cup{flex:0 0 44px;width:44px;height:44px;}' +
+    '.fs-cup svg{width:100%;height:100%;}' +
+    '.fs-ctext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}' +
+    '.fs-cname{font-family:var(--font-display);font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;}' +
+    '.fs-csub{font-size:.74rem;color:var(--mute);line-height:1.3;}' +
     '@keyframes fsPop{from{opacity:0;transform:translateY(12px) scale(.92);}to{opacity:1;transform:none;}}' +
     '@keyframes fsPulse{0%{transform:scale(1);opacity:.9;}100%{transform:scale(1.55);opacity:0;}}' +
     '@media (prefers-reduced-motion:reduce){.fs-tip,.fs-panel{animation:none;}.fs-fab.nudge::after{animation:none;}' +
-      '.fs-fab,.fs-tile{transition:none;}}' +
+      '.fs-fab,.fs-tile,.fs-coffee{transition:none;}}' +
     '@media (max-width:520px){.fs-root{right:12px;bottom:12px;}.fs-fab{width:56px;height:56px;}}';
   document.head.appendChild(css);
 
@@ -155,6 +185,16 @@
       ? '<a class="fs-tile" href="' + esc(t.href) + '" data-fantasy="' + esc(t.key) + '">' + inner + '</a>'
       : '<div class="fs-tile soon" aria-disabled="true" data-fantasy="' + esc(t.key) + '">' + inner + '</div>';
   }
+  function coffeeHTML() {
+    if (!CONFIG.coffee) return '';
+    var inner = '<span class="fs-cup">' + CUP + '</span>' +
+      '<span class="fs-ctext"><span class="fs-cname">' + esc(CONFIG.coffeeLabel) + '</span>' +
+      '<span class="fs-csub">' + esc(CONFIG.coffeeSub) + '</span></span>' +
+      (CONFIG.coffeeUrl ? '<span class="fs-go">&rarr;</span>' : '<span class="fs-soon">Pronto</span>');
+    return CONFIG.coffeeUrl
+      ? '<a class="fs-coffee" href="' + esc(CONFIG.coffeeUrl) + '" target="_blank" rel="noopener noreferrer" data-coffee="1">' + inner + '</a>'
+      : '<div class="fs-coffee soon" aria-disabled="true" data-coffee="1">' + inner + '</div>';
+  }
   window.__fsIcon = function (name) { return ICONS[name] || ''; };
 
   var root = document.createElement('div');
@@ -168,6 +208,7 @@
       '<h2 id="fsTitle">' + esc(CONFIG.title) + '</h2>' +
       '<p>' + esc(CONFIG.hint) + '</p>' +
       '<div class="fs-tiles">' + CONFIG.tiles.map(tileHTML).join('') + '</div>' +
+      coffeeHTML() +
     '</div>' +
     '<button type="button" class="fs-fab" id="fsFab" aria-label="' + esc(CONFIG.prompt) + '" aria-expanded="false" aria-controls="fsPanel">' +
       CHAT + '<span class="fs-dot"></span></button>';

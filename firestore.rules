@@ -1,0 +1,74 @@
+// Firestore security rules for the LPBLSA comments.
+//
+// These live in Firebase, NOT on the website: paste this whole file into
+//   Firebase console > Build > Firestore Database > Rules > Publish
+// (see FIREBASE-SETUP.md, step 6). This copy in the repo is just so you keep it.
+//
+// Nothing to fill in: paste it exactly as it is. Who the commissioner is gets set
+// separately, with one document in the database (FIREBASE-SETUP.md, step 6).
+//
+// What these rules do:
+//   - Anyone can READ comments (so people can read before they log in).
+//   - Only a signed-in person can WRITE a comment, only as themselves, only with the
+//     expected fields, and only up to 1000 characters.
+//   - Nobody can EDIT a comment. A person can DELETE their own; the commissioner can
+//     delete any.
+//   - The commissioner (someone with a document in "admins" under their own id) can block a
+//     person (a document in "banned" with their id). A blocked person can no longer post.
+//   - Everything else is closed.
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    function isBanned() {
+      return exists(/databases/$(database)/documents/banned/$(request.auth.uid));
+    }
+
+    match /comments/{commentId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && !isBanned()
+        && request.resource.data.keys().hasOnly(['storyId', 'uid', 'name', 'text', 'parentId', 'createdAt'])
+        && request.resource.data.keys().hasAll(['storyId', 'uid', 'name', 'text', 'parentId', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.storyId is string
+        && request.resource.data.storyId.size() > 0
+        && request.resource.data.storyId.size() <= 120
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 1000
+        && (request.resource.data.parentId == null
+            || (request.resource.data.parentId is string && request.resource.data.parentId.size() <= 40))
+        && request.resource.data.createdAt == request.time;
+
+      allow update: if false;
+
+      allow delete: if signedIn()
+        && (resource.data.uid == request.auth.uid || isAdmin());
+    }
+
+    // Commissioners. A person may look up only their OWN document here (that is how the site
+    // knows to show them the delete buttons). Nobody can create or change these from the website;
+    // you add one by hand in the Firebase console.
+    match /admins/{userId} {
+      allow get: if signedIn() && request.auth.uid == userId;
+      allow list, write: if false;
+    }
+
+    // The block list. Only a commissioner can see or change it.
+    match /banned/{userId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

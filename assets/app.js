@@ -345,7 +345,7 @@
         '<div class="news-grid">' + others.map(cardHTML).join('') + '</div>'
       : '';
     return '<a class="back-link" href="' + NEWS_INDEX + '">&larr; All news</a>' +
-      '<article class="article">' +
+      '<article class="article" data-story="' + esc(n.id) + '">' +
       '<div class="news-date">' + sportBadge(n) + esc(n.date) + '</div>' +
       '<h1>' + esc(n.headline) + '</h1>' +
       '<p class="article-lede">' + esc(n.summary) + '</p>' +

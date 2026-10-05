@@ -27,7 +27,7 @@ belongs to one league lives in that league's folder and starts with its name
     news.js               the stories themselves - the only file you edit to post
     about-data.js         the About page content - edited via about-manager.html
     writer.js, about-manager.js   power news-writer.html / about-manager.html
-    alerts.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
+    alerts.js, comments.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
     rules-view.js         draws a league's Reglas page from its rules-data file
     playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
   images/               your logos go here (see images/README.txt)
@@ -502,7 +502,27 @@ anyone opening the page after that sees that message straight away.
     scripts at the bottom.
   - The home page, the Teams page, the menu and the bubble still point at this page.
 
+### Comments and login (news stories)
+Under every news story there is a "Comentarios" section: visitors log in (Google or email +
+password), comment, reply, and delete their own. The commissioner can delete any comment and
+block a person. It is all in assets/comments.js, loaded by news.html. The accounts and comments
+live in a free Firebase project, so the site itself stays plain files on GitHub.
+
+It stays completely invisible until you paste your Firebase details into FIREBASE_CONFIG at the
+top of assets/comments.js. The click-by-click setup is in FIREBASE-SETUP.md, and the safety rules
+that go into Firebase are in firestore.rules. The wording on screen is the COPY block in
+comments.js. app.js tags each article with data-story="<story id>" so each story gets its own
+comment thread (so never change a story's id once people have commented on it).
+
+### The coffee button
+The floating bubble now says "Quieres ver la info de otro Fantasy, o comprarme un café?" and its
+panel ends with a wide "Invitame un café" button for Buy Me a Coffee. Its address is the single
+line  coffeeUrl: ''  near the top of assets/fantasy-switcher.js - paste your page there, for
+example  coffeeUrl: 'https://buymeacoffee.com/yourname',  and the button turns into a live link
+(opens in a new tab). While that line is empty the button shows a greyed "Pronto". The wording is
+the  prompt,  coffeeLabel  and  coffeeSub  lines in the same place; set  coffee: false  to remove it.
+
 ### The bubble logos
-The "Quieres ver la info de otro Fantasy?" bubble shows images/leagues/nfl.png,
+The floating bubble shows images/leagues/nfl.png,
 nba.png and ucl.png (set by the logo field of each league in assets/leagues.js). To
 change one, replace that file and keep the name (256x256 is plenty).
