@@ -1075,9 +1075,10 @@ body.pane-open{ overflow:hidden; }
 .site-nav .nav-drop-menu a.active{ background:var(--navy-800); box-shadow:inset 3px 0 0 var(--gold); }
 .nav-soon{ opacity:.55; cursor:default; }
 .nav-soon:focus-visible{ outline:2px solid var(--gold-dark); }
-/* eight tabs need the room: a little tighter on a small laptop, and the phone menu takes over at 1100px */
-@media (min-width:1101px) and (max-width:1239px){
-  .site-nav > a, .nav-drop-btn{ padding-left:10px; padding-right:10px; }
+/* nine tabs (and the bell) need the room: a little tighter on a small laptop, and the phone menu takes over at 1100px */
+@media (min-width:1101px) and (max-width:1299px){
+  .site-nav{ gap:0; margin-left:0; }
+  .site-nav > a, .nav-drop-btn{ padding-left:8px; padding-right:8px; font-size:.86rem; }
 }
 @media (max-width:1100px){
   .site-nav{ align-items:stretch; }

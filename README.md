@@ -502,6 +502,18 @@ anyone opening the page after that sees that message straight away.
     scripts at the bottom.
   - The home page, the Teams page, the menu and the bubble still point at this page.
 
+### La Tiendita (merch page)
+tienda.html shows the merch from the Fourthwall store (https://lpblsa-shop.fourthwall.com). The products are NOT
+typed into the page: assets/shop.js asks the store for them each time the page opens, so a new product, photo or
+price appears on its own. "Comprar" opens that product in the store, which is where payment and shipping happen
+(print-on-demand: Fourthwall prints, ships and handles support; there is no stock to manage).
+- assets/shop.js: the store address, the read-only Storefront token, and FALLBACK (a short backup list of name,
+  slug and price used only when the store cannot be reached, so the page is never empty). Update FALLBACK if you
+  add or remove products.
+- assets/shop.css: the card styles.
+- The "Tienda" tab comes from assets/nav.js.
+- To cancel the token: Fourthwall > Settings > For Developers, delete it, create a new one, paste it into shop.js.
+
 ### Push notifications (the card, the bell and the menu item)
 A few seconds after a page opens, a notification-style card slides in from the top asking to turn on push
 notifications (one tap; "Ahora no" hides it for a week). A bell in the header (computers) and a

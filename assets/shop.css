@@ -1,0 +1,61 @@
+/* La Tiendita (tienda.html). Uses the same colors and fonts as the rest of the site. */
+
+.shop-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+  gap:20px;
+}
+.shop-card{
+  display:flex; flex-direction:column;
+  background:var(--navy-800);
+  border:1px solid var(--line);
+  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  transition:border-color .15s ease, transform .15s ease;
+}
+.shop-card:hover{ border-color:var(--gold); transform:translateY(-2px); }
+.shop-photo{
+  display:block; aspect-ratio:3 / 4; overflow:hidden;
+  background:var(--navy-900); border-bottom:1px solid var(--line);
+}
+.shop-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.shop-ph{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.shop-ph img{ width:96px; height:96px; object-fit:contain; opacity:.85; }
+.shop-info{ padding:16px 18px 26px; display:flex; flex-direction:column; gap:10px; flex:1; }
+.shop-info h3{ font-size:1.08rem; line-height:1.2; margin:0; }
+.shop-sw{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.shop-sw i{
+  width:16px; height:16px; border-radius:50%;
+  background:var(--navy-600); border:1px solid rgba(255,255,255,.35);
+}
+.shop-sw small{ color:var(--mute); font-size:.72rem; }
+.shop-sizes{ color:var(--mute); font-size:.8rem; }
+.shop-row{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-top:auto; padding-top:6px;
+}
+.shop-price{ font-family:var(--font-display); font-size:1.35rem; color:var(--gold-light); letter-spacing:.02em; }
+.shop-buy{ white-space:nowrap; }
+.shop-buy[aria-disabled="true"]{ opacity:.6; cursor:default; pointer-events:none; }
+
+.shop-skel{
+  aspect-ratio:3 / 4.6; background:var(--navy-800); border:1px solid var(--line);
+  animation:shopPulse 1.4s ease-in-out infinite;
+}
+@keyframes shopPulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
+@media (prefers-reduced-motion:reduce){ .shop-skel{ animation:none; } .shop-card{ transition:none; } }
+
+.shop-facts{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;
+  margin:0 0 30px; padding:0; list-style:none;
+}
+.shop-facts li{
+  padding:14px 16px; background:var(--navy-900); border:1px solid var(--line); border-left:4px solid var(--gold);
+  color:var(--mute); font-size:.9rem; line-height:1.45;
+}
+.shop-facts b{ display:block; color:var(--white); font-family:var(--font-display); letter-spacing:.04em; margin-bottom:3px; }
+.shop-all{ margin-top:30px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+
+@media (max-width:480px){
+  .shop-grid{ grid-template-columns:1fr; }
+  .shop-photo{ aspect-ratio:4 / 5; }
+}

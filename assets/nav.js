@@ -6,7 +6,7 @@
    A page tells it where it is with attributes on <body>:
      data-root    how far up the site root is   ("" , "../" or "../../")
      data-active  which tab to light up:  home  about  reglas  news  leagues
-                  playoffs  teams  contact   (leave off for the private tools)
+                  playoffs  teams  contact  tienda   (leave off for the private tools)
      data-league  on a league's own pages: nfl / nba / ucl - lights up
                   that league inside the Leagues menu
 
@@ -68,7 +68,8 @@
     dropdown('leagues', 'Leagues', 'home') +
     dropdown('playoffs', 'Playoffs', 'playoffs') +
     link('teams', 'Teams', 'teams.html') +
-    link('contact', 'Contact', 'contact.html');
+    link('contact', 'Contact', 'contact.html') +
+    link('tienda', 'Tienda', 'tienda.html');
 
   /* ---------- open / close the menus (hover on a computer, tap on a phone) ---------- */
   var drops = Array.prototype.slice.call(nav.querySelectorAll('.nav-drop'));
