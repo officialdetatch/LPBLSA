@@ -5,6 +5,156 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "resumen-de-la-semana-4",
+    "league": "football",
+    "date": "Week 4 | Oct 6",
+    "headline": "Resumen de la Semana",
+    "summary": "La semana 4 nos dejó tres historias. Hobbit le ganó a Mugiwaras De Caimito 191.42 a 175.7, Los Puntos de Piña vencieron a Peter's Perfect Team 173.66 a 159.76 para sumar su segunda victoria concecutivas, y Sierra Linda Cameltoes descansó con su bye week (y aun así hizo el peor score de la liga, ahorita llegamos a eso).",
+    "blocks": [
+      {
+        "type": "image",
+        "src": "images/news/IMG_8834.jpeg",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "Hobbit 191.42, Mugiwaras De Caimito 175.7"
+      },
+      {
+        "type": "p",
+        "text": "Mugiwaras ni siquiera jugó mal. Quedaron casi clavados en su proyección de 177.4. El problema fue que Hobbit se pasó casi 18 puntos de la suya (173.7), y contra eso no hay lineup que aguante."
+      },
+      {
+        "type": "p",
+        "text": "Que paso? Tetairoa McMillan paso. Con 38.2 puntos, el mejor score de toda la liga esta semana, casi 25 puntos por encima de su proyección. Lo mejor es el arco de redención: la semana pasada se quedó en 2.7 puntos y salió en la lista de los que se pudieron quedar en la banca. De villano a superhéroe en siete días."
+      },
+      {
+        "type": "p",
+        "text": "Jonathan Taylor también se puso las pilas con 22.2 puntos (95 yardas y 2 TD) y Josh Allen sumó 18.52 en el QB. Y ojo a esto: Hobbit ganó con Saquon Barkley en 1.5 y Jeremiyah Love en 6.0 dentro del lineup, y con Nico Collins sentado en la banca con 27.3 puntos. Imagínate si acomodan todo bien."
+      },
+      {
+        "type": "p",
+        "text": "Del lado de Mugiwaras, CeeDee Lamb hizo su parte con 32.8 (segundo mejor score de la semana) y Puka Nacua se fue con 23.2, pero J. Gibbs bajó a 15.7, el mismo que la semana pasada fue el #1 de la liga con 37.9. Entre Lawrence (13.08) y Swift (6.4, con fumble incluido), el resto no acompañó."
+      },
+      {
+        "type": "h",
+        "text": "Los Puntos de Piña 173.66, Peter's Perfect Team 159.76"
+      },
+      {
+        "type": "p",
+        "text": "Los Puntos de Piña ganaron por 13.9 puntos y llegan a 2-2 con dos victorias seguidas. Iban proyectados en 149.1 y terminaron en 173.66, o sea casi 25 puntos por encima de lo esperado."
+      },
+      {
+        "type": "p",
+        "text": "La estrella fue Kyren Williams con 31.7 puntos (80 yardas y 2 TD), cuando apenas se proyectaba para unos 12. Quinshon Judkins también aportó con 18.6 y un touchdown. Del otro lado, Matthew Stafford se quedó en 9.68 en el QB y Davante Adams en 5.2, y ganaron igual. Y sí, Brock Purdy se quedó en la banca con 19.6 puntos, el tercer banqueado más valioso de la semana. Cosas del manager."
+      },
+      {
+        "type": "p",
+        "text": "Peter's tuvo a Drake Maye con 26.16 (3 TD) y a Kenneth Walker III con 30.4, pero B. Hall, marcado como Out, aportó 0.0 y J. Chase se quedó en 4.2. Eso fue lo que terminó costando el partido, y Peter's cae a 1-2."
+      },
+      {
+        "type": "h",
+        "text": "Los mejores de la semana"
+      },
+      {
+        "type": "p",
+        "text": "1. T. McMillan (Hobbit): 38.2 pts"
+      },
+      {
+        "type": "p",
+        "text": "2. C. Lamb (Mugiwaras De Caimito): 32.8 pts"
+      },
+      {
+        "type": "p",
+        "text": "3. K. Williams (Los Puntos de Piña): 31.7 pts"
+      },
+      {
+        "type": "p",
+        "text": "4. K. Walker III (Peter's Perfect Team): 30.4 pts"
+      },
+      {
+        "type": "p",
+        "text": "5. J. Williams (Hobbit): 28.8 pts"
+      },
+      {
+        "type": "h",
+        "text": "Los banqueados más valiosos:"
+      },
+      {
+        "type": "p",
+        "text": "1. N. Collins (Hobbit) con 27.3,"
+      },
+      {
+        "type": "p",
+        "text": "2. M. Nabers (Sierra Linda Cameltoes) con 20.2"
+      },
+      {
+        "type": "p",
+        "text": "3. B. Purdy (Los Puntos de Piña) con 19.6."
+      },
+      {
+        "type": "h",
+        "text": "Los que se pudieron quedar en la banca"
+      },
+      {
+        "type": "p",
+        "text": "4. Jeremiyah Love (Hobbit) con 6.0"
+      },
+      {
+        "type": "p",
+        "text": "2.  J. Smith-Njigba (Sierra Linda Cameltoes) con 10.1"
+      },
+      {
+        "type": "p",
+        "text": "3. J. Gibbs (Mugiwaras De Caimito) con 15.7."
+      },
+      {
+        "type": "p",
+        "text": "Vieron el patron? La triple J for the lose!!!"
+      },
+      {
+        "type": "h",
+        "text": "Cómo queda la tabla"
+      },
+      {
+        "type": "p",
+        "text": "1. Mugiwaras De Caimito (Daniel Heredia): 2-1-0"
+      },
+      {
+        "type": "p",
+        "text": "2. Hobbit (Jose Cruz): 2-1-0"
+      },
+      {
+        "type": "p",
+        "text": "3. Los Puntos de Piña (Christopher Ramirez): 2-2-0"
+      },
+      {
+        "type": "p",
+        "text": "4. Peter's Perfect Team (Peter Cruz): 1-2-0"
+      },
+      {
+        "type": "p",
+        "text": "5. Sierra Linda Cameltoes (George Sanchez): 1-2-0"
+      },
+      {
+        "type": "p",
+        "text": "Del 0-2 a meterse en el tercer puesto con dos victorias seguidas. Los Puntos de Piña van para arriba. Renacieron como el ave fenix!"
+      },
+      {
+        "type": "h",
+        "text": "Lo que viene en la semana 5"
+      },
+      {
+        "type": "p",
+        "text": "Hobbit se mide a Sierra Linda Cameltoes con un 55% a 45% de probabilidad a favor, y Mugiwaras De Caimito enfrenta a Peter's Perfect Team como gran favorito, 80% a 20%. Mugiwaras necesita reaccionar rápido, porque Hobbit viene pisándole los talones!!!"
+      },
+      {
+        "type": "p",
+        "text": "Y claro en el bye week, Los Puntos de Piña, luego de 4 semanas consecutivas se van de vacaciones pa Bermudas!"
+      }
+    ]
+  },
+  {
     "id": "la-tiendita-y-freeeesh-look",
     "league": "all",
     "date": "",

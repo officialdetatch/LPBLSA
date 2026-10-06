@@ -361,7 +361,7 @@
           .sort(function (a, b) { return b.streakN - a.streakN || b.rank - a.rank; })[0];
         if (!e) return null;
         return { e: e, icon: '🧊', title: 'Congelado', stat: 'L' + e.streakN, unit: 'racha',
-          line: e.streakN + ' derrotas al hilo. ¿Alguien revisó si ese lineup está prendido?' };
+          line: e.streakN + ' derrotas CONSECUTIVAS. ¿Alguien revisó si ese lineup está prendido?' };
       },
       function () {
         var e = list[n - 1];
