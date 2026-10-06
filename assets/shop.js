@@ -71,6 +71,12 @@
     return any ? res[any] : [];
   }
   function allProducts() {
+    /* one quiet retry: a slow phone connection or a single hiccup should not drop the page to the backup list */
+    return loadAll().catch(function () {
+      return new Promise(function (ok) { setTimeout(ok, 700); }).then(loadAll);
+    });
+  }
+  function loadAll() {
     var out = [];
     function page(n) {
       return getJSON('/collections/' + COLLECTION + '/products' + (n ? '?page=' + n : '')).then(function (res) {
@@ -84,8 +90,8 @@
   }
   /* The list may not carry prices and sizes, so ask for the full product when it does not. */
   function withDetails(p) {
-    if (p.variants && p.variants.length) return Promise.resolve(p);
-    return getJSON('/products/' + encodeURIComponent(p.slug)).then(function (full) { return full || p; }, function () { return p; });
+    if ((p.variants && p.variants.length) || p.price) return Promise.resolve(p);
+    return getJSON('/products/' + encodeURIComponent(p.slug)).then(function (full) { return full && full.slug ? full : p; }, function () { return p; });
   }
 
   /* ---------- reading one product ---------- */
@@ -101,10 +107,14 @@
     var img = (p.images && p.images[0] && (p.images[0].transformedUrl || p.images[0].url)) ||
       (variants[0] && variants[0].images && variants[0].images[0] && variants[0].images[0].url) || '';
     var sold = !!(p.state && p.state.type && p.state.type !== 'AVAILABLE');
+    /* a bundle (or a backup-list item) carries its price at the top instead of inside variants;
+       the store sends it as {value, currency}, the backup list as a plain number */
+    var top = p.price && typeof p.price === 'object' ? Number(p.price.value) : Number(p.price);
+    var flat = top > 0 ? top : null;
     return {
       name: p.name, slug: p.slug, img: safeImg(img), sold: sold,
-      min: prices.length ? Math.min.apply(null, prices) : (p.price || null),
-      max: prices.length ? Math.max.apply(null, prices) : (p.price || null),
+      min: prices.length ? Math.min.apply(null, prices) : flat,
+      max: prices.length ? Math.max.apply(null, prices) : flat,
       colors: colors, sizes: sizes
     };
   }
@@ -129,11 +139,20 @@
       '<div class="shop-info"><h3>' + esc(s.name) + '</h3>' + sw + sz +
       '<div class="shop-row"><span class="shop-price">' + esc(priceText) + '</span>' + buy + '</div></div></article>';
   }
-  function draw(list, isFallback) {
+  /* Add ?debug to the page address (tienda.html?debug) to see, under the products, where they came from and,
+     if the store could not be reached, the exact reason. Visitors never see this. */
+  var DEBUG = /[?&]debug\b/.test(location.search);
+  function draw(list, isFallback, why) {
     if (!list.length) { grid.innerHTML = '<p class="section-note">' + COPY.empty + '</p>'; return; }
     grid.innerHTML = list.map(card).join('');
     grid.removeAttribute('aria-busy');
-    if (note) { note.textContent = isFallback ? COPY.fallbackNote : ''; note.hidden = !isFallback; }
+    grid.setAttribute('data-source', isFallback ? 'backup' : 'store');
+    if (note) {
+      var msg = isFallback ? COPY.fallbackNote : '';
+      if (DEBUG) msg += (msg ? ' ' : '') + '[debug] ' + (isFallback ? 'BACKUP LIST. Store said: ' + why : 'LIVE from the store: ' + list.length + ' products.');
+      note.textContent = msg;
+      note.hidden = !msg;
+    }
   }
 
   /* ---------- go ---------- */
@@ -146,7 +165,9 @@
     return Promise.all(list.map(withDetails));
   }).then(function (full) {
     draw(full.map(summary), false);
-  }).catch(function () {
-    draw(FALLBACK.map(summary), true);
+  }).catch(function (e) {
+    var why = e && e.name === 'AbortError' ? 'no answer in 9 seconds (timeout)' : (e && e.message) || String(e);
+    if (window.console && console.warn) console.warn('[tienda] could not load the store, showing the backup list:', e);
+    draw(FALLBACK.map(summary), true, why);
   });
 })();

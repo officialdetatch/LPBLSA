@@ -585,6 +585,7 @@ price appears on its own. "Comprar" opens that product in the store, which is wh
   slug and price used only when the store cannot be reached, so the page is never empty). Update FALLBACK if you
   add or remove products.
 - assets/shop.css: the card styles.
+- Is the shop really live? Open tienda.html?debug (add ?debug to the address). A line under the products says "LIVE from the store" or "BACKUP LIST" plus the exact reason the store could not be reached.
 - The "Tienda" tab comes from assets/nav.js.
 - To cancel the token: Fourthwall > Settings > For Developers, delete it, create a new one, paste it into shop.js.
 
