@@ -5,6 +5,52 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "la-tiendita-y-freeeesh-look",
+    "league": "all",
+    "date": "",
+    "headline": "La Tiendita y FREEEESH Look",
+    "summary": "Asi como lo lees, tenemos tiendita y look nuevo",
+    "blocks": [
+      {
+        "type": "h",
+        "text": "La Tiendita"
+      },
+      {
+        "type": "p",
+        "text": "Todavia no esta al 100% pero, tenemos 3 articulos en la tiendita, 3 camisas para que representen la liga."
+      },
+      {
+        "type": "p",
+        "text": "Please lean, y compren bien el size, todas las ventas son finales  (no te van a devolver el dinero) mi recomendacion, pide un size mas grande y ya!"
+      },
+      {
+        "type": "p",
+        "text": "Dentro de la semana pondremos stickers y mas cositas, el stock es made to order so se puede quedar ahi cogiendo polvo, no importa ni hard feelings"
+      },
+      {
+        "type": "h",
+        "text": "New Look y Features"
+      },
+      {
+        "type": "p",
+        "text": "Como ultimo, estrenamos nuevo look ante lo que se viene el draft de NBA (recuerden este domingo)"
+      },
+      {
+        "type": "p",
+        "text": "Ademas del nuevo look, pusimos el feature de poder comentar (ya que lo pidieron) y ademas a esto, NOTIFICACIONES!!! Cada vez que haya un update o news relevantes tendras notificaciones, solo recuerda dar login. (es seguro ya backed up by google)"
+      },
+      {
+        "type": "p",
+        "text": "Y nada, si te gusto parten apoyando, denle like, subscribanse y de paso, me compran un cafe. https://buymeacoffee.com/cmramirez.dev"
+      },
+      {
+        "type": "video",
+        "src": "images/news/un-cafe.mp4",
+        "caption": ""
+      }
+    ]
+  },
+  {
     "id": "draft-confirmado",
     "league": "basketball",
     "date": "",
@@ -279,9 +325,9 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "Tenemos Discord nuevo! Ve a las noticias para el link",
-  "No seas Fari Fari! Subscribete a nuestro newsletter para recibir noticias si no sabes contactanos",
-  "La semana 4 de NFL empieza hoy! Hagan sus cambios!",
-  "El cheque de Joby Weeks cleario, pudimos hacer expansion y la liga de NBA va! Draft: 10/11/2026 a las 9PM.",
-  "Todavia Daniel no sabe lo que es un pueico. Se le dijo que era un animai, un sei vivo, y nada. Creemos que es analfabeta."
+  "La Tiendita esta live! Vayan y capeen su camisita!",
+  "Bijan Robinson y McMillan, las bestias, los goats.",
+  "Los Puntos de Piña se fueron de Bye Week pa Bermudas.",
+  "No se olviden del Draft de NBA este domingo, 9:00PM.",
+  "Apoyenme con un cafecito, link en el bubble!"
 ];
