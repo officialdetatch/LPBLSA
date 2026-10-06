@@ -123,12 +123,56 @@
   }
 
   /* ---------- news cards (home page) ---------- */
+  /* The picture on top of a card: the story's first photo. A story whose first
+     picture is a video gets a play button; a story with no picture gets its
+     league's logo. Paths in news.js are from the site root, so pages in
+     sub-folders (the league landing pages) prefix them with data-root. */
+  var PAGE_ROOT = document.body.getAttribute('data-root') || '';
+  function fromRoot(src) {
+    return /^(https?:|data:)?\/\//i.test(src) || /^(data:|\/)/.test(src) ? src : PAGE_ROOT + src;
+  }
+  function coverOf(n) {
+    var blocks = Array.isArray(n.blocks) ? n.blocks : [];
+    for (var i = 0; i < blocks.length; i++) {
+      var b = blocks[i];
+      if (b && b.src && (b.type === 'image' || b.type === 'video')) return { type: b.type, src: b.src };
+    }
+    if (n.image) return { type: 'image', src: n.image };
+    if (n.video) return { type: 'video', src: n.video };
+    return null;
+  }
+  function leagueLogoFor(n) {
+    var list = window.LPBSA_LEAGUES || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].story === n.league && list[i].logo) return list[i].logo; }
+    return 'images/league-logo.png';
+  }
+  var PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg>';
+  var ARROW_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function coverHTML(n) {
+    var c = coverOf(n);
+    var mark = '<span class="news-cover-mark"><img src="' + esc(fromRoot(leagueLogoFor(n))) + '" alt="" loading="lazy" decoding="async"></span>';
+    var inner;
+    if (c && c.type === 'image') {
+      inner = '<img src="' + esc(fromRoot(c.src)) + '" alt="" loading="lazy" decoding="async"' +
+        (/\.(png|webp|svg|gif)(\?|$)/i.test(c.src) ? ' class="is-graphic"' : '') + ' onerror="this.remove()">';
+    } else if (c && c.type === 'video') {
+      inner = mark + '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>';
+    } else {
+      inner = mark;
+    }
+    return '<div class="news-cover">' + inner + '</div>';
+  }
   function cardHTML(n, withBadge) {
+    var badge = withBadge === true ? sportBadge(n) : '';
+    var when = n.date ? '<span class="news-when">' + esc(n.date) + '</span>' : '';
     return '<a class="news-card" href="' + NEWS_BASE + encodeURIComponent(n.id) + '">' +
-      '<div class="news-date">' + (withBadge === true ? sportBadge(n) : '') + esc(n.date) + '</div>' +
+      coverHTML(n) +
+      '<div class="news-date">' + badge + when + '</div>' +
+      '<div class="news-body">' +
       '<h3>' + esc(n.headline) + '</h3>' +
       '<p>' + esc(n.summary) + '</p>' +
-      '<span class="news-more">Read the story &rarr;</span>' +
+      '<span class="news-more">Leer la noticia ' + ARROW_ICON + '</span>' +
+      '</div>' +
       '</a>';
   }
 
@@ -349,9 +393,58 @@
       '<div class="news-date">' + sportBadge(n) + esc(n.date) + '</div>' +
       '<h1>' + esc(n.headline) + '</h1>' +
       '<p class="article-lede">' + esc(n.summary) + '</p>' +
+      shareHTML(n) +
       content +
       '</article>' + more;
   }
+
+  /* ---------- sharing a story (the group chat is where the trash talk lives) ---------- */
+  var SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
+  var CHAT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.3A8.5 8.5 0 1 1 21 11.5z"/></svg>';
+  function storyURL(id) {
+    try { return new URL(NEWS_BASE + encodeURIComponent(id), location.href).href; } catch (e) { return location.href; }
+  }
+  function shareHTML(n) {
+    return '<div class="article-share">' +
+      '<button type="button" class="btn btn-small btn-solid" data-share-story="' + esc(n.id) + '">' + SHARE_ICON + 'Compartir</button>' +
+      '<a class="btn btn-small btn-ghost" href="https://wa.me/?text=' + encodeURIComponent(n.headline + '\n' + storyURL(n.id)) +
+        '" target="_blank" rel="noopener noreferrer">' + CHAT_ICON + 'Mandarlo al grupo</a>' +
+    '</div>';
+  }
+  function flash(text) {
+    var t = document.createElement('div');
+    t.className = 'toast';
+    t.setAttribute('role', 'status');
+    t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(function () { t.classList.add('hide'); }, 2600);
+    setTimeout(function () { t.remove(); }, 3000);
+  }
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    return new Promise(function (ok, fail) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy') ? ok() : fail(); } catch (e) { fail(e); }
+      ta.remove();
+    });
+  }
+  document.addEventListener('click', function (ev) {
+    var btn = ev.target.closest ? ev.target.closest('[data-share-story]') : null;
+    if (!btn) return;
+    var story = findStory(btn.getAttribute('data-share-story'));
+    if (!story) return;
+    var url = storyURL(story.id);
+    if (navigator.share) {
+      navigator.share({ title: story.headline, text: story.summary, url: url }).catch(function () { /* closed the sheet */ });
+      return;
+    }
+    copyText(url).then(function () { flash('Link copiado. P\u00e9galo en el grupo.'); },
+      function () { flash('No se pudo copiar. El link es: ' + url); });
+  });
 
   /* The news page is split by fantasy: a row of filter chips, then one
      section per fantasy. Football and Basketball always show; Soccer only

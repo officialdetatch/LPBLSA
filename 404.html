@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060c1c">
+  <meta name="robots" content="noindex">
+  <title>Página en el IR | La Premier Bundesliga Serie A</title>
+  <!--
+    THE "PAGE NOT FOUND" PAGE. GitHub Pages shows this file by itself whenever
+    someone opens a link that does not exist on lpblsa.vip, at ANY address
+    (lpblsa.vip/whatever/else). That is why every path below starts with "/"
+    (from the top of the site) instead of the usual relative paths - leave them
+    like that. Opened straight from your computer it will look unstyled; that
+    is normal, it only works on the real site.
+  -->
+  <link rel="icon" type="image/png" href="/images/league-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-root="/">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="/index.html">
+        <span class="crest crest-circle">
+          <img src="/images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">2026 season</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="/assets/leagues.js"></script>
+  <script src="/assets/nav.js"></script>
+
+  <main>
+  <section class="hero hero-404">
+    <div class="wrap">
+      <div class="big-404" aria-hidden="true">404</div>
+      <div class="hero-text">
+        <div class="ir-tag"><span>Status: IR</span></div>
+        <h1 class="hero-title">Página en el IR.</h1>
+        <p class="hero-lede">Esta página se lesionó y no juega esta semana. O el link está mal escrito, o el comisionado la cortó sin avisarle a nadie.</p>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="/index.html">Volver al inicio</a>
+          <a class="btn btn-ghost" href="/news.html">Ver las noticias</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Una Liga. Todos los Deportes.</div>
+      <div>EST. 2026</div>
+      <div class="footer-social" aria-label="Follow the league">
+        <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="/images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="/images/socials-logo/threads-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <img src="/images/socials-logo/discord-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@lpblsa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="/images/socials-logo/tiktok-simplified-white-icon.png" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://x.com/lpblsa_onX" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="/images/socials-logo/x-social-media-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* the menu button (the rest of app.js is not needed on this page) */
+    (function () {
+      var t = document.getElementById('navToggle'), n = document.getElementById('siteNav');
+      if (t && n) t.addEventListener('click', function () {
+        var open = n.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -12,7 +12,9 @@ belongs to one league lives in that league's folder and starts with its name
 (nfl-... or nba-...), so you always know which league a file is for.
 
   THE WHOLE SITE (root)
-  index.html            league-neutral home: league buttons, latest 3 stories, tabbed Standings
+  index.html            league-neutral home: league tiles, La Jornada, latest 3 stories,
+                        tabbed Standings, Los Premios, Socials
+  404.html              the "page not found" page GitHub Pages shows for a broken link
   news.html             all stories, and the full article view
   teams.html            the Teams page: a carousel of cards per league
   about.html            the league's story - one page, see below
@@ -43,6 +45,7 @@ belongs to one league lives in that league's folder and starts with its name
   assets/nfl-roster-data.js        every NFL roster + the free agent board (edited via the roster manager)
   assets/nfl-roster-manager.js     powers nfl-roster-manager.html only
   assets/nfl-standings-data.js     the NFL table (edited via the standings manager)
+  assets/nfl-schedule-data.js      the whole NFL regular season, week by week (see "La Jornada")
   assets/nfl-standings-manager.js  powers nfl-standings-manager.html only
   nfl-rules.html               the NFL Reglas page
   nfl-playoffs.html            the NFL Playoffs page: the bracket, who is out
@@ -71,6 +74,77 @@ belongs to one league lives in that league's folder and starts with its name
 
   The NFL and NBA tools are separate copies on purpose: changing one never
   touches the other.
+
+## Look and feel (2026 redesign)
+  Fonts         Barlow Condensed (titles, buttons, numbers) + Barlow (text), loaded from
+                Google Fonts at the top of every page.
+  Colours       still the league's navy + gold - all of them are set once at the top of
+                assets/style.css (:root), so a change there changes the whole site.
+  The "slash"   the gold diagonal bar (hero headline, section titles, active menu tab,
+                team rank badges) is the site's signature - it is drawn by CSS, no images.
+  Home hero     the big crest is images/league-logo.png. The league tiles under it are
+                drawn by assets/hero-leagues.js from assets/leagues.js and show the
+                current #1 of each league by themselves (from its standings file).
+  News cards    each card uses the story's FIRST picture as its cover. A photo (.jpg)
+                fills the card; a logo or graphic (.png) is shown whole; a story that
+                starts with a video gets a play button; no picture = the league's logo.
+                So: put the photo you want on the card first in the story.
+  Images        keep crests and logos around 512px wide - they are shown small, and a
+                2 MB logo makes the site slow on phones.
+
+## The parts that run themselves (assets/jornada.js)
+They work for every league (NFL now, NBA and UCL the day they go live). On the home page
+each one gets a tab per league as soon as that league has the data it needs; a league
+without it simply doesn't show up yet. Each league's own page shows its own.
+
+  La Jornada    this week's matchups: both crests, records, points per week, a line of
+                trash talk, who is on bye, and a countdown ("Kickoff en ..." for NFL,
+                "Tip-off en ..." for NBA) that turns into "En juego" when the games start.
+                The week comes from the league's schedule file
+                (leagues/<league>/assets/<league>-schedule-data.js), so it moves to the next
+                week by itself - nothing to edit during the season. The top of each schedule
+                file explains its format (the NBA one covers the short first week and the
+                two-week All-Star matchup). On the home page it opens on the league whose
+                games are on right now.
+  Los Premios   up to four awards worked out from the standings every time the page opens:
+                El Dueño (1st), La Aplanadora (most points per week but not 1st),
+                El Suertudo (high in the table with a bad point differential),
+                Bendito (the opposite), El Saco de Boxeo (most points against),
+                En Llamas / Congelado (a streak of 2 or more), El Sótano (last),
+                Ni Fu Ni Fa (the most average team). A team only gets one award.
+                Save new standings = new awards. They hide until every team has played.
+  League hero   on a league page, the week, the leader, most points per week and weeks
+                left keep themselves up to date (the data-auto="..." spots).
+  Stories       every story has a "Compartir" button (the phone's share sheet, or it
+                copies the link on a computer) and "Mandarlo al grupo" (WhatsApp).
+  Link previews pasting any lpblsa.vip link in WhatsApp, iMessage or X shows
+                images/social-card.png with the title (the og: tags in each page's <head>).
+  404.html      "Página en el IR" - shown by GitHub Pages for any address that does
+                not exist. Its paths start with "/" on purpose; it only looks right on
+                the real site.
+  The crest     tap the big crest on the home page. Then tap it some more. (7 times.)
+
+## Going live: NBA and UCL
+NBA (after the draft):
+  1. Teams: add them to leagues/nba/assets/nba-teams-data.js (the file shows how).
+  2. Standings: leagues/nba/nba-standings-manager.html, as with the NFL.
+  3. Matchups: fill in leagues/nba/assets/nba-schedule-data.js (instructions at the top).
+  4. The NBA page: delete the DRAFT COUNTDOWN section, then take the comment marks off
+     the switched-off content AND the two switched-off script blocks at the bottom
+     (part 1 has to stay above app.js - it is already in the right place).
+  The home page needs nothing: the NBA leader tile, the NBA standings tab, and the NBA
+  tabs of La Jornada and Los Premios appear by themselves once the data is there.
+
+UCL (next year):
+  1. Copy the leagues/nba/ folder to leagues/ucl/ and rename every nba- file to ucl-.
+     Inside each data file change .nba to .ucl (LPBSA_TEAMS.ucl, LPBSA_SCHEDULE.ucl,
+     LPBSA_RULES.ucl, LPBSA_PLAYOFFS.ucl), and in the pages change the nba paths, titles,
+     texts and the og: lines at the top to UCL.
+  2. assets/leagues.js: set UCL's status to 'live' and give it home / rules / playoffs.
+  3. index.html: take the comment marks off the four UCL lines near the bottom.
+     teams.html: add the UCL teams file next to the NBA one.
+  Everything else - menus, the bubble, news badges, the hero tile, standings tab,
+  La Jornada and Los Premios - picks it up by itself.
 
 ## Posting news - you are the only editor
 The public pages have no edit button and no way to change anything. Stories are

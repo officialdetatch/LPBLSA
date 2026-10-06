@@ -23,7 +23,7 @@ window.LEAGUE_TEAMS = [
   },
   {
     "slug": "puntos",
-    "name": "Los Puntos de Pina",
+    "name": "Los Puntos de Piña",
     "crest": "images/puntos.png",
     "initials": "LPP",
     "shape": "circle"

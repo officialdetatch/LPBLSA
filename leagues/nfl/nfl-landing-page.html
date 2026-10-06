@@ -3,8 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060c1c">
   <title>NFL Fantasy | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A football fantasy league.">
+  <!-- link previews (WhatsApp, iMessage, X, Facebook): the card is images/social-card.png -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="La Premier Bundesliga Serie A">
+  <meta property="og:title" content="NFL Fantasy | La Premier Bundesliga Serie A">
+  <meta property="og:description" content="La Premier Bundesliga Serie A football fantasy league.">
+  <meta property="og:url" content="https://lpblsa.vip/leagues/nfl/nfl-landing-page.html">
+  <meta property="og:image" content="https://lpblsa.vip/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="La Premier Bundesliga Serie A: una liga, todos los deportes.">
+  <meta property="og:locale" content="es_PR">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,7 +26,7 @@
   <link rel="manifest" href="../../manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body data-root="../../" data-active="leagues" data-league="nfl">
@@ -26,7 +39,7 @@
         </span>
         <span class="brand-text">
           <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
-          <div class="brand-sub">NFL Fantasy &middot; Week 4</div>
+          <div class="brand-sub">NFL Fantasy &middot; Week <span data-auto="week">4</span></div>
         </span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
@@ -41,7 +54,7 @@
   <script src="../../assets/push.js"></script>
 
   <div class="ticker" aria-label="League wire">
-    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-label"><span class="live-dot" aria-hidden="true"></span>Última hora</div>
     <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
   </div>
 
@@ -49,15 +62,28 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <div class="hero-kicker">NFL Fantasy &middot; Week 4</div>
+        <div class="hero-kicker">NFL Fantasy &middot; Week <span data-auto="week">4</span></div>
         <h1>Cinco Equipos.<br><span class="accent">Un Solo Ganador.</span></h1>
-        <p>Pagina Oficial de La Liga mas dura de Fantasy.</p>
+        <p>Página oficial de la liga más dura de Fantasy.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><b>Mugiwaras De Caimito</b><span>Top of the table</span></div>
-          <div class="hero-stat"><b>360.38</b><span>Most points scored (MDC)</span></div>
-          <div class="hero-stat"><b>12</b><span>Weeks to survive</span></div>
+          <!-- these three keep themselves up to date (assets/jornada.js, data-auto); the numbers here are only a fallback -->
+          <div class="hero-stat"><b data-auto="leader">Mugiwaras De Caimito</b><span>Top of the table</span></div>
+          <div class="hero-stat"><b data-auto="top-ppw">180.2</b><span>Most points per week (<span data-auto="top-ppw-team">MDC</span>)</span></div>
+          <div class="hero-stat"><b data-auto="weeks-left">12</b><span>Weeks to survive</span></div>
         </div>
       </div>
+      <div class="hero-side-crest" aria-hidden="true"><img src="../../images/leagues/nfl.png" alt="" width="256" height="256" onerror="this.parentNode.remove()"></div>
+    </div>
+  </section>
+
+  <section class="section section-jornada">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>La Jornada</h2>
+        <div class="jornada-status" data-jornada-status></div>
+      </div>
+      <!-- this week's matchups: drawn by assets/jornada.js from assets/nfl-schedule-data.js -->
+      <div id="jornada" data-league="nfl"></div>
     </div>
   </section>
 
@@ -81,6 +107,16 @@
           <tbody id="standingsBody" data-empty="No standings posted yet."></tbody>
         </table>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Los Premios</h2>
+        <span class="section-note">Calculados con la tabla. Sin piedad.</span>
+      </div>
+      <div id="premios" data-league="nfl"></div>
     </div>
   </section>
 
@@ -132,7 +168,9 @@
   <script src="../../assets/news.js"></script>
   <script src="assets/nfl-roster-data.js"></script>
   <script src="assets/nfl-standings-data.js"></script>
+  <script src="assets/nfl-schedule-data.js"></script>
   <script src="../../assets/app.js"></script>
+  <script src="../../assets/jornada.js"></script>
   <script src="../../assets/teams-view.js"></script>
   <script src="../../assets/alerts.js"></script>
   <script src="../../assets/fantasy-switcher.js"></script>

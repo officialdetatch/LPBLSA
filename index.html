@@ -3,8 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060c1c">
   <title>La Premier Bundesliga Serie A</title>
-  <meta name="description" content="La Premier Bundesliga Serie A: one fantasy league, several sports (NFL, NBA, UCL).">
+  <meta name="description" content="La liga más dura de Fantasy. NFL, NBA y pronto UCL: la jornada, la tabla, las noticias y los equipos.">
+  <!-- link previews (WhatsApp, iMessage, X, Facebook): the card is images/social-card.png -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="La Premier Bundesliga Serie A">
+  <meta property="og:title" content="La Premier Bundesliga Serie A · La liga más dura de Fantasy">
+  <meta property="og:description" content="La liga más dura de Fantasy. NFL, NBA y pronto UCL: la jornada, la tabla, las noticias y los equipos.">
+  <meta property="og:url" content="https://lpblsa.vip/">
+  <meta property="og:image" content="https://lpblsa.vip/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="La Premier Bundesliga Serie A: una liga, todos los deportes.">
+  <meta property="og:locale" content="es_PR">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,7 +26,7 @@
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
   
 </head>
@@ -43,19 +56,38 @@
   <script src="assets/push.js"></script>
 
   <div class="ticker" aria-label="League wire">
-    <div class="ticker-label">Ultima Hora</div>
+    <div class="ticker-label"><span class="live-dot" aria-hidden="true"></span>Última hora</div>
     <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
   </div>
 
   <main>
-  <section class="hero">
-    <div class="wrap hero-inner">
+  <section class="hero hero-home">
+    <div class="wrap hero-grid">
       <div class="hero-text">
-        <div class="hero-kicker">2026 season</div>
-        <h1>Una Liga.<br><span class="accent">Todos los Deportes.</span></h1>
-        <p>Pagina Oficial de La Liga mas dura de Fantasy.</p>
-        <div class="hero-leagues" id="heroLeagues"></div>
+        <div class="hero-kicker">Temporada 2026</div>
+        <h1 class="hero-title"><span>Una Liga.</span> <span class="line-2">Todos los Deportes.</span></h1>
+        <p class="hero-lede">La página oficial de la liga más dura de Fantasy.</p>
       </div>
+      <div class="hero-crest" aria-hidden="true">
+        <span class="glow"></span>
+        <!-- the big crest uses the same file as the header: images/league-logo.png -->
+        <img src="images/league-logo.png" alt="" width="512" height="512" fetchpriority="high" onerror="this.remove()">
+      </div>
+      <!-- one tile per league, drawn by assets/hero-leagues.js from assets/leagues.js -->
+      <nav class="league-tiles" id="heroLeagues" aria-label="Las ligas"></nav>
+    </div>
+  </section>
+
+  <section class="section section-jornada">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>La Jornada</h2>
+        <div class="jornada-status" data-jornada-status></div>
+      </div>
+      <!-- this week's matchups, drawn by assets/jornada.js from each league's schedule file and
+           standings. "auto" = a tab for every open league whose schedule is filled in (NFL now,
+           NBA by itself once leagues/nba/assets/nba-schedule-data.js has its weeks). Nothing to edit here. -->
+      <div id="jornada" data-league="auto"></div>
     </div>
   </section>
 
@@ -65,7 +97,7 @@
         <h2>Las Noticias</h2>
         <a class="btn btn-small" href="news.html">Todas las noticias</a>
       </div>
-      <div class="news-grid" id="newsGrid" data-limit="3" data-badges="1"></div>
+      <div class="news-grid is-featured" id="newsGrid" data-limit="3" data-badges="1"></div>
     </div>
   </section>
 
@@ -75,6 +107,18 @@
         <h2>Standings</h2>
       </div>
       <div id="standingsTabs"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Los Premios</h2>
+        <span class="section-note">Calculados con la tabla. Sin piedad.</span>
+      </div>
+      <!-- awards worked out from the standings by assets/jornada.js - they change whenever the table does.
+           "auto" = a tab for every open league once all its teams have played. -->
+      <div id="premios" data-league="auto"></div>
     </div>
   </section>
 
@@ -117,12 +161,21 @@
   <script src="leagues/nfl/assets/nfl-roster-data.js"></script>
   <script src="leagues/nfl/assets/nfl-standings-data.js"></script>
   <script>LPBSA_captureStandings('nfl');</script>
+  <script src="leagues/nfl/assets/nfl-schedule-data.js"></script>
   <script src="leagues/nba/assets/nba-teams-data.js"></script>
   <script src="leagues/nba/assets/nba-standings-data.js"></script>
   <script>LPBSA_captureStandings('nba');</script>
+  <script src="leagues/nba/assets/nba-schedule-data.js"></script>
+  <!-- UCL: the day it opens (and its folder exists), take the comment marks off these four lines:
+  <script src="leagues/ucl/assets/ucl-teams-data.js"></script>
+  <script src="leagues/ucl/assets/ucl-standings-data.js"></script>
+  <script>LPBSA_captureStandings('ucl');</script>
+  <script src="leagues/ucl/assets/ucl-schedule-data.js"></script>
+  -->
   <script src="assets/app.js"></script>
   <script src="assets/hero-leagues.js"></script>
   <script src="assets/standings-tabs.js"></script>
+  <script src="assets/jornada.js"></script>
   <script src="assets/alerts.js"></script>
   <script src="assets/fantasy-switcher.js"></script>
   <script src="assets/socials-data.js"></script>
