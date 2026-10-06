@@ -175,7 +175,8 @@ async function listDevices() {
   } while (page);
   return out;
 }
-function wants(device, league) { return !device.sports || device.sports.includes(league); }
+/* league-wide ("all") stories go to every device, whichever fantasies it picked */
+function wants(device, league) { return league === 'all' || !device.sports || device.sports.includes(league); }
 
 function sentDocId(storyId) { return 's-' + String(storyId).replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 120); }
 async function alreadySent(storyId) {

@@ -535,6 +535,11 @@ as before so old stories still work; a story with no league counts as NFL).
     by itself once the first UCL story is posted.
   - The home page shows the latest stories from every league, each with its badge.
     A league's landing page shows only its own.
+  - League-wide news: pick "ALL" in the writer's League row for updates and announcements
+    that belong to no single fantasy (value "all" in news.js). It appears on the home page,
+    on every league's page (with an outlined LIGA badge), in the wire and in "more stories",
+    and on news.html under its own "Liga" button + section (shown once one exists; rename it
+    in SPORTS at the top of assets/app.js). Its phone alert and email go to everyone.
   - Two stories cannot share a "Link name" - the writer refuses, because the
     links and the email alerts use that name.
   - Email alerts work as before. An NBA story's email says "Noticias de la liga - NBA".

@@ -59,7 +59,7 @@
         http(s) link typed into a paragraph &mdash; like a Discord invite &mdash; becomes a real
         clickable link automatically, no extra formatting needed. When you are done, press
         <b>Download news.js</b> and drop the file into <code>assets/</code>, replacing the old one.
-        Pick the <b>League</b> (NFL, NBA or UCL) first &mdash; that decides which
+        Pick the <b>League</b> (ALL, NFL, NBA or UCL) first &mdash; that decides which
         section of the News page the story lands in. Nothing changes on the public site until you do. Visitors never see this page unless you
         send them the link &mdash; delete <code>news-writer.html</code> and
         <code>assets/writer.js</code> before uploading if you would rather it never leaves your
@@ -81,10 +81,14 @@
         <div class="field">
           <label>League &mdash; which fantasy is this story for?</label>
           <div class="chip-row" id="wLeague">
+            <button type="button" class="chip" data-league="all" title="Updates and announcements for the whole league">ALL</button>
             <button type="button" class="chip active" data-league="football">NFL</button>
             <button type="button" class="chip" data-league="basketball">NBA</button>
             <button type="button" class="chip" data-league="soccer">UCL</button>
           </div>
+          <p class="section-note" style="margin:8px 0 0"><b>ALL</b> = general news for the whole league (updates, announcements, site news).
+            It shows on the home page, on every league's page and in the wire, under its own <b>LIGA</b> button on the News page,
+            and the phone alert goes to everyone, whichever fantasies they follow.</p>
         </div>
         <div class="writer-grid">
           <div class="field">

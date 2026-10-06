@@ -1486,6 +1486,8 @@ body.pane-open{ overflow:hidden; }
   font-family:var(--font-display); font-weight:700; font-size:.82rem; letter-spacing:.1em; text-transform:uppercase;
   color:var(--gold-ink); background:var(--gold); border-radius:6px; vertical-align:middle;
 }
+/* league-wide news: outlined, so it reads as "for everybody" next to the solid NFL / NBA badges */
+.news-sport-all{ color:var(--gold-light); background:transparent; box-shadow:inset 0 0 0 1.5px var(--gold); }
 
 /* ---------- Leagues dropdown in the navbar ---------- */
 .nav-drop{ position:relative; }

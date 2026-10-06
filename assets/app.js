@@ -26,11 +26,14 @@
   /* Which fantasy a story belongs to. A story with no "league" is football,
      so every story written before the basketball expansion still works. */
   var SPORTS = {
+    /* "all" = league-wide news (updates, announcements) that belongs to no single fantasy.
+       To rename it on the site, change label / full here - nothing else. */
+    all:        { label: 'LIGA', full: 'Avisos de la Liga' },
     football:   { label: 'NFL', full: 'NFL Fantasy' },
     basketball: { label: 'NBA', full: 'NBA Fantasy' },
     soccer:     { label: 'UCL', full: 'UCL Fantasy' }
   };
-  var SPORT_ORDER = ['football', 'basketball', 'soccer'];
+  var SPORT_ORDER = ['all', 'football', 'basketball', 'soccer'];
   /* the league list in assets/leagues.js, when loaded, is the source of the names */
   (window.LPBSA_LEAGUES || []).forEach(function (L) {
     if (SPORTS[L.story]) SPORTS[L.story] = { label: L.short, full: L.name };
@@ -87,11 +90,17 @@
     for (var i = 0; i < all.length; i++) { if (all[i].id === id) return all[i]; }
     return null;
   }
-  function storiesFor(league) {
+  /* only the stories written for exactly this fantasy (the news page sections) */
+  function storiesOnly(league) {
     return stories().filter(function (s) { return s.league === league; });
   }
+  /* a fantasy's own stories PLUS the league-wide ones, newest first as written - used by the league
+     pages, the wire and "more stories", so an update for everybody shows up everywhere */
+  function storiesFor(league) {
+    return stories().filter(function (s) { return s.league === league || s.league === 'all'; });
+  }
   function sportBadge(n) {
-    return '<span class="news-sport">' + esc(SPORTS[n.league].label) + '</span>';
+    return '<span class="news-sport' + (n.league === 'all' ? ' news-sport-all' : '') + '">' + esc(SPORTS[n.league].label) + '</span>';
   }
 
   /* ---------- mobile menu ---------- */
@@ -163,7 +172,7 @@
     return '<div class="news-cover">' + inner + '</div>';
   }
   function cardHTML(n, withBadge) {
-    var badge = withBadge === true ? sportBadge(n) : '';
+    var badge = (withBadge === true || n.league === 'all') ? sportBadge(n) : '';
     var when = n.date ? '<span class="news-when">' + esc(n.date) + '</span>' : '';
     return '<a class="news-card" href="' + NEWS_BASE + encodeURIComponent(n.id) + '">' +
       coverHTML(n) +
@@ -447,15 +456,15 @@
   });
 
   /* The news page is split by fantasy: a row of filter chips, then one
-     section per fantasy. Football and Basketball always show; Soccer only
-     appears once a soccer story exists. news.html?sport=basketball shows
+     section per fantasy. Football and Basketball always show; Soccer and the
+     league-wide "Liga" section only appear once a story exists for them. news.html?sport=basketball shows
      just that one. */
   function pickedSport() {
     var m = /[?&]sport=([a-z]+)/.exec(location.search);
     return m && SPORTS[m[1]] ? m[1] : '';
   }
   function sportSectionHTML(key) {
-    var list = storiesFor(key);
+    var list = storiesOnly(key);
     var body = list.length
       ? '<div class="news-grid">' + list.map(cardHTML).join('') + '</div>'
       : '<p class="section-note">Aun no hay noticias de ' + esc(SPORTS[key].label) + '.</p>';
@@ -470,7 +479,7 @@
     }
     var picked = pickedSport();
     var shown = SPORT_ORDER.filter(function (k) {
-      return k === 'football' || k === 'basketball' || storiesFor(k).length;
+      return k === 'football' || k === 'basketball' || storiesOnly(k).length;
     });
     function chip(key, label) {
       return '<button type="button" class="chip sport-chip' + (key === picked ? ' active' : '') + '" data-sport="' + key + '">' + esc(label) + '</button>';

@@ -15,8 +15,8 @@
   /* Which fantasy the story in the form belongs to. Stays on whatever you
      picked last, so writing three basketball stories in a row is three
      clicks fewer. Stories with no league are football (the original). */
-  var LEAGUES = ['football', 'basketball', 'soccer'];
-  var LEAGUE_LABEL = { football: 'NFL', basketball: 'NBA', soccer: 'UCL' };
+  var LEAGUES = ['all', 'football', 'basketball', 'soccer'];
+  var LEAGUE_LABEL = { all: 'ALL', football: 'NFL', basketball: 'NBA', soccer: 'UCL' };
   var league = 'football';
   var leagueRow = document.getElementById('wLeague');
   function cleanLeague(v) { return LEAGUES.indexOf(v) !== -1 ? v : 'football'; }
