@@ -27,7 +27,7 @@ window.LPBSA_RULES.nba = {
         { type: "facts",
           rows: [
             ["League Name", "LPBLSA - Basketball"],
-            ["Number of Teams", 10],
+            ["Number of Teams", 6],
             ["Scoring Type", "Head to Head Points"],
           ],
         },
@@ -41,7 +41,7 @@ window.LPBSA_RULES.nba = {
             ["Roster Size", 14],
             ["Total Starters", 9],
             ["Total on Bench", 5],
-            ["Injury Reserve", 2],
+            ["Injury Reserve", 1],
           ],
         },
         { type: "lineup", title: "Positions", columns: ["Position", "Starters", "Maximums"],
@@ -55,7 +55,7 @@ window.LPBSA_RULES.nba = {
             ["Forward (F)", 1, "N/A"],
             ["Util (UTIL)", 2, "N/A"],
             ["Bench (BE)", 5, "N/A"],
-            ["Injured Reserve (IR)", 2, "N/A"],
+            ["Injured Reserve (IR)", 1, "N/A"],
           ],
         },
       ]

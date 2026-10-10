@@ -9,10 +9,8 @@
    ============================================================ */
 window.LPBSA_PLAYOFFS = window.LPBSA_PLAYOFFS || {};
 window.LPBSA_PLAYOFFS.nba = {
-  "format": 6,
+  "format": 4,
   "seeds": [
-    "",
-    "",
     "",
     "",
     "",

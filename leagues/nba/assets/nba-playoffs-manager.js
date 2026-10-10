@@ -22,7 +22,7 @@
   var DRAFT_KEY = 'lpbsa.nba.playoffs.draft.v1';                 /* where your unsaved edits are kept in this browser */
   var DATA_PATH = 'leagues/nba/assets/nba-playoffs-data.js'; /* the file this tool replaces (shown in messages) */
   var OUT_NAME = 'nba-playoffs-data.js';                         /* the name of the file it downloads */
-  var DEFAULT_FORMAT = 6;                                      /* 4 or 6 teams */
+  var DEFAULT_FORMAT = 4;                                      /* 4 or 6 teams */
 
   var PO = window.LPBSA_Playoffs;
   var els = {

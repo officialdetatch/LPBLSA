@@ -5,6 +5,31 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "la-primera-piedra",
+    "league": "basketball",
+    "date": "Week 0 | Oct. 10",
+    "headline": "La Primera Piedra",
+    "summary": "El Draft de NBA se celebrara mañana 11 de Octubre de 2026!",
+    "blocks": [
+      {
+        "type": "h",
+        "text": "Todo tiene un principio!"
+      },
+      {
+        "type": "p",
+        "text": "Asi es! Todo tiene un principio y el dia de mañana 11 de Octubre es el nacimiento de la division de Basketball de Nuestra Liga!"
+      },
+      {
+        "type": "p",
+        "text": "El draft sera celebrado en Discord: https://discord.gg/8QX7cw42?event=1558575535167250592 a las 9:00 PM."
+      },
+      {
+        "type": "p",
+        "text": "NOS VEMOS POR ALLA!"
+      }
+    ]
+  },
+  {
     "id": "resumen-de-la-semana-4",
     "league": "football",
     "date": "Week 4 | Oct 6",
