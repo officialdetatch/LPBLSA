@@ -13,7 +13,7 @@ belongs to one league lives in that league's folder and starts with its name
 
   THE WHOLE SITE (root)
   index.html            league-neutral home: league tiles, La Jornada, latest 3 stories,
-                        tabbed Standings, Los Premios, Socials
+                        tabbed Standings, Los Premios, Socials (see "The Socials section")
   404.html              the "page not found" page GitHub Pages shows for a broken link
   news.html             all stories, and the full article view
   teams.html            the Teams page: a carousel of cards per league
@@ -32,9 +32,17 @@ belongs to one league lives in that league's folder and starts with its name
     alerts.js, comments.js, firebase-config.js, push.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
     rules-view.js         draws a league's Reglas page from its rules-data file
     playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
+    team-page.js          the parts of an NBA team page that keep themselves up to date (record, rank, schedule)
+    socials-view.js, socials-data.js   the Socials section (socials-data.js is made by socials-writer.html)
   images/               your logos go here (see images/README.txt)
-    leagues/              the round NFL / NBA / UCL logos used by the "otro Fantasy" bubble
+    leagues/              the round NFL / NBA / UCL / MLB logos used by the "otro Fantasy" bubble
   audio/                the commissioner theme (see audio/README.txt)
+  scripts/              what the GitHub Actions run (you never run these yourself):
+    send-news-alert.mjs     the email alert for a new story (news-alert.yml)
+    send-push-alert.mjs     the push notification for a new story (push-alert.yml)
+    fetch-instagram.py      the Instagram card's latest posts (instagram-feed.yml) - see INSTAGRAM-SETUP.md
+  .github/workflows/    the Actions themselves: news-alert.yml, push-alert.yml, instagram-feed.yml
+  PUSH-SETUP.md, FIREBASE-SETUP.md, INSTAGRAM-SETUP.md   one-time setup guides
 
   NFL  (leagues/nfl/)
   nfl-landing-page.html        the NFL home: standings, teams in rank order, NFL news
@@ -55,16 +63,19 @@ belongs to one league lives in that league's folder and starts with its name
   assets/nfl-playoffs-manager.js   powers nfl-playoffs-manager.html only
 
   NBA  (leagues/nba/) - the same set, for basketball
-  nba-landing-page.html        the NBA home - right now only the draft countdown (see below)
-  nba-roster-manager.html      YOUR private tool for NBA rosters
+  nba-landing-page.html        the NBA home: La Jornada, standings, Los Premios, teams, NBA news
+  nba-free-agents.html         searchable top 100 free agent board
+  nba-roster-manager.html      YOUR private tool for NBA rosters and free agents
   nba-standings-manager.html   YOUR private tool for the NBA table
-  teams/  images/              NBA team pages and crests, later
-  assets/nba-countdown.js          the draft-night timer on the NBA page
-  assets/nba-teams-data.js         the NBA teams (empty until they exist)
-  assets/nba-roster-data.js        NBA rosters + free agents (empty until they exist)
+  teams/<team>.html            one page per NBA team: logo, bio, roster, schedule (see "The NBA teams")
+  images/                      the NBA team logos (see images/README.txt in that folder)
+  assets/nba-teams-data.js         the six NBA teams: names, initials, logos
+  assets/nba-roster-data.js        every NBA roster + the free agent board (edited via the roster manager)
   assets/nba-roster-manager.js     powers nba-roster-manager.html only
-  assets/nba-standings-data.js     the NBA table
+  assets/nba-standings-data.js     the NBA table (edited via the standings manager)
+  assets/nba-schedule-data.js      the NBA regular season, matchup by matchup (15 matchups, Oct 20 - Jan 31)
   assets/nba-standings-manager.js  powers nba-standings-manager.html only
+  assets/nba-countdown.js          the old draft-night timer - no page loads it any more (kept for a future countdown)
   nba-rules.html               the NBA Reglas page
   nba-playoffs.html            the NBA Playoffs page: the bracket, who is out
   nba-playoffs-manager.html    YOUR private tool for the NBA bracket
@@ -93,7 +104,7 @@ belongs to one league lives in that league's folder and starts with its name
                 2 MB logo makes the site slow on phones.
 
 ## The parts that run themselves (assets/jornada.js)
-They work for every league (NFL now, NBA and UCL the day they go live). On the home page
+They work for every league (NFL and NBA now, UCL the day it goes live). On the home page
 each one gets a tab per league as soon as that league has the data it needs; a league
 without it simply doesn't show up yet. Each league's own page shows its own.
 
@@ -103,9 +114,10 @@ without it simply doesn't show up yet. Each league's own page shows its own.
                 The week comes from the league's schedule file
                 (leagues/<league>/assets/<league>-schedule-data.js), so it moves to the next
                 week by itself - nothing to edit during the season. The top of each schedule
-                file explains its format (the NBA one covers the short first week and the
-                two-week All-Star matchup). On the home page it opens on the league whose
-                games are on right now.
+                file explains its format (the NBA one covers the short first matchup and
+                what to do if a matchup ever runs two weeks). The NBA calls its weeks
+                "Matchup" (weekLabel in its schedule file). On the home page it opens on the
+                league whose games are on right now.
   Los Premios   up to four awards worked out from the standings every time the page opens:
                 El Dueño (1st), La Aplanadora (most points per week but not 1st),
                 El Suertudo (high in the table with a bad point differential),
@@ -124,27 +136,37 @@ without it simply doesn't show up yet. Each league's own page shows its own.
                 the real site.
   The crest     tap the big crest on the home page. Then tap it some more. (7 times.)
 
-## Going live: NBA and UCL
-NBA (after the draft):
-  1. Teams: add them to leagues/nba/assets/nba-teams-data.js (the file shows how).
-  2. Standings: leagues/nba/nba-standings-manager.html, as with the NFL.
-  3. Matchups: fill in leagues/nba/assets/nba-schedule-data.js (instructions at the top).
-  4. The NBA page: delete the DRAFT COUNTDOWN section, then take the comment marks off
-     the switched-off content AND the two switched-off script blocks at the bottom
-     (part 1 has to stay above app.js - it is already in the right place).
-  The home page needs nothing: the NBA leader tile, the NBA standings tab, and the NBA
-  tabs of La Jornada and Los Premios appear by themselves once the data is there.
+## Going live: UCL and MLB
+(The NBA went live after the draft on Oct 11 2026 - see "The NBA teams" further down.)
 
-UCL (next year):
+Both are already in assets/leagues.js as 'soon': they show greyed out ("Pronto") in the
+menus, on the home page tiles, the Standings tabs, the Teams page and the bubble. MLB (the
+baseball division) says "Se está cocinando"; its logo is images/leagues/mlb.png - the league
+crest with a baseball (gold stitches, like the other balls), made to match the others: replace that file if you get an official one.
+To keep MLB a secret for now, put // in front of its lines in assets/leagues.js.
+News is already ready for both: the news writer has UCL and MLB buttons, the News page grows
+their section by itself with the first story, and the email / phone alerts say UCL or MLB.
+
+UCL (next year) - and MLB the same way, with mlb- / .mlb / 'mlb' instead:
   1. Copy the leagues/nba/ folder to leagues/ucl/ and rename every nba- file to ucl-.
      Inside each data file change .nba to .ucl (LPBSA_TEAMS.ucl, LPBSA_SCHEDULE.ucl,
      LPBSA_RULES.ucl, LPBSA_PLAYOFFS.ucl), and in the pages change the nba paths, titles,
      texts and the og: lines at the top to UCL.
   2. assets/leagues.js: set UCL's status to 'live' and give it home / rules / playoffs.
-  3. index.html: take the comment marks off the four UCL lines near the bottom.
+  3. index.html: take the comment marks off the four UCL lines near the bottom (MLB has
+     its own four lines right under them).
      teams.html: add the UCL teams file next to the NBA one.
+  4. Phone alerts: firestore.rules already accepts 'soccer' and 'baseball' - publish it again
+     in Firebase (Firestore > Rules) the day the league opens, so phones can ask for it.
   Everything else - menus, the bubble, news badges, the hero tile, standings tab,
   La Jornada and Los Premios - picks it up by itself.
+
+  Baseball differences to remember when MLB opens (send me the rules sheet, teams and
+  ESPN schedule like the NBA and it gets built the same way):
+  - ties can happen in baseball, so MLB keeps the T column (noTies: false in leagues.js)
+  - the roster manager's positions and "who may start where" (C, 1B, 2B, 3B, SS, OF, UTIL,
+    SP, RP, P...) come from the rules sheet - the NBA copy's SLOT_FITS is the model
+  - the countdown word: the schedule file's kickoff label, e.g. "Play ball"
 
 ## Posting news - you are the only editor
 The public pages have no edit button and no way to change anything. Stories are
@@ -300,6 +322,23 @@ online at all, delete leagues/nfl/nfl-roster-manager.html and leagues/nfl/assets
 before you upload - the team and free agent pages keep working off whatever
 leagues/nfl/assets/nfl-roster-data.js already says, they just lose the tool that edits it.
 
+## The Socials section (home page)
+It is three LIVE FEEDS that update themselves - post and it shows up, nothing to save or upload:
+  Instagram the @lpblsa profile with a grid of the 9 latest posts and the newest caption.
+            Instagram has no profile embed, so a GitHub Action (instagram-feed.yml) reads
+            the posts every 4 hours and saves them on the side branch "instagram-feed";
+            the card reads them from there. Needs a one-time setup: INSTAGRAM-SETUP.md.
+            Until then (or if it ever stops) the card shows your newest Instagram post
+            from socials-writer.html instead.
+  TikTok    the @lpblsa profile card with the latest videos (TikTok shows up to 10)
+  X.com     the @lpblsa_onX timeline, newest posts first (it scrolls inside its card)
+Which accounts: the LIVE lines at the top of assets/socials-view.js (set one to '' to switch
+its feed off). If the X or TikTok embed cannot load (an ad blocker, X having a bad day) its
+card shows a "Ver los posts en X" / "Ver los videos en TikTok" link.
+socials-writer.html (your private tool) is now for Threads, plus one recent Instagram post
+kept as the Instagram card's stand-in. "Show" in the writer counts the live feeds too:
+3 = the Instagram, TikTok and X cards.
+
 ## Footer social links
 Every page's footer has five round icons - Instagram, Threads, Discord, TikTok
 and X - linking to the league's official pages:
@@ -310,8 +349,8 @@ and X - linking to the league's official pages:
   X           x.com/lpblsa_onX
 They are plain HTML, the same five links repeated in every page, so if a URL
 ever changes, search the project for that link (for example discord.gg) and
-replace it everywhere it appears (10 pages: index, news, about, contact and
-free-agents, plus the 5 team pages under leagues/nfl/teams/).
+replace it everywhere it appears (every public page has them, including the
+team pages under leagues/nfl/teams/ and leagues/nba/teams/).
 The icons are the white image files in images/socials-logo/. To swap one,
 replace the file there and keep the same file name. The small size tweaks
 that keep them looking even live in assets/style.css under .social-link img.
@@ -334,10 +373,13 @@ the top of assets/style.css.
 ## Manager bios
 Each team page has a <p class="team-bio"> paragraph under the manager name.
 Rewrite it directly in that team's html file. There is a comment right above
-it so you can find it quickly.
+it so you can find it quickly. Same for the NBA team pages in leagues/nba/teams/
+(they say "Bio en camino" until you write one).
 
 ## The commissioner pane
-leagues/nfl/teams/puntos.html has extra pieces the other teams do not:
+leagues/nfl/teams/puntos.html has extra pieces the other teams do not (and
+leagues/nba/teams/puntos.html has its own copy - same photo and anthem, its own
+bio and decrees, so edit each one in its own page):
 
   - a gold "Meet the commissioner" button, and a clickable crest
   - a full-screen pane with THE COMMISSIONER in large gold type, your photo,
@@ -427,13 +469,17 @@ Try dry-run first, then test, and only then rely on the automatic sending.
 The site is ONE league with one fantasy per sport:
 
   NFL   football     live      (the original site)
-  NBA   basketball   live      (teams and rosters still to come)
+  NBA   basketball   live      (6 teams, drafted Oct 11 2026)
   UCL   UEFA Champions League  next year - greyed out in the menu, does nothing when clicked
+  MLB   baseball     soon      (greyed out like UCL: "Se está cocinando")
 
 ### The navbar (same on every page)
-Home, About, Reglas, News, Leagues, Playoffs, Teams, Contact. Reglas, Leagues and Playoffs are
-hover menus (tap on a phone) listing NFL / NBA / UCL; UCL is greyed out and does nothing.
-Below 1100px wide the whole bar folds into the menu button.
+All in Spanish: Inicio, Nosotros, Reglas, Noticias, Divisiones, Playoffs, Equipos, Tienda,
+Contáctanos. Reglas, Divisiones and Playoffs are hover menus (tap on a phone) listing
+NFL / NBA / UCL with the sport in Spanish under each (the  sport  field in assets/leagues.js);
+UCL is greyed out and does nothing. On a computer the bar always stays on one row (if the
+window is tight, the league name in the corner shortens with "..."); below 1280px wide the
+whole bar folds into the menu button. The labels are one line each in assets/nav.js.
 It is NOT written into each page any more. assets/nav.js draws it, from the
 league list in assets/leagues.js, so changing the menu or opening a league is
 one edit. Each page only carries an empty <nav id="siteNav"> plus attributes on
@@ -457,8 +503,8 @@ all of them.
 teams.html shows every team as a card - crest, name, and a link to its
 page when it has one - in a scrolling carousel per league (arrows appear when a
 row is wider than the screen). A team with no crest picture shows its initials on
-a round badge. NBA says "Equipos por confirmar" until teams exist, and UCL says it is
-available next year.
+a round badge (every NBA team, until their logos arrive). UCL says it is available
+next year.
 
 ### The Reglas pages
 Each league has its own rules page in its own folder: leagues/nfl/nfl-rules.html and
@@ -492,8 +538,9 @@ visitors will see. The Playoffs menu in the navbar links to each league's page.
 
 Two bracket shapes, taken from the league's bracket pictures:
   4 teams   ROUND 1 (No.1 v No.4, No.2 v No.3) -> CHAMP          (NFL: 5 teams, top 4 qualify)
-  6 teams   ROUND 1 (No.1 and No.2 have a BYE; No.4 v No.5; No.3 v No.6) -> ROUND 2 -> CHAMP   (NBA: 10 teams, top 6)
-The NFL is set to 4 and the NBA to 6; the manager has a "Bracket" box if that ever changes.
+  6 teams   ROUND 1 (No.1 and No.2 have a BYE; No.4 v No.5; No.3 v No.6) -> ROUND 2 -> CHAMP
+Both leagues are set to 4 (the NBA has 6 teams, top 4 qualify); the manager has a "Bracket"
+box if that ever changes.
 
 How to run the playoffs with the manager (open leagues/nfl/nfl-playoffs-manager.html from
 your folder):
@@ -521,7 +568,7 @@ the managers. assets/standings-tabs.js draws the tabs, assets/hero-leagues.js th
 
 ### League landing pages
 Each has the standings table, then the teams as cards in standings order (a gold
-rank badge on each), then that league's latest news. Open a new league by copying
+rank badge on each, once a game has been played), then that league's latest news. Open a new league by copying
 leagues/nba/ and changing its data.
 
 ### News: one list, split by league
@@ -548,38 +595,63 @@ as before so old stories still work; a story with no league counts as NFL).
 Open leagues/nba/nba-standings-manager.html on your own computer. It works like the NFL
 one (arrows to reorder, click a box to edit) without the T column, since basketball
 has no ties. Press Download, then drop the file (it is named nba-standings-data.js)
-into leagues/nba/assets/ replacing the old one. The manager lists the teams found in
-leagues/nba/assets/nba-teams-data.js, so add the teams there first (the file explains
-the format).
+into leagues/nba/assets/ replacing the old one. Save it after every matchup: the NBA page,
+the home page, La Jornada, Los Premios and all six team pages follow it by themselves.
 
 leagues/nba/nba-roster-manager.html is the NBA twin of the NFL roster manager: draft
-players from free agency, bench, start, drop or trade them. It downloads
-nba-roster-data.js for leagues/nba/assets/. The starting lineup in that file is the
-league's real one from the rules sheet - 9 starters: PG SG SF PF C G F UTIL UTIL
-(NBA_STARTER_SLOTS). The NBA rosters are not shown on any public page yet; that comes
-with the NBA team pages.
+players from free agency, bench, start, drop or trade them, and edit Status / FPTS / AVG /
+LAST. It downloads nba-roster-data.js for leagues/nba/assets/. Basketball differences:
+  - a player can play several positions, written the way ESPN lists them ("PG, SG"). The
+    first one is his main position (the round badge next to his name); the free agent
+    page's PG / SG / SF / PF / C buttons show everyone who can play there.
+  - "Start at" only offers the slots his positions allow: PG, SG, SF, PF and C need that
+    position, G takes a PG or SG, F takes an SF or PF, UTIL takes anyone. The 9 starters
+    (NBA_STARTER_SLOTS) are the rules sheet's: PG SG SF PF C G F UTIL UTIL.
+  - the snapshot at the top warns when a roster breaks the rules sheet (9 starters,
+    5 on the bench, 1 on IR) or someone is starting where he can't play.
+  - FPTS / AVG / LAST are season fantasy points, average per game and last game. They
+    are empty until the season starts; the pages show a dash meanwhile.
+The rosters show on the six team pages and the free agents on nba-free-agents.html.
 
-### When the NBA teams and rosters arrive
-Fill in leagues/nba/assets/nba-teams-data.js - they appear on the NBA page, the Teams
-page and both NBA managers at once. Individual NBA team pages are not built yet. When
-they exist, set  teamPages: 'leagues/nba/teams/'  for the nba league in assets/leagues.js
-and the team names become links.
+### The NBA teams
+The six teams, as ESPN lists them, live in leagues/nba/assets/nba-teams-data.js (slug, name,
+initials, logo, round badge):
+  puntos        Los Puntos de Piña           LPP   Christopher Ramirez
+  sin-talento   Sin Talento de Barrio        STB   Tatiana Mejias
+  imcebollin    iMcebollin                   JST   Jose Cruz
+  concheros     Concheros de la Concha       CLC   George Sanchez
+  mugiwaras     Mugiwaras De Caimito         MDC   Daniel Heredia   (same team and bio as in the NFL)
+  pantyman      Pantyman Squad               PPT   Peter Cruz
+Each has its page at leagues/nba/teams/<slug>.html, built like the NFL team pages: logo,
+manager and bio, Record / Points / Streak / Playoff odds, the roster, and the schedule.
+Unlike the NFL pages (written out by hand), everything except the name, manager and bio
+updates itself:
+  record, rank, points, streak, playoff odds   from nba-standings-data.js
+  roster                                       from nba-roster-data.js
+  schedule                                     from nba-schedule-data.js - the current matchup
+                                               is marked ("Próximo" / "En juego") and the
+                                               ones already played fade
+  logo                                         from nba-teams-data.js
+"Ranked #2 of 6" appears once a game has been played; until then the line says
+"Temporada 2026-27". The same goes for the home page's NBA tile (it shows the tagline from
+assets/leagues.js instead of crowning a 0-0 team) and the rank badges on the team cards.
 
-### The NBA countdown page
-Until the NBA teams are ready, leagues/nba/nba-landing-page.html shows only a countdown:
-"La expansion fue confirmada - NBA DRAFT este Domingo a las 9PM", with a timer to
-Sunday 4 Oct 2026, 9PM New York time. The moment the timer hits zero the page swaps
-itself (no reload) to "ESTAMOS TRABAJANDO EN EDITAR LOS EQUIPOS - CHECK PRONTO!", and
-anyone opening the page after that sees that message straight away.
+Logos: every NBA logo is a circle. Save it as leagues/nba/images/<slug>.png (about 512x512)
+and set that team's "crest" to "images/<slug>.png" in nba-teams-data.js - it then shows on
+every page at once. Until then each team shows its initials on a round badge.
 
-  - The draft time is one line on the page: data-target="2026-10-04T21:00:00-04:00"
-    (year-month-day, T, hour:min:sec, then the New York offset: -04:00 while clocks
-    are on summer time, -05:00 in winter). Change it there to move the draft.
-  - The old NBA page (hero, standings, teams, news) is still in the file, switched off
-    inside one big HTML comment. The comment itself says how to bring it back: delete the
-    countdown section, remove the comment start and end lines, and uncomment the three
-    scripts at the bottom.
-  - The home page, the Teams page, the menu and the bubble still point at this page.
+The schedule: copied from the ESPN schedule tabs of the basketball sheet - 15 matchups (each
+team plays the other five three times), Matchup 1 = Oct 20-25, then Monday to Sunday until
+Jan 25-31. The visitor (ESPN's "@" team) is written first, home second; that is how the team
+pages know Home / Away. The top of the file explains the format.
+
+### The NBA page
+leagues/nba/nba-landing-page.html: the hero (Matchup number, leader, most points per matchup
+and matchups left, all kept up to date), La Jornada, the standings, Los Premios (they appear
+once every team has played), the six teams with a Free Agents button, and the NBA news.
+The draft countdown and its music are gone; assets/nba-countdown.js is no longer loaded but
+stays in the folder in case you ever want a countdown again (the CSS for it is still in
+style.css). The only pages with music are the commissioner's (Los Puntos de Piña, NFL and NBA).
 
 ### La Tiendita (merch page)
 tienda.html shows the merch from the Fourthwall store (https://lpblsa-shop.fourthwall.com). The products are NOT
@@ -627,5 +699,6 @@ the  prompt,  coffeeLabel  and  coffeeSub  lines in the same place; set  coffee:
 
 ### The bubble logos
 The floating bubble shows images/leagues/nfl.png,
-nba.png and ucl.png (set by the logo field of each league in assets/leagues.js). To
-change one, replace that file and keep the name (256x256 is plenty).
+nba.png, ucl.png and mlb.png (set by the logo field of each league in assets/leagues.js). To
+change one, replace that file and keep the name (256x256 is plenty). The tiles sit side by
+side in one row (4 on the home page, 3 on a league page); on phones they shrink to fit.

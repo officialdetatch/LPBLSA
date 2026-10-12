@@ -19,7 +19,7 @@
   <meta property="og:locale" content="es_PR">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="La Premier Bundesliga Serie A">
+  <meta name="apple-mobile-web-app-title" content="LPBLSA">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/png" href="../../images/league-logo.png">
   <link rel="apple-touch-icon" href="../../images/league-logo.png">
@@ -39,7 +39,7 @@
         </span>
         <span class="brand-text">
           <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
-          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+          <div class="brand-sub">NBA Fantasy &middot; Temporada 2026</div>
         </span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
@@ -59,64 +59,18 @@
   </div>
 
   <main>
-    
-  <audio id="music" autoplay loop>
-    <source src="../../audio/commissioner-theme.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const music = document.getElementById("music");
-      music.play().catch(() => {
-        document.addEventListener("click", () => {
-          music.play();
-        }, { once: true });
-    });
-  </script>
-
-  <!-- ===== DRAFT COUNTDOWN (live until the NBA teams are ready) ===== -->
-  <section class="hero countdown-hero">
-    <div class="wrap">
-      <div class="countdown-wrap">
-        <div class="hero-kicker">NBA Fantasy &middot; 2026 season</div>
-
-        <div id="nbaBefore">
-          <h1>La expansi&oacute;n fue <span class="accent">confirmada</span></h1>
-          <p class="countdown-sub">NBA DRAFT Domingo 11 de Octubre a las 9PM.</p>
-          <!-- To move the draft, change data-target: year-month-day T hour:min:sec, then the New York offset (-04:00 summer time, -05:00 winter) -->
-          <div class="countdown" id="nbaCountdown" data-target="2026-10-11T21:00:00-04:00" role="timer" aria-label="Tiempo para el NBA Draft">
-            <div class="countdown-cell"><b data-unit="d">--</b><span>D&iacute;as</span></div>
-            <div class="countdown-cell"><b data-unit="h">--</b><span>Horas</span></div>
-            <div class="countdown-cell"><b data-unit="m">--</b><span>Min</span></div>
-            <div class="countdown-cell"><b data-unit="s">--</b><span>Seg</span></div>
-          </div>
-        </div>
-
-        <div id="nbaAfter" hidden>
-          <h1>ESTAMOS TRABAJANDO EN <span class="accent">EDITAR LOS EQUIPOS</span></h1>
-          <p class="countdown-sub">CHECK PRONTO!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-
-  <!-- ===== NBA PAGE CONTENT - SWITCHED OFF UNTIL THE TEAMS ARE READY =====
-       To bring it back: delete the DRAFT COUNTDOWN section above, then delete
-       the comment opener at the very top of this block (the line that says
-       SWITCHED OFF) and the comment closer on the last line of the block.
-       Do the same for the two blocks of scripts commented out at the bottom of the page.
-
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-text">
-        <div class="hero-kicker">NBA Fantasy &middot; 2026 season</div>
+        <div class="hero-kicker">NBA Fantasy &middot; Matchup <span data-auto="week">1</span></div>
         <h1>La Misma Liga.<br><span class="accent">Ahora en la Duela.</span></h1>
         <p>Página oficial del Fantasy Basketball de La Premier Bundesliga Serie A.</p>
         <div class="hero-stats">
+          <!-- these three keep themselves up to date (assets/jornada.js, data-auto) from the standings and the
+               schedule; the leader and the top scorer appear once the first matchup is in the standings -->
           <div class="hero-stat"><b data-auto="leader">&mdash;</b><span>Top of the table</span></div>
-          <div class="hero-stat"><b data-auto="top-ppw">&mdash;</b><span>Most points per week (<span data-auto="top-ppw-team">&mdash;</span>)</span></div>
-          <div class="hero-stat"><b data-auto="weeks-left">&mdash;</b><span>Weeks to survive</span></div>
+          <div class="hero-stat"><b data-auto="top-ppw">&mdash;</b><span>Most points per matchup (<span data-auto="top-ppw-team">&mdash;</span>)</span></div>
+          <div class="hero-stat"><b data-auto="weeks-left">15</b><span>Matchups to survive</span></div>
         </div>
       </div>
       <div class="hero-side-crest" aria-hidden="true"><img src="../../images/leagues/nba.png" alt="" width="256" height="256" onerror="this.parentNode.remove()"></div>
@@ -129,6 +83,7 @@
         <h2>La Jornada</h2>
         <div class="jornada-status" data-jornada-status></div>
       </div>
+      <!-- this matchup's games: drawn by assets/jornada.js from assets/nba-schedule-data.js -->
       <div id="jornada" data-league="nba"></div>
     </div>
   </section>
@@ -170,7 +125,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Los Equipos</h2>
-        
+        <a class="btn btn-small" href="nba-free-agents.html">Free Agents</a>
       </div>
       <div id="teamsGrid" data-empty="Los equipos se anuncian cuando arranque la temporada."></div>
     </div>
@@ -185,8 +140,6 @@
       <div class="news-grid" id="newsGrid" data-limit="3" data-league="basketball" data-empty="Todavia no hay noticias de NBA. Pronto!"></div>
     </div>
   </section>
-
-  ===== end of switched-off NBA content ===== -->
   </main>
 
   <footer class="site-footer">
@@ -214,18 +167,12 @@
   </footer>
 
   <script src="../../assets/news.js"></script>
-  <!-- SWITCHED OFF with the page content above (part 1 of 2: the data, which has to load
-       BEFORE app.js) - bring these back with it:
   <script src="assets/nba-teams-data.js"></script>
   <script src="assets/nba-standings-data.js"></script>
   <script src="assets/nba-schedule-data.js"></script>
-  ===== -->
   <script src="../../assets/app.js"></script>
-  <script src="assets/nba-countdown.js"></script>
-  <!-- SWITCHED OFF with the page content above (part 2 of 2) - bring these back with it:
-  <script src="../../assets/teams-view.js"></script>
   <script src="../../assets/jornada.js"></script>
-  ===== -->
+  <script src="../../assets/teams-view.js"></script>
   <script src="../../assets/alerts.js"></script>
   <script src="../../assets/fantasy-switcher.js"></script>
 </body>

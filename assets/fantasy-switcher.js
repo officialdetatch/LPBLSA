@@ -7,15 +7,16 @@
    WHICH TILES, AND WHERE THEY GO
    There is one tile per league in assets/leagues.js, except the league the
    visitor is already on (a page says which with <body data-league="nba">).
-   So the home page offers NFL, NBA and UCL, and the NBA page offers NFL and
-   UCL. A league that is still 'soon' shows a greyed "Pronto" tile.
+   So the home page offers NFL, NBA, UCL and MLB, and the NBA page offers NFL,
+   UCL and MLB. The tiles always sit side by side in one row, sharing the width.
+   A league that is still 'soon' shows a greyed "Pronto" tile.
    A page can still replace the tiles by hand with window.LPBSA_SWITCHER.
 
    THE LOGOS
-   Each tile shows its league's round logo - images/leagues/nfl.png, nba.png and
-   ucl.png, set by the  logo  field in assets/leagues.js. To change one, replace
-   that picture file (keep the name). If a picture is missing, a built-in
-   football / basketball / soccer ball icon is drawn instead.
+   Each tile shows its league's round logo - images/leagues/nfl.png, nba.png,
+   ucl.png and mlb.png, set by the  logo  field in assets/leagues.js. To change one,
+   replace that picture file (keep the name). If a picture is missing, a built-in
+   football / basketball / soccer ball / baseball icon is drawn instead.
 
    THE COFFEE ROW
    Under the league tiles there is one wide "Invitame un cafe" button that opens
@@ -51,11 +52,11 @@
 
   var ROOT = document.body.getAttribute('data-root') || '';
   var HERE = document.body.getAttribute('data-league') || '';
-  var ICON_FOR = { Football: 'football', Basketball: 'basketball', Soccer: 'soccer' };
+  var ICON_FOR = { nfl: 'football', nba: 'basketball', ucl: 'soccer', mlb: 'baseball' };   /* by league key */
   if (!CONFIG.tiles) {
     CONFIG.tiles = (window.LPBSA_LEAGUES || []).filter(function (L) { return L.key !== HERE; }).map(function (L) {
       var live = L.status === 'live' && L.home;
-      return { key: L.key, label: L.short, sub: L.sport, icon: ICON_FOR[L.sport] || 'basketball',
+      return { key: L.key, label: L.short, sub: L.sport, icon: ICON_FOR[L.key] || 'basketball',
         img: L.logo ? ROOT + L.logo : '',
         href: live ? ROOT + L.home : '', soon: 'Pronto' };
     });
@@ -85,6 +86,13 @@
         '<path d="M24 14.5l8.5 6.2-3.2 10H18.700l-3.200-10z" fill="var(--navy-950)"/>' +
         '<g fill="none" stroke="var(--navy-950)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
           '<path d="M24 14.5V4.200M32.500 20.700l9.700-3.200M29.300 30.700l6 8.300M18.700 30.700l-6 8.300M15.500 20.700l-9.700-3.200"/>' +
+        '</g></svg>',
+    baseball:
+      '<svg viewBox="0 0 48 48" aria-hidden="true">' +
+        '<circle cx="24" cy="24" r="21" fill="var(--white)" stroke="var(--gold)" stroke-width="2"/>' +
+        '<g fill="none" stroke-width="2" stroke-linecap="round">' +   /* gold seams and stitches, like the logo */
+          '<path stroke="var(--gold-dark)" d="M13 8c5 4 6.500 11 6.500 16S18 36 13 40"/><path stroke="var(--gold-dark)" d="M35 8c-5 4-6.500 11-6.500 16S30 36 35 40"/>' +
+          '<path stroke="var(--gold)" d="M14.500 14l3-1.500M16.500 20l3-.8M16.500 28l3 .8M14.500 34l3 1.500M33.500 14l-3-1.500M31.500 20l-3-.8M31.500 28l-3 .8M33.500 34l-3 1.500"/>' +
         '</g></svg>',
     football:
       '<svg viewBox="0 0 48 48" aria-hidden="true">' +
@@ -132,7 +140,7 @@
       'color:#5b6788;font-size:1.25rem;line-height:1;cursor:pointer;}' +
     '.fs-tip-x:hover{color:var(--navy-950);background:rgba(10,23,48,.08);}' +
     /* panel */
-    '.fs-panel{width:min(372px,calc(100vw - 36px));padding:20px 18px 18px;text-align:center;' +
+    '.fs-panel{width:min(480px,calc(100vw - 36px));padding:20px 16px 16px;text-align:center;' +
       'background:linear-gradient(160deg,var(--navy-700),var(--navy-900) 65%);border:1px solid var(--gold);' +
       'border-top:5px solid var(--gold);border-radius:var(--radius);box-shadow:0 24px 70px rgba(0,0,0,.65);' +
       'animation:fsPop .35s cubic-bezier(.2,.9,.3,1.25) both;}' +
@@ -142,19 +150,23 @@
     '.fs-x{position:absolute;top:6px;right:8px;width:32px;height:32px;border:0;background:none;color:var(--mute);' +
       'font-size:1.6rem;line-height:1;cursor:pointer;}' +
     '.fs-x:hover{color:var(--white);}' +
-    '.fs-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:10px;}' +
-    '.fs-sub{margin-top:-6px;font-size:.72rem;color:var(--mute);letter-spacing:.04em;}' +
-    '.fs-tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px 14px;' +
+    /* the league tiles sit side by side in ONE row, however many there are (4 on the home page,
+       3 on a league page); they share the width equally */
+    '.fs-tiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px;}' +
+    '.fs-sub{margin-top:-4px;font-size:.7rem;color:var(--mute);letter-spacing:.03em;line-height:1.25;}' +
+    '.fs-tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px;min-width:0;' +
       'text-decoration:none;color:var(--white);background:var(--navy-950);border:1px solid var(--line);' +
       'border-radius:var(--radius);transition:transform .15s ease,border-color .15s ease;}' +
     'a.fs-tile:hover,a.fs-tile:focus-visible{transform:translateY(-3px);border-color:var(--gold);outline:none;}' +
     '.fs-tile.soon{opacity:.72;cursor:default;}' +
-    '.fs-ico{width:64px;height:64px;display:flex;align-items:center;justify-content:center;}' +
+    '.fs-ico{width:58px;height:58px;display:flex;align-items:center;justify-content:center;}' +
     '.fs-ico svg,.fs-ico img{width:100%;height:100%;object-fit:contain;}' +
-    '.fs-name{font-family:var(--font-display);font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;}' +
-    '.fs-go{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);padding:3px 0;}' +
-    '.fs-soon{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);' +
-      'border:1px solid var(--gold-dark);border-radius:20px;padding:2px 9px;}' +
+    '.fs-name{font-family:var(--font-display);font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;line-height:1;}' +
+    '.fs-go{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);padding:3px 0;white-space:nowrap;}' +
+    '.fs-soon{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);' +
+      'border:1px solid var(--gold-dark);border-radius:20px;padding:2px 8px;white-space:nowrap;}' +
+    /* keeps "Entrar" / "Pronto" level across the row, even when a sport name takes two lines */
+    '.fs-tile .fs-go,.fs-tile .fs-soon{margin-top:auto;line-height:16px;}' +
     /* coffee row */
     '.fs-coffee{display:flex;align-items:center;gap:14px;margin-top:12px;padding:12px 16px;text-align:left;' +
       'text-decoration:none;color:var(--white);background:var(--navy-950);border:1px dashed var(--gold);' +
@@ -170,7 +182,19 @@
     '@keyframes fsPulse{0%{transform:scale(1);opacity:.9;}100%{transform:scale(1.55);opacity:0;}}' +
     '@media (prefers-reduced-motion:reduce){.fs-tip,.fs-panel{animation:none;}.fs-fab.nudge::after{animation:none;}' +
       '.fs-fab,.fs-tile,.fs-coffee{transition:none;}}' +
-    '@media (max-width:520px){.fs-root{right:12px;bottom:12px;}.fs-fab{width:56px;height:56px;}}';
+    '@media (max-width:520px){.fs-root{right:12px;bottom:12px;}.fs-fab{width:56px;height:56px;}' +
+      /* phones: the panel takes the screen's width and the tiles get compact so all of them still fit in the row */
+      '.fs-panel{width:calc(100vw - 24px);padding:18px 10px 10px;}' +
+      '.fs-panel h2{font-size:1.3rem;}.fs-panel p{margin-bottom:12px;}' +
+      '.fs-tiles{gap:6px;}' +
+      '.fs-tile{gap:6px;padding:11px 3px 9px;}' +
+      '.fs-ico{width:46px;height:46px;}' +
+      '.fs-name{font-size:1rem;}' +
+      '.fs-sub{font-size:.62rem;letter-spacing:0;}' +
+      '.fs-go{font-size:.62rem;letter-spacing:.05em;}' +
+      '.fs-soon{font-size:.58rem;letter-spacing:.05em;padding:2px 6px;}' +
+      '.fs-coffee{margin-top:8px;padding:10px 12px;gap:12px;}.fs-cup{flex-basis:38px;width:38px;height:38px;}' +
+      '.fs-cname{font-size:1rem;line-height:1.15;}}';
   document.head.appendChild(css);
 
   /* ---------- markup ---------- */
@@ -180,7 +204,7 @@
       : (ICONS[t.icon] || '');
     var inner = '<span class="fs-ico">' + art + '</span><span class="fs-name">' + esc(t.label) + '</span>' +
       (t.sub ? '<span class="fs-sub">' + esc(t.sub) + '</span>' : '') +
-      (t.href ? '<span class="fs-go">Entrar &rarr;</span>' : '<span class="fs-soon">' + esc(t.soon || 'Proximamente') + '</span>');
+      (t.href ? '<span class="fs-go">Entrar &rarr;</span>' : '<span class="fs-soon">' + esc(t.soon || 'Próximamente') + '</span>');
     return t.href
       ? '<a class="fs-tile" href="' + esc(t.href) + '" data-fantasy="' + esc(t.key) + '">' + inner + '</a>'
       : '<div class="fs-tile soon" aria-disabled="true" data-fantasy="' + esc(t.key) + '">' + inner + '</div>';

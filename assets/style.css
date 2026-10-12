@@ -166,7 +166,7 @@ h1,h2,h3,h4{
 }
 .brand{ display:flex; align-items:center; gap:12px; min-width:0; }
 /* phones/tablets: the name shrinks (with …) so the menu button always stays on the same row */
-@media (max-width:1100px){ .brand{ flex:1 1 0; } }
+@media (max-width:1279px){ .brand{ flex:1 1 0; } }
 .brand .crest{ --crest-size:48px; transition:transform .3s var(--ease-out); }
 .brand:hover .crest{ transform:rotate(-6deg) scale(1.04); }
 .brand-text{ min-width:0; }
@@ -189,6 +189,7 @@ h1,h2,h3,h4{
   letter-spacing:.06em;
   color:var(--mute);
   margin-top:3px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;   /* one line, like the name above it */
 }
 .nav-toggle{
   margin-left:auto;
@@ -225,7 +226,7 @@ h1,h2,h3,h4{
   background:var(--gold); transform:skewX(var(--slash)); border-radius:1px;
 }
 
-@media (max-width:1100px){
+@media (max-width:1279px){
   .nav-toggle{ display:flex; }
   .site-nav{
     flex-basis:100%;
@@ -494,6 +495,8 @@ h1,h2,h3,h4{
   grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap:14px;
 }
+/* four leagues: two rows of two (the live ones on top), one column on a phone */
+@media (min-width:600px){ .league-tiles.tiles-4{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
 .league-tile{
   position:relative; overflow:hidden;
   display:grid;
@@ -925,8 +928,12 @@ a.team-link:hover span.name{ color:var(--gold-light); }
 .team-hero{
   display:flex; align-items:center; gap:24px; flex-wrap:wrap;
   padding:40px 0;
+  /* side margins only once the screen is narrower than the page (tablets, phones):
+     on a wide screen it stays exactly as before */
+  padding:40px clamp(0px, calc((1248px - 100vw) / 2), 24px);
   border-bottom:1px solid var(--line);
 }
+@media (max-width:600px){ .team-hero{ padding:32px 16px; } }
 .team-hero h1{ font-size:clamp(2.2rem,5vw,3.4rem); font-weight:800; font-style:italic; text-transform:uppercase; line-height:.95; }
 .team-meta{ color:var(--mute); font-size:.95rem; margin-top:6px; }
 .team-badges{
@@ -984,7 +991,7 @@ a.team-link:hover span.name{ color:var(--gold-light); }
   margin-left:6px;
   font-family:var(--font-display);
 }
-.nfl-tag{ color:var(--mute); font-size:.78rem; }
+.nfl-tag{ color:var(--mute); font-size:.78rem; margin-left:6px; }
 
 /* ---------- inline-editable fields (roster manager) ---------- */
 .stat-input, .status-input{
@@ -1514,7 +1521,7 @@ body.pane-open{ overflow:hidden; }
 /* invisible bridge so the menu doesn't close while the mouse travels to it */
 .nav-drop-menu::before{ content:""; position:absolute; left:0; right:0; top:-8px; height:8px; }
 .nav-drop.open .nav-drop-menu{ display:block; animation:menu-in .2s var(--ease-out); }
-@media (hover:hover) and (min-width:1101px){
+@media (hover:hover) and (min-width:1280px){
   .nav-drop:hover .nav-drop-menu{ display:block; }
   .nav-drop:hover .nav-chev{ transform:rotate(180deg); }
   .nav-drop:hover .nav-drop-btn{ color:var(--white); }
@@ -1533,14 +1540,17 @@ body.pane-open{ overflow:hidden; }
 .site-nav .nav-drop-menu a.active::after{ content:none; }
 .nav-soon{ opacity:.5; cursor:default; }
 .nav-soon:focus-visible{ outline:2px solid var(--gold-dark); }
-/* nine tabs (and the bell) need the room: a little tighter on a small laptop, and the phone menu takes over at 1100px */
-@media (min-width:1101px) and (max-width:1299px){
+/* nine tabs (and the bell) in Spanish need the room: the bar stays on ONE row (the league name
+   gives way with "…" if it must), a little tighter on a laptop, and below 1280px the phone menu
+   takes over */
+@media (min-width:1280px){ .site-nav{ flex-wrap:nowrap; } }
+@media (min-width:1280px) and (max-width:1439px){
   .site-nav{ gap:0; }
-  .site-nav > a, .nav-drop-btn{ padding-left:9px; padding-right:9px; font-size:.96rem; }
-  .site-nav > a.active::after{ left:9px; right:9px; }
-  .nav-drop-btn.active::after{ left:9px; right:26px; }
+  .site-nav > a, .nav-drop-btn{ padding-left:8px; padding-right:8px; font-size:.95rem; letter-spacing:.03em; }
+  .site-nav > a.active::after{ left:8px; right:8px; }
+  .nav-drop-btn.active::after{ left:8px; right:25px; }
 }
-@media (max-width:1100px){
+@media (max-width:1279px){
   .site-nav{ align-items:stretch; }
   .nav-drop{ width:100%; }
   .nav-drop-btn{ width:100%; justify-content:space-between; padding:14px 6px; border-bottom:1px solid var(--line-soft); font-size:1.15rem; }
@@ -1604,6 +1614,10 @@ a.team-card:hover .crest{ transform:scale(1.06) rotate(-3deg); }
 .carousel-track:focus-visible{ outline:2px solid var(--gold-dark); outline-offset:4px; }
 .carousel-track .team-card{ flex:0 0 230px; scroll-snap-align:start; }
 .carousel-track .team-soon{ flex:1 1 auto; scroll-snap-align:start; }
+/* six teams (NBA): one row of six on a wide screen, two rows of three on a tablet,
+   three rows of two on a phone - never five and a lonely one */
+@media (min-width:1100px){ .team-grid.team-count-6{ grid-template-columns:repeat(6, minmax(0, 1fr)); } }
+@media (min-width:721px) and (max-width:1099px){ .team-grid.team-count-6{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
 @media (max-width:600px){
   .carousel-track .team-card{ flex-basis:68%; }
   .team-grid{ grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); }
@@ -2098,3 +2112,17 @@ a.mu-team:hover .mu-name{ color:var(--gold-light); }
     grid-column:1 / -1; justify-self:center; width:calc(50% - 8px);
   }
 }
+
+/* ---------- team page Schedule that keeps itself up to date (assets/team-page.js) ---------- */
+.sched-dates{ color:var(--mute); font-variant-numeric:tabular-nums; }
+tr.sched-past td{ opacity:.5; }
+tr.sched-now{ background:linear-gradient(90deg, rgba(212,175,55,.16), rgba(212,175,55,0) 75%); }
+tr.sched-now td:first-child{ box-shadow:inset 3px 0 0 var(--gold); }
+.sched-tag{
+  display:inline-flex; align-items:center; gap:6px; margin-left:10px; vertical-align:middle;
+  padding:2px 9px; border-radius:999px;
+  font-family:var(--font-display); font-weight:700; font-size:.74rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--gold-light); border:1px solid rgba(212,175,55,.45); background:rgba(212,175,55,.08);
+}
+.sched-tag.is-live{ color:#ffb8c1; border-color:rgba(255,77,94,.45); background:rgba(255,77,94,.1); }
+.sched-tag .live-dot{ width:6px; height:6px; }

@@ -3,6 +3,10 @@
    the whole site. Each page has an empty <nav id="siteNav"> and this
    fills it in.
 
+   Everything on it is in Spanish (the league asked): Inicio, Nosotros, Reglas, Noticias,
+   Divisiones, Playoffs, Equipos, Tienda, Contáctanos. The keys below (home, about...)
+   are only internal names - change a label here and every page follows.
+
    A page tells it where it is with attributes on <body>:
      data-root    how far up the site root is   ("" , "../" or "../../")
      data-active  which tab to light up:  home  about  reglas  news  leagues
@@ -61,15 +65,19 @@
   }
 
   nav.innerHTML =
-    link('home', 'Home', 'index.html') +
-    link('about', 'About', 'about.html') +
+    link('home', 'Inicio', 'index.html') +
+    link('about', 'Nosotros', 'about.html') +
     dropdown('reglas', 'Reglas', 'rules') +
-    link('news', 'News', 'news.html') +
-    dropdown('leagues', 'Leagues', 'home') +
+    link('news', 'Noticias', 'news.html') +
+    dropdown('leagues', 'Divisiones', 'home') +
     dropdown('playoffs', 'Playoffs', 'playoffs') +
-    link('teams', 'Teams', 'teams.html') +
-    link('contact', 'Contact', 'contact.html') +
-    link('tienda', 'Tienda', 'tienda.html');
+    link('teams', 'Equipos', 'teams.html') +
+    link('tienda', 'Tienda', 'tienda.html') +
+    link('contact', 'Cont\u00e1ctanos', 'contact.html');
+
+  /* the phone menu button, for screen readers (it is written "Show menu" in every page) */
+  var menuBtn = document.getElementById('navToggle');
+  if (menuBtn) menuBtn.setAttribute('aria-label', 'Abrir el men\u00fa');
 
   /* ---------- open / close the menus (hover on a computer, tap on a phone) ---------- */
   var drops = Array.prototype.slice.call(nav.querySelectorAll('.nav-drop'));

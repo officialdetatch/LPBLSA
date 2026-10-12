@@ -73,7 +73,7 @@
     '.alerts-msg{min-height:1.4em;margin-top:10px;font-size:.9rem;color:var(--mute);}' +
     '.alerts-msg.ok{color:var(--gold-light);}' +
     '.alerts-msg.err{color:var(--loss);}' +
-    '@media (max-width:760px){.alerts-card{grid-template-columns:1fr;padding:22px;}.alerts-row{flex-direction:column;}}' +
+    '@media (max-width:760px){.alerts-card{grid-template-columns:minmax(0,1fr);padding:22px;}.alerts-row{flex-direction:column;}}' +   /* minmax(0,..): the email box can never push the card wider than a small phone */
     /* pop-up */
     '.alerts-pop-backdrop{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;' +
       'padding:20px;background:rgba(3,8,20,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);' +

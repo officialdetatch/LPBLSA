@@ -73,7 +73,7 @@
     deniedAndroid: 'Para activarlas: toca el candado junto a la dirección de la página > Permisos > Notificaciones > Permitir. Luego recarga la página.',
     deniedPc: 'Para activarlas: haz clic en el candado junto a la dirección de la página > Notificaciones > Permitir. Luego recarga la página.',
     stepSafari: 'Abre esta página en <strong>Safari</strong>.',
-    stepShare: 'Toca el botón <strong>Compartir</strong> {share} (abajo en el centro; en iPad, arriba a la derecha).',
+    stepShare: 'Toca el botón <strong>Compartir</strong> {share} (abajo en el centro o arriba a la derecha, según el dispositivo).',
     stepAdd: 'Baja en el menú y toca <strong>Agregar a pantalla de inicio</strong> {add}. Luego toca <strong>Agregar</strong>.',
     stepOpen: 'Abre <strong>LPBLSA</strong> desde el ícono nuevo en tu pantalla de inicio (no desde Safari). Arriba te saldrá un aviso: pulsa <strong>Activar</strong>. Si no lo ves, abre el menú y toca <strong>Notificaciones</strong> {bell}.'
   };
@@ -106,7 +106,7 @@
       });
       if (live.length) return live;
     }
-    return [{ key: 'football', label: 'NFL', sub: 'Football' }, { key: 'basketball', label: 'NBA', sub: 'Basketball' }];
+    return [{ key: 'football', label: 'NFL', sub: 'F\u00fatbol americano' }, { key: 'basketball', label: 'NBA', sub: 'Baloncesto' }];
   }
 
   /* ---------- the backend (Firebase), behind a small seam ---------- */
@@ -251,7 +251,7 @@
       'border:2px solid var(--navy-950);}' +
     /* on phones and tablets the bell would crowd the header, so it lives inside the menu instead */
     '.site-nav a.pn-navlink{display:none;}' +
-    '@media (max-width:1100px){.pn-bell{display:none;}' +
+    '@media (max-width:1279px){.pn-bell{display:none;}' +   /* same width as the phone menu in style.css */
       '.site-nav a.pn-navlink{display:flex;align-items:center;gap:10px;color:var(--gold-light);}' +
       '.pn-navlink svg{width:20px;height:20px;flex:0 0 20px;}' +
       '.pn-navlink.pn-on svg{fill:currentColor;}}' +

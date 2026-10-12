@@ -1,0 +1,72 @@
+# Keeps the INSTAGRAM card in the home page's Socials section up to date.
+# Every 4 hours it reads the latest posts of the Instagram account and saves them (one small
+# file, pictures included) on a side branch called "instagram-feed", which the site
+# reads from. It never touches main, so your own commit + push works exactly as before.
+# Every Monday it also renews the Instagram token, so it never runs out.
+# One-time setup: INSTAGRAM-SETUP.md
+name: Instagram feed
+
+on:
+  schedule:
+    - cron: "23 */4 * * *"   # every 4 hours
+    - cron: "41 9 * * 1"     # Mondays: same, plus renew the token (keep this line exactly as it is - see REFRESH below)
+  workflow_dispatch:
+    inputs:
+      refresh_token:
+        description: "Also renew the Instagram token now (only works on a token at least 24 hours old)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write            # to save the feed on the instagram-feed branch
+
+concurrency:
+  group: instagram-feed
+  cancel-in-progress: false
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the picture resizer
+        run: pip install --disable-pip-version-check --quiet "pillow>=11,<14"
+
+      - name: Read the latest Instagram posts
+        id: ig
+        run: python scripts/fetch-instagram.py
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          REFRESH: ${{ github.event.schedule == '41 9 * * 1' || inputs.refresh_token == true }}
+          OUT_DIR: ${{ runner.temp }}/instagram-feed
+
+      - name: Save them on the instagram-feed branch
+        if: steps.ig.outputs.publish == 'true'
+        working-directory: ${{ runner.temp }}/instagram-feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init -q -b instagram-feed
+          git add -A
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Instagram feed $(date -u '+%Y-%m-%d %H:%M') UTC"
+          git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/instagram-feed
+          echo "- Saved on the \`instagram-feed\` branch." >> "$GITHUB_STEP_SUMMARY"
+          # the site's second source (jsDelivr) keeps a copy for up to 12 hours: ask it to refresh now (fine if it says no)
+          curl -fsS --max-time 20 -o /dev/null "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@instagram-feed/instagram.json" || true
+
+      - name: Something needs you
+        if: steps.ig.outputs.attention != ''
+        env:
+          ATTENTION: ${{ steps.ig.outputs.attention }}
+        run: |
+          echo "::error::$ATTENTION"
+          exit 1

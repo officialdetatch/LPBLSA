@@ -26,7 +26,7 @@
       data-auto="..." is kept up to date:
         week          this week's number           leader     who is 1st
         weeks-left    weeks left in the season     top-ppw    most points per week
-        top-ppw-team  that team's initials
+        top-ppw-team  that team's initials         (leader waits until a game is played)
       The number written in the HTML is only what shows if the script can't run.
 
    Needs, loaded before it: assets/leagues.js, each league's teams and
@@ -158,6 +158,10 @@
       label: ko.label || 'Kickoff', unit: sc.S.weekLabel || 'Semana'
     };
   }
+
+  /* the same calendar for the team pages' Schedule (assets/team-page.js), so a
+     team page and La Jornada always agree on which week it is */
+  window.LPBSA_CALENDAR = { scheduleOf: scheduleOf, calendarOf: calendarOf, plusDays: plusDays };
 
   function countdownText(ms) {
     var m = Math.max(0, Math.floor(ms / 60000));
@@ -476,7 +480,7 @@
       var val = null;
       if (what === 'week' && cal) val = cal.week;
       else if (what === 'weeks-left' && cal) val = cal.phase === 'over' ? 0 : cal.last - cal.week + 1;
-      else if (what === 'leader' && leader) val = leader.team.name;
+      else if (what === 'leader' && leader && leader.gp > 0) val = leader.team.name;   /* nobody leads at 0-0 */
       else if (what === 'top-ppw' && top) val = fmt(top.pfg);
       else if (what === 'top-ppw-team' && top) val = top.team.initials || top.team.name;
       if (val !== null) el.textContent = String(val);

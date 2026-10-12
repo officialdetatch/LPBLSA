@@ -7,6 +7,13 @@
    site until you replace that file yourself.
 
    Needs  assets/socials-view.js  (it checks the links and draws the preview).
+
+   Instagram, TikTok and X.com show a LIVE FEED on the home page (socials-view.js keeps them
+   up to date by itself), so the posts you add here are really for Threads - plus one
+   Instagram post as a stand-in: the newest Instagram post here is what the Instagram card
+   shows if its feed cannot be read (not set up yet, or the Instagram Action stopped).
+   A post added for X or TikTok is kept in the file but not shown while that live feed is on.
+   "Show" counts the live feeds too: 3 = the Instagram, TikTok and X feeds.
    ============================================================ */
 (function () {
   'use strict';
@@ -106,8 +113,13 @@
     var choices = SHOW_CHOICES.slice();
     if (choices.indexOf(show) === -1) choices.push(show);      /* a number typed by hand into the data file */
     els.show.innerHTML = choices.map(function (n) {
-      return '<option value="' + n + '"' + (n === show ? ' selected' : '') + '>' + (n ? n + ' posts' : 'All of them') + '</option>';
+      return '<option value="' + n + '"' + (n === show ? ' selected' : '') + '>' + (n ? n + ' cards' : 'All of them') + '</option>';
     }).join('');
+  }
+  /* the live feeds that are on (Instagram, TikTok, X) take the first cards on the home page */
+  function liveCount() {
+    var L = S.live || {};
+    return Object.keys(L).filter(function (k) { return L[k]; }).length;
   }
 
   var IDLE_HINT = 'Paste the link of the post. The platform is picked for you from the link; change the drop-down only if it guessed wrong.';
@@ -166,13 +178,22 @@
   /* ---------- the list of posts ---------- */
   function rowHTML(p, i) {
     var r = S.parse(p.url);
-    var over = show > 0 && i >= show;
-    return '<div class="writer-row' + (over ? ' sw-over' : '') + '">' +
+    var live = !!(S.live && S.live[p.platform]);
+    /* the newest Instagram post stands in for the Instagram feed whenever that cannot be read */
+    var standIn = live && p.platform === 'instagram' &&
+      !posts.slice(0, i).some(function (q) { return q.platform === 'instagram'; });
+    /* where this post lands: after the live feeds, among the posts that are not live */
+    var place = posts.slice(0, i).filter(function (q) { return !(S.live && S.live[q.platform]); }).length;
+    var over = !live && show > 0 && liveCount() + place >= show;
+    var note = standIn
+      ? ' &middot; <b>stand-in</b> (shows in the Instagram card only while the Instagram feed is not working)'
+      : live ? ' &middot; <b>not on the home page</b> (the live ' + esc(S.platforms[p.platform].menu) + ' feed already shows your newest posts)'
+      : over ? ' &middot; <b>not on the home page</b> (only ' + show + ' cards show, live feeds included)'
+      : place === 0 ? ' &middot; first post after the live feeds' : '';
+    return '<div class="writer-row' + (over || live ? ' sw-over' : '') + '">' +
       '<div class="writer-row-main">' +
         '<div class="sw-meta"><span class="sw-chip">' + esc(S.platforms[p.platform].menu) + '</span>' +
-          '<span class="section-note">' + esc(r.ok ? r.kind : '') +
-          (i === 0 ? ' &middot; top of the Socials' : '') +
-          (over ? ' &middot; <b>not on the home page</b> (only the first ' + show + ' show)' : '') + '</span></div>' +
+          '<span class="section-note">' + esc(r.ok ? r.kind : '') + note + '</span></div>' +
         '<a class="sw-url" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.url) + '</a>' +
       '</div>' +
       '<div class="writer-row-actions">' +
@@ -208,7 +229,7 @@
   var previewTimer = 0;
   function drawPreview() {
     if (!els.preview) return;
-    if (!posts.length) {
+    if (!posts.length && !liveCount()) {
       els.preview.className = '';
       els.preview.innerHTML = '<p class="section-note">No posts yet, so the home page will say &ldquo;A&uacute;n no hemos publicado en redes.&rdquo;</p>';
       return;
@@ -231,8 +252,10 @@
     var header = [
       '/* ============================================================',
       '   SOCIALS  --  the posts embedded in the Socials section of the home page.',
-      '   Newest post goes FIRST in the list. "show" is how many appear on the home page',
-      '   (0 means all of them).',
+      '   Newest post goes FIRST in the list. "show" is how many cards appear on the home',
+      '   page, the live Instagram, TikTok and X feeds included (0 means all of them). Posts for',
+      '   X or TikTok are skipped while their live feed is on (see LIVE in socials-view.js); the',
+      '   newest Instagram post shows only if the Instagram feed cannot be read.',
       '   Generated with socials-writer.html -- add and remove posts there.',
       '   ============================================================ */'
     ].join('\n');

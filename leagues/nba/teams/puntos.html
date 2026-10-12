@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060c1c">
+  <title>Los Puntos de Piña &middot; NBA | La Premier Bundesliga Serie A</title>
+  <meta name="description" content="Los Puntos de Piña (Christopher Ramirez) en el NBA Fantasy de La Premier Bundesliga Serie A: roster, calendario y récord.">
+  <!-- link previews (WhatsApp, iMessage, X, Facebook): the card is images/social-card.png -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="La Premier Bundesliga Serie A">
+  <meta property="og:title" content="Los Puntos de Piña &middot; NBA | La Premier Bundesliga Serie A">
+  <meta property="og:description" content="Los Puntos de Piña (Christopher Ramirez) en el NBA Fantasy de La Premier Bundesliga Serie A: roster, calendario y récord.">
+  <meta property="og:url" content="https://lpblsa.vip/leagues/nba/teams/puntos.html">
+  <meta property="og:image" content="https://lpblsa.vip/images/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="La Premier Bundesliga Serie A: una liga, todos los deportes.">
+  <meta property="og:locale" content="es_PR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="LPBLSA">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/png" href="../../../images/league-logo.png">
+  <link rel="apple-touch-icon" href="../../../images/league-logo.png">
+  <link rel="manifest" href="../../../manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body data-root="../../../" data-active="teams" data-league="nba">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="../../../index.html">
+        <span class="crest crest-circle">
+          <!-- LEAGUE LOGO: drop your file at images/league-logo.png (round logo, so crest-circle) -->
+          <img src="../../../images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">NBA Fantasy &middot; Temporada 2026</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="../../../assets/leagues.js"></script>
+  <script src="../../../assets/nav.js"></script>
+  <script src="../../../assets/firebase-config.js"></script>
+  <script src="../../../assets/push.js"></script>
+
+  <div class="ticker" aria-label="League wire">
+    <div class="ticker-label"><span class="live-dot" aria-hidden="true"></span>Última hora</div>
+    <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
+  </div>
+
+  <!-- ============================================================
+       NBA TEAM PAGE - Los Puntos de Piña
+       Written here by hand: the name, the manager and the bio (MANAGER BIO below).
+       Everything else keeps itself up to date from leagues/nba/assets/:
+         logo                 nba-teams-data.js      ("crest")
+         rank, record, PF/PA,
+         streak, playoff odds nba-standings-data.js  (the standings manager)
+         roster               nba-roster-data.js     (the roster manager)
+         schedule             nba-schedule-data.js
+       ============================================================ -->
+  <main data-team="puntos">
+  <section class="wrap team-hero commish-hero">
+    <span class="crest crest-circle crest-lg commish-crest" data-tp="crest">
+      <!-- TEAM LOGO: comes from leagues/nba/assets/nba-teams-data.js. Save the picture as
+           leagues/nba/images/puntos.png and set "crest": "images/puntos.png" for this team
+           there - it then shows here and on every other page at once. -->
+      <span class="crest-fallback">LPP</span>
+    </span>
+    <div>
+      <h1>Los Puntos de Piña</h1>
+      <div class="team-meta">Manager: Christopher Ramirez &middot; <span data-tp="rank">Temporada 2026-27</span></div>
+      <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
+     
+      <div class="team-badges">
+        <!-- these numbers update themselves from nba-standings-data.js (what is written here is only a fallback) -->
+        <span class="pill">Record <b data-tp="record">0-0</b></span>
+        <span class="pill">Points for <b data-tp="pf">0</b></span>
+        <span class="pill">Points against <b data-tp="pa">0</b></span>
+        <span class="pill">Streak <b data-tp="streak">&mdash;</b></span>
+        <span class="pill gold-pill">Playoff odds <b data-tp="playoff">69%</b></span>
+        <span class="pill gold-pill">Starters FPTS <b id="starters-projected-puntos">&mdash;</b></span>
+      </div>
+      <button class="btn btn-solid commish-trigger" data-commish-open>&#9819; El Bio mas duro.</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       COMMISSIONER'S ANTHEM
+       The same sound file as the NFL page: audio/commissioner-theme.mp3.
+       Browsers block sound that starts on its own until the visitor
+       has clicked something on the page, so the button in the corner
+       is the fallback, and opening the pane always starts it.
+       ============================================================ -->
+  <audio id="commishAudio" src="../../../audio/commissioner-theme.mp3" loop preload="auto"></audio>
+  <button class="sound-toggle" id="soundToggle" aria-pressed="false">
+    <span class="sound-icon">&#9834;</span><span id="soundLabel">Dale Play</span>
+  </button>
+
+  <div class="commish-overlay hidden" id="commishPane">
+    <div class="commish-backdrop" data-commish-close></div>
+    <div class="commish-panel" role="dialog" aria-modal="true" aria-labelledby="commishTitle">
+      <button class="commish-close" data-commish-close aria-label="Close">&times;</button>
+      <div class="commish-shine"></div>
+      <div class="commish-inner">
+        <div class="commish-kicker">La Premier Bundesliga Serie A &middot; NBA Fantasy</div>
+        <h2 class="commish-title" id="commishTitle"><span class="the">El</span>Comisionado Residente</h2>
+
+        <span class="crest crest-circle commish-portrait">
+          <!-- COMMISSIONER PHOTO: drop your file at images/commissioner.jpg (the same photo as the NFL page) -->
+          <img src="../../../images/commissioner.jpg" alt="The commissioner" onerror="this.remove()">
+          <span class="crest-fallback">CR</span>
+        </span>
+
+        <div class="commish-name">Christopher Ramirez</div>
+        <div class="commish-role">El Creador &middot; El Ruler &middot; Los Puntos de Pi&ntilde;a</div>
+
+        <!-- COMMISSIONER BIO: say whatever you like here (this is the NBA page's copy - the NFL one
+             is in leagues/nfl/teams/puntos.html). -->
+        <p class="commish-bio">
+          El que creo la liga, el que hizo las reglas, y el que peor drafteo? Se mudo de un pais tercer mundista,
+          siendo clase media-baja a uno que es tercer mundista y es clase alta.
+        </p>
+
+        <ul class="commish-decrees">
+          <li>Luka Doncic es mi cabra y nada me faltara.</li>
+          <li>No jodan conmigo, si no tumbo la liga pal carajo</li>
+          <li>Si, si me mandan chavos los puedo poner en mejor pocision</li>
+        </ul>
+
+        <button class="btn btn-solid" data-commish-close>Close</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Roster</h2>
+        <span class="section-note">2026-27 season: total fantasy points, average per game, last game.</span>
+      </div>
+      <div class="roster-block">
+      <h3>Starters</h3>
+      <div class="table-scroll" style="border-top:none">
+        <table>
+          <thead>
+            <tr><th>Slot</th><th>Player</th><th class="num">FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
+          </thead>
+          <tbody id="body-starters-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Starters total</td>
+            <td class="num" id="total-starters-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+      <div class="roster-block">
+      <h3>Bench</h3>
+      <div class="table-scroll" style="border-top:none">
+        <table>
+          <thead>
+            <tr><th>Slot</th><th>Player</th><th class="num">FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
+          </thead>
+          <tbody id="body-bench-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Bench total</td>
+            <td class="num" id="total-bench-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+      <div class="roster-block">
+      <h3>Injured reserve</h3>
+      <div class="table-scroll" style="border-top:none">
+        <table>
+          <thead>
+            <tr><th>Slot</th><th>Player</th><th class="num">FPTS</th><th class="num">Avg</th><th class="num">Last</th></tr>
+          </thead>
+          <tbody id="body-ir-puntos">
+            <tr><td colspan="5" class="section-note">Loading roster&hellip;</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td colspan="2" style="font-family:var(--font-display);color:var(--gold-light)">Injured reserve total</td>
+            <td class="num" id="total-ir-puntos" style="color:var(--gold-light);font-weight:700">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Schedule</h2>
+        <span class="section-note">El matchup de esta semana sale marcado.</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Matchup</th><th>Dates</th><th>Opponent</th><th>Venue</th></tr></thead>
+          <!-- drawn by assets/team-page.js from leagues/nba/assets/nba-schedule-data.js -->
+          <tbody id="teamSchedule">
+            <tr><td colspan="4" class="section-note">Loading schedule&hellip;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Seis Equipos Un Ganador.</div>
+      <div>EST 2026</div>
+      <div class="footer-social" aria-label="Follow the league">
+        <a class="social-link" href="https://www.instagram.com/lpblsa?stkn=d2M2bGRnYnZhYzJj&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="../../../images/socials-logo/instagram-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.threads.com/@lpblsa?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener noreferrer" aria-label="Threads">
+          <img src="../../../images/socials-logo/threads-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://discord.gg/BN3yCCYXz5" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <img src="../../../images/socials-logo/discord-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://www.tiktok.com/@lpblsa" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <img src="../../../images/socials-logo/tiktok-simplified-white-icon.png" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+        <a class="social-link" href="https://x.com/lpblsa_onX" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="../../../images/socials-logo/x-social-media-white-icon.webp" alt="" width="17" height="17" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../assets/news.js"></script>
+  <script src="../assets/nba-teams-data.js"></script>
+  <script src="../assets/nba-standings-data.js"></script>
+  <script src="../assets/nba-schedule-data.js"></script>
+  <script src="../assets/nba-roster-data.js"></script>
+  <script src="../../../assets/app.js"></script>
+  <script src="../../../assets/jornada.js"></script>
+  <script src="../../../assets/team-page.js"></script>
+</body>
+</html>

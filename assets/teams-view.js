@@ -42,13 +42,14 @@
     return '<div class="team-card">' + inner + '</div>';
   }
 
-  /* Teams in standings order when there is a table; anyone missing from it goes last. */
+  /* Teams in standings order when there is a table; anyone missing from it goes last.
+     While every team is still 0-0 the order is the table's, but nobody gets a rank badge. */
   function inRankOrder(teams) {
     var rows = window.LEAGUE_STANDINGS || [];
     var bySlug = {}, out = [], used = {};
     teams.forEach(function (t) { bySlug[t.slug] = t; });
     rows.forEach(function (r) { if (bySlug[r.team] && !used[r.team]) { out.push(bySlug[r.team]); used[r.team] = true; } });
-    var ranked = out.length;
+    var ranked = (window.LPBSA_hasPlayed && !window.LPBSA_hasPlayed(rows)) ? 0 : out.length;
     teams.forEach(function (t) { if (!used[t.slug]) out.push(t); });
     return { list: out, ranked: ranked };
   }
@@ -64,7 +65,7 @@
           esc(grid.getAttribute('data-empty') || 'Los equipos se publican pronto.') + '</div>';
       } else {
         var ordered = inRankOrder(teams);
-        grid.className = 'team-grid';
+        grid.className = 'team-grid team-count-' + ordered.list.length;   /* the count lets the CSS balance the rows */
         grid.innerHTML = ordered.list.map(function (t, i) {
           return cardHTML(t, L, i < ordered.ranked ? i + 1 : 0);
         }).join('');
@@ -82,9 +83,9 @@
         body = '<div class="carousel-track" tabindex="0" aria-label="Equipos ' + esc(L.short) + '">' +
           teams.map(function (t) { return cardHTML(t, L, 0); }).join('') + '</div>';
       } else {
-        var msg = L.status === 'live' ? 'Los equipos se anuncian pronto.' : (L.soonText || 'Proximamente.');
+        var msg = L.status === 'live' ? 'Los equipos se anuncian pronto.' : (L.soonText || 'Próximamente.');
         body = '<div class="carousel-track"><div class="team-soon"><b>' + esc(L.short) + ' &middot; ' +
-          (L.status === 'live' ? 'Equipos por confirmar' : 'Proximamente') + '</b>' + esc(msg) + '</div></div>';
+          (L.status === 'live' ? 'Equipos por confirmar' : 'Próximamente') + '</b>' + esc(msg) + '</div></div>';
       }
       return '<section class="team-league" id="teams-' + esc(L.key) + '" data-league="' + esc(L.key) + '">' +
         '<div class="section-head"><h2><span class="news-sport">' + esc(L.short) + '</span>' + esc(L.name) + '</h2>' +

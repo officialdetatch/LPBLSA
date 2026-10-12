@@ -13,15 +13,27 @@
    The NBA teams come from leagues/nba/assets/nba-teams-data.js (add them
    there first). This tool then keeps each team's roster and the free-agent
    board in nba-roster-data.js.
+
+   Basketball differences from the NFL copy:
+     - a player can play several positions ("PG, SG"), so "Start at" only
+       offers the slots he is allowed in: PG / SG / SF / PF / C need that
+       position, G takes a PG or SG, F takes an SF or PF, UTIL takes anyone
+       (the rules sheet). A player with no positions written can start anywhere.
+     - the snapshot checks the roster limits from the rules sheet:
+       9 starters, 5 on the bench, 1 on IR.
    ============================================================ */
 (function () {
   'use strict';
 
-  var DRAFT_KEY = 'lpbsa.nba.roster.draft.v1';   /* where your unsaved edits are kept in this browser */
+  var DRAFT_KEY = 'lpbsa.nba.roster.draft.v2';   /* where your unsaved edits are kept in this browser (v2: the drafted rosters) */
   var DATA_PATH = 'leagues/nba/assets/nba-roster-data.js';   /* the file this tool replaces */
   var OUT_NAME = 'nba-roster-data.js';      /* the name of the file it downloads */
   var TEAMS = (window.LPBSA_TEAMS && window.LPBSA_TEAMS.nba) || [];
   var SLOTS = window.NBA_STARTER_SLOTS || [];
+  var POSITIONS = ['PG', 'SG', 'SF', 'PF', 'C'];
+  /* who may start in each slot (null = anyone) */
+  var SLOT_FITS = { PG: ['PG'], SG: ['SG'], SF: ['SF'], PF: ['PF'], C: ['C'], G: ['PG', 'SG'], F: ['SF', 'PF'], UTIL: null };
+  var LIMITS = { bench: 5, ir: 1 };          /* from the rules sheet */
   var state = null; /* { rosters: {...}, freeAgents: [...] } */
   var filterTeam = 'ALL';
 
@@ -40,10 +52,6 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   }
-  function fmtNum(v) {
-    if (v === null || v === undefined || v === '') return '--';
-    return (typeof v === 'number') ? (Math.round(v * 10) / 10).toString() : String(v);
-  }
   function teamName(slug) {
     var t = TEAMS.filter(function (x) { return x.slug === slug; })[0];
     return t ? t.name : slug;
@@ -57,14 +65,26 @@
     setTimeout(function () { t.remove(); }, 3000);
   }
 
+  /* ---------- positions ---------- */
+  function positionsOf(p) {
+    return String((p && p.pos) || '').split(',').map(function (x) { return x.trim().toUpperCase(); }).filter(Boolean);
+  }
+  function mainPos(p) { return positionsOf(p)[0] || '?'; }
+  function canStart(p, slot) {
+    var fits = SLOT_FITS[slot];
+    var mine = positionsOf(p);
+    if (!fits || !mine.length) return true;
+    return mine.some(function (x) { return fits.indexOf(x) !== -1; });
+  }
+
   function liveSnapshot() {
     var rosters = {};
     TEAMS.forEach(function (t) {
       var r = (window.NBA_ROSTERS || {})[t.slug] || { starters: [], bench: [], ir: [] };
       rosters[t.slug] = {
-        starters: r.starters.slice(),
-        bench: r.bench.slice(),
-        ir: r.ir.slice()
+        starters: (r.starters || []).slice(),
+        bench: (r.bench || []).slice(),
+        ir: (r.ir || []).slice()
       };
     });
     return { rosters: rosters, freeAgents: (window.NBA_FREE_AGENTS || []).slice() };
@@ -79,12 +99,19 @@
   function saveDraft() {
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(state)); } catch (err) { /* ignore */ }
   }
+  /* a saved draft from before a team was added still needs a roster for it */
+  function fillMissingTeams(s) {
+    TEAMS.forEach(function (t) {
+      if (!s.rosters[t.slug]) s.rosters[t.slug] = { starters: [], bench: [], ir: [] };
+    });
+    return s;
+  }
 
   function start() {
     var live = liveSnapshot();
     var draft = loadDraft();
-    if (draft && JSON.stringify(draft) !== JSON.stringify(live)) {
-      state = draft;
+    if (draft && draft.rosters && draft.freeAgents && JSON.stringify(draft) !== JSON.stringify(live)) {
+      state = fillMissingTeams(draft);
       els.draftNote.classList.remove('hidden');
     } else {
       state = live;
@@ -137,6 +164,10 @@
     } else if (action.indexOf('start:') === 0) {
       var idx = Number(action.slice(6));
       var team = loc.team;
+      if (!canStart(player, SLOTS[idx])) {
+        toast(player.name + ' (' + player.pos + ') cannot play ' + SLOTS[idx] + '.', true);
+        return;
+      }
       var displaced = state.rosters[team].starters[idx];
       removeAtLoc(loc);
       state.rosters[team].starters[idx] = player;
@@ -174,7 +205,7 @@
   }
 
   function locLabel(loc) {
-    if (loc.type === 'fa') return '<span class="loc-pill loc-fa">Free agent</span>';
+    if (loc.type === 'fa') return '<span class="loc-pill loc-fa">Free agent #' + (loc.idx + 1) + '</span>';
     var name = teamName(loc.team);
     if (loc.section === 'starters') {
       return '<span class="loc-pill loc-start">' + esc(name) + ' &middot; ' + esc(SLOTS[loc.idx]) + '</span>';
@@ -183,7 +214,8 @@
     return '<span class="loc-pill loc-ir">' + esc(name) + ' &middot; IR</span>';
   }
 
-  function actionOptionsHTML(loc) {
+  function actionOptionsHTML(entry) {
+    var loc = entry.loc, player = entry.player;
     var opts = ['<option value="">Choose action&hellip;</option>'];
     if (loc.type === 'fa') {
       TEAMS.forEach(function (t) {
@@ -197,6 +229,7 @@
     if (section !== 'ir') opts.push('<option value="ir">Move to injured reserve</option>');
     SLOTS.forEach(function (label, idx) {
       if (section === 'starters' && loc.idx === idx) return;
+      if (!canStart(player, label)) return;   /* only the slots his positions allow */
       var occ = state.rosters[team].starters[idx];
       opts.push('<option value="start:' + idx + '">Start at ' + esc(label) +
         ' (currently: ' + esc(occ ? occ.name : 'empty') + ')</option>');
@@ -225,7 +258,7 @@
   function rowHTML(entry) {
     var p = entry.player, loc = entry.loc;
     return '<tr>' +
-      '<td><span class="player-cell"><span class="player-avatar">' + esc(p.pos || '?') + '</span>' +
+      '<td><span class="player-cell"><span class="player-avatar">' + esc(mainPos(p)) + '</span>' +
       '<span><span class="player-name">' + esc(p.name) + '</span>' +
       '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
       '<td>' + locLabel(loc) + '</td>' +
@@ -233,9 +266,7 @@
       '<td class="num">' + statInputHTML(loc, 'fpts', p.fpts) + '</td>' +
       '<td class="num">' + statInputHTML(loc, 'avg', p.avg) + '</td>' +
       '<td class="num">' + statInputHTML(loc, 'last', p.last) + '</td>' +
-      '<td><select class="sort-select action-select" data-loc-type="' + loc.type +
-        '" data-loc-team="' + (loc.team || '') + '" data-loc-section="' + (loc.section || '') +
-        '" data-loc-idx="' + (loc.idx != null ? loc.idx : '') + '">' + actionOptionsHTML(loc) + '</select></td>' +
+      '<td><select class="sort-select action-select"' + locAttrs(loc) + '>' + actionOptionsHTML(entry) + '</select></td>' +
       '</tr>';
   }
 
@@ -252,10 +283,18 @@
     els.snapshot.innerHTML = TEAMS.map(function (t) {
       var r = state.rosters[t.slug];
       var filled = r.starters.filter(Boolean).length;
+      var warn = [];
+      if (filled < SLOTS.length) warn.push((SLOTS.length - filled) + ' empty starting spot' + (SLOTS.length - filled === 1 ? '' : 's'));
+      if (r.bench.length > LIMITS.bench) warn.push('bench over the limit (' + r.bench.length + '/' + LIMITS.bench + ')');
+      if (r.ir.length > LIMITS.ir) warn.push('IR over the limit (' + r.ir.length + '/' + LIMITS.ir + ')');
+      r.starters.forEach(function (p, i) {
+        if (p && !canStart(p, SLOTS[i])) warn.push(p.name + ' cannot play ' + SLOTS[i]);
+      });
       return '<div class="writer-row"><div class="writer-row-main">' +
         '<b>' + esc(t.name) + '</b>' +
         '<p class="section-note" style="margin:4px 0 0">Starters ' + filled + '/' + SLOTS.length +
-        ' &middot; Bench ' + r.bench.length + ' &middot; IR ' + r.ir.length + '</p>' +
+        ' &middot; Bench ' + r.bench.length + '/' + LIMITS.bench + ' &middot; IR ' + r.ir.length + '/' + LIMITS.ir + '</p>' +
+        (warn.length ? '<p class="section-note" style="margin:4px 0 0;color:var(--loss)">&#9888; ' + esc(warn.join(' · ')) + '</p>' : '') +
         '</div></div>';
     }).join('') + '<div class="writer-row"><div class="writer-row-main">' +
       '<b>Free agents</b><p class="section-note" style="margin:4px 0 0">' +
@@ -283,7 +322,7 @@
         (q ? 'No one matches that search.' : 'Nothing here yet.') + '</td></tr>';
       return;
     }
-    /* Cap what renders at once so a blank search on 130+ players stays fast
+    /* Cap what renders at once so a blank search on 180+ players stays fast
        and the table does not overwhelm the page. */
     var shown = entries.slice(0, 250);
     els.body.innerHTML = shown.map(rowHTML).join('');
@@ -293,7 +332,18 @@
     var header = [
       '/* ============================================================',
       '   NBA ROSTERS & FREE AGENTS',
-      '   Generated with nba-roster-manager.html',
+      '   Generated with nba-roster-manager.html (in the folder above) - edit it',
+      '   there rather than by hand. The teams themselves are in nba-teams-data.js.',
+      '',
+      '   Each player:  name, status (DTD, OUT, SUSP... or null when healthy),',
+      '   team_abbr (his NBA team), pos (every position he can play, as ESPN lists',
+      '   it, e.g. "PG, SG" - the first one is his main position) and fpts / avg /',
+      '   last (season fantasy points, average per game, last game - null = not',
+      '   known yet).',
+      '   NBA_STARTER_SLOTS  the 9 starters from the rules sheet, in order.',
+      '   NBA_ROSTERS        each team\'s starters (one per slot, null = empty),',
+      '                      bench and IR.',
+      '   NBA_FREE_AGENTS    the free-agent board, in league order (#1 first).',
       '   ============================================================ */'
     ].join('\n');
     return header +
@@ -317,9 +367,25 @@
     avg: document.getElementById('rmNewAvg'),
     last: document.getElementById('rmNewLast')
   };
+  /* the position buttons: tap every position the player can play */
+  newForm.pos.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-pos]');
+    if (!b) return;
+    var on = !b.classList.contains('active');
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  function pickedPositions() {
+    var picked = Array.prototype.filter.call(newForm.pos.querySelectorAll('[data-pos]'), function (b) {
+      return b.classList.contains('active');
+    }).map(function (b) { return b.getAttribute('data-pos'); });
+    return POSITIONS.filter(function (p) { return picked.indexOf(p) !== -1; });
+  }
   document.getElementById('rmNewAdd').addEventListener('click', function () {
     var name = newForm.name.value.trim();
     if (!name) { toast('Give the player a name first.', true); return; }
+    var positions = pickedPositions();
+    if (!positions.length) { toast('Pick at least one position.', true); return; }
     var num = function (el) {
       var v = parseFloat(el.value);
       return isNaN(v) ? null : v;
@@ -328,7 +394,7 @@
       name: name,
       status: null,
       team_abbr: newForm.team.value.trim().toUpperCase(),
-      pos: newForm.pos.value,
+      pos: positions.join(', '),
       fpts: num(newForm.fpts),
       avg: num(newForm.avg),
       last: num(newForm.last)
@@ -338,6 +404,10 @@
     newForm.fpts.value = '';
     newForm.avg.value = '';
     newForm.last.value = '';
+    Array.prototype.forEach.call(newForm.pos.querySelectorAll('[data-pos]'), function (b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     saveDraft();
     filterTeam = 'FA';
     Array.prototype.forEach.call(els.chips.querySelectorAll('.chip'), function (c) {

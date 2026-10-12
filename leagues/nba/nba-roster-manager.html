@@ -23,7 +23,7 @@
         </span>
         <span class="brand-text">
           <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
-          <div class="brand-sub">NBA Fantasy &middot; 2026 season</div>
+          <div class="brand-sub">NBA Fantasy &middot; Temporada 2026</div>
         </span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
@@ -52,11 +52,14 @@
     <div class="wrap">
       <div class="writer-note">
         Search a player below and pick an action &mdash; draft them off free agency,
-        drop them, bench them, start them, or trade them to another team. In the
-        same row you can also edit their <b>Status, Proj FPTS, AVG and LAST</b>
+        drop them, bench them, start them, or trade them to another team. "Start at"
+        only lists the spots his positions allow (PG, SG, SF, PF and C need that
+        position, G takes a PG or SG, F takes an SF or PF, UTIL takes anyone), and the
+        snapshot warns you when a roster breaks the rules sheet (9 starters, 5 bench, 1 IR).
+        In the same row you can also edit their <b>Status, FPTS, AVG and LAST</b>
         directly &mdash; click into any of those boxes, type the new number or
         tag, then click elsewhere (or hit Tab/Enter) to save it. Clear the
-        Status box to remove a tag like Q once a player is healthy again.
+        Status box to remove a tag like DTD once a player is healthy again.
         When you are done, press <b>Download nba-roster-data.js</b> and drop the file
         into <code>leagues/nba/assets/</code>, replacing the old one. Nothing changes on the
         public site until you do. Visitors never see this page unless you send
@@ -86,8 +89,14 @@
             <input id="rmNewName" type="text" placeholder="Player name">
           </div>
           <div class="field">
-            <label for="rmNewPos">Position</label>
-            <select id="rmNewPos"><option>PG</option><option>SG</option><option>SF</option><option>PF</option><option>C</option></select>
+            <label>Positions (tap every one he can play)</label>
+            <div class="chip-row" id="rmNewPos" role="group" aria-label="Positions">
+              <button type="button" class="chip" data-pos="PG" aria-pressed="false">PG</button>
+              <button type="button" class="chip" data-pos="SG" aria-pressed="false">SG</button>
+              <button type="button" class="chip" data-pos="SF" aria-pressed="false">SF</button>
+              <button type="button" class="chip" data-pos="PF" aria-pressed="false">PF</button>
+              <button type="button" class="chip" data-pos="C" aria-pressed="false">C</button>
+            </div>
           </div>
           <div class="field">
             <label for="rmNewTeam">NBA team (abbreviation)</label>
@@ -96,16 +105,16 @@
         </div>
         <div class="writer-grid">
           <div class="field">
-            <label for="rmNewFpts">Proj FPTS (optional)</label>
-            <input id="rmNewFpts" type="number" step="0.1" placeholder="80.0">
+            <label for="rmNewFpts">FPTS (optional)</label>
+            <input id="rmNewFpts" type="number" step="0.1" placeholder="420.5">
           </div>
           <div class="field">
             <label for="rmNewAvg">Avg (optional)</label>
-            <input id="rmNewAvg" type="number" step="0.1" placeholder="8.0">
+            <input id="rmNewAvg" type="number" step="0.1" placeholder="28.4">
           </div>
           <div class="field">
             <label for="rmNewLast">Last (optional)</label>
-            <input id="rmNewLast" type="number" step="0.1" placeholder="6.5">
+            <input id="rmNewLast" type="number" step="0.1" placeholder="31.0">
           </div>
         </div>
         <button class="btn btn-solid btn-small" id="rmNewAdd">Add to free agents</button>
@@ -124,19 +133,19 @@
         <table>
           <thead><tr>
             <th>Player</th><th>Currently</th><th>Status</th>
-            <th class="num">Proj FPTS</th><th class="num">AVG</th><th class="num">LAST</th>
+            <th class="num">FPTS</th><th class="num">AVG</th><th class="num">LAST</th>
             <th>Action</th>
           </tr></thead>
           <tbody id="rmBody"></tbody>
         </table>
       </div>
       <datalist id="rmStatusOptions">
-        <option value="Q">Questionable</option>
-        <option value="D">Doubtful</option>
-        <option value="IR">Injured reserve</option>
+        <option value="DTD">Day-to-day</option>
         <option value="OUT">Out</option>
         <option value="SUSP">Suspended</option>
-        <option value="DTD">Day-to-day</option>
+        <option value="GTD">Game-time decision</option>
+        <option value="Q">Questionable</option>
+        <option value="IR">Injured reserve</option>
       </datalist>
 
       <div class="section-head" style="margin-top:34px"><h2>Your nba-roster-data.js</h2></div>

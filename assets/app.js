@@ -31,9 +31,10 @@
     all:        { label: 'LIGA', full: 'Avisos de la Liga' },
     football:   { label: 'NFL', full: 'NFL Fantasy' },
     basketball: { label: 'NBA', full: 'NBA Fantasy' },
-    soccer:     { label: 'UCL', full: 'UCL Fantasy' }
+    soccer:     { label: 'UCL', full: 'UCL Fantasy' },
+    baseball:   { label: 'MLB', full: 'MLB Fantasy' }
   };
-  var SPORT_ORDER = ['all', 'football', 'basketball', 'soccer'];
+  var SPORT_ORDER = ['all', 'football', 'basketball', 'soccer', 'baseball'];
   /* the league list in assets/leagues.js, when loaded, is the source of the names */
   (window.LPBSA_LEAGUES || []).forEach(function (L) {
     if (SPORTS[L.story]) SPORTS[L.story] = { label: L.short, full: L.name };
@@ -456,7 +457,7 @@
   });
 
   /* The news page is split by fantasy: a row of filter chips, then one
-     section per fantasy. Football and Basketball always show; Soccer and the
+     section per fantasy. Football and Basketball always show; Soccer, Baseball and the
      league-wide "Liga" section only appear once a story exists for them. news.html?sport=basketball shows
      just that one. */
   function pickedSport() {
@@ -623,10 +624,15 @@
     if (v === null || v === undefined || v === '') return '--';
     return (typeof v === 'number') ? (Math.round(v * 10) / 10).toString() : String(v);
   }
+  /* A basketball player can play several spots ("PG, SG"): the round avatar shows
+     the first (his main one), the small tag under the name shows them all. */
+  function mainPos(pos) {
+    return String(pos || '?').split(',')[0].trim() || '?';
+  }
   function playerCellHTML(p, slotLabel) {
     var status = p.status ? '<span class="player-status">' + esc(p.status) + '</span>' : '';
     return '<td><span class="slot-badge">' + esc(slotLabel) + '</span></td>' +
-      '<td><span class="player-cell"><span class="player-avatar">' + esc(p.pos || '?') + '</span>' +
+      '<td><span class="player-cell"><span class="player-avatar">' + esc(mainPos(p.pos)) + '</span>' +
       '<span><span class="player-name">' + esc(p.name) + '</span>' + status +
       '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
       '<td class="num">' + fmtNum(p.fpts) + '</td><td class="num">' + fmtNum(p.avg) + '</td><td class="num">' + fmtNum(p.last) + '</td>';
@@ -644,24 +650,27 @@
           if (!body) return;
           var rowsHtml = [];
           var total = 0;
+          var counted = false; /* no numbers yet (a new season) = a dash rather than 0 */
           var any = false;
           players.forEach(function (p, i) {
             if (!p) return;
             any = true;
             var label = slotList ? slotList[i] : (section === 'bench' ? 'Bench' : 'IR');
             rowsHtml.push('<tr>' + playerCellHTML(p, label) + '</tr>');
-            if (typeof p.fpts === 'number') total += p.fpts;
+            if (typeof p.fpts === 'number') { total += p.fpts; counted = true; }
           });
           body.innerHTML = any ? rowsHtml.join('') :
             '<tr><td colspan="5" class="section-note">No players here right now.</td></tr>';
-          if (totalEl) totalEl.textContent = fmtNum(Math.round(total * 10) / 10);
+          if (totalEl) totalEl.textContent = counted ? fmtNum(Math.round(total * 10) / 10) : '\u2014';
         });
       var badge = document.getElementById('starters-projected-' + slug);
       if (badge) {
+        var startCounted = false;
         var startTotal = (team.starters || []).reduce(function (sum, p) {
-          return sum + (p && typeof p.fpts === 'number' ? p.fpts : 0);
+          if (p && typeof p.fpts === 'number') { startCounted = true; return sum + p.fpts; }
+          return sum;
         }, 0);
-        badge.textContent = fmtNum(Math.round(startTotal * 10) / 10);
+        badge.textContent = startCounted ? fmtNum(Math.round(startTotal * 10) / 10) : '\u2014';
       }
     });
   }
@@ -675,12 +684,12 @@
       var fpts = typeof a.fpts === 'number' ? a.fpts : 0;
       var avg = typeof a.avg === 'number' ? a.avg : 0;
       var last = typeof a.last === 'number' ? a.last : 0;
-      var key = slug(a.name) + '-' + slug(a.pos || '');
+      var key = slug(a.name) + '-' + slug(a.pos ? mainPos(a.pos) : '');
       return '<tr class="fa-row" data-pos="' + esc(a.pos) + '" data-name="' + esc((a.name || '').toLowerCase()) +
         '" data-team="' + esc((a.team_abbr || '').toLowerCase()) + '" data-fpts="' + fpts + '" data-avg="' + avg +
         '" data-last="' + last + '" data-rank="' + (i + 1) + '">' +
         '<td class="num" style="color:var(--mute)">' + (i + 1) + '</td>' +
-        '<td><span class="player-cell"><span class="player-avatar">' + esc(a.pos) + '</span>' +
+        '<td><span class="player-cell"><span class="player-avatar">' + esc(mainPos(a.pos)) + '</span>' +
         '<span><span class="player-name">' + esc(a.name) + '</span>' + status +
         '<span class="nfl-tag">' + esc(a.team_abbr) + ' ' + esc(a.pos) + '</span></span></span></td>' +
         '<td><span class="avail-pill">Available</span></td>' +
@@ -716,10 +725,11 @@
       var shown = 0;
       rows.forEach(function (row) {
         var key = row.querySelector('[data-watch]').getAttribute('data-watch');
+        /* a player listed at several spots ("PG, SG") shows under each of them */
         var matchPos =
           pos === 'ALL' ? true :
           pos === 'WATCH' ? !!watch[key] :
-          row.getAttribute('data-pos') === pos;
+          row.getAttribute('data-pos').split(/\s*,\s*/).indexOf(pos) !== -1;
         var matchQ = !q ||
           row.getAttribute('data-name').indexOf(q) !== -1 ||
           row.getAttribute('data-team').indexOf(q) !== -1 ||

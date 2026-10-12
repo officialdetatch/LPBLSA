@@ -7,7 +7,8 @@
    Fills  <nav id="heroLeagues"></nav>.
 
    Optional field in assets/leagues.js:
-     tagline   the line shown under a live league that has no table yet
+     tagline   the line shown under a live league that has no table yet, or
+               whose teams are all still 0-0
                (default: "La tabla sale al arrancar la temporada")
    ============================================================ */
 (function () {
@@ -32,7 +33,8 @@
   /* "[crown] [crest] Mugiwaras De Caimito  2-0"  (the crown reads "Líder" to screen readers) */
   function leaderHTML(L) {
     var rows = (window.LPBSA_STANDINGS && window.LPBSA_STANDINGS[L.key]) || [];
-    if (!rows.length) {
+    /* no table yet, or everybody still 0-0: nobody gets the crown */
+    if (!rows.length || (window.LPBSA_hasPlayed && !window.LPBSA_hasPlayed(rows))) {
       return '<span>' + esc(L.tagline || 'La tabla sale al arrancar la temporada') + '</span>';
     }
     var top = rows[0];
@@ -49,6 +51,7 @@
       crest + '<b>' + esc(t.name) + '</b><span class="rec">' + esc(record) + '</span>';
   }
 
+  host.classList.add('tiles-' + window.LPBSA_LEAGUES.length);   /* lets the CSS balance the rows */
   host.innerHTML = window.LPBSA_LEAGUES.map(function (L) {
     var logo = L.logo
       ? '<img class="league-tile-logo" src="' + esc(root + L.logo) + '" alt="" width="56" height="56" onerror="this.style.visibility=\'hidden\'">'

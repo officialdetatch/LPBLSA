@@ -13,10 +13,11 @@
      key        short id, also the folder name under leagues/
      short      the name shown on buttons and badges
      name       the long name
-     sport      the sport, shown in small print
+     sport      the sport, in Spanish - shown in small print in the menus, the bubble
+                and the notifications window
      story      the value news-writer.html stores for stories of this
-                league. Kept as football / basketball / soccer so every
-                story already written keeps working.
+                league. Kept as football / basketball / soccer / baseball so
+                every story already written keeps working.
      status     'live' = clickable     'soon' = greyed out, does nothing
      home       landing page, from the site root (live leagues only)
      logo       the league's round logo (from the site root) - shown in the
@@ -28,24 +29,34 @@
      rules      the league's Reglas page, from the site root. The Reglas menu in
                 the navbar lists it; a league without one shows greyed out
      playoffs   the league's Playoffs page, from the site root (same idea)
+     tagline    (optional) the line on the league's tile on the home page while
+                nobody has played a game yet
    ============================================================ */
 window.LPBSA_LEAGUES = [
   {
-    key: 'nfl', short: 'NFL', name: 'NFL Fantasy', sport: 'Football', story: 'football',
+    key: 'nfl', short: 'NFL', name: 'NFL Fantasy', sport: 'F\u00fatbol americano', story: 'football',
     status: 'live', home: 'leagues/nfl/nfl-landing-page.html', logo: 'images/leagues/nfl.png',
     assetRoot: '', teamPages: 'leagues/nfl/teams/', noTies: false,
     rules: 'leagues/nfl/nfl-rules.html', playoffs: 'leagues/nfl/nfl-playoffs.html'
   },
   {
-    key: 'nba', short: 'NBA', name: 'NBA Fantasy', sport: 'Basketball', story: 'basketball',
+    key: 'nba', short: 'NBA', name: 'NBA Fantasy', sport: 'Baloncesto', story: 'basketball',
     status: 'live', home: 'leagues/nba/nba-landing-page.html', logo: 'images/leagues/nba.png',
-    assetRoot: 'leagues/nba/', teamPages: '', noTies: true,
-    rules: 'leagues/nba/nba-rules.html', playoffs: 'leagues/nba/nba-playoffs.html'
+    assetRoot: 'leagues/nba/', teamPages: 'leagues/nba/teams/', noTies: true,
+    rules: 'leagues/nba/nba-rules.html', playoffs: 'leagues/nba/nba-playoffs.html',
+    tagline: 'Todos 0-0. Tip-off el 20 de octubre.'
   },
   {
-    key: 'ucl', short: 'UCL', name: 'UEFA Champions League', sport: 'Soccer', story: 'soccer',
-    status: 'soon', soonText: 'Disponible el proximo año', logo: 'images/leagues/ucl.png',
+    key: 'ucl', short: 'UCL', name: 'UEFA Champions League', sport: 'F\u00fatbol', story: 'soccer',
+    status: 'soon', soonText: 'Disponible el próximo año', logo: 'images/leagues/ucl.png',
     assetRoot: 'leagues/ucl/', teamPages: '', noTies: true
+  },
+  {
+    /* the baseball division - greyed out ("Pronto") until it opens. To keep it a secret for now,
+       put // in front of these lines. To open it: see "Going live: UCL and MLB" in README.md */
+    key: 'mlb', short: 'MLB', name: 'MLB Fantasy', sport: 'B\u00e9isbol', story: 'baseball',
+    status: 'soon', soonText: 'Se est\u00e1 cocinando', logo: 'images/leagues/mlb.png',
+    assetRoot: 'leagues/mlb/', teamPages: '', noTies: false
   }
 ];
 
@@ -97,5 +108,19 @@ window.LPBSA_captureStandings = function (key) {
     window.LPBSA_NO_TIES = !!L.noTies;
     /* the shared code looks up teams in LEAGUE_TEAMS */
     if (window.LPBSA_TEAMS[L.key]) window.LEAGUE_TEAMS = window.LPBSA_TEAMS[L.key];
+    /* ...and rosters in LEAGUE_ROSTERS / STARTER_SLOTS / FREE_AGENTS. A newer league's
+       roster file names them after the league (nba-roster-data.js: NBA_ROSTERS,
+       NBA_STARTER_SLOTS, NBA_FREE_AGENTS), so the two leagues can never mix them up. */
+    var P = L.key.toUpperCase() + '_';
+    if (window[P + 'ROSTERS']) window.LEAGUE_ROSTERS = window[P + 'ROSTERS'];
+    if (window[P + 'STARTER_SLOTS']) window.STARTER_SLOTS = window[P + 'STARTER_SLOTS'];
+    if (window[P + 'FREE_AGENTS']) window.FREE_AGENTS = window[P + 'FREE_AGENTS'];
+  };
+
+  /* true once at least one team in a standings list has played a game */
+  window.LPBSA_hasPlayed = function (rows) {
+    return (rows || []).some(function (r) {
+      return (Number(r.w) || 0) + (Number(r.l) || 0) + (Number(r.t) || 0) > 0;
+    });
   };
 })();
