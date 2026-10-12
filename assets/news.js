@@ -9,7 +9,7 @@ window.LEAGUE_NEWS = [
     "league": "all",
     "date": "",
     "headline": "⚾",
-    "summary": "Un deporte creado por gringos y dominado por 2 islas en el caribe llegan a la mejor liga de fantasy",
+    "summary": "Un deporte creado por gringos y dominado por 2 islas en el caribe llega a la mejor liga de fantasy",
     "blocks": [
       {
         "type": "youtube",
