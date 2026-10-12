@@ -1,9 +1,9 @@
 /* ============================================================
    SOCIALS  --  the posts embedded in the Socials section of the home page.
    Newest post goes FIRST in the list. "show" is how many cards appear on the home
-   page, the live Instagram, TikTok and X feeds included (0 means all of them). Posts for
-   X or TikTok are skipped while their live feed is on (see LIVE in socials-view.js); the
-   newest Instagram post shows only if the Instagram feed cannot be read.
+   page, the Instagram, TikTok and X cards included (0 means all of them). The TikTok and X
+   cards show the newest TikTok / X post in this list; the newest Instagram post shows only
+   if the Instagram feed cannot be read.
    Generated with socials-writer.html -- add and remove posts there.
    ============================================================ */
 window.LPBSA_SOCIALS = {

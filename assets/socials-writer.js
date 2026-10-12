@@ -8,12 +8,15 @@
 
    Needs  assets/socials-view.js  (it checks the links and draws the preview).
 
-   Instagram, TikTok and X.com show a LIVE FEED on the home page (socials-view.js keeps them
-   up to date by itself), so the posts you add here are really for Threads - plus one
-   Instagram post as a stand-in: the newest Instagram post here is what the Instagram card
-   shows if its feed cannot be read (not set up yet, or the Instagram Action stopped).
-   A post added for X or TikTok is kept in the file but not shown while that live feed is on.
-   "Show" counts the live feeds too: 3 = the Instagram, TikTok and X feeds.
+   The home page always has an Instagram, a TikTok and an X card (socials-view.js):
+     Instagram  a live grid of the latest posts (INSTAGRAM-SETUP.md). The newest Instagram post here is only the
+                stand-in shown if that feed cannot be read (not set up yet, or the Instagram Action stopped).
+     TikTok     TikTok's own profile card (nothing to add here), unless TIKTOK_MODE in socials-view.js is
+                'latest' - then the NEWEST TikTok video in this list.
+     X          the NEWEST X post in this list - so paste each new X post here.
+                Older ones stay in the file but are not shown.
+     Threads    every post you add here, after those three cards.
+   "Show" counts those three cards too: 3 = Instagram, TikTok and X.
    ============================================================ */
 (function () {
   'use strict';
@@ -116,7 +119,7 @@
       return '<option value="' + n + '"' + (n === show ? ' selected' : '') + '>' + (n ? n + ' cards' : 'All of them') + '</option>';
     }).join('');
   }
-  /* the live feeds that are on (Instagram, TikTok, X) take the first cards on the home page */
+  /* the live feeds that are on (just Instagram now) take the first card on the home page */
   function liveCount() {
     var L = S.live || {};
     return Object.keys(L).filter(function (k) { return L[k]; }).length;
@@ -179,18 +182,27 @@
   function rowHTML(p, i) {
     var r = S.parse(p.url);
     var live = !!(S.live && S.live[p.platform]);
+    var latest = !!(S.latest && S.latest[p.platform]);
+    var firstOfKind = !posts.slice(0, i).some(function (q) { return q.platform === p.platform; });
     /* the newest Instagram post stands in for the Instagram feed whenever that cannot be read */
-    var standIn = live && p.platform === 'instagram' &&
-      !posts.slice(0, i).some(function (q) { return q.platform === 'instagram'; });
-    /* where this post lands: after the live feeds, among the posts that are not live */
-    var place = posts.slice(0, i).filter(function (q) { return !(S.live && S.live[q.platform]); }).length;
-    var over = !live && show > 0 && liveCount() + place >= show;
+    var standIn = live && p.platform === 'instagram' && firstOfKind;
+    var isNewest = latest && firstOfKind;
+    var older = latest && !firstOfKind;
+    /* where a Threads / other post lands: after the Instagram, TikTok and X cards */
+    var place = posts.slice(0, i).filter(function (q) {
+      return !(S.live && S.live[q.platform]) && !(S.latest && S.latest[q.platform]);
+    }).length;
+    var fixed = Object.keys(S.live || {}).filter(function (k) { return S.live[k]; }).length +
+                Object.keys(S.latest || {}).filter(function (k) { return S.latest[k]; }).length;
+    var over = !live && !latest && show > 0 && fixed + place >= show;
     var note = standIn
       ? ' &middot; <b>stand-in</b> (shows in the Instagram card only while the Instagram feed is not working)'
-      : live ? ' &middot; <b>not on the home page</b> (the live ' + esc(S.platforms[p.platform].menu) + ' feed already shows your newest posts)'
-      : over ? ' &middot; <b>not on the home page</b> (only ' + show + ' cards show, live feeds included)'
-      : place === 0 ? ' &middot; first post after the live feeds' : '';
-    return '<div class="writer-row' + (over || live ? ' sw-over' : '') + '">' +
+      : live ? ' &middot; <b>not on the home page</b> (the live ' + esc(S.platforms[p.platform].menu) + ' card already shows your newest posts)'
+      : isNewest ? ' &middot; <b>shown in the ' + esc(S.platforms[p.platform].menu) + ' card</b> (the newest one)'
+      : older ? ' &middot; <b>not on the home page</b> (an older post: only the newest ' + esc(S.platforms[p.platform].menu) + ' post shows)'
+      : over ? ' &middot; <b>not on the home page</b> (only ' + show + ' cards show, the Instagram, TikTok and X cards included)'
+      : place === 0 ? ' &middot; first post after the Instagram, TikTok and X cards' : '';
+    return '<div class="writer-row' + (over || live || older ? ' sw-over' : '') + '">' +
       '<div class="writer-row-main">' +
         '<div class="sw-meta"><span class="sw-chip">' + esc(S.platforms[p.platform].menu) + '</span>' +
           '<span class="section-note">' + esc(r.ok ? r.kind : '') + note + '</span></div>' +
@@ -253,9 +265,9 @@
       '/* ============================================================',
       '   SOCIALS  --  the posts embedded in the Socials section of the home page.',
       '   Newest post goes FIRST in the list. "show" is how many cards appear on the home',
-      '   page, the live Instagram, TikTok and X feeds included (0 means all of them). Posts for',
-      '   X or TikTok are skipped while their live feed is on (see LIVE in socials-view.js); the',
-      '   newest Instagram post shows only if the Instagram feed cannot be read.',
+      '   page, the Instagram, TikTok and X cards included (0 means all of them). The TikTok and X',
+      '   cards show the newest TikTok / X post in this list; the newest Instagram post shows only',
+      '   if the Instagram feed cannot be read.',
       '   Generated with socials-writer.html -- add and remove posts there.',
       '   ============================================================ */'
     ].join('\n');

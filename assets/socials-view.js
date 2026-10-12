@@ -6,17 +6,21 @@
    a file the Socials writer (socials-writer.html) makes for you. You never
    edit this script to add or remove a post.
 
-   LIVE FEEDS (Instagram, TikTok and X.com): the Socials section starts with each account's
-   own feed, which keeps itself up to date - post and it shows up here, nothing to save:
-     Instagram  the profile with a grid of the latest posts  drawn here from the "instagram-feed" branch,
+   THE FIRST CARDS (Instagram, TikTok and X.com) are the league's own accounts:
+     Instagram  the profile with a grid of the latest posts, drawn here from the "instagram-feed" branch,
                 which the Instagram GitHub Action refreshes every 4 hours (INSTAGRAM-SETUP.md). Until
                 that is set up - or if it ever stops - the card shows your newest Instagram post from
                 the Socials writer instead.
-     X.com      the profile timeline (newest posts first)    <a class="twitter-timeline"> + widgets.js
-     TikTok     the profile card with the latest videos      <blockquote class="tiktok-embed" data-embed-type="creator"> + embed.js
-   Which accounts: LIVE below. Threads has no feed, so for it the section shows the posts you
-   add with the Socials writer (posts you add there for X or TikTok are skipped while their live
-   feed is on; the newest Instagram one is the Instagram card's stand-in).
+     TikTok     TikTok's own profile card (TIKTOK_MODE 'profile') - or, set to 'latest', your NEWEST TikTok video
+                from the Socials writer, as TikTok's own player (click to play) -
+     X.com      your NEWEST X post from the Socials writer, as X's own embedded post
+                plus a "Ver más" link to the whole profile under each.
+   Why TikTok and X are not live profile feeds: both platforms' profile widgets (X's timeline, TikTok's
+   creator card) are unreliable now - X often shows no timeline at all to visitors who are not logged in,
+   and TikTok's server answers "overload-protect triggered" - and neither has a free way to read the latest
+   posts. A single post embed works every time, so paste each new X / TikTok link in the Socials writer
+   (ten seconds) and the card updates. Which accounts: LIVE and LATEST below.
+   Threads has no feed, so for it the section shows the posts you add with the Socials writer.
 
    On a page, this script fills  <div id="socialsGrid">  with the live feeds, then one
    card per post. Each platform's own embed is used, so a post looks and works exactly
@@ -33,8 +37,8 @@
      top of the home page loads just as fast as before.
    - TikTok is click-to-play on purpose: its embed servers sometimes answer with an
      "overload-protect triggered" error, and a page that loads the video by itself would
-     show that error as a big empty box. The card shows a clean play button instead, and
-     under the video there is always an "open it on TikTok" link.
+     show that error as a big empty box. The card shows the video's own cover picture (when TikTok
+     lets the page ask for it) with a play button, and under it there is always an "open it on TikTok" link.
    - If a platform's script cannot load (an ad blocker, no connection, a post that
      was deleted or is private), the card keeps a plain "Ver la publicacion"
      link to the post, so there is never an empty hole.
@@ -46,8 +50,8 @@
    window.LPBSA_Socials  (also used by the writer):
      parse(link, platform)  -> { ok, platform, url, ... }  or  { ok:false, error }
      detect(link)           -> 'threads' | 'x' | 'instagram' | 'tiktok' | ''
-     render(element, posts, { limit, lazy })   limit counts the live feeds too
-     live                   the LIVE accounts below
+     render(element, posts, { limit, lazy })   limit counts the Instagram, TikTok and X cards too
+     live, latest           the LIVE and LATEST accounts below
    ============================================================ */
 (function () {
   'use strict';
@@ -57,13 +61,23 @@
   /* The accounts shown as a LIVE FEED, newest posts first, kept up to date by themselves.
      Set one to '' to go back to single posts from the Socials writer for that platform. */
   var LIVE = {
-    instagram: 'lpblsa',         /* instagram.com/lpblsa - its latest posts, saved every 4 hours by the
+    instagram: 'lpblsa'          /* instagram.com/lpblsa - its latest posts, saved every 4 hours by the
                                     "Instagram feed" GitHub Action (one-time setup: INSTAGRAM-SETUP.md) */
+  };
+  var LIVE_ORDER = ['instagram'];
+
+  /* Accounts whose NEWEST saved post (the first one in the Socials writer) fills the card, with a link to
+     the whole profile under it. Set one to '' to treat that platform's posts like any other saved post. */
+  var LATEST = {
     tiktok: 'lpblsa',            /* tiktok.com/@lpblsa */
     x: 'lpblsa_onX'              /* x.com/lpblsa_onX */
   };
-  var LIVE_ORDER = ['instagram', 'tiktok', 'x'];
-  var FEED_HEIGHT = 620;         /* how tall the X timeline is, in pixels (it scrolls inside) */
+  var LATEST_ORDER = ['tiktok', 'x'];
+
+  /* TikTok card: 'profile' = TikTok's own profile card (avatar, numbers and a scrolling row of your latest
+     videos), which updates itself but sometimes shows TikTok's "overload-protect triggered" error instead;
+     'latest' = your newest saved TikTok video, click to play, which always loads. */
+  var TIKTOK_MODE = 'profile';
 
   /* Where the Instagram Action saves the latest posts (one small file, pictures included): the
      "instagram-feed" branch of the repo - never main, so your own pushes are never in its way. It is read
@@ -83,8 +97,9 @@
     empty: 'Aún no hemos publicado en redes.',     /* shown when there is no post to show */
     play: 'Toca para ver el video',
     noLoad: '¿No carga? Ábrelo en TikTok',
-    liveX: 'Ver los posts de @{u} en X',           /* the link under a live feed, until it loads */
-    liveTiktok: 'Ver los videos de @{u} en TikTok',
+    moreX: 'Ver más posts en X',                    /* the link to the whole profile under an X / TikTok card */
+    moreTiktok: 'Ver más videos en TikTok',
+    noPost: 'Síguenos en {p}',                       /* when no post of that platform is saved yet */
     liveInstagram: 'Ver las publicaciones de @{u} en Instagram',
     liveTag: 'Lo último',                           /* the little tag on a live feed's card */
     igFollow: 'Seguir',                             /* the Instagram card */
@@ -111,7 +126,7 @@
     threads:   ['https://www.threads.com/embed.js', 'https://www.threads.net/embed.js'],
     x:         ['https://platform.twitter.com/widgets.js'],
     instagram: ['https://www.instagram.com/embed.js'],      /* a single TikTok post needs no script: see tiktokFrame() */
-    tiktokLive: ['https://www.tiktok.com/embed.js']          /* TikTok's profile card (the live feed) */
+    tiktokLive: ['https://www.tiktok.com/embed.js']          /* TikTok's profile card (TIKTOK_MODE 'profile') */
   };
 
   function esc(s) {
@@ -242,12 +257,19 @@
       '.soc-body blockquote::before,.soc-body blockquote::after{content:none}',
       '.soc-body blockquote.instagram-media{min-width:0 !important}',
       '.soc-tt{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}',
-      '.soc-tt-play{width:100%;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;',
-        'background:rgba(255,255,255,.03);border:1px dashed var(--gold-dark,#a98a28);border-radius:var(--radius,3px);',
-        'font-family:var(--font-display,inherit);font-size:.86rem;letter-spacing:.07em;text-transform:uppercase;color:var(--gold-light,#f0d77a)}',
-      '.soc-tt-play:hover,.soc-tt-play:focus-visible{border-style:solid;color:var(--white,#fff)}',
-      '.soc-tt-ico{display:flex;align-items:center;justify-content:center;width:54px;height:54px;border-radius:50%;padding-left:4px;',
-        'background:var(--gold,#d4af37);color:var(--navy-950,#050b18);font-size:1.15rem}',
+      '.soc-tt-play{position:relative;overflow:hidden;width:100%;max-width:340px;aspect-ratio:9/14;max-height:520px;display:flex;flex-direction:column;',
+        'align-items:center;justify-content:center;gap:12px;padding:0;cursor:pointer;background:#050505 linear-gradient(160deg,#101010,#000);',
+        'border:1px solid rgba(255,255,255,.14);border-radius:var(--radius,3px);',
+        'font-family:var(--font-display,inherit);font-size:.84rem;letter-spacing:.07em;text-transform:uppercase;color:#fff}',
+      '.soc-tt-play:hover,.soc-tt-play:focus-visible{border-color:var(--gold,#d4af37)}',
+      '.soc-tt-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82}',
+      '.soc-tt-play:hover .soc-tt-thumb{opacity:.95}',
+      '.soc-tt-ico{position:relative;display:flex;align-items:center;justify-content:center;width:58px;height:58px;border-radius:50%;padding-left:4px;',
+        'background:var(--gold,#d4af37);color:var(--navy-950,#050b18);font-size:1.2rem;box-shadow:0 2px 14px rgba(0,0,0,.55)}',
+      '.soc-tt-label{position:relative;padding:5px 12px;border-radius:999px;background:rgba(0,0,0,.62)}',
+      '.soc-tt-cap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;text-align:left;text-transform:none;letter-spacing:0;',
+        'font-family:inherit;font-size:.8rem;line-height:1.35;background:linear-gradient(transparent,rgba(0,0,0,.82));',
+        'overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}',
       '.soc-tt-open{font-size:.8rem;color:var(--mute,#8fa3c4);text-decoration:none;text-align:center}',
       '.soc-tt-open:hover{color:var(--gold-light,#f0d77a)}',
       '.soc-tt-frame{display:block;width:100%;max-width:605px;height:739px;border:0;border-radius:var(--radius,3px);background:#fff}',
@@ -265,9 +287,14 @@
       '.soc-handle{font-size:.78rem;color:var(--mute,#8fa3c4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}',
       '.soc-live{flex:none;font-family:var(--font-display,inherit);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;',
         'padding:2px 8px;border-radius:999px;color:var(--gold-light,#f0d77a);border:1px solid rgba(212,175,55,.45)}',
-      '.soc-feed{width:100%}',
-      '.soc-feed iframe{width:100% !important;max-width:100%}',
-      '.soc-body blockquote.tiktok-embed{margin:0 auto;min-width:0 !important}',
+      '.soc-stack{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;min-width:0}',
+      '.soc-more{display:block;width:100%;box-sizing:border-box;padding:10px 14px;text-align:center;text-decoration:none;border-radius:999px;',
+        'border:1px solid rgba(212,175,55,.5);font-family:var(--font-display,inherit);font-size:.76rem;letter-spacing:.08em;',
+        'text-transform:uppercase;color:var(--gold-light,#f0d77a)}',
+      '.soc-more:hover,.soc-more:focus-visible{background:var(--gold,#d4af37);color:var(--navy-950,#050b18)}',
+      '.soc-profile{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;padding:34px 10px;text-align:center}',
+      '.soc-profile img{width:42px;height:42px;object-fit:contain}',
+      '.soc-profile b{font-family:var(--font-display,inherit);font-size:1rem;letter-spacing:.06em;color:var(--white,#fff)}',
       /* the Instagram card: profile row, a 3-across grid of the latest posts, the newest caption */
       '.soc-ig{width:100%;display:flex;flex-direction:column;gap:12px}',
       '.soc-ig-top{display:flex;align-items:center;gap:11px;min-width:0;text-decoration:none;color:var(--white,#fff)}',
@@ -319,10 +346,11 @@
       return '<blockquote class="text-post-media" data-text-post-version="0" data-text-post-permalink="' + esc(p.url) +
         '" id="ig-tp-' + esc(p.id) + '">' + link(p.url) + '</blockquote>';
     }
-    /* TikTok: a play button; the video itself is only fetched when someone presses it */
-    return '<div class="soc-tt" data-tt-id="' + esc(p.id) + '">' +
-      '<button type="button" class="soc-tt-play"><span class="soc-tt-ico" aria-hidden="true">&#9654;</span>' +
-        esc(TEXT.play) + '</button>' +
+    /* TikTok: the video's cover with a play button; the video itself is only fetched when someone presses it
+       (ttPoster() adds the real cover picture and caption when TikTok lets the page ask for them) */
+    return '<div class="soc-tt" data-tt-id="' + esc(p.id) + '" data-tt-url="' + esc(p.url) + '">' +
+      '<button type="button" class="soc-tt-play" aria-label="' + esc(TEXT.play) + '">' +
+        '<span class="soc-tt-ico" aria-hidden="true">&#9654;</span><span class="soc-tt-label">' + esc(TEXT.play) + '</span></button>' +
       '<a class="soc-tt-open" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' +
         esc(TEXT.openIn + name) + ' &#8599;</a>' +
     '</div>';
@@ -343,41 +371,55 @@
       '<a class="soc-tt-open" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' + esc(TEXT.noLoad) + ' &#8599;</a>';
   }
 
-  /* a live feed: the platform's own profile embed, with a plain link inside it until it loads */
+  /* the live Instagram card: grey tiles while the latest posts load (see igLoad), so the card does not jump */
   function liveHTML(p) {
-    var u = p.user;
-    if (p.platform === 'instagram') {
-      /* grey tiles while the latest posts load (see igLoad), so the card does not jump */
-      var skel = '';
-      for (var i = 0; i < IG_SHOW; i++) skel += '<span class="soc-ig-tile soc-ig-skel"></span>';
-      return '<div class="soc-ig" aria-busy="true"><div class="soc-ig-grid">' + skel + '</div>' +
-        '<a class="soc-fallback" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' +
-        esc(TEXT.liveInstagram.replace('{u}', u)) + ' &#8599;</a></div>';
+    var skel = '';
+    for (var i = 0; i < IG_SHOW; i++) skel += '<span class="soc-ig-tile soc-ig-skel"></span>';
+    return '<div class="soc-ig" aria-busy="true"><div class="soc-ig-grid">' + skel + '</div>' +
+      '<a class="soc-fallback" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' +
+      esc(TEXT.liveInstagram.replace('{u}', p.user)) + ' &#8599;</a></div>';
+  }
+
+  /* the profile link under an X / TikTok card */
+  function profileURL(platform, u) {
+    return platform === 'x' ? 'https://x.com/' + u : 'https://www.tiktok.com/@' + u;
+  }
+  function moreLink(platform, u) {
+    var t = platform === 'x' ? TEXT.moreX : TEXT.moreTiktok;
+    return '<a class="soc-more" href="' + esc(profileURL(platform, u)) + '" target="_blank" rel="noopener noreferrer">' +
+      esc(t.replace('{u}', u)) + ' &#8599;</a>';
+  }
+  /* the body of an X / TikTok card: the newest saved post, or - when none is saved - a clean profile card */
+  function latestBody(p) {
+    var pf = PLATFORMS[p.platform];
+    if (p.profile) {
+      var u = esc(p.user);
+      return '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@' + u + '" data-unique-id="' + u + '"' +
+        ' data-embed-type="creator" style="max-width:720px;min-width:288px;"><section>' +
+        '<a class="soc-fallback" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@' + u + '?refer=creator_embed">' +
+        esc(TEXT.moreTiktok) + ' &#8599;</a></section></blockquote>';
     }
-    if (p.platform === 'x') {
-      return '<div class="soc-feed"><a class="twitter-timeline soc-fallback" data-theme="dark" data-dnt="true" data-lang="es"' +
-        ' data-height="' + FEED_HEIGHT + '" data-chrome="noheader nofooter transparent"' +
-        ' href="https://twitter.com/' + esc(u) + '">' + esc(TEXT.liveX.replace('{u}', u)) + ' &#8599;</a></div>';
+    var root = document.body.getAttribute('data-root') || '';
+    if (p.empty) {
+      return '<div class="soc-profile"><img src="' + esc(root + 'images/socials-logo/' + pf.icon) + '" alt="" onerror="this.remove()">' +
+        '<b>@' + esc(p.user) + '</b>' + moreLink(p.platform, p.user) + '</div>';
     }
-    return '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@' + esc(u) + '" data-unique-id="' + esc(u) + '"' +
-      ' data-embed-type="creator" style="max-width:720px;min-width:288px;"><section>' +
-      '<a class="soc-fallback" target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@' + esc(u) + '?refer=creator_embed">' +
-      esc(TEXT.liveTiktok.replace('{u}', u)) + ' &#8599;</a></section></blockquote>';
+    return '<div class="soc-stack">' + embedHTML(p) + moreLink(p.platform, p.user) + '</div>';
   }
 
   function cardHTML(p) {
     var pf = PLATFORMS[p.platform];
     var root = document.body.getAttribute('data-root') || '';
-    if (p.live) {
+    if (p.live || p.latest) {
       return '<article class="soc-card soc-card-live" data-platform="' + esc(p.platform) + '">' +
         '<header class="soc-head">' +
           '<img src="' + esc(root + 'images/socials-logo/' + pf.icon) + '" alt="" width="16" height="16" onerror="this.remove()">' +
           '<span class="soc-name">' + esc(pf.label) + '</span>' +
           '<span class="soc-handle">@' + esc(p.user) + '</span>' +
           '<span class="soc-live">' + esc(TEXT.liveTag) + '</span>' +
-          '<a class="soc-open" href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(TEXT.open) + ' &#8599;</a>' +
+          '<a class="soc-open" href="' + esc(p.empty ? profileURL(p.platform, p.user) : p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(TEXT.open) + ' &#8599;</a>' +
         '</header>' +
-        '<div class="soc-body">' + liveHTML(p) + '</div>' +
+        '<div class="soc-body">' + (p.live ? liveHTML(p) : latestBody(p)) + '</div>' +
       '</article>';
     }
     return '<article class="soc-card" data-platform="' + esc(p.platform) + '">' +
@@ -388,6 +430,40 @@
       '</header>' +
       '<div class="soc-body">' + embedHTML(p) + '</div>' +
     '</article>';
+  }
+
+  /* The cover picture and caption of a TikTok card, from TikTok's public oEmbed address. If TikTok does not
+     answer the page (or the browser is not allowed to ask), the card simply keeps its plain black cover. */
+  function ttPoster(host) {
+    if (!window.fetch) return;
+    var boxes = host.querySelectorAll('.soc-tt[data-tt-url]:not([data-tt-done])');
+    Array.prototype.forEach.call(boxes, function (box) {
+      box.setAttribute('data-tt-done', '1');
+      var ctl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+      fetch('https://www.tiktok.com/oembed?url=' + encodeURIComponent(box.getAttribute('data-tt-url')), { signal: ctl ? ctl.signal : undefined })
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function (d) {
+          clearTimeout(timer);
+          var btn = box.querySelector('.soc-tt-play');
+          if (!btn || !d) return;
+          var img = String(d.thumbnail_url || '');
+          if (/^https:\/\//.test(img)) {
+            var im = new Image();
+            im.className = 'soc-tt-thumb';
+            im.alt = '';
+            im.onload = function () { if (btn.isConnected) btn.insertBefore(im, btn.firstChild); };
+            im.src = img;
+          }
+          var cap = short(d.title, 140);
+          if (cap) {
+            var c = document.createElement('span');
+            c.className = 'soc-tt-cap';
+            c.textContent = cap;
+            btn.appendChild(c);
+          }
+        }, function () { clearTimeout(timer); });
+    });
   }
 
   /* ---------- loading each platform's script ---------- */
@@ -450,21 +526,24 @@
   }
 
   function scriptFor(p) {
-    if (p.platform === 'tiktok') return p.live ? 'tiktokLive' : '';      /* a single TikTok post has no script */
+    if (p.profile) return 'tiktokLive';                                   /* TikTok's profile card */
+    if (p.empty || p.platform === 'tiktok') return '';                    /* a TikTok post has no script (see tiktokFrame) */
     if (p.platform === 'instagram' && p.live) return '';                 /* the Instagram card is drawn here, no script */
     return SCRIPTS[p.platform] ? p.platform : '';
   }
   function loadEmbeds(host, list, lazy) {
     if (host._socObserver) { host._socObserver.disconnect(); host._socObserver = null; }
-    var used = [], igCard = false;
+    var used = [], igCard = false, ttCard = false;
     list.forEach(function (p) {
       if (p.live && p.platform === 'instagram') igCard = true;
+      if (p.platform === 'tiktok' && !p.empty && !p.profile) ttCard = true;
       var k = scriptFor(p);
       if (k && used.indexOf(k) === -1) used.push(k);
     });
-    if (!used.length && !igCard) return;
+    if (!used.length && !igCard && !ttCard) return;
     var go = function () {
       if (igCard) igLoad(host);
+      if (ttCard) ttPoster(host);
       used.forEach(function (pf) { boot(pf, host); });
     };
     if (lazy && 'IntersectionObserver' in window) {
@@ -620,20 +699,34 @@
   }
 
   /* render(element, posts, { limit, lazy })  -> how many cards were drawn.
-     The live feeds come first, then the saved posts (minus those of a platform that has a live feed).
+     The live Instagram card comes first, then the newest TikTok and X posts, then the other saved posts.
      Posts that are not a real, single post link are skipped; the same post twice shows once.
      The newest saved Instagram post is kept aside as the Instagram card's stand-in (see igApply). */
   function render(host, posts, opts) {
     opts = opts || {};
-    var list = liveFeeds(), seen = {};
+    var list = liveFeeds(), rest = [], newest = {}, seen = {};
     host._igBackup = null;
     (Array.isArray(posts) ? posts : []).forEach(function (p) {
       var r = parse(p && p.url);           /* the platform comes from the link itself */
       if (!r.ok || seen[r.url]) return;
       seen[r.url] = 1;
       if (r.platform === 'instagram' && !host._igBackup) host._igBackup = r;
-      if (!isLive(r.platform)) list.push(r);
+      if (LATEST[r.platform]) {            /* X / TikTok: only the newest post of each is shown */
+        if (!newest[r.platform]) { r.latest = true; r.user = LATEST[r.platform]; newest[r.platform] = r; }
+        return;
+      }
+      if (!isLive(r.platform)) rest.push(r);
     });
+    /* TikTok, then X, right after Instagram - a platform with no saved post gets a plain profile card */
+    LATEST_ORDER.forEach(function (k) {
+      if (!LATEST[k]) return;
+      if (k === 'tiktok' && TIKTOK_MODE === 'profile') {
+        list.push({ latest: true, profile: true, platform: 'tiktok', user: LATEST.tiktok, url: profileURL('tiktok', LATEST.tiktok) });
+        return;
+      }
+      list.push(newest[k] || { latest: true, empty: true, platform: k, user: LATEST[k], url: profileURL(k, LATEST[k]) });
+    });
+    list = list.concat(rest);
     if (opts.limit > 0) list = list.slice(0, opts.limit);
     injectCSS();
     host.classList.add('soc-grid');
@@ -656,10 +749,22 @@
     return { posts: posts, show: show };
   }
 
+  function exportMap(self) {
+    var m = {};
+    Object.keys(LIVE).forEach(function (k) { if (self && LIVE[k]) m[k] = LIVE[k]; });
+    Object.keys(LATEST).forEach(function (k) {
+      var tt = k === 'tiktok' && TIKTOK_MODE === 'profile';
+      if (LATEST[k] && (tt === self)) m[k] = LATEST[k];
+    });
+    return m;
+  }
+
   window.LPBSA_Socials = {
     platforms: PLATFORMS,
     order: ORDER,
-    live: LIVE,
+    live: exportMap(true),       /* cards that fill themselves: Instagram (and TikTok in 'profile' mode) */
+    latest: exportMap(false),    /* cards that show the newest saved post */
+    tiktokMode: TIKTOK_MODE,
     defaultShow: DEFAULT_SHOW,
     parse: parse,
     detect: detect,

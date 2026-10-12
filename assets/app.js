@@ -53,6 +53,28 @@
     });
   }
 
+  /* YouTube links: any normal way of copying a video's address -> { id, short } (or null).
+     Handles youtube.com/watch?v=, youtu.be/, /embed/, /shorts/, /live/, music.youtube.com and m.youtube.com.
+     The news writer uses the same function, so what it accepts is exactly what the site can show. */
+  function youtubeInfo(raw) {
+    var s = String(raw == null ? '' : raw).trim();
+    if (!s) return null;
+    if (/^[A-Za-z0-9_-]{11}$/.test(s)) return { id: s, short: false };       /* a bare video id */
+    if (!/^[a-z][a-z0-9+.\-]*:\/\//i.test(s)) s = 'https://' + s.replace(/^\/+/, '');
+    var u;
+    try { u = new URL(s); } catch (e) { return null; }
+    var host = u.hostname.toLowerCase().replace(/^(www|m|music)\./, '');
+    var id = '', isShort = false, m;
+    if (host === 'youtu.be') {
+      id = u.pathname.split('/')[1] || '';
+    } else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+      if (u.pathname === '/watch') id = u.searchParams.get('v') || '';
+      else if ((m = /^\/(embed|shorts|live|v)\/([A-Za-z0-9_-]{11})(?:[/?]|$)/.exec(u.pathname))) { id = m[2]; isShort = m[1] === 'shorts'; }
+    }
+    return /^[A-Za-z0-9_-]{11}$/.test(id) ? { id: id, short: isShort } : null;
+  }
+  window.LPBSA_youtubeInfo = youtubeInfo;
+
   /* Shared renderer for the "content blocks" model used by the About page
      and by news articles: an ordered list of paragraphs, subtitles,
      images and videos. */
@@ -66,6 +88,18 @@
       if (b.type === 'video' && b.src) {
         return '<figure class="article-figure"><video controls playsinline preload="metadata">' +
           '<source src="' + esc(b.src) + '" type="video/mp4">Your browser does not support video playback.</video>' +
+          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+      }
+      if (b.type === 'youtube') {
+        /* YouTube's own player (its play screen), through the privacy-friendly youtube-nocookie address,
+           and only fetched as the visitor scrolls near it. A bad link shows a plain link instead. */
+        var yt = youtubeInfo(b.src);
+        if (!yt) return b.src ? '<p>' + linkify(String(b.src)) + '</p>' : '';
+        return '<figure class="article-figure article-youtube' + (yt.short ? ' is-short' : '') + '">' +
+          '<div class="yt-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + yt.id + '?rel=0&modestbranding=1&playsinline=1" ' +
+          'title="' + esc(b.caption || 'YouTube') + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' +
+          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>' +
+          '<a class="yt-open" href="https://www.youtube.com/watch?v=' + yt.id + '" target="_blank" rel="noopener noreferrer">Ver en YouTube &#8599;</a>' +
           (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
       }
       if (b.type === 'h') {
@@ -146,6 +180,10 @@
     for (var i = 0; i < blocks.length; i++) {
       var b = blocks[i];
       if (b && b.src && (b.type === 'image' || b.type === 'video')) return { type: b.type, src: b.src };
+      if (b && b.src && b.type === 'youtube') {                       /* a YouTube video: its thumbnail + a play button */
+        var yt = youtubeInfo(b.src);
+        if (yt) return { type: 'youtube', id: yt.id };
+      }
     }
     if (n.image) return { type: 'image', src: n.image };
     if (n.video) return { type: 'video', src: n.video };
@@ -165,6 +203,11 @@
     if (c && c.type === 'image') {
       inner = '<img src="' + esc(fromRoot(c.src)) + '" alt="" loading="lazy" decoding="async"' +
         (/\.(png|webp|svg|gif)(\?|$)/i.test(c.src) ? ' class="is-graphic"' : '') + ' onerror="this.remove()">';
+    } else if (c && c.type === 'youtube') {
+      /* the video's own thumbnail; if YouTube's picture cannot load, the league logo shows instead */
+      inner = mark + '<img src="https://i.ytimg.com/vi/' + esc(c.id) + '/hqdefault.jpg" alt="" loading="lazy" decoding="async" ' +
+        'style="position:relative;z-index:0;background:#0b1530" onload="if(this.naturalWidth>120){this.previousSibling.style.display=\'none\'}" onerror="this.remove()">' +
+        '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>';
     } else if (c && c.type === 'video') {
       inner = mark + '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>';
     } else {

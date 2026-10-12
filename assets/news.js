@@ -5,6 +5,93 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "",
+    "league": "all",
+    "date": "",
+    "headline": "⚾",
+    "summary": "Un deporte creado por gringos y dominado por 2 islas en el caribe llegan a la mejor liga de fantasy",
+    "blocks": [
+      {
+        "type": "youtube",
+        "src": "https://www.youtube.com/watch?v=B0LscFd2vRk",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "⚾"
+      },
+      {
+        "type": "p",
+        "text": "Mas informacion pronto..."
+      },
+      {
+        "type": "p",
+        "text": "Por ahora solo diremos ⚾🧢"
+      }
+    ]
+  },
+  {
+    "id": "la-liga-de-nba-empieza",
+    "league": "basketball",
+    "date": "Week 0 | Oct 12",
+    "headline": "La Liga de NBA empieza!",
+    "summary": "Luego de haber culminado el draft el dia de ayer Octubre 11 de 2026, solo nos queda una cosa, que empiezen los juegos!",
+    "blocks": [
+      {
+        "type": "h",
+        "text": "El Draft"
+      },
+      {
+        "type": "p",
+        "text": "Los managers se dieron cita la noche de ayer Octubre 11 de 2026 para celebrar el Draft de nuestra NBA Division. En los mismos hubieron consultas, risas y como siempre, decisiones CUESTIONABLES!"
+      },
+      {
+        "type": "p",
+        "text": "Los primeros picks de esta division dejaron de que hablar, y claro esta aqui viene el resumen! Los primeros 6 picks de la primera ronda fueron los siguientes:"
+      },
+      {
+        "type": "p",
+        "text": "Nikola Jokic drafteado por Pantyman Squad"
+      },
+      {
+        "type": "p",
+        "text": "Shai Gilgeous-Alexander drafteado por Concheros de la Concha"
+      },
+      {
+        "type": "p",
+        "text": "Luka Doncic drafteado por Los Puntos de Piña"
+      },
+      {
+        "type": "p",
+        "text": "Victor Wembanyama drafteado por Mugiwaras De Caimito"
+      },
+      {
+        "type": "p",
+        "text": "Giannis Antetokounmpo drafteado por Sin Talento de Barrio"
+      },
+      {
+        "type": "p",
+        "text": "Y ultimo pero no menos importante:"
+      },
+      {
+        "type": "p",
+        "text": "Anthony Edwards drafteado por iMcebollin"
+      },
+      {
+        "type": "p",
+        "text": "No todo fue peaches and creeme, ya que hubo unos picks MUY cuestionables, por ejemplo Kyrie Irving y Donovan Clingan. Pero como todo, he aqui donde el ball knowledge y el gamble entra en juego!"
+      },
+      {
+        "type": "p",
+        "text": "Estando todo servido en bandeja de plata, solo nos queda una pregunta: El ball knowledge de estos managers habra sido suficiente como para ganar la liga? O quedaran como bochornos no clasificando ni a los playoffs!?"
+      },
+      {
+        "type": "p",
+        "text": "Nos vemos este 20 de Octubre para nuestra Primera Jornada!"
+      }
+    ]
+  },
+  {
     "id": "la-primera-piedra",
     "league": "basketball",
     "date": "Week 0 | Oct. 10",
@@ -500,9 +587,10 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "La Tiendita esta live! Vayan y capeen su camisita!",
-  "Bijan Robinson y McMillan, las bestias, los goats.",
-  "Los Puntos de Piña se fueron de Bye Week pa Bermudas.",
-  "No se olviden del Draft de NBA este domingo, 9:00PM.",
-  "Apoyenme con un cafecito, link en el bubble!"
+  "⚾",
+  "El virus de las lesiones sigue en toda la NFL, chequeen sus players probablemente estan lesionados",
+  "Los Puntos de Piña han hecho mas puntos estando en BYE WEEK, que cuando jugan normal",
+  "El draft de NBA dejo mucho de que hablar, mas informacion en la seccion de noticias",
+  "Si tienen alguna noticia que quieran que publiquemos, mandenla a nuestro correo: newsletter@lpblsa.vip",
+  "Criture es el mejor ser humano del mundo, gracias por tu apoyo!!"
 ];

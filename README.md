@@ -175,14 +175,22 @@ they cannot change what anyone else sees - only you can, by replacing that file.
 
 Open news-writer.html on your own computer to write. Fill in the headline,
 date and summary, then build the story itself as a stack of blocks -
-paragraphs, subtitles, images and videos, in any order you like:
+paragraphs, subtitles, images, videos and YouTube videos, in any order you like:
 
-- Add as many blocks as you want with the four "+ Add" buttons under the list.
+- Add as many blocks as you want with the five "+ Add" buttons under the list.
 - Use the up/down arrows to reorder a block, and click into any box to edit
   it directly - the same pattern as the other tools.
 - For an image or video, upload the file itself into images/ first (an
   images/news/ folder keeps things tidy) and point the path box at it. Videos
   play inline the same size no matter how big the source file is.
+- For a YouTube video, press "+ Add YouTube video" and paste its link (the Share
+  button, or the address bar - youtu.be/..., youtube.com/watch?v=... and Shorts all
+  work). Nothing to download or upload: the story shows YouTube's own player with its
+  play screen (a Short is shown tall), with a "Ver en YouTube" link under it. On the
+  home page and the news page the story's card uses the video's thumbnail with a play
+  button when the video is the first picture in the story. The writer tells you if the
+  link is not a YouTube link. (Private videos, or ones whose owner switched off
+  embedding, show YouTube's own "unavailable" message.)
 - Any http(s) link typed straight into a paragraph - a Discord invite, a
   tweet, anything - turns into a real clickable link automatically. You do
   not need to write it as a link yourself.
@@ -323,21 +331,27 @@ before you upload - the team and free agent pages keep working off whatever
 leagues/nfl/assets/nfl-roster-data.js already says, they just lose the tool that edits it.
 
 ## The Socials section (home page)
-It is three LIVE FEEDS that update themselves - post and it shows up, nothing to save or upload:
-  Instagram the @lpblsa profile with a grid of the 9 latest posts and the newest caption.
-            Instagram has no profile embed, so a GitHub Action (instagram-feed.yml) reads
-            the posts every 4 hours and saves them on the side branch "instagram-feed";
-            the card reads them from there. Needs a one-time setup: INSTAGRAM-SETUP.md.
-            Until then (or if it ever stops) the card shows your newest Instagram post
-            from socials-writer.html instead.
-  TikTok    the @lpblsa profile card with the latest videos (TikTok shows up to 10)
-  X.com     the @lpblsa_onX timeline, newest posts first (it scrolls inside its card)
-Which accounts: the LIVE lines at the top of assets/socials-view.js (set one to '' to switch
-its feed off). If the X or TikTok embed cannot load (an ad blocker, X having a bad day) its
-card shows a "Ver los posts en X" / "Ver los videos en TikTok" link.
-socials-writer.html (your private tool) is now for Threads, plus one recent Instagram post
-kept as the Instagram card's stand-in. "Show" in the writer counts the live feeds too:
-3 = the Instagram, TikTok and X cards.
+Three cards always come first, then any Threads posts:
+  Instagram the @lpblsa profile with a grid of the 9 latest posts and the newest caption. It
+            updates itself: Instagram has no profile embed, so a GitHub Action
+            (instagram-feed.yml) reads the posts every 4 hours and saves them on the side branch
+            "instagram-feed"; the card reads them from there. Needs a one-time setup:
+            INSTAGRAM-SETUP.md. Until then (or if it ever stops) the card shows your newest
+            Instagram post from socials-writer.html instead - that is why only ONE post shows
+            before the setup is done.
+  TikTok    TikTok's own profile card: avatar, numbers and a scrolling row of your latest videos. It
+            updates itself, but TikTok's server sometimes answers "overload-protect triggered" and
+            the card shows an error box. If that bothers you, set TIKTOK_MODE to 'latest' near the top
+            of assets/socials-view.js: the card then shows your newest saved TikTok video (cover +
+            play button) and you paste each new TikTok link in socials-writer.html, like for X.
+  X.com     your NEWEST X post as X's own embedded post, plus "Ver más posts en X".
+Why X is not a live profile feed: X's timeline widget often shows nothing to visitors who are not
+logged in, and there is no free way to read its latest posts. A single post embed works every time.
+So when you post on X (or on TikTok, in 'latest' mode): copy the post's link, paste it in socials-writer.html, make sure it is the top one,
+copy the new socials-data.js it makes, and push. Older posts stay in the file but only the newest
+TikTok and the newest X post show.
+Which accounts: LIVE (Instagram), LATEST (TikTok, X) and TIKTOK_MODE at the top of assets/socials-view.js.
+"Show" in the writer counts the three cards too: 3 = Instagram, TikTok and X.
 
 ## Footer social links
 Every page's footer has five round icons - Instagram, Threads, Discord, TikTok

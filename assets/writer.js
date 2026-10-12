@@ -75,7 +75,7 @@
   }
 
   function cloneBlock(b) {
-    if (b.type === 'image' || b.type === 'video') {
+    if (b.type === 'image' || b.type === 'video' || b.type === 'youtube') {
       return { type: b.type, src: b.src || '', caption: b.caption || '' };
     }
     if (b.type === 'h') return { type: 'h', text: b.text || '' };
@@ -166,6 +166,22 @@
       '<button class="btn btn-ghost btn-small" data-down="' + i + '" ' + (i === n - 1 ? 'disabled' : '') + '>&darr;</button>' +
       '<button class="btn btn-small btn-danger" data-del="' + i + '">Delete</button>' +
       '</div>';
+    if (b.type === 'youtube') {
+      var yt = window.LPBSA_youtubeInfo ? window.LPBSA_youtubeInfo(b.src) : null;
+      var status = !b.src ? '' : yt
+        ? '<span class="section-note" style="color:var(--gold-light)">&#10003; Video found' + (yt.short ? ' (a Short, shown tall)' : '') + '</span>'
+        : '<span class="section-note" style="color:#ff8a8a">That does not look like a YouTube link. Copy it from YouTube\'s Share button or the address bar.</span>';
+      return '<div class="writer-row">' +
+        '<div class="writer-row-main">' +
+          '<div class="writer-grid">' +
+            '<div class="field" style="margin-bottom:0"><label>YouTube link</label>' +
+              '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="https://www.youtube.com/watch?v=..."></div>' +
+            '<div class="field" style="margin-bottom:0"><label>Caption (optional)</label>' +
+              '<input type="text" class="block-input" data-field="caption" data-idx="' + i + '" value="' + esc(b.caption) + '" placeholder="Optional caption"></div>' +
+          '</div>' + status +
+        '</div>' + actions +
+      '</div>';
+    }
     if (b.type === 'image' || b.type === 'video') {
       var label = b.type === 'image' ? 'Image path' : 'Video path (.mp4)';
       var ph = b.type === 'image' ? 'images/news/week2.jpg' : 'images/news/week2.mp4';
@@ -210,6 +226,7 @@
     if (!block) return;
     block[field] = target.value;
     flashSaved(target);
+    if (block.type === 'youtube' && field === 'src') renderFormBlocks();      /* refresh the "video found" note */
   });
   blocksEl.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Enter') return;
@@ -253,6 +270,11 @@
   });
   document.getElementById('wAddImg').addEventListener('click', function () {
     formBlocks.push({ type: 'image', src: '', caption: '' });
+    renderFormBlocks();
+    focusLastBlockField('input[data-field="src"]');
+  });
+  document.getElementById('wAddYT').addEventListener('click', function () {
+    formBlocks.push({ type: 'youtube', src: '', caption: '' });
     renderFormBlocks();
     focusLastBlockField('input[data-field="src"]');
   });
@@ -306,13 +328,13 @@
     var headline = f.headline.value.trim();
     if (!headline) { toast('A story needs a headline.', true); return; }
     var cleanBlocks = formBlocks.map(function (b) {
-      if (b.type === 'image' || b.type === 'video') {
+      if (b.type === 'image' || b.type === 'video' || b.type === 'youtube') {
         return { type: b.type, src: (b.src || '').trim(), caption: (b.caption || '').trim() };
       }
       if (b.type === 'h') return { type: 'h', text: (b.text || '').trim() };
       return { type: 'p', text: (b.text || '').trim() };
     }).filter(function (b) {
-      return (b.type === 'image' || b.type === 'video') ? !!b.src : !!b.text;
+      return (b.type === 'image' || b.type === 'video' || b.type === 'youtube') ? !!b.src : !!b.text;
     });
     var firstPara = cleanBlocks.filter(function (b) { return b.type === 'p'; })[0];
     var storyId = f.id.value.trim() || slug(headline);

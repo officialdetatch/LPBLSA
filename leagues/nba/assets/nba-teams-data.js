@@ -20,10 +20,10 @@
    ============================================================ */
 window.LPBSA_TEAMS = window.LPBSA_TEAMS || {};
 window.LPBSA_TEAMS.nba = [
-  {"slug": "puntos", "name": "Los Puntos de Piña", "crest": "", "initials": "LPP", "shape": "circle"},
-  {"slug": "sin-talento", "name": "Sin Talento de Barrio", "crest": "", "initials": "STB", "shape": "circle"},
-  {"slug": "imcebollin", "name": "iMcebollin", "crest": "", "initials": "JST", "shape": "circle"},
-  {"slug": "concheros", "name": "Concheros de la Concha", "crest": "", "initials": "CLC", "shape": "circle"},
-  {"slug": "mugiwaras", "name": "Mugiwaras De Caimito", "crest": "", "initials": "MDC", "shape": "circle"},
-  {"slug": "pantyman", "name": "Pantyman Squad", "crest": "", "initials": "PPT", "shape": "circle"}
+  {"slug": "puntos", "name": "Los Puntos de Piña", "crest": "images/puntos.png", "initials": "LPP", "shape": "circle"},
+  {"slug": "sin-talento", "name": "Sin Talento de Barrio", "crest": "images/sin-talento.png", "initials": "STB", "shape": "circle"},
+  {"slug": "imcebollin", "name": "iMcebollin", "crest": "images/imcebollin.png", "initials": "JST", "shape": "circle"},
+  {"slug": "concheros", "name": "Concheros de la Concha", "crest": "images/concheros.png", "initials": "CLC", "shape": "circle"},
+  {"slug": "mugiwaras", "name": "Mugiwaras De Caimito", "crest": "images/mugiwaras.png", "initials": "MDC", "shape": "circle"},
+  {"slug": "pantyman", "name": "Pantyman Squad", "crest": "images/pantyman.png", "initials": "PPT", "shape": "circle"}
 ];
