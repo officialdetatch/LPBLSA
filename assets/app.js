@@ -677,6 +677,14 @@
   if (newsPage && !window.LPBSA_SINGLE) {
     var fromHash = function () {
       var raw = location.hash.replace(/^#/, ''), id;
+      /* Link-in-bio tools (Later / linkin.bio) and some apps stick tracking tags AFTER the #,
+         e.g. #story-1?utm_campaign=linkinbio&utm_source=... Only the part before the first
+         ? or & is the story, so cut the rest off and tidy the address bar to the clean link. */
+      var cut = raw.search(/[?&]/);
+      if (cut !== -1) {
+        raw = raw.slice(0, cut);
+        try { history.replaceState(null, '', location.pathname + location.search + (raw ? '#' + raw : '')); } catch (e) { /* file:// quirks */ }
+      }
       try { id = decodeURIComponent(raw); } catch (e) { id = raw; }      /* a mangled link (a stray %) */
       window.LPBSA_renderNews(id);
       window.scrollTo(0, 0);
