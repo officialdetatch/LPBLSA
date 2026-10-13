@@ -5,6 +5,142 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "resumen-de-la-semana-5",
+    "league": "football",
+    "date": "Week 5 | Oct 13",
+    "headline": "Resumen De La Semana 5",
+    "summary": "Nueva semana, nuevo resumen. Que semana para ser amante de este deporte!",
+    "blocks": [
+      {
+        "type": "image",
+        "src": "images/news/IMG_8967.jpg",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "Masacre en terreno enemigo!"
+      },
+      {
+        "type": "p",
+        "text": "La visita de Mugiwaras de Caimito a Peter's Perfect Team termina en una masacre horrible!!! Muchos describieron esto como un un verdadero tiroteo."
+      },
+      {
+        "type": "p",
+        "text": "Mugiwaras De Caimito derrotó a Peter’s Perfect Team y subió a 3-1, con un 96.0% de probabilidad de llegar a los playoffs. Aunque una floja actuación de Omarion Hampton pudo ser la diferencia entre ganar y perder. Peter’s Perfect Team cae a 1-3 y la próxima semana enfrenta a Sierra Linda Cameltoes."
+      },
+      {
+        "type": "p",
+        "text": "Final del encuentro: Mugiwaras De Caimito - 204.34 vs. Peter’s Perfect Team - 130.56"
+      },
+      {
+        "type": "h",
+        "text": "MOOOOOOOOOOOOOOONDAYYYYYYYY NIGHT FOOTBALL MIRACLE!"
+      },
+      {
+        "type": "youtube",
+        "src": "https://www.youtube.com/shorts/qUG66jc901I",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "El encuentro entre Hobbit y Sierra Linda Cameltoes se decidio completamente el dia de ayer. Josh Allen (Buf, QB) cargó con el equipo de Hobbit: 30.5 puntos, 2 TDs y 331 yardas. ¿Qué es el amor? Es lo que Josh Allen siente por Hobbit: rindió por encima de lo esperado cuando había una victoria en juego, y no se achicó ante la presión."
+      },
+      {
+        "type": "p",
+        "text": "No solo eso, Jayden Daniels (Wsh, QB) de Hobbit anotó 32.3 puntos, 11.8 por encima de su proyección."
+      },
+      {
+        "type": "p",
+        "text": "Literalmente, cuando no ves venir a alguien, es difícil detenerlo, y Sierra Linda Cameltoes lo sintió en carne propia. Seguro les dio dolor de cuello al voltear a ver el marcador, flow RKO OUTTA NO WHERE (Randy Orton, please no nos cantes copy rights)"
+      },
+      {
+        "type": "p",
+        "text": "Final del encuentro: Hobbit - 154.26 vs. Sierra Linda Cameltoes - 149.06."
+      },
+      {
+        "type": "h",
+        "text": "Vacaciones y El Regreso del Alma Patriota!"
+      },
+      {
+        "type": "p",
+        "text": "Los Puntos de Piña tuvieron un exitoso bye week poniendo un total de 215.36 puntos a su score differential y manteniendo su 2-2. Pero eso no fue todo..."
+      },
+      {
+        "type": "p",
+        "text": "Todos sabemos de la leyenda que algun dia fue el Alma Patriota! Personaje el cual en el pasado el comisionado Detatch dio vida! Claro luego de aquella noche horrible en el pasado Superbowl perdio su mascara y carrera. (que mucho puso en la linea y que mucho perdio!)"
+      },
+      {
+        "type": "p",
+        "text": "Bueno suficiente de las historias tristes! Compartiendo semana de bye Week, su Tight End, Travis Kelce y Detatch fuero vistos por Mexico!!! No solo eso el TE, se vio practicando tackleadas con el MISMISIMO ALMAAAAA PATRIOTAAAAAA!!!!!! Cabe recalcar que el TE le dio una palisa la cual realmente estamos de acuerdo, Alma Patriota, quedate en el retiro por favor."
+      },
+      {
+        "type": "image",
+        "src": "images/news/IMG_8966.JPG",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "Los Puntos de Piña se estaran enfrentando contra los Mugiwara de Caimito, que vienen mas caliente que una perra en celos estando 3-1."
+      },
+      {
+        "type": "h",
+        "text": "La Tabla"
+      },
+      {
+        "type": "p",
+        "text": "Nuestra tabla de posiciones queda asi luego de la semana 5:"
+      },
+      {
+        "type": "p",
+        "text": "1. Mugiwaras De Caimito (Daniel Heredia): 3-1-0"
+      },
+      {
+        "type": "p",
+        "text": "2. Hobbit (Jose Cruz): 3-1-0"
+      },
+      {
+        "type": "p",
+        "text": "3. Los Puntos de Pina (Christopher Ramirez): 2-2-0"
+      },
+      {
+        "type": "p",
+        "text": "4. Peter’s Perfect Team (Peter Cruz): 1-3-0"
+      },
+      {
+        "type": "p",
+        "text": "5. Sierra Linda Cameltoes (George Sanchez): 1-3-0"
+      },
+      {
+        "type": "h",
+        "text": "Enfrentamientos de esta semana"
+      },
+      {
+        "type": "p",
+        "text": "Estando Hobbit en un merecido Bye Week, nuesta semana queda de la siguiente manera:"
+      },
+      {
+        "type": "p",
+        "text": "Los Puntos de Pina (57%) vs. Mugiwaras De Caimito (43%)"
+      },
+      {
+        "type": "p",
+        "text": "Sierra Linda Cameltoes (41%) vs. Peter’s Perfect Team (59%)"
+      },
+      {
+        "type": "p",
+        "text": "Como todo, estos numeros no son de confiar! Aqui la volatilidad y los cambios de un dia para otro seran la razon por la cual despegar un ojo puede ser pecado capital!"
+      },
+      {
+        "type": "p",
+        "text": "Nos vemos la semana que viene en este tu segmento favorito:"
+      },
+      {
+        "type": "p",
+        "text": "EL RESUMEN DE LA SEMANA!!!!"
+      }
+    ]
+  },
+  {
     "id": "story-1",
     "league": "all",
     "date": "",

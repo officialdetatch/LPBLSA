@@ -193,10 +193,10 @@
     }
     var cold = [a, b].filter(function (x) { return x.streakType === 'L' && x.streakN >= 2; })
       .sort(function (x, y) { return y.streakN - x.streakN; })[0];
-    if (cold) return cold.team.name + ' viene con ' + cold.streakN + ' derrotas al hilo. Hoy o nunca.';
+    if (cold) return cold.team.name + ' viene con ' + cold.streakN + ' derrotas consecutivas. Hoy o nunca.';
     var hot = [a, b].filter(function (x) { return x.streakType === 'W' && x.streakN >= 2; })
       .sort(function (x, y) { return y.streakN - x.streakN; })[0];
-    if (hot) return hot.team.name + ' viene en llamas: ' + hot.streakN + ' victorias al hilo.';
+    if (hot) return hot.team.name + ' viene en llamas: ' + hot.streakN + ' victorias consecutivas.';
     if (a.rank <= 2 && b.rank <= 2) return 'Duelo en la cima. Aquí se decide quién manda.';
     if (a.w === b.w && a.l === b.l && a.t === b.t) {
       return 'Mismo récord, ' + recordOf(a) + '. Alguien sale de aquí con cara larga.';
@@ -309,7 +309,7 @@
     var facts = [];
     if (!leader.l && !leader.t) facts.push('invicto');
     if (hasPF && byPF[0].slug === leader.slug) facts.push('el que más anota');
-    if (leader.streakType === 'W' && leader.streakN >= 2) facts.push(leader.streakN + ' victorias al hilo');
+    if (leader.streakType === 'W' && leader.streakN >= 2) facts.push(leader.streakN + ' victorias consecutivas');
     var tail = ['Y lo sabe.', 'Que alguien los pare.', 'Esto ya es abuso.'];
     var dueno = {
       e: leader, icon: '👑', title: 'El Dueño', stat: recordOf(leader), unit: '#1 en la tabla', top: true,
@@ -358,7 +358,7 @@
           .sort(function (a, b) { return b.streakN - a.streakN || a.rank - b.rank; })[0];
         if (!e) return null;
         return { e: e, icon: '🔥', title: 'En Llamas', stat: 'W' + e.streakN, unit: 'racha',
-          line: e.streakN + ' victorias al hilo. El grupo de chat ya tiene miedo.' };
+          line: e.streakN + ' victorias consecutivas. El grupo de chat ya tiene miedo.' };
       },
       function () {
         var e = list.filter(function (x) { return x.streakType === 'L' && x.streakN >= 2; })
