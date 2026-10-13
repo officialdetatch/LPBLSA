@@ -2,7 +2,7 @@
    THE LEAGUES  --  one list that the navbar, the Teams page, the
    league landing pages and the floating bubble all read from.
 
-   To open a new league (say UCL next year):
+   To open a new league (say MLB next year):
      1. change its  status  from 'soon' to 'live'
      2. give it a  home  (its landing page, relative to the site root)
      3. create its folder under leagues/ (copy leagues/nba as a start)
@@ -16,7 +16,7 @@
      sport      the sport, in Spanish - shown in small print in the menus, the bubble
                 and the notifications window
      story      the value news-writer.html stores for stories of this
-                league. Kept as football / basketball / soccer / baseball so
+                league. Kept as football / basketball / baseball so
                 every story already written keeps working.
      status     'live' = clickable     'soon' = greyed out, does nothing
      home       landing page, from the site root (live leagues only)
@@ -47,13 +47,8 @@ window.LPBSA_LEAGUES = [
     tagline: 'Todos 0-0. Tip-off el 20 de octubre.'
   },
   {
-    key: 'ucl', short: 'UCL', name: 'UEFA Champions League', sport: 'F\u00fatbol', story: 'soccer',
-    status: 'soon', soonText: 'Disponible el próximo año', logo: 'images/leagues/ucl.png',
-    assetRoot: 'leagues/ucl/', teamPages: '', noTies: true
-  },
-  {
     /* the baseball division - greyed out ("Pronto") until it opens. To keep it a secret for now,
-       put // in front of these lines. To open it: see "Going live: UCL and MLB" in README.md */
+       put // in front of these lines. To open it: see "Going live: MLB" in README.md */
     key: 'mlb', short: 'MLB', name: 'MLB Fantasy', sport: 'B\u00e9isbol', story: 'baseball',
     status: 'soon', soonText: 'Se est\u00e1 cocinando', logo: 'images/leagues/mlb.png',
     assetRoot: 'leagues/mlb/', teamPages: '', noTies: false

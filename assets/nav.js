@@ -11,7 +11,7 @@
      data-root    how far up the site root is   ("" , "../" or "../../")
      data-active  which tab to light up:  home  about  reglas  news  leagues
                   playoffs  teams  contact  tienda   (leave off for the private tools)
-     data-league  on a league's own pages: nfl / nba / ucl - lights up
+     data-league  on a league's own pages: nfl / nba / mlb - lights up
                   that league inside the Leagues menu
 
    The Reglas, Leagues and Playoffs menus are all built from assets/leagues.js

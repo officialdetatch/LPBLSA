@@ -676,7 +676,7 @@ a.league-tile:hover .league-tile-go{ transform:translateX(3px); }
   display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
 }
 .news-edit-row{
-  display:flex; gap:10px; margin-top:10px;
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;
 }
 
 /* home: the newest story leads, the next two stack beside it */
@@ -702,9 +702,7 @@ a.league-tile:hover .league-tile-go{ transform:translateX(3px); }
 @media (max-width:520px){
   .news-grid.is-featured > .news-card:not(:first-child){ flex-direction:row; }
   .news-grid.is-featured > .news-card:not(:first-child) .news-cover{ flex:0 0 36%; aspect-ratio:auto; min-height:132px; }
-  .news-grid.is-featured > .news-card:not(:first-child) /* a logo or graphic (png) is shown whole on the card instead of being cropped */
-.news-cover img.is-graphic{ object-fit:contain; padding:6%; filter:drop-shadow(0 12px 24px rgba(0,0,0,.45)); }
-.news-cover::after{ display:none; }
+  .news-grid.is-featured > .news-card:not(:first-child) .news-cover::after{ display:none; }
   .news-grid.is-featured > .news-card:not(:first-child) .news-cover-mark img{ width:56%; }
   .news-grid.is-featured > .news-card:not(:first-child) .news-cover-play span{ width:42px; height:42px; }
   .news-grid.is-featured > .news-card:not(:first-child) .news-more{ display:none; }
@@ -1252,7 +1250,7 @@ a.news-card:hover .news-more svg{ transform:translateX(3px); }
   background:var(--navy-800);
 }
 .article-figure img{ width:100%; }
-.article-figure video{
+.article-figure:not(.tv) video{
   display:block;
   width:100%;
   height:min(70vh, 600px);
@@ -2136,3 +2134,376 @@ tr.sched-now td:first-child{ box-shadow:inset 3px 0 0 var(--gold); }
 }
 .sched-tag.is-live{ color:#ffb8c1; border-color:rgba(255,77,94,.45); background:rgba(255,77,94,.1); }
 .sched-tag .live-dot{ width:6px; height:6px; }
+
+/* ============================================================
+   LPBLSA TV  --  the league's video player (assets/tv.js)
+   Every uploaded video and YouTube link in a story or on the About page.
+   ============================================================ */
+.tv{
+  --tv-ar:16 / 9; --tv-r:1.778;
+  position:relative;
+  background:var(--navy-950);
+  border:1px solid var(--line);
+  box-shadow:0 18px 44px rgba(1,4,14,.45);
+}
+/* the gold broadcast line along the top of the box */
+.tv::after{
+  content:""; position:absolute; z-index:5; top:0; left:0; right:0; height:2px; pointer-events:none;
+  background:linear-gradient(90deg, var(--gold-light), var(--gold) 30%, rgba(212,175,55,0) 85%);
+}
+/* upright phone videos and YouTube Shorts get a tall box instead of thin black bars */
+.tv.is-portrait{ width:min(100%, 380px, calc(76vh * var(--tv-r))); margin-left:auto; margin-right:auto; }
+
+.tv-stage{ position:relative; background:#000; }
+.tv-screen{
+  position:relative; aspect-ratio:var(--tv-ar); overflow:hidden; isolation:isolate;
+  container-type:inline-size;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(212,175,55,.22), transparent 60%),
+    repeating-linear-gradient(104deg, rgba(255,255,255,.03) 0 2px, transparent 2px 18px),
+    linear-gradient(160deg, var(--navy-700), var(--navy-950));
+}
+.tv-stage .tv-media{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; display:block; border:0; background:transparent;
+}
+.tv-stage .tv-iframe{ background:#000; }
+
+/* YouTube before the first press: its picture */
+.tv-facade{ position:absolute; inset:0; display:block; }
+.tv-thumb{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease-out); }
+.tv-stage:hover .tv-thumb{ transform:scale(1.035); }
+
+/* what sits on the picture */
+.tv-overlay{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+.tv-overlay::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(6,12,28,.6) 0%, rgba(6,12,28,0) 30%, rgba(6,12,28,0) 55%, rgba(6,12,28,.8) 100%);
+  transition:opacity .35s ease;
+}
+.tv-stage.is-playing .tv-overlay::before{ opacity:0; }
+.tv-stage.is-live-yt .tv-overlay{ display:none; }            /* YouTube's own player takes over */
+
+.tv-tag{
+  position:absolute; top:12px; left:12px;
+  display:inline-flex; align-items:center; gap:7px;
+  padding:5px 10px 5px 9px; border-radius:6px;
+  background:rgba(6,12,28,.62); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-family:var(--font-display); font-style:italic; font-weight:800;
+  font-size:.82rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white);
+  transition:opacity .3s ease;
+}
+.tv-tag i{ width:4px; height:13px; border-radius:1px; background:var(--gold); transform:skewX(var(--slash)); }
+.tv-tag b{ color:var(--gold); font-weight:800; }
+.tv-stage.is-started .tv-tag{ opacity:0; }
+
+/* the channel logo in the corner, like on TV */
+.tv-bug{
+  position:absolute; top:10px; right:10px; width:40px; height:40px;
+  filter:drop-shadow(0 3px 8px rgba(0,0,0,.55)); opacity:.92; transition:opacity .4s ease;
+}
+.tv-bug img{ width:100%; height:100%; object-fit:contain; }
+.tv-stage.is-playing .tv-bug{ opacity:.5; }
+
+/* the big gold button */
+.tv-big{
+  position:absolute; left:50%; top:50%; width:78px; height:78px; margin:-39px 0 0 -39px;
+  display:grid; place-items:center; padding:0;
+  border:0; border-radius:50%; cursor:pointer; pointer-events:auto;
+  color:var(--navy-950);
+  background:linear-gradient(160deg, #f7e08f, var(--gold) 58%, #b8922a);
+  box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 0 7px rgba(212,175,55,.2);
+  transition:transform .25s var(--ease-out), box-shadow .25s ease, opacity .25s ease;
+}
+.tv-big svg{ width:30px; height:30px; }
+.tv-stage:not(.is-playing):not(.is-ended) .tv-big svg{ margin-left:4px; }    /* a play triangle looks centred a bit to the right */
+.tv-big::before{
+  content:""; position:absolute; inset:-9px; border-radius:50%;
+  border:1.5px solid rgba(242,217,138,.55); pointer-events:none;
+  animation:tvPulse 2.4s var(--ease-out) infinite;
+}
+.tv-stage.is-started .tv-big::before{ animation:none; opacity:0; }
+.tv-big:hover, .tv-big:focus-visible{ transform:scale(1.07); box-shadow:0 18px 40px rgba(0,0,0,.55), 0 0 0 9px rgba(212,175,55,.26); }
+.tv-big:focus-visible{ outline:2px solid var(--white); outline-offset:4px; }
+.tv-stage.is-playing .tv-big{ opacity:0; pointer-events:none; transform:scale(.85); }
+@media (hover:none){
+  /* phones: while the controls show, the middle button pauses */
+  .tv-stage.is-playing:not(.is-idle):not(.is-docked) .tv-big{ opacity:.94; pointer-events:auto; transform:none; }
+}
+@keyframes tvPulse{ 0%{ transform:scale(.92); opacity:.85; } 100%{ transform:scale(1.32); opacity:0; } }
+
+/* how long it is, before it starts */
+.tv-chip{
+  position:absolute; left:12px; bottom:12px;
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 10px 4px 8px; border-radius:999px;
+  background:rgba(6,12,28,.74); color:var(--white);
+  font-family:var(--font-display); font-weight:700; font-size:.9rem; letter-spacing:.04em; font-variant-numeric:tabular-nums;
+}
+.tv-chip[hidden]{ display:none; }
+.tv-chip svg{ width:11px; height:11px; color:var(--gold); }
+.tv-stage.is-started .tv-chip{ display:none; }
+
+/* loading */
+.tv-spin{
+  position:absolute; left:50%; top:50%; width:58px; height:58px; margin:-29px 0 0 -29px;
+  border-radius:50%; border:3px solid rgba(255,255,255,.16); border-top-color:var(--gold);
+  opacity:0; transition:opacity .2s ease; animation:tvSpin .85s linear infinite;
+}
+.tv-stage.is-waiting.is-playing .tv-spin{ opacity:1; }
+@keyframes tvSpin{ to{ transform:rotate(360deg); } }
+
+/* the controls */
+.tv-bar{
+  position:absolute; left:0; right:0; bottom:0; z-index:3;
+  display:flex; align-items:center; gap:4px;
+  padding:30px 10px 8px;
+  background:linear-gradient(180deg, rgba(4,8,20,0), rgba(4,8,20,.88));
+  transition:opacity .3s ease, transform .3s var(--ease-out);
+}
+.tv-stage:not(.is-started) .tv-bar,
+.tv-stage.is-playing.is-idle .tv-bar{ opacity:0; transform:translateY(8px); pointer-events:none; }
+.tv-stage:not(.is-started) .tv-bar{ visibility:hidden; }
+.tv-stage.is-playing.is-idle{ cursor:none; }
+.tv-btn{
+  flex:none; width:38px; height:38px; padding:0;
+  display:grid; place-items:center;
+  border:0; border-radius:8px; background:transparent; color:var(--white); cursor:pointer;
+  transition:color .15s ease, background-color .15s ease;
+}
+.tv-btn svg{ width:22px; height:22px; }
+.tv-btn:hover{ color:var(--gold-light); background:rgba(255,255,255,.08); }
+.tv-time{
+  flex:none; padding:0 6px 0 2px; white-space:nowrap;
+  font-family:var(--font-display); font-weight:600; font-size:.95rem; letter-spacing:.03em;
+  color:#e6ebf6; font-variant-numeric:tabular-nums;
+}
+.tv-sep{ color:var(--mute); }
+.tv-seek{
+  --p:0%; --b:0%;
+  flex:1; min-width:50px; height:24px; margin:0 6px; padding:0;
+  -webkit-appearance:none; appearance:none; background:transparent; cursor:pointer;
+}
+.tv-seek::-webkit-slider-runnable-track{
+  height:4px; border-radius:999px;
+  background:linear-gradient(90deg, var(--gold) 0 var(--p), rgba(255,255,255,.42) var(--p) var(--b), rgba(255,255,255,.18) var(--b) 100%);
+}
+.tv-seek::-moz-range-track{
+  height:4px; border-radius:999px;
+  background:linear-gradient(90deg, var(--gold) 0 var(--p), rgba(255,255,255,.42) var(--p) var(--b), rgba(255,255,255,.18) var(--b) 100%);
+}
+.tv-seek::-webkit-slider-thumb{
+  -webkit-appearance:none; width:14px; height:14px; margin-top:-5px; border:0; border-radius:50%;
+  background:var(--gold-light); box-shadow:0 0 0 3px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.5);
+  transition:transform .15s ease;
+}
+.tv-seek::-moz-range-thumb{
+  width:14px; height:14px; border:0; border-radius:50%;
+  background:var(--gold-light); box-shadow:0 0 0 3px rgba(212,175,55,.35), 0 2px 6px rgba(0,0,0,.5);
+}
+.tv-seek:hover::-webkit-slider-thumb, .tv-seek:active::-webkit-slider-thumb{ transform:scale(1.25); }
+.tv-btn:focus-visible, .tv-seek:focus-visible, .tv-db:focus-visible, .tv-hold-btn:focus-visible{ outline:2px solid var(--gold-light); outline-offset:2px; }
+@media (max-width:420px){ .tv-sep, .tv-dur{ display:none; } }
+@container (max-width:300px){ .tv-sep, .tv-dur{ display:none; } }
+@container (max-width:250px){ .tv-time, .tv-vol{ display:none; } .tv-seek{ min-width:0; } }
+
+/* a file the browser cannot read */
+.tv-error{
+  position:absolute; inset:0; z-index:4;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  padding:20px; text-align:center; color:var(--mute); background:rgba(6,12,28,.9);
+}
+.tv-error[hidden]{ display:none; }
+.tv-error b{ color:var(--white); font-family:var(--font-display); font-size:1.25rem; letter-spacing:.01em; }
+.tv-error a{ margin-top:8px; color:var(--gold-light); font-family:var(--font-display); font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.tv-stage.is-error .tv-big, .tv-stage.is-error .tv-bar, .tv-stage.is-error .tv-chip, .tv-stage.is-error .tv-spin{ display:none; }
+
+/* under the picture: the channel's name, where the video comes from, its length */
+.tv-foot{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 14px; background:var(--navy-900); border-top:1px solid var(--line-soft);
+  font-size:.86rem; color:var(--mute);
+}
+.tv-mark{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--font-display); font-style:italic; font-weight:800;
+  font-size:.92rem; letter-spacing:.1em; text-transform:uppercase; color:var(--white);
+}
+.tv-mark::before{ content:""; width:4px; height:13px; border-radius:1px; background:var(--gold); transform:skewX(var(--slash)); }
+.tv-mark b{ color:var(--gold); font-weight:800; }
+.tv-src{
+  padding:2px 8px; border-radius:999px; border:1px solid var(--line);
+  font-family:var(--font-display); font-weight:600; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase;
+}
+.tv-foot-r{ margin-left:auto; font-family:var(--font-display); font-weight:600; letter-spacing:.04em; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.tv-ext{ color:var(--mute); }
+.tv-ext:hover{ color:var(--gold-light); }
+.tv figcaption{ border-top:1px solid var(--line-soft); }
+@media (max-width:420px){ .tv-src{ display:none; } }
+
+/* la cajita: the player keeps going in the corner while you scroll */
+.tv-dockbar{ display:none; }
+.tv-stage.is-docked{
+  --tv-dock-w:clamp(250px, 26vw, 360px);
+  position:fixed; z-index:80;
+  right:max(16px, env(safe-area-inset-right)); bottom:max(16px, env(safe-area-inset-bottom));
+  width:var(--tv-dock-w);
+  border-radius:14px; overflow:hidden;
+  box-shadow:0 22px 60px rgba(0,0,0,.65), 0 0 0 1px rgba(212,175,55,.55);
+  animation:tvDockIn .4s var(--ease-out);
+}
+.tv-stage.is-docked.is-portrait{ --tv-dock-w:clamp(150px, 14vw, 200px); }
+@media (max-width:600px){
+  .tv-stage.is-docked{ --tv-dock-w:60vw; right:12px; bottom:12px; }
+  .tv-stage.is-docked.is-portrait{ --tv-dock-w:36vw; }
+}
+@keyframes tvDockIn{ from{ opacity:0; transform:translateY(18px) scale(.96); } to{ opacity:1; transform:none; } }
+.tv-stage.is-docked .tv-dockbar{
+  display:flex; align-items:center; gap:2px;
+  padding:4px 4px 4px 11px; background:var(--navy-900); border-bottom:1px solid var(--line);
+}
+.tv-dockbar .tv-mark{ flex:1 1 auto; min-width:0; overflow:hidden; white-space:nowrap; font-size:.8rem; }
+.tv-stage.is-docked.is-portrait .tv-mark-l{ display:none; }        /* the tall box is narrow: just "TV" */
+.tv-db{
+  flex:none; width:32px; height:32px; padding:0;
+  display:grid; place-items:center; border:0; border-radius:8px;
+  background:transparent; color:var(--mute); cursor:pointer;
+}
+.tv-db svg{ width:17px; height:17px; }
+.tv-db:hover{ color:var(--white); background:rgba(255,255,255,.08); }
+.tv-stage.is-docked .tv-time, .tv-stage.is-docked .tv-vol, .tv-stage.is-docked .tv-fs,
+.tv-stage.is-docked .tv-tag, .tv-stage.is-docked .tv-bug, .tv-stage.is-docked .tv-chip{ display:none; }
+.tv-stage.is-docked .tv-bar{ padding:20px 4px 2px; }
+.tv-stage.is-docked .tv-btn{ width:32px; height:32px; }
+.tv-stage.is-docked .tv-big{ width:52px; height:52px; margin:-26px 0 0 -26px; box-shadow:0 8px 20px rgba(0,0,0,.5); }
+.tv-stage.is-docked .tv-big svg{ width:21px; height:21px; }
+
+/* what stays in the story while the video is in the corner */
+.tv-hold{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+  aspect-ratio:var(--tv-ar); overflow:hidden;
+  padding:16px; text-align:center; color:var(--mute);
+  background:
+    repeating-linear-gradient(104deg, rgba(255,255,255,.03) 0 2px, transparent 2px 18px),
+    linear-gradient(160deg, var(--navy-800), var(--navy-950));
+}
+.tv-hold[hidden]{ display:none; }
+.tv-hold-icon svg{ width:34px; height:34px; color:var(--gold); }
+.tv-hold-text{ font-family:var(--font-display); font-weight:700; font-size:1.1rem; letter-spacing:.02em; color:var(--white); }
+.tv-hold-btn{
+  margin-top:2px; padding:8px 16px; border-radius:999px;
+  border:1px solid var(--gold-dark); background:transparent; color:var(--gold-light); cursor:pointer;
+  font-family:var(--font-display); font-weight:700; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase;
+}
+.tv-hold-btn:hover{ background:rgba(212,175,55,.12); }
+
+/* full screen: the whole box, with our controls */
+.tv-stage:fullscreen{ width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; background:#000; }
+.tv-stage:fullscreen .tv-screen{ aspect-ratio:auto; height:100%; background:#000; }
+.tv-stage:-webkit-full-screen{ width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; background:#000; }
+.tv-stage:-webkit-full-screen .tv-screen{ aspect-ratio:auto; height:100%; background:#000; }
+
+@media (prefers-reduced-motion: reduce){
+  .tv-big::before, .tv-stage.is-docked{ animation:none; }
+  .tv-thumb, .tv-big, .tv-bar, .tv-overlay::before{ transition:none; }
+  .tv-stage:hover .tv-thumb{ transform:none; }
+}
+
+/* ---------- video stories on the news cards ---------- */
+.news-cover-video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transition:opacity .45s ease; pointer-events:none;
+}
+.news-cover.is-ready .news-cover-video{ opacity:1; }
+.news-cover.is-ready .news-cover-mark{ opacity:0; }
+.news-cover-mark{ transition:opacity .45s ease; }
+.news-cover-dur{
+  position:absolute; right:12px; bottom:12px; z-index:2;
+  padding:3px 9px; border-radius:6px;
+  background:rgba(6,12,28,.78); color:var(--white);
+  font-family:var(--font-display); font-weight:700; font-size:.86rem; letter-spacing:.04em; font-variant-numeric:tabular-nums;
+}
+.news-cover-dur[hidden]{ display:none; }
+/* a YouTube story's thumbnail. The standard one (hqdefault) has black bars above and below the
+   picture, so app.js zooms it just enough to hide them (--yt-s). */
+.news-cover img.news-cover-yt{ position:relative; z-index:0; background:#0b1530; }
+.news-cover img.news-cover-yt.is-hq{ transform:scale(var(--yt-s, 1)); }
+a.news-card:hover .news-cover img.news-cover-yt.is-hq{ transform:scale(calc(var(--yt-s, 1) * 1.05)); }
+/* the same gold play button as LPBLSA TV */
+.news-cover-play span{
+  border:0;
+  background:linear-gradient(160deg, #f7e08f, var(--gold) 58%, #b8922a);
+  box-shadow:0 12px 30px rgba(0,0,0,.5), 0 0 0 6px rgba(212,175,55,.2);
+  -webkit-backdrop-filter:none; backdrop-filter:none;
+  transition:transform .25s var(--ease-out);
+}
+.news-cover-play svg{ color:var(--navy-950); }
+a.news-card:hover .news-cover-play span{ transform:scale(1.08); }
+
+/* ---------- reading one story ---------- */
+/* the page title steps aside: the story's own headline is the top of the page */
+body.is-reading main > .hero{ display:none; }
+.read-progress{ position:fixed; top:0; left:0; right:0; height:3px; z-index:45; pointer-events:none; }
+.read-progress span{
+  display:block; height:100%; transform:scaleX(0); transform-origin:0 50%;
+  background:linear-gradient(90deg, var(--gold-dark), var(--gold) 40%, var(--gold-light));
+  box-shadow:0 0 12px rgba(212,175,55,.6);
+}
+body:not(.is-reading) .read-progress{ display:none; }
+
+.article-rail{ display:none; }
+@media (min-width:1100px){
+  .article-layout{ display:grid; grid-template-columns:minmax(0, 1fr) 300px; column-gap:56px; align-items:start; }
+  .article-layout > .article{ grid-column:1; grid-row:1; }
+  .article-layout > .cm{ grid-column:1; grid-row:2; }
+  .article-layout > .article-rail{ display:block; grid-column:2; grid-row:1 / span 2; position:sticky; top:100px; }
+}
+.rail-head{
+  display:flex; align-items:center; gap:10px; margin:6px 0 10px;
+  font-family:var(--font-display); font-style:italic; font-weight:800; font-size:1.4rem; text-transform:uppercase; letter-spacing:.01em;
+}
+.rail-head::before{ content:""; width:7px; height:22px; border-radius:2px; background:var(--gold); transform:skewX(var(--slash)); }
+.rail-item{ display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line-soft); color:inherit; }
+.rail-item:hover b{ color:var(--gold-light); }
+.rail-thumb{
+  position:relative; flex:none; width:98px; aspect-ratio:16 / 10; border-radius:10px; overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(212,175,55,.25), transparent 60%),
+    linear-gradient(160deg, var(--navy-600), var(--navy-900));
+}
+.rail-thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .4s var(--ease-out); }
+.rail-thumb img.rail-logo, .rail-thumb img.is-graphic{ object-fit:contain; padding:12%; }
+.rail-item:hover .rail-thumb img{ transform:scale(1.06); }
+.rail-play{
+  position:absolute; right:6px; bottom:6px; width:24px; height:24px; border-radius:50%;
+  display:grid; place-items:center; color:var(--navy-950);
+  background:linear-gradient(160deg, #f7e08f, var(--gold));
+  box-shadow:0 3px 10px rgba(0,0,0,.45);
+}
+.rail-play svg{ width:11px; height:11px; margin-left:2px; }
+.rail-text{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.rail-meta{ display:flex; align-items:center; flex-wrap:wrap; gap:6px; font-family:var(--font-display); font-weight:600; font-size:.8rem; letter-spacing:.03em; color:var(--mute); }
+.rail-meta .news-sport{ font-size:.7rem; padding:2px 7px; border-radius:5px; }
+.rail-text b{
+  font-family:var(--font-display); font-weight:700; font-size:1.08rem; line-height:1.15; color:var(--white);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.rail-all{
+  display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+  font-family:var(--font-display); font-weight:700; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; color:var(--gold);
+}
+.rail-all svg{ width:15px; height:15px; transition:transform .2s var(--ease-out); }
+.rail-all:hover svg{ transform:translateX(3px); }
+
+/* ---------- a new season: everybody 0-0 ---------- */
+.preseason-tag{
+  display:inline-block; margin-right:4px; padding:1px 8px; border-radius:6px; vertical-align:1px;
+  border:1px solid var(--gold-dark); color:var(--gold-light);
+  font-family:var(--font-display); font-weight:700; font-size:.76rem; letter-spacing:.08em; text-transform:uppercase;
+}
+
+/* ---------- roster totals (team pages) ---------- */
+tfoot td{
+  padding:12px 16px; white-space:nowrap;
+  border-top:1px solid var(--line); background:rgba(15,29,63,.55);
+}

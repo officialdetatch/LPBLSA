@@ -7,16 +7,16 @@
    WHICH TILES, AND WHERE THEY GO
    There is one tile per league in assets/leagues.js, except the league the
    visitor is already on (a page says which with <body data-league="nba">).
-   So the home page offers NFL, NBA, UCL and MLB, and the NBA page offers NFL,
-   UCL and MLB. The tiles always sit side by side in one row, sharing the width.
+   So the home page offers NFL, NBA and MLB, and the NBA page offers NFL
+   and MLB. The tiles always sit side by side in one row, sharing the width.
    A league that is still 'soon' shows a greyed "Pronto" tile.
    A page can still replace the tiles by hand with window.LPBSA_SWITCHER.
 
    THE LOGOS
-   Each tile shows its league's round logo - images/leagues/nfl.png, nba.png,
-   ucl.png and mlb.png, set by the  logo  field in assets/leagues.js. To change one,
+   Each tile shows its league's round logo - images/leagues/nfl.png, nba.png
+   and mlb.png, set by the  logo  field in assets/leagues.js. To change one,
    replace that picture file (keep the name). If a picture is missing, a built-in
-   football / basketball / soccer ball / baseball icon is drawn instead.
+   football / basketball / baseball icon is drawn instead.
 
    THE COFFEE ROW
    Under the league tiles there is one wide "Invitame un cafe" button that opens
@@ -26,7 +26,7 @@
    so a visitor can never land on a wrong page. Set  coffee: false  to remove
    the row (and put the old wording back in  prompt).
 
-   To open UCL, set its status to 'live' (and give it a home) in
+   To open MLB, set its status to 'live' (and give it a home) in
    assets/leagues.js - this bubble follows automatically.                    */
 (function () {
   'use strict';
@@ -52,7 +52,7 @@
 
   var ROOT = document.body.getAttribute('data-root') || '';
   var HERE = document.body.getAttribute('data-league') || '';
-  var ICON_FOR = { nfl: 'football', nba: 'basketball', ucl: 'soccer', mlb: 'baseball' };   /* by league key */
+  var ICON_FOR = { nfl: 'football', nba: 'basketball', mlb: 'baseball' };   /* by league key */
   if (!CONFIG.tiles) {
     CONFIG.tiles = (window.LPBSA_LEAGUES || []).filter(function (L) { return L.key !== HERE; }).map(function (L) {
       var live = L.status === 'live' && L.home;
@@ -79,13 +79,6 @@
         '<g fill="none" stroke="var(--gold-ink)" stroke-width="2" stroke-linecap="round">' +
           '<path d="M24 3v42M3 24h42"/>' +
           '<path d="M8 9.5c7 5 7 24 0 29"/><path d="M40 9.5c-7 5-7 24 0 29"/>' +
-        '</g></svg>',
-    soccer:
-      '<svg viewBox="0 0 48 48" aria-hidden="true">' +
-        '<circle cx="24" cy="24" r="21" fill="var(--white)" stroke="var(--navy-950)" stroke-width="2"/>' +
-        '<path d="M24 14.5l8.5 6.2-3.2 10H18.700l-3.200-10z" fill="var(--navy-950)"/>' +
-        '<g fill="none" stroke="var(--navy-950)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-          '<path d="M24 14.5V4.200M32.500 20.700l9.700-3.200M29.300 30.700l6 8.300M18.700 30.700l-6 8.300M15.500 20.700l-9.700-3.200"/>' +
         '</g></svg>',
     baseball:
       '<svg viewBox="0 0 48 48" aria-hidden="true">' +
@@ -150,8 +143,8 @@
     '.fs-x{position:absolute;top:6px;right:8px;width:32px;height:32px;border:0;background:none;color:var(--mute);' +
       'font-size:1.6rem;line-height:1;cursor:pointer;}' +
     '.fs-x:hover{color:var(--white);}' +
-    /* the league tiles sit side by side in ONE row, however many there are (4 on the home page,
-       3 on a league page); they share the width equally */
+    /* the league tiles sit side by side in ONE row, however many there are (3 on the home page,
+       2 on a league page); they share the width equally */
     '.fs-tiles{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px;}' +
     '.fs-sub{margin-top:-4px;font-size:.7rem;color:var(--mute);letter-spacing:.03em;line-height:1.25;}' +
     '.fs-tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px;min-width:0;' +

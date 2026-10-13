@@ -72,7 +72,7 @@ service cloud.firestore {
     // Devices that turned on push notifications. The id of each record IS the device's address
     // (a long random token), so changing or removing a record needs that address. Reading is closed
     // to everyone here; the GitHub sender reads the list with its own private key, which bypasses
-    // these rules. "sports" says which fantasies the person wants (football / basketball / soccer / baseball).
+    // these rules. "sports" says which fantasies the person wants (football / basketball / baseball).
     match /pushTokens/{token} {
       allow read: if false;
 
@@ -83,14 +83,14 @@ service cloud.firestore {
         && request.resource.data.sports is list
         && request.resource.data.sports.size() >= 1
         && request.resource.data.sports.size() <= 6
-        && request.resource.data.sports.hasOnly(['football', 'basketball', 'soccer', 'baseball'])
+        && request.resource.data.sports.hasOnly(['football', 'basketball', 'baseball'])
         && request.resource.data.updatedAt == request.time;
 
       allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['sports', 'updatedAt'])
         && request.resource.data.sports is list
         && request.resource.data.sports.size() >= 1
         && request.resource.data.sports.size() <= 6
-        && request.resource.data.sports.hasOnly(['football', 'basketball', 'soccer', 'baseball'])
+        && request.resource.data.sports.hasOnly(['football', 'basketball', 'baseball'])
         && request.resource.data.updatedAt == request.time;
 
       allow delete: if true;

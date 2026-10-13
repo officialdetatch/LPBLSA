@@ -33,9 +33,10 @@ belongs to one league lives in that league's folder and starts with its name
     rules-view.js         draws a league's Reglas page from its rules-data file
     playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
     team-page.js          the parts of an NBA team page that keep themselves up to date (record, rank, schedule)
+    tv.js                 LPBLSA TV, the league's own video player (see "LPBLSA TV" below)
     socials-view.js, socials-data.js   the Socials section (socials-data.js is made by socials-writer.html)
   images/               your logos go here (see images/README.txt)
-    leagues/              the round NFL / NBA / UCL / MLB logos used by the "otro Fantasy" bubble
+    leagues/              the round NFL / NBA / MLB logos used by the "otro Fantasy" bubble
   audio/                the commissioner theme (see audio/README.txt)
   scripts/              what the GitHub Actions run (you never run these yourself):
     send-news-alert.mjs     the email alert for a new story (news-alert.yml)
@@ -97,14 +98,46 @@ belongs to one league lives in that league's folder and starts with its name
                 drawn by assets/hero-leagues.js from assets/leagues.js and show the
                 current #1 of each league by themselves (from its standings file).
   News cards    each card uses the story's FIRST picture as its cover. A photo (.jpg)
-                fills the card; a logo or graphic (.png) is shown whole; a story that
-                starts with a video gets a play button; no picture = the league's logo.
-                So: put the photo you want on the card first in the story.
+                fills the card; a logo or graphic (.png) is shown whole; a video shows a
+                real picture from the clip (YouTube: its own thumbnail) with the gold play
+                button and its length; no picture = the league's logo.
+                So: put the photo or video you want on the card first in the story.
+  Reading       a single story (news.html#<story>) hides the "Noticias de la Liga" header so
+                the headline is the top of the page, draws a thin gold bar under the menu
+                that fills as you read, and on a wide screen shows "Lo último" (the newest
+                five stories, every league) beside it. The comments stay under the story.
+  New season    while every team in a league is still 0-0 nobody gets the gold / silver /
+                bronze in the tables, the home Standings tab says "Pretemporada", and the
+                league page's hero shows the opening day and the number of teams instead of
+                a leader. It all switches by itself once the first results are saved.
   Images        keep crests and logos around 512px wide - they are shown small, and a
                 2 MB logo makes the site slow on phones.
 
+## LPBLSA TV (assets/tv.js) - the video player
+Every video in a story or on the About page plays in the league's own player - an uploaded
+file (images/news/clip.mp4) and a YouTube link alike. Nothing to do: write the story in
+news-writer.html as always ("+ Add video" or "+ Add YouTube video").
+
+  The box        navy frame, the crest in the top corner like a TV channel's logo, the gold
+                 play button, the clip's length, and "LPBLSA TV" under it. Upright phone
+                 videos and YouTube Shorts get a tall box instead of black bars.
+  Controls       an uploaded file gets our own: play/pause, the gold time bar, sound, full
+                 screen (they fade while it plays). Keys: space or K, the arrows (5 s), M, F.
+  YouTube        shows the video's picture and our play button; YouTube's player only loads
+                 when someone presses play (faster page, and YouTube sees nothing until then).
+  La cajita      scroll away while a video plays and it keeps going in a small box in the
+                 bottom corner (X closes it, the arrow takes you back to it). An uploaded video
+                 even keeps playing while you open another story.
+  One at a time  starting a video pauses the others.
+  Video files    use .mp4. An iPhone .mov is usually HEVC: it can be 5x bigger and some Android
+                 phones and Windows browsers cannot play it (the player then says so instead of
+                 showing a black box). The writer warns you when a video path ends in .mov.
+  The words      the player's Spanish labels are in TEXT at the top of assets/tv.js.
+  Without it     if tv.js is ever missing, uploaded videos still play with the browser's own
+                 controls and a YouTube video opens on YouTube.
+
 ## The parts that run themselves (assets/jornada.js)
-They work for every league (NFL and NBA now, UCL the day it goes live). On the home page
+They work for every league (NFL and NBA now, MLB the day it goes live). On the home page
 each one gets a tab per league as soon as that league has the data it needs; a league
 without it simply doesn't show up yet. Each league's own page shows its own.
 
@@ -136,27 +169,27 @@ without it simply doesn't show up yet. Each league's own page shows its own.
                 the real site.
   The crest     tap the big crest on the home page. Then tap it some more. (7 times.)
 
-## Going live: UCL and MLB
+## Going live: MLB
 (The NBA went live after the draft on Oct 11 2026 - see "The NBA teams" further down.)
 
-Both are already in assets/leagues.js as 'soon': they show greyed out ("Pronto") in the
-menus, on the home page tiles, the Standings tabs, the Teams page and the bubble. MLB (the
-baseball division) says "Se está cocinando"; its logo is images/leagues/mlb.png - the league
-crest with a baseball (gold stitches, like the other balls), made to match the others: replace that file if you get an official one.
+MLB (the baseball division, starting next season) is already in assets/leagues.js as 'soon':
+it shows greyed out ("Pronto") in the menus, on the home page tiles, the Standings tabs, the
+Teams page and the bubble, and says "Se está cocinando". Its logo is images/leagues/mlb.png -
+the league crest with a baseball (gold stitches, like the other balls), made to match the
+others: replace that file if you get an official one.
 To keep MLB a secret for now, put // in front of its lines in assets/leagues.js.
-News is already ready for both: the news writer has UCL and MLB buttons, the News page grows
-their section by itself with the first story, and the email / phone alerts say UCL or MLB.
+News is already ready for it: the news writer has an MLB button, the News page grows its
+section by itself with the first story, and the email / phone alerts say MLB.
 
-UCL (next year) - and MLB the same way, with mlb- / .mlb / 'mlb' instead:
-  1. Copy the leagues/nba/ folder to leagues/ucl/ and rename every nba- file to ucl-.
-     Inside each data file change .nba to .ucl (LPBSA_TEAMS.ucl, LPBSA_SCHEDULE.ucl,
-     LPBSA_RULES.ucl, LPBSA_PLAYOFFS.ucl), and in the pages change the nba paths, titles,
-     texts and the og: lines at the top to UCL.
-  2. assets/leagues.js: set UCL's status to 'live' and give it home / rules / playoffs.
-  3. index.html: take the comment marks off the four UCL lines near the bottom (MLB has
-     its own four lines right under them).
-     teams.html: add the UCL teams file next to the NBA one.
-  4. Phone alerts: firestore.rules already accepts 'soccer' and 'baseball' - publish it again
+To open MLB:
+  1. Copy the leagues/nba/ folder to leagues/mlb/ and rename every nba- file to mlb-.
+     Inside each data file change .nba to .mlb (LPBSA_TEAMS.mlb, LPBSA_SCHEDULE.mlb,
+     LPBSA_RULES.mlb, LPBSA_PLAYOFFS.mlb), and in the pages change the nba paths, titles,
+     texts and the og: lines at the top to MLB.
+  2. assets/leagues.js: set MLB's status to 'live' and give it home / rules / playoffs.
+  3. index.html: take the comment marks off the four MLB lines near the bottom.
+     teams.html: add the MLB teams file next to the NBA one.
+  4. Phone alerts: firestore.rules already accepts 'baseball' - publish it again
      in Firebase (Firestore > Rules) the day the league opens, so phones can ask for it.
   Everything else - menus, the bubble, news badges, the hero tile, standings tab,
   La Jornada and Los Premios - picks it up by itself.
@@ -479,19 +512,19 @@ Try dry-run first, then test, and only then rely on the automatic sending.
   - Never put subscriber emails in this repo - it is public. Brevo holds them.
   - If a run fails, GitHub emails you; the log says why in plain words.
 
-## One league, several fantasies (NFL + NBA + UCL)
+## One league, several fantasies (NFL + NBA + MLB)
 The site is ONE league with one fantasy per sport:
 
   NFL   football     live      (the original site)
   NBA   basketball   live      (6 teams, drafted Oct 11 2026)
-  UCL   UEFA Champions League  next year - greyed out in the menu, does nothing when clicked
-  MLB   baseball     soon      (greyed out like UCL: "Se está cocinando")
+  MLB   baseball     soon      (next season - greyed out in the menu, does nothing when
+                                clicked: "Se está cocinando")
 
 ### The navbar (same on every page)
 All in Spanish: Inicio, Nosotros, Reglas, Noticias, Divisiones, Playoffs, Equipos, Tienda,
 Contáctanos. Reglas, Divisiones and Playoffs are hover menus (tap on a phone) listing
-NFL / NBA / UCL with the sport in Spanish under each (the  sport  field in assets/leagues.js);
-UCL is greyed out and does nothing. On a computer the bar always stays on one row (if the
+NFL / NBA / MLB with the sport in Spanish under each (the  sport  field in assets/leagues.js);
+MLB is greyed out and does nothing. On a computer the bar always stays on one row (if the
 window is tight, the league name in the corner shortens with "..."); below 1280px wide the
 whole bar folds into the menu button. The labels are one line each in assets/nav.js.
 It is NOT written into each page any more. assets/nav.js draws it, from the
@@ -501,7 +534,7 @@ one edit. Each page only carries an empty <nav id="siteNav"> plus attributes on
 
   data-root    how far up the site root is ("" or "../" or "../../")
   data-active  the tab to light up: home about reglas news leagues playoffs teams contact
-  data-league  on a league's own pages: nfl / nba / ucl
+  data-league  on a league's own pages: nfl / nba / mlb
 
 ### The folders
 See "Files - where everything lives" at the top. In short: the root and assets/ hold
@@ -517,12 +550,12 @@ all of them.
 teams.html shows every team as a card - crest, name, and a link to its
 page when it has one - in a scrolling carousel per league (arrows appear when a
 row is wider than the screen). A team with no crest picture shows its initials on
-a round badge (every NBA team, until their logos arrive). UCL says it is available
-next year.
+a round badge (every NBA team, until their logos arrive). MLB says "Se está cocinando"
+until it opens.
 
 ### The Reglas pages
 Each league has its own rules page in its own folder: leagues/nfl/nfl-rules.html and
-leagues/nba/nba-rules.html. The navbar's Reglas menu (next to About) lists them; UCL is
+leagues/nba/nba-rules.html. The navbar's Reglas menu (next to About) lists them; MLB is
 greyed out until it has rules. The headline is "Las reglas son las reglas." The page shows
 Basics and Roster as tiles (one tile per position), the scoring lists, and for the NBA the
 Games Played limit - with "Secciones" jump links at the top.
@@ -531,9 +564,9 @@ The rules themselves are copied straight from your two rules spreadsheets into
 leagues/nfl/assets/nfl-rules-data.js and leagues/nba/assets/nba-rules-data.js (the .xlsx
 files are not part of the website). To change a rule, edit the number or text in that file
 and save - the top of each file explains the little format. assets/rules-view.js draws the
-page. When UCL opens: set it to 'live' in assets/leagues.js and give it a  rules  page
+page. When MLB opens: set it to 'live' in assets/leagues.js and give it a  rules  page
 (see the fields listed at the top of leagues.js), copying leagues/nba/nba-rules.html and
-leagues/nba/assets/nba-rules-data.js (change LPBSA_RULES.nba to LPBSA_RULES.ucl in the copy).
+leagues/nba/assets/nba-rules-data.js (change LPBSA_RULES.nba to LPBSA_RULES.mlb in the copy).
 
 To change the headline or the line under it, edit the hero at the top of nfl-rules.html /
 nba-rules.html.
@@ -572,10 +605,10 @@ Changing a seed removes only the results that depended on it. Nobody is ever typ
 
 ### The home page (index.html)
 It no longer belongs to one sport. It has the news wire, league buttons (NFL / NBA,
-UCL greyed out), the latest 3 stories from every league (each with a small NFL / NBA /
-UCL badge), and one "Standings" section with a tab per league. Each tab shows that
-league's own table and a "Ver la liga" link. The UCL tab is greyed and does nothing
-until UCL is set to live in assets/leagues.js. The old hero numbers (top of the table,
+MLB greyed out), the latest 3 stories from every league (each with a small NFL / NBA /
+MLB / LIGA badge), and one "Standings" section with a tab per league. Each tab shows that
+league's own table and a "Ver la liga" link. The MLB tab is greyed and does nothing
+until MLB is set to live in assets/leagues.js. The old hero numbers (top of the table,
 most points, weeks to survive) now live on the NFL page, leagues/nfl/nfl-landing-page.html.
 Standings still come from each league's own <league>-standings-data.js - nothing changed for
 the managers. assets/standings-tabs.js draws the tabs, assets/hero-leagues.js the buttons.
@@ -586,14 +619,14 @@ rank badge on each, once a game has been played), then that league's latest news
 leagues/nba/ and changing its data.
 
 ### News: one list, split by league
-All stories - NFL, NBA, UCL - are still written in news-writer.html and saved into
-the ONE assets/news.js. The writer has a "League" picker at the top of the form;
-each story is stored with a "league" value (football / basketball / soccer - kept
+All stories - NFL, NBA, MLB and league-wide ones - are still written in news-writer.html
+and saved into the ONE assets/news.js. The writer has a "League" picker at the top of the form;
+each story is stored with a "league" value (all / football / basketball / baseball - kept
 as before so old stories still work; a story with no league counts as NFL).
 
   - news.html shows buttons (Todas / NFL / NBA) and one section per league.
-    news.html?sport=basketball opens with only that league. A UCL section appears
-    by itself once the first UCL story is posted.
+    news.html?sport=basketball opens with only that league. An MLB section appears
+    by itself once the first MLB story is posted.
   - The home page shows the latest stories from every league, each with its badge.
     A league's landing page shows only its own.
   - League-wide news: pick "ALL" in the writer's League row for updates and announcements
@@ -713,6 +746,6 @@ the  prompt,  coffeeLabel  and  coffeeSub  lines in the same place; set  coffee:
 
 ### The bubble logos
 The floating bubble shows images/leagues/nfl.png,
-nba.png, ucl.png and mlb.png (set by the logo field of each league in assets/leagues.js). To
+nba.png and mlb.png (set by the logo field of each league in assets/leagues.js). To
 change one, replace that file and keep the name (256x256 is plenty). The tiles sit side by
-side in one row (4 on the home page, 3 on a league page); on phones they shrink to fit.
+side in one row (3 on the home page, 2 on a league page); on phones they shrink to fit.

@@ -36,7 +36,7 @@ const COPY = {
 };
 
 /* Football notifications keep the plain headline; other fantasies say which one it is. */
-const LEAGUE_LABEL = { basketball: 'NBA', soccer: 'UCL', baseball: 'MLB' };
+const LEAGUE_LABEL = { basketball: 'NBA', baseball: 'MLB' };
 
 /* ---------- settings ---------- */
 const MODE = (env.MODE || 'send').trim();

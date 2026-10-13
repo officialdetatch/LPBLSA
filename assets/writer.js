@@ -15,8 +15,8 @@
   /* Which fantasy the story in the form belongs to. Stays on whatever you
      picked last, so writing three basketball stories in a row is three
      clicks fewer. Stories with no league are football (the original). */
-  var LEAGUES = ['all', 'football', 'basketball', 'soccer', 'baseball'];
-  var LEAGUE_LABEL = { all: 'ALL', football: 'NFL', basketball: 'NBA', soccer: 'UCL', baseball: 'MLB' };
+  var LEAGUES = ['all', 'football', 'basketball', 'baseball'];
+  var LEAGUE_LABEL = { all: 'ALL', football: 'NFL', basketball: 'NBA', baseball: 'MLB' };
   var league = 'football';
   var leagueRow = document.getElementById('wLeague');
   function cleanLeague(v) { return LEAGUES.indexOf(v) !== -1 ? v : 'football'; }
@@ -185,6 +185,11 @@
     if (b.type === 'image' || b.type === 'video') {
       var label = b.type === 'image' ? 'Image path' : 'Video path (.mp4)';
       var ph = b.type === 'image' ? 'images/news/week2.jpg' : 'images/news/week2.mp4';
+      /* an iPhone .mov is usually HEVC: big, and some Android phones / Windows browsers cannot play it */
+      var movNote = b.type === 'video' && /\.mov(\?|#|$)/i.test(b.src || '')
+        ? '<span class="section-note" style="color:#ffcf7a">Heads up: an iPhone .mov is heavy and some phones and browsers cannot play it. ' +
+          'If you can, export it as .mp4 (on iPhone: share it to yourself with "Most Compatible" on, or any video converter).</span>'
+        : '';
       return '<div class="writer-row">' +
         '<div class="writer-row-main">' +
           '<div class="writer-grid">' +
@@ -192,7 +197,7 @@
               '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="' + ph + '"></div>' +
             '<div class="field" style="margin-bottom:0"><label>Caption (optional)</label>' +
               '<input type="text" class="block-input" data-field="caption" data-idx="' + i + '" value="' + esc(b.caption) + '" placeholder="Optional caption"></div>' +
-          '</div>' +
+          '</div>' + movNote +
         '</div>' + actions +
       '</div>';
     }
@@ -226,7 +231,7 @@
     if (!block) return;
     block[field] = target.value;
     flashSaved(target);
-    if (block.type === 'youtube' && field === 'src') renderFormBlocks();      /* refresh the "video found" note */
+    if ((block.type === 'youtube' || block.type === 'video') && field === 'src') renderFormBlocks();   /* refresh the note under it */
   });
   blocksEl.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Enter') return;
@@ -338,6 +343,13 @@
     });
     var firstPara = cleanBlocks.filter(function (b) { return b.type === 'p'; })[0];
     var storyId = f.id.value.trim() || slug(headline);
+    if (!storyId) {
+      /* a headline with no letters (just an emoji) still needs a link name that never changes:
+         it takes today's date. (Without one, its link and its alerts would shift every time a story is added.) */
+      var base = 'noticia-' + new Date().toISOString().slice(0, 10), nth = 1;
+      storyId = base;
+      while (list.some(function (s, idx) { return idx !== editingIndex && s.id === storyId; })) storyId = base + '-' + (++nth);
+    }
     /* Football and basketball stories share one list and one set of links,
        so two stories may never use the same link name. */
     var clash = list.some(function (s, idx) { return idx !== editingIndex && s.id === storyId; });

@@ -5,11 +5,11 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
-    "id": "",
+    "id": "story-1",
     "league": "all",
     "date": "",
     "headline": "⚾",
-    "summary": "Un deporte creado por gringos y dominado por 2 islas en el caribe llega a la mejor liga de fantasy",
+    "summary": "Un deporte creado por gringos y dominado por 2 islas en el caribe llegan a la mejor liga de fantasy",
     "blocks": [
       {
         "type": "youtube",
@@ -510,15 +510,36 @@ window.LEAGUE_NEWS = [
     "date": "Week 3 | Sept 22",
     "headline": "De Vuelta a la Vuelta",
     "summary": "Los Mugiwara De Caimito regresan a su campamento tras vacaciones en Filipinas",
-    "image": "",
-    "caption": "",
-    "body": [
-      "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes.",
-      "Se reportó al manager Daniel llegando con moretones en el cuello y cojeando levemente. ¿Qué pasó en esas vacaciones? Nadie lo sabe con certeza, pero dado su fama, no sería raro que haya habido algún encontronazo por ahí. Lamentablemente no había presupuesto para mandar al agente 007 a investigar a fondo, así que por ahora esto se queda en el terreno del misterio.",
-      "Pronta recuperación, Daniel. Que sea lo que sea, esperamos que no afecte la estrategia de la semana.",
-      "Lesión misteriosa del manager aparte, el roster que trae Mugiwaras sigue intacto y peligroso. Joe Burrow y Jalen Hurts repartiéndose el trabajo desde los dos puestos de quarterback, Jahmyr Gibbs y James Cook III cargando en tierra, y Puka Nacua junto a Justin Jefferson dominando por el aire. Este equipo no descansó en lo futbolístico, aunque parece que sí se movió bastante en lo personal.",
-      "Sierra Linda Cameltoes no viene fácil tampoco. Con Lamar Jackson y Justin Herbert tirando el balón, más De'Von Achane en el backfield, este partido tiene toda la pinta de ser reñido.",
-      "Con Daniel de vuelta, cojera y todo, Mugiwaras va con la mira puesta en seguir invicto. Habrá que ver si el misterio del cuello se resuelve antes del kickoff o si se queda como uno de esos rumores que nunca se aclaran."
+    "blocks": [
+      {
+        "type": "video",
+        "src": "images/news/daniel-are-u-ok.mp4",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "Daniel y su gente ya están de vuelta. Después del bye week, Los Mugiwara De Caimito llegan al campamento para preparar la batalla de esta semana contra Sierra Linda Cameltoes."
+      },
+      {
+        "type": "p",
+        "text": "Se reportó al manager Daniel llegando con moretones en el cuello y cojeando levemente. ¿Qué pasó en esas vacaciones? Nadie lo sabe con certeza, pero dado su fama, no sería raro que haya habido algún encontronazo por ahí. Lamentablemente no había presupuesto para mandar al agente 007 a investigar a fondo, así que por ahora esto se queda en el terreno del misterio."
+      },
+      {
+        "type": "p",
+        "text": "Pronta recuperación, Daniel. Que sea lo que sea, esperamos que no afecte la estrategia de la semana."
+      },
+      {
+        "type": "p",
+        "text": "Lesión misteriosa del manager aparte, el roster que trae Mugiwaras sigue intacto y peligroso. Joe Burrow y Jalen Hurts repartiéndose el trabajo desde los dos puestos de quarterback, Jahmyr Gibbs y James Cook III cargando en tierra, y Puka Nacua junto a Justin Jefferson dominando por el aire. Este equipo no descansó en lo futbolístico, aunque parece que sí se movió bastante en lo personal."
+      },
+      {
+        "type": "p",
+        "text": "Sierra Linda Cameltoes no viene fácil tampoco. Con Lamar Jackson y Justin Herbert tirando el balón, más De'Von Achane en el backfield, este partido tiene toda la pinta de ser reñido."
+      },
+      {
+        "type": "p",
+        "text": "Con Daniel de vuelta, cojera y todo, Mugiwaras va con la mira puesta en seguir invicto. Habrá que ver si el misterio del cuello se resuelve antes del kickoff o si se queda como uno de esos rumores que nunca se aclaran."
+      }
     ]
   },
   {

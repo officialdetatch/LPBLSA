@@ -31,10 +31,9 @@
     all:        { label: 'LIGA', full: 'Avisos de la Liga' },
     football:   { label: 'NFL', full: 'NFL Fantasy' },
     basketball: { label: 'NBA', full: 'NBA Fantasy' },
-    soccer:     { label: 'UCL', full: 'UCL Fantasy' },
     baseball:   { label: 'MLB', full: 'MLB Fantasy' }
   };
-  var SPORT_ORDER = ['all', 'football', 'basketball', 'soccer', 'baseball'];
+  var SPORT_ORDER = ['all', 'football', 'basketball', 'baseball'];
   /* the league list in assets/leagues.js, when loaded, is the source of the names */
   (window.LPBSA_LEAGUES || []).forEach(function (L) {
     if (SPORTS[L.story]) SPORTS[L.story] = { label: L.short, full: L.name };
@@ -75,6 +74,25 @@
   }
   window.LPBSA_youtubeInfo = youtubeInfo;
 
+  /* LPBLSA TV: every video - an uploaded file or a YouTube link - is written as the league's own player.
+     assets/tv.js (on news.html and about.html) turns this into the player with our controls; without it
+     an uploaded video still plays with the browser's controls and a YouTube video opens on YouTube.
+     "#t=0.1" makes phones show the clip's first picture instead of a black box. */
+  function tvFileHTML(src, caption) {
+    var url = fromRoot(String(src));
+    return '<figure class="article-figure tv" data-tv="file"><div class="tv-stage"><div class="tv-screen">' +
+      '<video class="tv-media" controls playsinline preload="metadata" src="' + esc(url) + (url.indexOf('#') === -1 ? '#t=0.1' : '') + '"></video>' +
+      '</div></div>' + (caption ? '<figcaption>' + esc(caption) + '</figcaption>' : '') + '</figure>';
+  }
+  function tvYouTubeHTML(yt, caption) {
+    var watch = 'https://www.youtube.com/watch?v=' + yt.id;
+    return '<figure class="article-figure tv tv-yt' + (yt.short ? ' is-portrait' : '') + '" data-tv="youtube" data-yt="' + esc(yt.id) + '">' +
+      '<div class="tv-stage"><div class="tv-screen">' +
+      '<a class="tv-facade" href="' + watch + '" target="_blank" rel="noopener noreferrer" aria-label="Ver el video en YouTube">' +
+      '<img class="tv-thumb" src="https://i.ytimg.com/vi/' + esc(yt.id) + '/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"></a>' +
+      '</div></div>' + (caption ? '<figcaption>' + esc(caption) + '</figcaption>' : '') + '</figure>';
+  }
+
   /* Shared renderer for the "content blocks" model used by the About page
      and by news articles: an ordered list of paragraphs, subtitles,
      images and videos. */
@@ -85,22 +103,12 @@
           '" onerror="this.closest(\'figure\').remove()">' +
           (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
       }
-      if (b.type === 'video' && b.src) {
-        return '<figure class="article-figure"><video controls playsinline preload="metadata">' +
-          '<source src="' + esc(b.src) + '" type="video/mp4">Your browser does not support video playback.</video>' +
-          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
-      }
+      if (b.type === 'video' && b.src) return tvFileHTML(b.src, b.caption);
       if (b.type === 'youtube') {
-        /* YouTube's own player (its play screen), through the privacy-friendly youtube-nocookie address,
-           and only fetched as the visitor scrolls near it. A bad link shows a plain link instead. */
+        /* a bad link shows as a plain link instead */
         var yt = youtubeInfo(b.src);
         if (!yt) return b.src ? '<p>' + linkify(String(b.src)) + '</p>' : '';
-        return '<figure class="article-figure article-youtube' + (yt.short ? ' is-short' : '') + '">' +
-          '<div class="yt-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + yt.id + '?rel=0&modestbranding=1&playsinline=1" ' +
-          'title="' + esc(b.caption || 'YouTube') + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' +
-          'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>' +
-          '<a class="yt-open" href="https://www.youtube.com/watch?v=' + yt.id + '" target="_blank" rel="noopener noreferrer">Ver en YouTube &#8599;</a>' +
-          (b.caption ? '<figcaption>' + esc(b.caption) + '</figcaption>' : '') + '</figure>';
+        return tvYouTubeHTML(yt, b.caption);
       }
       if (b.type === 'h') {
         return '<h2 class="article-subhead">' + esc(b.text || '') + '</h2>';
@@ -204,16 +212,72 @@
       inner = '<img src="' + esc(fromRoot(c.src)) + '" alt="" loading="lazy" decoding="async"' +
         (/\.(png|webp|svg|gif)(\?|$)/i.test(c.src) ? ' class="is-graphic"' : '') + ' onerror="this.remove()">';
     } else if (c && c.type === 'youtube') {
-      /* the video's own thumbnail; if YouTube's picture cannot load, the league logo shows instead */
-      inner = mark + '<img src="https://i.ytimg.com/vi/' + esc(c.id) + '/hqdefault.jpg" alt="" loading="lazy" decoding="async" ' +
-        'style="position:relative;z-index:0;background:#0b1530" onload="if(this.naturalWidth>120){this.previousSibling.style.display=\'none\'}" onerror="this.remove()">' +
+      /* the video's own thumbnail: the big one (no black bars) when YouTube has it, its standard one
+         otherwise (see ytCover below); if neither loads, the league logo shows instead */
+      inner = mark + '<img class="news-cover-yt" src="https://i.ytimg.com/vi/' + esc(c.id) + '/maxresdefault.jpg" alt="" loading="lazy" decoding="async" ' +
+        'data-yt="' + esc(c.id) + '" onload="LPBSA_ytCover(this,1)" onerror="LPBSA_ytCover(this,0)">' +
         '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>';
     } else if (c && c.type === 'video') {
-      inner = mark + '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>';
+      /* a real picture from the clip (loaded only when the card is near the screen, see wakeCoverVideos);
+         the logo shows until then, or for good if the clip cannot be read */
+      inner = mark + '<video class="news-cover-video" muted playsinline preload="none" tabindex="-1" aria-hidden="true" data-src="' +
+        esc(fromRoot(c.src)) + '"></video>' +
+        '<span class="news-cover-play"><span>' + PLAY_ICON + '</span></span>' +
+        '<span class="news-cover-dur" hidden></span>';
     } else {
       inner = mark;
     }
-    return '<div class="news-cover">' + inner + '</div>';
+    return '<div class="news-cover' + (c && (c.type === 'video' || c.type === 'youtube') ? ' is-video' : '') + '">' + inner + '</div>';
+  }
+  /* YouTube answers a missing big thumbnail with a tiny grey one (or an error): fall back to the standard picture */
+  window.LPBSA_ytCover = function (img, loaded) {
+    var big = /maxresdefault/.test(img.src);
+    if (loaded && img.naturalWidth > 120) {
+      if (img.previousSibling) img.previousSibling.style.display = 'none';    /* the logo underneath */
+      if (!big) {
+        /* the standard thumbnail is 4:3 with black bars around a 16:9 picture: zoom in just enough
+           to hide them in this card's shape (a 16:9 card needs no zoom, a square one 1.33x) */
+        var box = img.parentNode.getBoundingClientRect();
+        var r = box.height ? box.width / box.height : 16 / 9;
+        img.style.setProperty('--yt-s', String(r >= 16 / 9 ? 1 : r >= 4 / 3 ? (16 / 9) / r : 4 / 3));
+        img.classList.add('is-hq');
+      }
+      return;
+    }
+    if (big) { img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(img.getAttribute('data-yt')) + '/hqdefault.jpg'; return; }
+    img.remove();
+  };
+  function clockText(t) {
+    t = Math.floor(t || 0);
+    return Math.floor(t / 60) + ':' + (t % 60 < 10 ? '0' : '') + (t % 60);
+  }
+  /* Card covers of video stories: fetch a few frames of the clip once the card is close to the screen. */
+  function wakeCoverVideos(scope) {
+    var vids = (scope || document).querySelectorAll('video.news-cover-video[data-src]');
+    if (!vids.length) return;
+    function load(v) {
+      var src = v.getAttribute('data-src');
+      v.removeAttribute('data-src');
+      var cover = v.parentNode;
+      var ready = function () { cover.classList.add('is-ready'); };
+      v.addEventListener('loadeddata', ready);
+      v.addEventListener('seeked', ready);
+      v.addEventListener('loadedmetadata', function () {
+        var dur = cover.querySelector('.news-cover-dur');
+        if (dur && isFinite(v.duration) && v.duration > 0) { dur.textContent = clockText(v.duration); dur.hidden = false; }
+      });
+      v.preload = 'metadata';
+      v.src = src + (src.indexOf('#') === -1 ? '#t=0.1' : '');
+    }
+    if (!('IntersectionObserver' in window)) { Array.prototype.forEach.call(vids, load); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        load(e.target);
+      });
+    }, { rootMargin: '250px 0px' });
+    Array.prototype.forEach.call(vids, function (v) { io.observe(v); });
   }
   function cardHTML(n, withBadge) {
     var badge = (withBadge === true || n.league === 'all') ? sportBadge(n) : '';
@@ -239,6 +303,7 @@
     grid.innerHTML = list.length
       ? list.map(function (n) { return cardHTML(n, gridBadges); }).join('')
       : '<p class="section-note">' + esc(grid.getAttribute('data-empty') || 'No stories posted yet. Add one in assets/news.js.') + '</p>';
+    wakeCoverVideos(grid);
   }
 
   /* ---------- standings table (home page) ---------- */
@@ -262,6 +327,8 @@
   function standingsRowHTML(row, i, ctx) {
     ctx = ctx || {};
     var rank = i + 1;
+    /* nobody has played yet (a new season): no gold, silver or bronze until a game counts */
+    var podium = ctx.played !== false;
     var t = findTeam(row.team, ctx.teams) || { slug: row.team, name: row.name || row.team };
     /* Other fantasies can tune the table before this script runs:
          LPBSA_TEAM_LINKS = false   team pages do not exist yet (no links)
@@ -276,8 +343,8 @@
       ? assetBase + t.crest : t.crest;
     var crestImg = t.crest ? '<img src="' + esc(crestPath) + '" alt="' + esc(t.name) + ' crest" onerror="this.remove()">' : '';
     var streakText = row.streak ? '<span class="' + streakClass(row.streak) + '">' + esc(row.streak) + '</span>' : '--';
-    return '<tr class="' + standingsRowClass(rank) + '">' +
-      '<td><div class="rk-cell"><span class="medal ' + medalClass(rank) + '">' + rank + '</span></div></td>' +
+    return '<tr class="' + (podium ? standingsRowClass(rank) : 'rank-n') + '">' +
+      '<td><div class="rk-cell"><span class="medal ' + (podium ? medalClass(rank) : 'n') + '">' + rank + '</span></div></td>' +
       '<td>' + (linked ? '<a class="team-link" href="' + esc(teamBase) + esc(t.slug) + '.html">' : '<span class="team-link">') +
       '<span class="crest' + (t.shape === 'circle' ? ' crest-circle' : '') + '">' + crestImg + '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
       '<span class="name">' + esc(t.name) + '</span>' + (linked ? '</a>' : '</span>') + '</td>' +
@@ -293,14 +360,18 @@
       '</tr>';
   }
   /* the same rows, for pages that show more than one league's table (see standings-tabs.js) */
+  function playedAny(rows) { return window.LPBSA_hasPlayed ? window.LPBSA_hasPlayed(rows) : true; }
   window.LPBSA_standingsRowsHTML = function (rows, ctx) {
+    ctx = ctx || {};
+    if (ctx.played === undefined) ctx.played = playedAny(rows);
     return (rows || []).map(function (r, i) { return standingsRowHTML(r, i, ctx); }).join('');
   };
   var standingsBody = document.getElementById('standingsBody');
   if (standingsBody) {
     var standingsRows = window.LEAGUE_STANDINGS || [];
+    var standingsCtx = { played: playedAny(standingsRows) };
     standingsBody.innerHTML = standingsRows.length
-      ? standingsRows.map(function (r, i) { return standingsRowHTML(r, i); }).join('')
+      ? standingsRows.map(function (r, i) { return standingsRowHTML(r, i, standingsCtx); }).join('')
       : '<tr><td colspan="' + (window.LPBSA_NO_TIES ? 10 : 11) + '" class="section-note">' +
         esc(standingsBody.getAttribute('data-empty') || 'No standings posted yet. Add them with the standings manager.') + '</td></tr>';
   }
@@ -422,12 +493,7 @@
     } else {
       var paras = (n.body || []).map(function (p) { return '<p>' + linkify(p) + '</p>'; }).join('');
       var pic = n.video
-    ? '<figure class="article-figure"><video controls playsinline preload="metadata">' +
-      '<source src="' + esc(n.video) + '" type="video/mp4">' +
-      'Your browser does not support video playback.' +
-      '</video>' +
-      (n.caption ? '<figcaption>' + esc(n.caption) + '</figcaption>' : '') +
-      '</figure>'
+    ? tvFileHTML(n.video, n.caption)
     : n.image
       ? '<figure class="article-figure"><img src="' + esc(n.image) + '" alt="' +
         esc(n.headline) + '" onerror="this.closest(\'figure\').remove()">' +
@@ -438,17 +504,64 @@
     }
     var others = storiesFor(n.league).filter(function (s) { return s.id !== n.id; }).slice(0, 3);
     var more = others.length
-      ? '<div class="section-head" style="margin-top:46px"><h2>More stories</h2></div>' +
+      ? '<div class="section-head" style="margin-top:46px"><h2>M\u00e1s noticias</h2></div>' +
         '<div class="news-grid">' + others.map(cardHTML).join('') + '</div>'
       : '';
-    return '<a class="back-link" href="' + NEWS_INDEX + '">&larr; All news</a>' +
+    /* the story on the left; on a wide screen "Lo \u00faltimo" sits beside it (the comments go under the story) */
+    return '<a class="back-link" href="' + NEWS_INDEX + '">&larr; Todas las noticias</a>' +
+      '<div class="article-layout">' +
       '<article class="article" data-story="' + esc(n.id) + '">' +
       '<div class="news-date">' + sportBadge(n) + esc(n.date) + '</div>' +
       '<h1>' + esc(n.headline) + '</h1>' +
       '<p class="article-lede">' + esc(n.summary) + '</p>' +
       shareHTML(n) +
       content +
-      '</article>' + more;
+      '</article>' + railHTML(n) + '</div>' + more;
+  }
+
+  /* "Lo \u00faltimo": the newest stories from every league, beside the one being read (wide screens only) */
+  function railThumb(s) {
+    var c = coverOf(s), pic = '';
+    if (c && c.type === 'image') {
+      pic = '<img src="' + esc(fromRoot(c.src)) + '" alt="" loading="lazy" decoding="async"' +
+        (/\.(png|webp|svg|gif)(\?|$)/i.test(c.src) ? ' class="is-graphic"' : '') + ' onerror="this.remove()">';
+    } else if (c && c.type === 'youtube') {
+      pic = '<img src="https://i.ytimg.com/vi/' + esc(c.id) + '/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()">';
+    }
+    var play = c && (c.type === 'video' || c.type === 'youtube') ? '<i class="rail-play">' + PLAY_ICON + '</i>' : '';
+    return '<span class="rail-thumb"><img class="rail-logo" src="' + esc(fromRoot(leagueLogoFor(s))) + '" alt="" loading="lazy" decoding="async">' +
+      pic + play + '</span>';
+  }
+  function railHTML(n) {
+    var latest = stories().filter(function (s) { return s.id !== n.id; }).slice(0, 5);
+    if (!latest.length) return '';
+    return '<aside class="article-rail" aria-label="Lo \u00faltimo">' +
+      '<div class="rail-head">Lo \u00faltimo</div>' +
+      latest.map(function (s) {
+        return '<a class="rail-item" href="' + NEWS_BASE + encodeURIComponent(s.id) + '">' + railThumb(s) +
+          '<span class="rail-text"><span class="rail-meta">' + sportBadge(s) + (s.date ? '<span>' + esc(s.date) + '</span>' : '') + '</span>' +
+          '<b>' + esc(s.headline) + '</b></span></a>';
+      }).join('') +
+      '<a class="rail-all" href="' + NEWS_INDEX + '">Todas las noticias ' + ARROW_ICON + '</a>' +
+      '</aside>';
+  }
+
+  /* the thin gold bar under the menu that fills as you read a story */
+  var progressBar = null, progressQueued = false;
+  function paintProgress() {
+    progressQueued = false;
+    if (!progressBar) return;
+    var art = document.body.classList.contains('is-reading') && newsPage && newsPage.querySelector('article.article');
+    if (!art) { progressBar.style.transform = 'scaleX(0)'; return; }
+    var r = art.getBoundingClientRect();
+    var span = r.height - window.innerHeight * 0.6;
+    var done = span > 0 ? (window.innerHeight * 0.25 - r.top) / span : 1;
+    progressBar.style.transform = 'scaleX(' + Math.max(0, Math.min(1, done)).toFixed(4) + ')';
+  }
+  function queueProgress() {
+    if (progressQueued) return;
+    progressQueued = true;
+    (window.requestAnimationFrame || setTimeout)(paintProgress);
   }
 
   /* ---------- sharing a story (the group chat is where the trash talk lives) ---------- */
@@ -500,7 +613,7 @@
   });
 
   /* The news page is split by fantasy: a row of filter chips, then one
-     section per fantasy. Football and Basketball always show; Soccer, Baseball and the
+     section per fantasy. Football and Basketball always show; Baseball and the
      league-wide "Liga" section only appear once a story exists for them. news.html?sport=basketball shows
      just that one. */
   function pickedSport() {
@@ -534,20 +647,37 @@
   }
 
   var newsPage = document.getElementById('newsPage');
+  if (newsPage) {
+    var bar = document.createElement('div');
+    bar.className = 'read-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    bar.innerHTML = '<span></span>';
+    document.body.appendChild(bar);
+    progressBar = bar.firstChild;
+    window.addEventListener('scroll', queueProgress, { passive: true });
+    window.addEventListener('resize', queueProgress);
+  }
   window.LPBSA_renderNews = function (id) {
     if (!newsPage) return;
     var story = id ? findStory(id) : null;
+    /* a video playing in the corner keeps playing while the next story opens (assets/tv.js) */
+    if (window.LPBSA_TV) window.LPBSA_TV.beforeRender(newsPage);
+    /* reading one story: the page header steps aside so the story is the first thing on screen */
+    document.body.classList.toggle('is-reading', !!story);
     if (id && !story) {
-      newsPage.innerHTML = '<a class="back-link" href="' + NEWS_INDEX + '">&larr; All news</a>' +
-        '<p class="section-note">That story is no longer here.</p>';
+      newsPage.innerHTML = '<a class="back-link" href="' + NEWS_INDEX + '">&larr; Todas las noticias</a>' +
+        '<p class="section-note">Esa noticia ya no est\u00e1 aqu\u00ed.</p>';
       return;
     }
     newsPage.innerHTML = story ? articleHTML(story) : indexHTML();
+    wakeCoverVideos(newsPage);
+    queueProgress();
   };
 
   if (newsPage && !window.LPBSA_SINGLE) {
     var fromHash = function () {
-      var id = decodeURIComponent(location.hash.replace(/^#/, ''));
+      var raw = location.hash.replace(/^#/, ''), id;
+      try { id = decodeURIComponent(raw); } catch (e) { id = raw; }      /* a mangled link (a stray %) */
       window.LPBSA_renderNews(id);
       window.scrollTo(0, 0);
     };

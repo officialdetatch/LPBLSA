@@ -55,13 +55,16 @@
         in whatever order you like. Add as many as you want with the buttons below the block list,
         use the <b>&uarr; &darr;</b> arrows to reorder them, and click into any box to edit it
         directly. For a <b>YouTube video</b>, just paste its link (from YouTube's Share button or the address bar,
-        Shorts too) &mdash; no download or upload, the story shows YouTube's own player with its play screen.
+        Shorts too) &mdash; no download or upload. Every video, YouTube or your own file, plays in
+        <b>LPBLSA TV</b>, the league's own player (gold play button, the crest in the corner, and it keeps
+        playing in a little box in the corner if the reader scrolls away). For a video file, <b>.mp4</b> plays on every
+        phone; an iPhone <b>.mov</b> is heavy and some phones cannot play it.
         For an image or video file, upload the file itself into <code>images/</code> first (an
         <code>images/news/</code> folder keeps things tidy) and point the path box at it. Any
         http(s) link typed into a paragraph &mdash; like a Discord invite &mdash; becomes a real
         clickable link automatically, no extra formatting needed. When you are done, press
         <b>Download news.js</b> and drop the file into <code>assets/</code>, replacing the old one.
-        Pick the <b>League</b> (ALL, NFL, NBA or UCL) first &mdash; that decides which
+        Pick the <b>League</b> (ALL, NFL, NBA or MLB) first &mdash; that decides which
         section of the News page the story lands in. Nothing changes on the public site until you do. Visitors never see this page unless you
         send them the link &mdash; delete <code>news-writer.html</code> and
         <code>assets/writer.js</code> before uploading if you would rather it never leaves your
@@ -86,7 +89,6 @@
             <button type="button" class="chip" data-league="all" title="Updates and announcements for the whole league">ALL</button>
             <button type="button" class="chip active" data-league="football">NFL</button>
             <button type="button" class="chip" data-league="basketball">NBA</button>
-            <button type="button" class="chip" data-league="soccer">UCL</button>
             <button type="button" class="chip" data-league="baseball">MLB</button>
           </div>
           <p class="section-note" style="margin:8px 0 0"><b>ALL</b> = general news for the whole league (updates, announcements, site news).

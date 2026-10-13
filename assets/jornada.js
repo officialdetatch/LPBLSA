@@ -1,6 +1,6 @@
 /* ============================================================
    LA JORNADA + LOS PREMIOS  --  the sections that run themselves,
-   for every league (NFL, NBA, UCL...).
+   for every league (NFL, NBA, MLB...).
 
    1. LA JORNADA   <div id="jornada" data-league="nfl"></div>
       This week's matchups as head-to-head cards, the team on bye, and a
@@ -468,6 +468,30 @@
   }
 
   /* ---------- 3. data-auto numbers on a league page ---------- */
+  var MONTHS_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  function preseasonStats(key, cal, teamCount) {
+    var lead = document.querySelector('.hero-stat [data-auto="leader"]');
+    var top = document.querySelector('.hero-stat [data-auto="top-ppw"]');
+    var when = cal.kickoff instanceof Date ? cal.kickoff : new Date(cal.kickoff);
+    if (lead && cal.phase === 'live') {
+      /* the first week is being played, but no result is in the table yet */
+      lead.closest('.hero-stat').innerHTML = '<b>' + esc(cal.unit || 'Semana') + ' ' + esc(cal.week) + '</b><span>En juego ahora mismo</span>';
+    } else if (lead && !isNaN(when)) {
+      var parts = {};
+      try {
+        new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit' })
+          .formatToParts(when).forEach(function (x) { parts[x.type] = x.value; });
+      } catch (e) { parts = { month: when.getMonth() + 1, day: when.getDate(), hour: '', minute: '' }; }
+      var day = parts.day + ' ' + (MONTHS_ES[Number(parts.month) - 1] || '');
+      var time = parts.hour ? parts.hour + ':' + parts.minute + ' ' + (parts.dayPeriod || '') : '';
+      lead.closest('.hero-stat').innerHTML = '<b>' + esc(day) + '</b><span>' + esc(cal.label || 'Kickoff') +
+        (time ? ' &middot; ' + esc(time.trim()) : '') + '</span>';
+    }
+    if (top && teamCount) {
+      top.closest('.hero-stat').innerHTML = '<b>' + teamCount + '</b><span>Equipos listos pa\u2019 la guerra</span>';
+    }
+  }
+
   function fillAuto(key, cal) {
     var els = document.querySelectorAll('[data-auto]');
     if (!els.length) return;
@@ -475,6 +499,10 @@
     var leader = info.list[0];
     var top = info.list.filter(function (e) { return e.gp > 0 && e.pfg > 0; })
       .sort(function (a, b) { return b.pfg - a.pfg || a.rank - b.rank; })[0];
+    /* Before the first game (everybody 0-0), "who leads" and "who scores most" have no answer yet,
+       so those two hero numbers turn into the opening day and the number of teams. */
+    var anyPlayed = info.list.some(function (e) { return e.gp > 0; });
+    if (!anyPlayed && cal && cal.phase !== 'over') preseasonStats(key, cal, info.list.length);
     Array.prototype.forEach.call(els, function (el) {
       var what = el.getAttribute('data-auto');
       var val = null;

@@ -39,7 +39,7 @@ window.LEAGUE_ABOUT = {
     },
     {
       "type": "p",
-      "text": "Luego de concretar el draft de la liga de NFL, socios y dueños de equipo confirmaron interés en una expansión a otros deportes, y las miras fueron el baloncesto y el fútbol. Aunque solo significó más trabajo, la expansión fue confirmada semanas después, fundándose con esto 2 divisiones nuevas:"
+      "text": "Luego de concretar el draft de la liga de NFL, socios y dueños de equipo confirmaron interés en una expansión a otros deportes, y las miras fueron el baloncesto y el béisbol. Aunque solo significó más trabajo, la expansión fue confirmada semanas después, fundándose con esto 2 divisiones nuevas:"
     },
     {
       "type": "p",
@@ -51,7 +51,7 @@ window.LEAGUE_ABOUT = {
     },
     {
       "type": "p",
-      "text": "LPBLSA - SOCCER, la cual, debido a los fondos, se iniciará en 2027"
+      "text": "LPBLSA - BASEBALL, la cual se iniciará en 2027"
     },
     {
       "type": "h",
@@ -59,7 +59,7 @@ window.LEAGUE_ABOUT = {
     },
     {
       "type": "p",
-      "text": "Los planes a futuro solo confirman expansiones para atraer más equipos y, como se mencionó antes, el inicio de la división LPBLSA - SOCCER."
+      "text": "Los planes a futuro solo confirman expansiones para atraer más equipos y, como se mencionó antes, el inicio de la división LPBLSA - BASEBALL."
     },
     {
       "type": "p",

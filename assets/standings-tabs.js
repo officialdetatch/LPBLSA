@@ -1,6 +1,6 @@
 /* ============================================================
    STANDINGS ON THE HOME PAGE  --  one "Standings" section with a tab per
-   league (NFL / NBA / UCL ...), each showing that league's own table.
+   league (NFL / NBA / MLB ...), each showing that league's own table.
 
    Leagues come from assets/leagues.js; their tables come from
    LPBSA_STANDINGS (each league's <league>-standings-data.js, filed by league).
@@ -38,8 +38,11 @@
       : '<tr><td colspan="' + cols + '" class="section-note">' +
         (L.key === 'nba' ? 'Los equipos y la tabla se publican cuando arranque la temporada.' : 'Todavia no hay tabla de posiciones.') +
         '</td></tr>';
+    /* before the first game everybody is 0-0: say so, instead of handing out a podium */
+    var played = !rows.length || !window.LPBSA_hasPlayed || window.LPBSA_hasPlayed(rows);
     return '<div class="standings-panel" id="standings-' + esc(L.key) + '" role="tabpanel" hidden>' +
-      '<p class="section-note standings-sub">' + esc(L.name) + ' &middot; El podio de los ganadores &middot; ' +
+      '<p class="section-note standings-sub">' + esc(L.name) + ' &middot; ' +
+        (played ? 'El podio de los ganadores' : '<span class="preseason-tag">Pretemporada</span> Todos arrancan 0-0') + ' &middot; ' +
         '<a href="' + esc(root + L.home) + '">Ver la liga &rarr;</a></p>' +
       '<div class="table-scroll"><table class="standings-table"><thead><tr>' +
         '<th>RK</th><th>Team</th><th class="num">W</th><th class="num">L</th>' +

@@ -32,7 +32,7 @@ const COPY = {
 };
 
 /* Football emails keep the plain kicker; other fantasies say which one it is. */
-const LEAGUE_LABEL = { basketball: 'NBA', soccer: 'UCL', baseball: 'MLB' };
+const LEAGUE_LABEL = { basketball: 'NBA', baseball: 'MLB' };
 function kickerFor(story) {
   const label = LEAGUE_LABEL[story.league];
   return label ? `${COPY.kicker} \u00b7 ${label}` : COPY.kicker;
