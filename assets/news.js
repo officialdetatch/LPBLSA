@@ -37,8 +37,8 @@ window.LEAGUE_NEWS = [
         "text": "MOOOOOOOOOOOOOOONDAYYYYYYYY NIGHT FOOTBALL MIRACLE!"
       },
       {
-        "type": "youtube",
-        "src": "https://www.youtube.com/shorts/qUG66jc901I",
+        "type": "video",
+        "src": "images/news/MONDAY-NIGGGGGT.mp4",
         "caption": ""
       },
       {
