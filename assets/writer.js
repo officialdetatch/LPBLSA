@@ -1,15 +1,19 @@
 /* ============================================================
    NEWS WRITER  --  private tool, not linked from the public site.
    Loads the current assets/news.js, lets you add, edit, reorder
-   and delete stories, then hands you a finished news.js to save
-   over the old one. Nothing here touches the live site until you
-   replace that file yourself.
+   and delete stories (and the lines of the gold wire), then hands
+   you a finished news.js to save over the old one. Nothing here
+   touches the live site until you replace that file yourself - or,
+   with the commissioner console set up on this device, press Publish
+   (assets/publish.js).
    ============================================================ */
 (function () {
   'use strict';
 
-  var DRAFT_KEY = 'lpbsa.writer.draft.v1';
+  var DRAFT_KEY = 'lpbsa.writer.draft.v2';     /* v2: the stories and the gold wire lines together */
   var list = [];
+  var ticker = [];                              /* the gold wire lines, in order */
+  var knownIds = [];                            /* story links already in the published file */
   var editingIndex = -1;
 
   /* Which fantasy the story in the form belongs to. Stays on whatever you
@@ -45,6 +49,7 @@
   var blocksEl = document.getElementById('wBlocks');
   var output = document.getElementById('wOutput');
   var formTitle = document.getElementById('wFormTitle');
+  var tickerEl = document.getElementById('wTicker');
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
@@ -63,7 +68,10 @@
     setTimeout(function () { t.remove(); }, 2800);
   }
 
-  function loadDraft() {
+  /* Unsaved work is kept in this browser (LPBSA_DRAFTS in assets/publish.js): only ever loaded
+     on the same version of news.js it was made on, so an old draft never undoes a newer file. */
+  function loadDraft(live) {
+    if (window.LPBSA_DRAFTS) return window.LPBSA_DRAFTS.load(DRAFT_KEY, live, 'wDraftNote');
     try {
       var raw = localStorage.getItem(DRAFT_KEY);
       if (raw) return JSON.parse(raw);
@@ -71,7 +79,24 @@
     return null;
   }
   function saveDraft() {
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(list)); } catch (err) { /* ignore */ }
+    var data = { stories: list, ticker: ticker };
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.save(DRAFT_KEY, data); return; }
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (err) { /* ignore */ }
+  }
+  /* a draft saved by the older writer (stories only) moves to the new key */
+  function moveOldDraft(live) {
+    try {
+      var old = localStorage.getItem('lpbsa.writer.draft.v1');
+      if (old === null) return;
+      localStorage.removeItem('lpbsa.writer.draft.v1');
+      var arr = JSON.parse(old);
+      if (Array.isArray(arr) && localStorage.getItem(DRAFT_KEY) === null) {
+        localStorage.setItem(DRAFT_KEY, JSON.stringify({ stories: arr.map(normalise), ticker: live.ticker }));
+      }
+    } catch (err) { /* ignore */ }
+  }
+  function cleanTicker(arr) {
+    return (Array.isArray(arr) ? arr : []).map(function (t) { return String(t == null ? '' : t); });
   }
 
   function cloneBlock(b) {
@@ -113,16 +138,26 @@
     return out;
   }
 
+  function liveData() {
+    return { stories: (window.LEAGUE_NEWS || []).map(normalise), ticker: cleanTicker(window.LEAGUE_TICKER) };
+  }
   function start() {
-    var draft = loadDraft();
-    var live = (window.LEAGUE_NEWS || []).map(normalise);
-    if (draft && draft.length && JSON.stringify(draft) !== JSON.stringify(live)) {
-      list = draft.map(normalise);
+    var live = liveData();
+    moveOldDraft(live);
+    var draft = loadDraft(live);
+    var mine = draft && Array.isArray(draft.stories)
+      ? { stories: draft.stories.map(normalise), ticker: cleanTicker(draft.ticker) } : null;
+    if (mine && JSON.stringify(mine) !== JSON.stringify(live)) {
+      list = mine.stories;
+      ticker = mine.ticker;
       document.getElementById('wDraftNote').classList.remove('hidden');
     } else {
-      list = live;
+      list = live.stories;
+      ticker = live.ticker;
     }
+    knownIds = live.stories.map(function (s) { return s.id; });
     renderFormBlocks();
+    renderTicker();
     render();
   }
 
@@ -197,7 +232,7 @@
               '<input type="text" class="block-input" data-field="src" data-idx="' + i + '" value="' + esc(b.src) + '" placeholder="' + ph + '"></div>' +
             '<div class="field" style="margin-bottom:0"><label>Caption (optional)</label>' +
               '<input type="text" class="block-input" data-field="caption" data-idx="' + i + '" value="' + esc(b.caption) + '" placeholder="Optional caption"></div>' +
-          '</div>' + movNote +
+          '</div>' + movNote + uploadButtonHTML(b, i) +
         '</div>' + actions +
       '</div>';
     }
@@ -215,6 +250,15 @@
           '<textarea class="block-input" data-field="text" data-idx="' + i + '" rows="3" placeholder="Write a paragraph. Any http(s) link typed here becomes clickable automatically.">' + esc(b.text) + '</textarea></div>' +
       '</div>' + actions +
     '</div>';
+  }
+  /* with the console set up on this device: send a photo or video from the phone straight to images/news/ */
+  function uploadButtonHTML(b, i) {
+    if (!(window.LPBSA_PUBLISH && window.LPBSA_PUBLISH.canUpload())) return '';
+    return '<div class="pub-upload"><button type="button" class="btn btn-small" data-upload="' + i + '">' +
+      (b.type === 'image' ? 'Upload a photo' : 'Upload a video') + '</button>' +
+      '<span class="section-note">' + (b.type === 'image'
+        ? 'Resized for the web and saved in images/news/ right away.'
+        : 'Up to 25 MB, saved in images/news/ right away. Longer videos: YouTube.') + '</span></div>';
   }
   function renderFormBlocks() {
     blocksEl.innerHTML = formBlocks.length
@@ -242,6 +286,24 @@
     }
   });
   blocksEl.addEventListener('click', function (ev) {
+    var upl = ev.target.closest('button[data-upload]');
+    if (upl) {
+      var block = formBlocks[Number(upl.getAttribute('data-upload'))];
+      if (!block) return;
+      window.LPBSA_PUBLISH.pick(block.type).then(function (file) {
+        upl.disabled = true;
+        upl.textContent = 'Uploading…';
+        return window.LPBSA_PUBLISH.upload(file, { folder: 'images/news/', hint: f.headline.value || f.id.value || 'noticia' });
+      }).then(function (path) {
+        block.src = path;
+        renderFormBlocks();
+        toast('Uploaded and saved as ' + path);
+      }, function (err) {
+        renderFormBlocks();
+        toast(err.message, true);
+      });
+      return;
+    }
     var btn = ev.target.closest('button[data-up],button[data-down],button[data-del]');
     if (!btn) return;
     var i;
@@ -322,11 +384,11 @@
       '   ============================================================ */'
     ].join('\n');
     var stories = JSON.stringify(list, null, 2);
-    var ticker = JSON.stringify(window.LEAGUE_TICKER || [], null, 2);
+    var lines = JSON.stringify(ticker.map(function (t) { return t.trim(); }).filter(Boolean), null, 2);
     return header +
       '\nwindow.LEAGUE_NEWS = ' + stories + ';\n\n' +
       '/* Short lines for the gold wire at the top of every page. */\n' +
-      'window.LEAGUE_TICKER = ' + ticker + ';\n';
+      'window.LEAGUE_TICKER = ' + lines + ';\n';
   }
 
   document.getElementById('wSave').addEventListener('click', function () {
@@ -430,12 +492,94 @@
 
   document.getElementById('wReset').addEventListener('click', function () {
     if (!window.confirm('Throw away your unsaved changes and reload the stories currently on the site?')) return;
-    try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
-    list = (window.LEAGUE_NEWS || []).map(normalise);
+    if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.clear(DRAFT_KEY);
+    else { try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ } }
+    var live = liveData();
+    list = live.stories;
+    ticker = live.ticker;
     document.getElementById('wDraftNote').classList.add('hidden');
     clearForm();
+    renderTicker();
     render();
   });
 
+  /* ---------- the gold wire (LEAGUE_TICKER) ---------- */
+  function renderTicker() {
+    if (!tickerEl) return;
+    tickerEl.innerHTML = ticker.length ? ticker.map(function (t, i) {
+      return '<div class="writer-row ticker-row">' +
+        '<div class="writer-row-main"><div class="field" style="margin-bottom:0"><label>Line ' + (i + 1) + '</label>' +
+          '<input type="text" class="ticker-input" data-tick="' + i + '" value="' + esc(t) + '" placeholder="A short line for the wire"></div></div>' +
+        '<div class="writer-row-actions">' +
+          '<button class="btn btn-ghost btn-small" data-tup="' + i + '" ' + (i === 0 ? 'disabled' : '') + '>&uarr;</button>' +
+          '<button class="btn btn-ghost btn-small" data-tdown="' + i + '" ' + (i === ticker.length - 1 ? 'disabled' : '') + '>&darr;</button>' +
+          '<button class="btn btn-small btn-danger" data-tdel="' + i + '">Delete</button>' +
+        '</div></div>';
+    }).join('') : '<p class="section-note">No lines. With none, the wire shows the latest headlines instead.</p>';
+  }
+  if (tickerEl) {
+    tickerEl.addEventListener('change', function (ev) {
+      var el = ev.target;
+      if (!el.classList.contains('ticker-input')) return;
+      ticker[Number(el.getAttribute('data-tick'))] = el.value;
+      flashSaved(el);
+      render();
+    });
+    tickerEl.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' && ev.target.classList.contains('ticker-input')) { ev.preventDefault(); ev.target.blur(); }
+    });
+    tickerEl.addEventListener('click', function (ev) {
+      var b = ev.target.closest('button[data-tup],button[data-tdown],button[data-tdel]');
+      if (!b) return;
+      var i;
+      if ((i = b.getAttribute('data-tup')) !== null) { i = Number(i); ticker.splice(i - 1, 0, ticker.splice(i, 1)[0]); }
+      else if ((i = b.getAttribute('data-tdown')) !== null) { i = Number(i); ticker.splice(i + 1, 0, ticker.splice(i, 1)[0]); }
+      else if ((i = b.getAttribute('data-tdel')) !== null) {
+        if (!window.confirm('Delete this line from the wire?')) return;
+        ticker.splice(Number(i), 1);
+      }
+      renderTicker();
+      render();
+    });
+    document.getElementById('wAddTicker').addEventListener('click', function () {
+      ticker.push('');
+      renderTicker();
+      render();
+      var inputs = tickerEl.querySelectorAll('.ticker-input');
+      if (inputs.length) inputs[inputs.length - 1].focus();
+    });
+  }
+
   start();
+
+  /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
+  if (window.LPBSA_PUBLISH) {
+    window.LPBSA_PUBLISH.attach({
+      build: buildFile,
+      /* a story still sitting in the form goes into the list first, so it is not left behind */
+      before: function () {
+        if (f.headline.value.trim()) {
+          document.getElementById('wSave').click();
+          return !f.headline.value.trim();          /* still there = it could not be added (a message says why) */
+        }
+        var unsaved = formBlocks.some(function (b) { return (b.text || b.src || '').trim(); });
+        if (unsaved) return window.confirm('The form has content but no headline, so it is not a story yet. Publish without it?');
+        return true;
+      },
+      pending: function () {
+        if (!f.headline.value.trim()) return '';
+        return editingIndex >= 0 ? 'Changes to this story are not saved yet; Publish saves them'
+          : 'New story not in the list yet; Publish adds it';
+      },
+      message: function () {
+        var added = list.filter(function (s) { return knownIds.indexOf(s.id) === -1; });
+        return added.length ? 'new story: ' + added[0].headline : 'edits';
+      },
+      after: function () {
+        if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.published(DRAFT_KEY, { stories: list, ticker: ticker });
+        knownIds = list.map(function (s) { return s.id; });
+        document.getElementById('wDraftNote').classList.add('hidden');
+      }
+    });
+  }
 })();

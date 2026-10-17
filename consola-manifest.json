@@ -1,0 +1,14 @@
+{
+  "name": "LPBLSA Consola",
+  "short_name": "Consola",
+  "description": "The commissioner's console for lpblsa.vip",
+  "start_url": "consola.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#060c1c",
+  "theme_color": "#060c1c",
+  "icons": [
+    { "src": "images/consola-icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/consola-icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

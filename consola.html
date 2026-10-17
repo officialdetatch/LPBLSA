@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#060c1c">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Consola | La Premier Bundesliga Serie A</title>
+  <!-- THE COMMISSIONER CONSOLE. Private: not linked from the public site, and it does nothing
+       without your GitHub key (kept on your own device only). Setup: README.md, "The console". -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Consola">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="icon" type="image/png" href="images/consola-icon-192.png">
+  <link rel="apple-touch-icon" href="images/consola-icon-180.png">
+  <link rel="manifest" href="consola-manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/console.css">
+</head>
+<body data-root="" data-active="consola">
+  <header class="site-header">
+    <div class="header-row">
+      <a class="brand" href="index.html">
+        <span class="crest crest-circle">
+          <img src="images/league-logo.png" alt="League crest" onerror="this.remove()">
+          <span class="crest-fallback">LP</span>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">La Premier <span class="accent">Bundesliga</span> Serie A</span>
+          <div class="brand-sub">Consola &middot; Temporada 2026</div>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Show menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="site-nav" id="siteNav"></nav>
+    </div>
+  </header>
+  <script src="assets/leagues.js"></script>
+  <script src="assets/nav.js"></script>
+
+  <main>
+  <section class="hero cs-hero">
+    <div class="wrap">
+      <div class="hero-kicker">Commissioner only &middot; not linked from the site</div>
+      <h1>Con<span class="accent">sola</span></h1>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:26px">
+    <div class="wrap cs-main">
+
+      <!-- set up: shown until this device has your GitHub key -->
+      <div id="csSetup" hidden>
+        <div class="cs-card">
+          <h2>Set up this device</h2>
+          <p>Once, on each device you want to publish from. After that every tool here gets a Publish button.</p>
+          <ol class="cs-steps">
+            <li id="csStepHome"><b>Put the Consola on your Home Screen first</b>, then open it from that icon and do
+              steps 2 and 3 there.
+              <ul>
+                <li>iPhone: Safari &rarr; Share &rarr; <b>Add to Home Screen</b>.</li>
+                <li>Android: Chrome menu &rarr; <b>Add to Home screen</b> (or Install).</li>
+              </ul>
+              <span class="section-note">The Home Screen app keeps its own storage, so a key pasted in the
+              browser does not carry over to it.</span>
+            </li>
+            <li><b>Make a key on GitHub.</b>
+              <a class="btn btn-small" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer" style="margin:8px 0 6px">Open GitHub &rarr;</a>
+              <ul>
+                <li>Token name: <code>LPBLSA consola</code>; expiration: up to you (when it runs out, make a new one).</li>
+                <li>Repository access: <b>Only select repositories</b> &rarr; <code>LPBLSA</code>.</li>
+                <li>Permissions &rarr; Repository permissions &rarr; <b>Contents: Read and write</b>. Nothing else.</li>
+                <li><b>Generate token</b>, then copy it (it starts with <code>github_pat_</code>).</li>
+              </ul>
+            </li>
+            <li><b>Paste it here.</b>
+              <form class="cs-key" id="csKeyForm" autocomplete="off">
+                <input id="csKey" type="password" placeholder="github_pat_..." spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Your GitHub key">
+                <button class="btn btn-solid" type="submit" id="csSave">Save and test</button>
+              </form>
+              <p class="cs-msg" id="csMsg" role="status" aria-live="polite"></p>
+              <span class="section-note">The key stays on this device only. It can change files in the LPBLSA
+              repository and nothing else; delete it on GitHub any time and it stops working everywhere.</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- the console: shown once the key works -->
+      <div id="csHome" class="cs-stack" hidden>
+        <div class="cs-card cs-conn">
+          <p><span class="pub-dot"></span><span>Publishing to <b>officialdetatch/LPBLSA</b> from this device.</span></p>
+          <button class="btn btn-ghost btn-small" type="button" id="csForget">Remove the key from this device</button>
+        </div>
+
+        <div id="csTools" class="cs-stack"></div>
+
+        <div class="cs-card">
+          <h2>Latest changes on GitHub</h2>
+          <p>Gold = published from the Consola. The site updates about a minute after each one; new stories
+            send the email and phone alerts on their own.</p>
+          <ul class="cs-activity" id="csActivity"><li><span></span><span class="cs-skel"></span></li></ul>
+          <div class="cs-pull" id="csPull">
+            <span>Before your next push from the computer, run</span> <code>git pull</code>
+          </div>
+        </div>
+
+        <div class="cs-links">
+          <a class="btn btn-small" href="index.html">Open the site</a>
+          <a class="btn btn-small" href="https://github.com/officialdetatch/LPBLSA/actions" target="_blank" rel="noopener noreferrer">Alerts on GitHub (Actions)</a>
+          <a class="btn btn-ghost btn-small" href="https://github.com/officialdetatch/LPBLSA" target="_blank" rel="noopener noreferrer">The repository</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>La Premier Bundesliga Serie A &middot; Consola</div>
+      <div>Private tool</div>
+    </div>
+  </footer>
+
+  <script src="assets/news.js"></script>
+  <script src="assets/app.js"></script>
+  <script src="assets/publish.js"></script>
+  <script src="assets/console.js"></script>
+</body>
+</html>

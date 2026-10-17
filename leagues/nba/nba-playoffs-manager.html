@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#060c1c">
   <title>NBA playoffs manager | La Premier Bundesliga Serie A</title>
   <meta name="description" content="NBA playoffs manager (private tool).">
@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+  <link rel="stylesheet" href="../../assets/console.css">
+  <meta name="robots" content="noindex">
 </head>
 <body data-root="../../" data-league="nba">
   <header class="site-header">
@@ -128,6 +130,9 @@
   <script src="assets/nba-playoffs-data.js"></script>
   <script src="../../assets/app.js"></script>
   <script src="../../assets/playoffs-view.js"></script>
-  <script src="assets/nba-playoffs-manager.js"></script>
+  <!-- the commissioner console: with your GitHub key on this device, the newest nba-playoffs-data.js comes
+       straight from GitHub and the Publish button saves it there (see assets/publish.js) -->
+  <script src="../../assets/publish.js"></script>
+  <script>LPBSA_PUBLISH.boot({ file: 'leagues/nba/assets/nba-playoffs-data.js', scripts: ['assets/nba-playoffs-manager.js'] });</script>
 </body>
 </html>

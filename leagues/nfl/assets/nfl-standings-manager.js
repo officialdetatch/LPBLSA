@@ -69,7 +69,9 @@
     };
   }
 
-  function loadDraft() {
+  /* (LPBSA_DRAFTS in assets/publish.js: a draft is only loaded on the same version of the file it was made on) */
+  function loadDraft(live) {
+    if (window.LPBSA_DRAFTS) return window.LPBSA_DRAFTS.load(DRAFT_KEY, live, 'smDraftNote');
     try {
       var raw = localStorage.getItem(DRAFT_KEY);
       if (raw) return JSON.parse(raw);
@@ -77,6 +79,7 @@
     return null;
   }
   function saveDraft() {
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.save(DRAFT_KEY, list); return; }
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(list)); } catch (err) { /* ignore */ }
   }
 
@@ -123,16 +126,16 @@
       '<td><span class="team-link" style="cursor:default"><span class="crest' + (t.shape === 'circle' ? ' crest-circle' : '') + '">' + crestImg +
         '<span class="crest-fallback">' + esc(initials) + '</span></span>' +
         '<span class="name">' + esc(t.name) + '</span></span></td>' +
-      '<td class="num">' + numInput('w', row.w) + '</td>' +
-      '<td class="num">' + numInput('l', row.l) + '</td>' +
-      (NO_TIES ? '' : '<td class="num">' + numInput('t', row.t) + '</td>') +
-      '<td class="num">' + textInput('pct', row.pct, 56) + '</td>' +
-      '<td class="num">' + textInput('gb', row.gb, 56) + '</td>' +
-      '<td class="num">' + numInput('pf', row.pf) + '</td>' +
-      '<td class="num">' + numInput('pa', row.pa) + '</td>' +
-      '<td class="num">' + textInput('streak', row.streak, 56) + '</td>' +
-      '<td class="num">' + textInput('playoff', row.playoff, 56) + '</td>' +
-      '<td><button class="btn btn-small btn-danger" data-del="' + i + '">Remove</button></td>' +
+      '<td class="num" data-label="W">' + numInput('w', row.w) + '</td>' +
+      '<td class="num" data-label="L">' + numInput('l', row.l) + '</td>' +
+      (NO_TIES ? '' : '<td class="num" data-label="T">' + numInput('t', row.t) + '</td>') +
+      '<td class="num" data-label="PCT">' + textInput('pct', row.pct, 56) + '</td>' +
+      '<td class="num" data-label="GB">' + textInput('gb', row.gb, 56) + '</td>' +
+      '<td class="num" data-label="PF">' + numInput('pf', row.pf) + '</td>' +
+      '<td class="num" data-label="PA">' + numInput('pa', row.pa) + '</td>' +
+      '<td class="num" data-label="Streak">' + textInput('streak', row.streak, 56) + '</td>' +
+      '<td class="num" data-label="Playoff">' + textInput('playoff', row.playoff, 56) + '</td>' +
+      '<td class="sm-del"><button class="btn btn-small btn-danger" data-del="' + i + '">Remove</button></td>' +
       '</tr>';
   }
 
@@ -162,8 +165,8 @@
   }
 
   function start() {
-    var draft = loadDraft();
     var live = (window.LEAGUE_STANDINGS || []).map(normalise);
+    var draft = loadDraft(live);
     if (draft && draft.length && JSON.stringify(draft) !== JSON.stringify(live)) {
       list = draft.map(normalise);
       els.draftNote.classList.remove('hidden');
@@ -271,11 +274,24 @@
 
   document.getElementById('smReset').addEventListener('click', function () {
     if (!window.confirm('Throw away your unsaved changes and reload the standings currently on the site?')) return;
-    try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
+    if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.clear(DRAFT_KEY);
+    else { try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ } }
     list = (window.LEAGUE_STANDINGS || []).map(normalise);
     els.draftNote.classList.add('hidden');
     render();
   });
 
   start();
+
+  /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
+  if (window.LPBSA_PUBLISH) {
+    window.LPBSA_PUBLISH.attach({
+      build: buildFile,
+      message: function () { return 'standings'; },
+      after: function () {
+        if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.published(DRAFT_KEY, list);
+        els.draftNote.classList.add('hidden');
+      }
+    });
+  }
 })();

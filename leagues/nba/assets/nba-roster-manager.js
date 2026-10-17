@@ -90,13 +90,16 @@
     return { rosters: rosters, freeAgents: (window.NBA_FREE_AGENTS || []).slice() };
   }
 
-  function loadDraft() {
+  /* (LPBSA_DRAFTS in assets/publish.js: a draft is only loaded on the same version of the file it was made on) */
+  function loadDraft(live) {
+    if (window.LPBSA_DRAFTS) return window.LPBSA_DRAFTS.load(DRAFT_KEY, live, 'rmDraftNote');
     try {
       var raw = localStorage.getItem(DRAFT_KEY);
       return raw ? JSON.parse(raw) : null;
     } catch (err) { return null; }
   }
   function saveDraft() {
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.save(DRAFT_KEY, state); return; }
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(state)); } catch (err) { /* ignore */ }
   }
   /* a saved draft from before a team was added still needs a roster for it */
@@ -109,7 +112,7 @@
 
   function start() {
     var live = liveSnapshot();
-    var draft = loadDraft();
+    var draft = loadDraft(live);
     if (draft && draft.rosters && draft.freeAgents && JSON.stringify(draft) !== JSON.stringify(live)) {
       state = fillMissingTeams(draft);
       els.draftNote.classList.remove('hidden');
@@ -510,7 +513,8 @@
   });
   document.getElementById('rmReset').addEventListener('click', function () {
     if (!window.confirm('Throw away your unsaved changes and reload what is currently on the site?')) return;
-    try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
+    if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.clear(DRAFT_KEY);
+    else { try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ } }
     state = liveSnapshot();
     els.draftNote.classList.add('hidden');
     renderAll();
@@ -518,4 +522,16 @@
   });
 
   start();
+
+  /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
+  if (window.LPBSA_PUBLISH) {
+    window.LPBSA_PUBLISH.attach({
+      build: buildFile,
+      message: function () { return 'rosters / free agents'; },
+      after: function () {
+        if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.published(DRAFT_KEY, state);
+        els.draftNote.classList.add('hidden');
+      }
+    });
+  }
 })();

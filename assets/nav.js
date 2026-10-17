@@ -10,7 +10,7 @@
    A page tells it where it is with attributes on <body>:
      data-root    how far up the site root is   ("" , "../" or "../../")
      data-active  which tab to light up:  home  about  reglas  news  leagues
-                  playoffs  teams  contact  tienda   (leave off for the private tools)
+                  playoffs  teams  contact  tienda  consola   (leave off for the private tools)
      data-league  on a league's own pages: nfl / nba / mlb - lights up
                   that league inside the Leagues menu
 
@@ -74,6 +74,12 @@
     link('teams', 'Equipos', 'teams.html') +
     link('tienda', 'Tienda', 'tienda.html') +
     link('contact', 'Cont\u00e1ctanos', 'contact.html');
+
+  /* The commissioner console (consola.html): its tab shows only on a device that holds the console's
+     GitHub key (assets/publish.js), so the commissioner can always get back to it. Visitors never see it. */
+  try {
+    if (window.localStorage.getItem('lpblsa.console.token')) nav.insertAdjacentHTML('beforeend', link('consola', 'Consola', 'consola.html'));
+  } catch (e) { /* storage blocked: no tab */ }
 
   /* the phone menu button, for screen readers (it is written "Show menu" in every page) */
   var menuBtn = document.getElementById('navToggle');

@@ -102,7 +102,9 @@
       'window.LPBSA_PLAYOFFS.' + KEY + ' = ' + JSON.stringify(obj, null, 2) + ';\n';
   }
 
-  function loadDraft() {
+  /* (LPBSA_DRAFTS in assets/publish.js: a draft is only loaded on the same version of the file it was made on) */
+  function loadDraft(live) {
+    if (window.LPBSA_DRAFTS) return window.LPBSA_DRAFTS.load(DRAFT_KEY, live, 'pmDraftNote');
     try {
       var raw = localStorage.getItem(DRAFT_KEY);
       if (raw) return JSON.parse(raw);
@@ -110,9 +112,11 @@
     return null;
   }
   function saveDraft() {
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.save(DRAFT_KEY, state); return; }
     try { localStorage.setItem(DRAFT_KEY, JSON.stringify(state)); } catch (err) { /* ignore */ }
   }
   function clearDraft() {
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.clear(DRAFT_KEY); return; }
     try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
   }
 
@@ -239,7 +243,7 @@
   /* ---------- start ---------- */
   function start() {
     var onSite = fromFile();
-    var draft = loadDraft();
+    var draft = loadDraft(onSite);
     state = onSite;
     if (draft) {
       var d = normalise(draft);
@@ -254,4 +258,16 @@
   }
 
   start();
+
+  /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
+  if (window.LPBSA_PUBLISH) {
+    window.LPBSA_PUBLISH.attach({
+      build: buildFile,
+      message: function () { return KEY.toUpperCase() + ' playoffs'; },
+      after: function () {
+        if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.published(DRAFT_KEY, state);
+        els.draftNote.classList.add('hidden');
+      }
+    });
+  }
 })();

@@ -21,6 +21,10 @@ belongs to one league lives in that league's folder and starts with its name
   contact.html          "join us / ask a question" page with a contact form
   news-writer.html      YOUR private tool for writing news (see below)
   about-manager.html    YOUR private tool for the About page (see below)
+  consola.html          YOUR commissioner console: every private tool in one place, with a Publish
+                        button that saves straight to GitHub from any device, phone included
+                        (see "The Consola" below); consola-manifest.json + images/consola-icon-*.png
+                        make it a Home Screen app
   assets/               what holds the website together, shared by every league:
     style.css             all colours, type and layout
     app.js                menu, ticker, news, standings rows, roster tables, about page, contact form
@@ -29,6 +33,9 @@ belongs to one league lives in that league's folder and starts with its name
     news.js               the stories themselves - the only file you edit to post
     about-data.js         the About page content - edited via about-manager.html
     writer.js, about-manager.js   power news-writer.html / about-manager.html
+    publish.js            the Consola's engine: the GitHub key, newest-copy loading, Publish, photo
+                          upload, and the drafts every tool keeps (loaded by every private tool)
+    console.js, console.css   consola.html itself, the Publish bar and the tools' phone layout
     alerts.js, comments.js, firebase-config.js, push.js, fantasy-switcher.js, hero-leagues.js, standings-tabs.js, teams-view.js
     rules-view.js         draws a league's Reglas page from its rules-data file
     playoffs-view.js      draws and works out the playoff bracket (4 or 6 teams) - used by every league's Playoffs page and manager
@@ -201,6 +208,49 @@ To open MLB:
     SP, RP, P...) come from the rules sheet - the NBA copy's SLOT_FITS is the model
   - the countdown word: the schedule file's kickoff label, e.g. "Play ball"
 
+## The Consola - publishing from your phone (consola.html)
+One private page with every tool on it: lpblsa.vip/consola.html. It is not linked from the
+site and does nothing without your GitHub key, which only lives on your own devices. With the
+key on a device, every tool there gets a gold Publish bar at the bottom:
+
+  - The tool opens with the newest copy of its file straight from GitHub (never an old copy
+    of the site), and the bar says "Up to date" or "Unpublished changes".
+  - Publish saves the file to GitHub - the same as a commit + push from the computer. The site
+    updates in about a minute, and a new story sends the email and phone alerts on its own.
+    Every commit from the Consola starts with "Consola:".
+  - If the file changed on GitHub after the page opened (you pushed from the computer, say),
+    Publish refuses and offers Reload, so the phone can never undo a newer change.
+  - The News writer can upload photos (resized to 1600 px, saved in images/news/) and videos
+    (up to 25 MB; longer ones go on YouTube) right from the phone, and edits the gold wire.
+  - Standings and rosters turn into one card per team / player on a phone.
+  - On a device with the key, the navbar gets a "Consola" tab (visitors never see it).
+Without the key (on the computer, opening the files from your folder) every tool works exactly
+as before: Download, then push.
+
+One-time setup, on each device (the steps are also on the page itself):
+  1. Open lpblsa.vip/consola.html, put it on the Home Screen (iPhone: Safari > Share > Add to
+     Home Screen) and open it from that icon. The Home Screen app keeps its own storage, so do
+     steps 2 and 3 inside it.
+  2. Make a key on GitHub: github.com/settings/personal-access-tokens/new
+       Token name: LPBLSA consola   Expiration: up to you
+       Repository access: Only select repositories > LPBLSA
+       Permissions > Repository permissions > Contents: Read and write   (nothing else)
+     Generate token and copy it (github_pat_...).
+  3. Paste it in the Consola and press "Save and test". It checks the key without changing
+     anything in the repo.
+The key can change files in the LPBLSA repository and nothing else. Lost the phone, or the key
+expired? Delete / regenerate it on GitHub (Settings > Developer settings > Personal access
+tokens > Fine-grained tokens) and paste the new one. "Remove the key from this device" on the
+Consola takes it off one device.
+
+THE ONE HABIT: after publishing from the phone, run  git pull  on the computer before your next
+push (the Consola reminds you when the newest change came from it). If git ever says your push
+was rejected, that is all it means: git pull, then push.
+
+Drafts: each tool keeps your unpublished changes in that browser. A draft is only loaded on the
+same version of the file it was made on; if the file changed since (from another device), the
+tool says so and offers "Load them anyway" instead of quietly putting old data back.
+
 ## Posting news - you are the only editor
 The public pages have no edit button and no way to change anything. Stories are
 read from assets/news.js, which lives on the server. Visitors can read it, but
@@ -242,7 +292,12 @@ block editor as everything else, and saving it upgrades it to the new
 format automatically - nothing to do on your end.
 
 The scrolling gold wire at the top reads window.LEAGUE_TICKER at the bottom of
-the same file. Empty that array and it falls back to your news headlines.
+the same file. Edit its lines in the "Gold wire" section of news-writer.html (add,
+reorder, delete); with no lines it falls back to your news headlines.
+
+From the Consola (see above) the same writer has a Publish button instead of the
+download step, and "Upload a photo" / "Upload a video" under image and video blocks.
+A story still sitting in the form when you press Publish is added to the list first.
 
 ## Updating standings - nfl-standings-manager.html
 Standings are no longer plain HTML you edit by hand. They live in

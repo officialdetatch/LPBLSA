@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#060c1c">
   <title>Socials writer | La Premier Bundesliga Serie A</title>
   <meta name="description" content="La Premier Bundesliga Serie A fantasy football league: standings, rosters, schedules and the top 100 free agents.">
@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/console.css">
+  <meta name="robots" content="noindex">
   <style>
     /* only this page uses these, so they live here and style.css stays as it is */
     .sw-add{ display:grid; grid-template-columns:170px 1fr auto; gap:12px; align-items:end; }
@@ -148,6 +150,9 @@
   <script src="assets/app.js"></script>
   <script src="assets/socials-data.js"></script>
   <script src="assets/socials-view.js"></script>
-  <script src="assets/socials-writer.js"></script>
+  <!-- the commissioner console: with your GitHub key on this device, the newest socials-data.js comes
+       straight from GitHub and the Publish button saves it there (see assets/publish.js) -->
+  <script src="assets/publish.js"></script>
+  <script>LPBSA_PUBLISH.boot({ file: 'assets/socials-data.js', scripts: ['assets/socials-writer.js'] });</script>
 </body>
 </html>

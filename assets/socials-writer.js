@@ -61,7 +61,9 @@
   }
 
   /* ---------- the draft, kept in this browser until you save the file ---------- */
-  function loadDraft() {
+  /* (LPBSA_DRAFTS in assets/publish.js: a draft is only loaded on the same version of the file it was made on) */
+  function loadDraft(live) {
+    if (window.LPBSA_DRAFTS) return window.LPBSA_DRAFTS.load(DRAFT_KEY, live, 'swDraftNote');
     try {
       var raw = localStorage.getItem(DRAFT_KEY);
       if (raw) return JSON.parse(raw);
@@ -69,7 +71,9 @@
     return null;
   }
   function saveDraft() {
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ show: show, posts: posts })); } catch (err) { /* ignore */ }
+    var data = { show: show, posts: posts };
+    if (window.LPBSA_DRAFTS) { window.LPBSA_DRAFTS.save(DRAFT_KEY, data); return; }
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify(data)); } catch (err) { /* ignore */ }
   }
 
   /* Whatever is handed in (the data file, the draft) comes out as clean posts: every link re-read, bad
@@ -91,7 +95,7 @@
   function start() {
     var cfg = S.readConfig();
     var live = { show: cleanShow(cfg.show), posts: clean(cfg.posts) };
-    var draft = loadDraft();
+    var draft = loadDraft(live);
     if (draft && Array.isArray(draft.posts) &&
         snapshot(clean(draft.posts), cleanShow(draft.show)) !== snapshot(live.posts, live.show)) {
       posts = clean(draft.posts);
@@ -308,7 +312,8 @@
 
   document.getElementById('swReset').addEventListener('click', function () {
     if (!window.confirm('Throw away your unsaved changes and reload the posts currently on the site?')) return;
-    try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
+    if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.clear(DRAFT_KEY);
+    else { try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ } }
     var cfg = S.readConfig();
     posts = clean(cfg.posts);
     show = cleanShow(cfg.show);
@@ -321,4 +326,16 @@
 
   start();
   setHint(IDLE_HINT);
+
+  /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
+  if (window.LPBSA_PUBLISH) {
+    window.LPBSA_PUBLISH.attach({
+      build: buildFile,
+      message: function () { return posts.length ? 'newest post ' + posts[0].url : 'edits'; },
+      after: function () {
+        if (window.LPBSA_DRAFTS) window.LPBSA_DRAFTS.published(DRAFT_KEY, { show: show, posts: posts });
+        els.draftNote.classList.add('hidden');
+      }
+    });
+  }
 })();
