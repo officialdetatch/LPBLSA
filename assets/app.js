@@ -814,7 +814,8 @@
   /* ---------- player photos (ESPN) ----------
      A player with an "espn" id in the roster data (the number in his ESPN player page address)
      shows his ESPN headshot in the round avatar; an NFL defense (D/ST) shows its team's logo.
-     The photos load straight from ESPN's image server, resized there to 216 px. When there is
+     The photos load straight from ESPN's image server at 350 x 254, the same size ESPN Fantasy uses
+     (no cropping on ESPN's side: the round crop is done in style.css). When there is
      no id, or ESPN does not answer, the avatar shows the position as before.
      The roster managers fill the ids in with "Find missing photos" (assets/espn-photos.js). */
   var PHOTO_CDN = 'https://a.espncdn.com/combiner/i?img=';
@@ -826,7 +827,7 @@
       return PHOTO_CDN + '/i/teamlogos/nfl/500/' + team + '.png&w=96&h=96';
     }
     if (/^\d{1,10}$/.test(String(p.espn || ''))) {
-      return PHOTO_CDN + '/i/headshots/' + league + '/players/full/' + p.espn + '.png&w=216&h=216&scale=crop&cquality=60&location=origin';
+      return PHOTO_CDN + '/i/headshots/' + league + '/players/full/' + p.espn + '.png&w=350&h=254';
     }
     return '';
   }
