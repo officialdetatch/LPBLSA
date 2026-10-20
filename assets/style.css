@@ -979,6 +979,20 @@ a.team-link:hover span.name{ color:var(--gold-light); }
   flex:none; overflow:hidden;
 }
 .player-avatar img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+/* ESPN headshots (see "player photos" in app.js): the photo sits over the position, which shows
+   again by itself if the photo cannot load */
+/* size of the player photo circle: bigger on a computer, a bit smaller on a phone */
+.player-avatar{ position:relative; width:var(--avatar,54px); height:var(--avatar,54px); }
+@media (max-width:640px){ .player-avatar{ --avatar:42px; } }
+.player-avatar.has-photo{ color:transparent; border-color:var(--gold-dark); background:var(--navy-800); }
+.player-avatar.has-photo img{ position:absolute; inset:0; object-position:center center;
+  /* ESPN's headshot has the face in the upper part of the frame (about 30% down) with the shoulders
+     under it, so on its own the face sits high in the circle. Zoom in on the face and slide it down
+     to the middle. Change --ph-face (where the face sits, 0-1) or --ph-zoom to fine-tune. */
+  --ph-face:.30; --ph-zoom:1.3;
+  transform-origin:50% calc(var(--ph-face) * 100%);
+  transform:translateY(calc((.5 - var(--ph-face)) * 100%)) scale(var(--ph-zoom)); }
+.player-avatar.is-logo img{ object-fit:contain; padding:4px; background:var(--navy-900); transform:none; }
 .player-name{ font-weight:600; color:var(--white); }
 .player-status{
   font-size:.68rem;

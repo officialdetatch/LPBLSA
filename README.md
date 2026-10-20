@@ -33,6 +33,7 @@ belongs to one league lives in that league's folder and starts with its name
     news.js               the stories themselves - the only file you edit to post
     about-data.js         the About page content - edited via about-manager.html
     writer.js, about-manager.js   power news-writer.html / about-manager.html
+    espn-photos.js        the "Player photos" box in both roster managers (see "Player photos" below)
     publish.js            the Consola's engine: the GitHub key, newest-copy loading, Publish, photo
                           upload, and the drafts every tool keeps (loaded by every private tool)
     console.js, console.css   consola.html itself, the Publish bar and the tools' phone layout
@@ -250,6 +251,20 @@ was rejected, that is all it means: git pull, then push.
 Drafts: each tool keeps your unpublished changes in that browser. A draft is only loaded on the
 same version of the file it was made on; if the file changed since (from another device), the
 tool says so and offers "Load them anyway" instead of quietly putting old data back.
+
+## Player photos (ESPN)
+Every player's round avatar shows his ESPN headshot; an NFL defense (D/ST) shows its team logo.
+Each player in the roster data has an "espn" id next to his name - the number in his ESPN player
+page address (espn.com/nba/player/_/id/3945274/luka-doncic -> "espn": "3945274"). The photos load
+straight from ESPN's image server (resized there), so nothing is stored in the repo. No id, or
+ESPN not answering, and the avatar shows the position like before. The code: "player photos"
+near the top of the roster section of assets/app.js.
+
+New players: the roster managers have a "Player photos" box ("184 of 184 players have an ESPN
+photo"). After adding a brand-new free agent, press "Find missing photos": it reads every ESPN
+roster, matches by name (accents and Jr./III don't matter; the team breaks ties), tries ESPN's
+player search for anyone left, then Publish. A name it cannot find is listed - check the spelling,
+or type the id from his ESPN page into the data file by hand.
 
 ## Posting news - you are the only editor
 The public pages have no edit button and no way to change anything. Stories are

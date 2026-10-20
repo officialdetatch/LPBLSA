@@ -810,10 +810,41 @@
   function mainPos(pos) {
     return String(pos || '?').split(',')[0].trim() || '?';
   }
+
+  /* ---------- player photos (ESPN) ----------
+     A player with an "espn" id in the roster data (the number in his ESPN player page address)
+     shows his ESPN headshot in the round avatar; an NFL defense (D/ST) shows its team's logo.
+     The photos load straight from ESPN's image server, resized there to 216 px. When there is
+     no id, or ESPN does not answer, the avatar shows the position as before.
+     The roster managers fill the ids in with "Find missing photos" (assets/espn-photos.js). */
+  var PHOTO_CDN = 'https://a.espncdn.com/combiner/i?img=';
+  function playerPhotoURL(p, league) {
+    if (!p) return '';
+    league = (league || document.body.getAttribute('data-league')) === 'nba' ? 'nba' : 'nfl';
+    var team = String(p.team_abbr || '').toLowerCase();
+    if (league === 'nfl' && /D\/ST/i.test(p.pos || '') && /^[a-z]{2,4}$/.test(team) && team !== 'fa') {
+      return PHOTO_CDN + '/i/teamlogos/nfl/500/' + team + '.png&w=96&h=96';
+    }
+    if (/^\d{1,10}$/.test(String(p.espn || ''))) {
+      return PHOTO_CDN + '/i/headshots/' + league + '/players/full/' + p.espn + '.png&w=216&h=216&scale=crop&cquality=60&location=origin';
+    }
+    return '';
+  }
+  /* the whole round avatar: the photo, with the position underneath in case it does not load */
+  function playerAvatarHTML(p, league, label) {
+    var src = playerPhotoURL(p, league);
+    var logo = /D\/ST/i.test((p && p.pos) || '');
+    return '<span class="player-avatar' + (src ? ' has-photo' + (logo ? ' is-logo' : '') : '') + '">' +
+      esc(label != null ? label : mainPos(p && p.pos)) +
+      (src ? '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" ' +
+        'onerror="this.parentNode.classList.remove(\'has-photo\');this.remove()">' : '') + '</span>';
+  }
+  window.LPBSA_playerPhotoURL = playerPhotoURL;
+  window.LPBSA_playerAvatar = playerAvatarHTML;
   function playerCellHTML(p, slotLabel) {
     var status = p.status ? '<span class="player-status">' + esc(p.status) + '</span>' : '';
     return '<td><span class="slot-badge">' + esc(slotLabel) + '</span></td>' +
-      '<td><span class="player-cell"><span class="player-avatar">' + esc(mainPos(p.pos)) + '</span>' +
+      '<td><span class="player-cell">' + playerAvatarHTML(p) +
       '<span><span class="player-name">' + esc(p.name) + '</span>' + status +
       '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
       '<td class="num">' + fmtNum(p.fpts) + '</td><td class="num">' + fmtNum(p.avg) + '</td><td class="num">' + fmtNum(p.last) + '</td>';
@@ -870,7 +901,7 @@
         '" data-team="' + esc((a.team_abbr || '').toLowerCase()) + '" data-fpts="' + fpts + '" data-avg="' + avg +
         '" data-last="' + last + '" data-rank="' + (i + 1) + '">' +
         '<td class="num" style="color:var(--mute)">' + (i + 1) + '</td>' +
-        '<td><span class="player-cell"><span class="player-avatar">' + esc(mainPos(a.pos)) + '</span>' +
+        '<td><span class="player-cell">' + playerAvatarHTML(a) +
         '<span><span class="player-name">' + esc(a.name) + '</span>' + status +
         '<span class="nfl-tag">' + esc(a.team_abbr) + ' ' + esc(a.pos) + '</span></span></span></td>' +
         '<td><span class="avail-pill">Available</span></td>' +

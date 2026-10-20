@@ -43,6 +43,7 @@ window.LEAGUE_ROSTERS = {
     "starters": [
       {
         "name": "Trevor Lawrence",
+        "espn": "4360310",
         "status": null,
         "team_abbr": "JAX",
         "pos": "QB",
@@ -52,6 +53,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jahmyr Gibbs",
+        "espn": "4429795",
         "status": null,
         "team_abbr": "DET",
         "pos": "RB",
@@ -61,6 +63,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "James Cook III",
+        "espn": "4379399",
         "status": null,
         "team_abbr": "BUF",
         "pos": "RB",
@@ -70,6 +73,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Puka Nacua",
+        "espn": "4426515",
         "status": "Q",
         "team_abbr": "LAR",
         "pos": "WR",
@@ -79,6 +83,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Justin Jefferson",
+        "espn": "4262921",
         "status": null,
         "team_abbr": "MIN",
         "pos": "WR",
@@ -88,6 +93,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jameson Williams",
+        "espn": "4426388",
         "status": null,
         "team_abbr": "DET",
         "pos": "WR",
@@ -97,6 +103,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Trey McBride",
+        "espn": "4361307",
         "status": null,
         "team_abbr": "ARI",
         "pos": "TE",
@@ -106,6 +113,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "CeeDee Lamb",
+        "espn": "4241389",
         "status": null,
         "team_abbr": "DAL",
         "pos": "WR",
@@ -115,6 +123,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "D'Andre Swift",
+        "espn": "4259545",
         "status": null,
         "team_abbr": "CHI",
         "pos": "RB",
@@ -124,6 +133,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jalen Hurts",
+        "espn": "4040715",
         "status": null,
         "team_abbr": "PHI",
         "pos": "QB",
@@ -142,6 +152,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Brandon Aubrey",
+        "espn": "3953687",
         "status": null,
         "team_abbr": "DAL",
         "pos": "K",
@@ -153,6 +164,7 @@ window.LEAGUE_ROSTERS = {
     "bench": [
       {
         "name": "Joe Burrow",
+        "espn": "3915511",
         "status": null,
         "team_abbr": "CIN",
         "pos": "QB",
@@ -162,6 +174,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Blake Corum",
+        "espn": "4429096",
         "status": null,
         "team_abbr": "LAR",
         "pos": "RB",
@@ -171,6 +184,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Ray Davis",
+        "espn": "4429501",
         "status": null,
         "team_abbr": "BUF",
         "pos": "RB",
@@ -180,6 +194,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Emmett Johnson",
+        "espn": "4832955",
         "status": null,
         "team_abbr": "KC",
         "pos": "RB",
@@ -189,6 +204,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Ryan Flournoy",
+        "espn": "5083754",
         "status": null,
         "team_abbr": "DAL",
         "pos": "WR",
@@ -198,6 +214,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Harrison Mevis",
+        "espn": "4574716",
         "status": null,
         "team_abbr": "LAR",
         "pos": "K",
@@ -212,6 +229,7 @@ window.LEAGUE_ROSTERS = {
     "starters": [
       {
         "name": "Drake Maye",
+        "espn": "4431452",
         "status": null,
         "team_abbr": "NE",
         "pos": "QB",
@@ -221,6 +239,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Derrick Henry",
+        "espn": "3043078",
         "status": null,
         "team_abbr": "BAL",
         "pos": "RB",
@@ -230,6 +249,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Breece Hall",
+        "espn": "4427366",
         "status": null,
         "team_abbr": "NYJ",
         "pos": "RB",
@@ -239,6 +259,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Ja'Marr Chase",
+        "espn": "4362628",
         "status": null,
         "team_abbr": "CIN",
         "pos": "WR",
@@ -248,6 +269,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Skyler Bell",
+        "espn": "4683153",
         "status": null,
         "team_abbr": "BUF",
         "pos": "WR",
@@ -257,6 +279,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Rashee Rice",
+        "espn": "4428331",
         "status": null,
         "team_abbr": "KC",
         "pos": "WR",
@@ -266,6 +289,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Harold Fannin Jr.",
+        "espn": "5083076",
         "status": null,
         "team_abbr": "CLE",
         "pos": "TE",
@@ -275,6 +299,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Kenneth Walker III",
+        "espn": "4567048",
         "status": null,
         "team_abbr": "KC",
         "pos": "RB",
@@ -284,6 +309,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Omarion Hampton",
+        "espn": "4685382",
         "status": null,
         "team_abbr": "LAC",
         "pos": "RB",
@@ -293,6 +319,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Dak Prescott",
+        "espn": "2577417",
         "status": null,
         "team_abbr": "DAL",
         "pos": "QB",
@@ -311,6 +338,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jason Myers",
+        "espn": "2473037",
         "status": null,
         "team_abbr": "SEA",
         "pos": "K",
@@ -322,6 +350,7 @@ window.LEAGUE_ROSTERS = {
     "bench": [
       {
         "name": "Patrick Mahomes",
+        "espn": "3139477",
         "status": null,
         "team_abbr": "KC",
         "pos": "QB",
@@ -331,6 +360,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "George Kittle",
+        "espn": "3040151",
         "status": null,
         "team_abbr": "SF",
         "pos": "TE",
@@ -349,6 +379,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Zay Flowers",
+        "espn": "4429615",
         "status": "Q",
         "team_abbr": "BAL",
         "pos": "WR",
@@ -358,6 +389,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Mike Evans",
+        "espn": "16737",
         "status": "Q",
         "team_abbr": "SF",
         "pos": "WR",
@@ -367,6 +399,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Eddy Pineiro",
+        "espn": "4034949",
         "status": null,
         "team_abbr": "SF",
         "pos": "K",
@@ -381,6 +414,7 @@ window.LEAGUE_ROSTERS = {
     "starters": [
       {
         "name": "Lamar Jackson",
+        "espn": "3916387",
         "status": null,
         "team_abbr": "BAL",
         "pos": "QB",
@@ -390,6 +424,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "De'Von Achane",
+        "espn": "4429160",
         "status": null,
         "team_abbr": "MIA",
         "pos": "RB",
@@ -399,6 +434,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Chase Brown",
+        "espn": "4362238",
         "status": null,
         "team_abbr": "CIN",
         "pos": "RB",
@@ -408,6 +444,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jaxon Smith-Njigba",
+        "espn": "4430878",
         "status": null,
         "team_abbr": "SEA",
         "pos": "WR",
@@ -417,6 +454,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Drake London",
+        "espn": "4426502",
         "status": null,
         "team_abbr": "ATL",
         "pos": "WR",
@@ -426,6 +464,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "DeVonta Smith",
+        "espn": "4241478",
         "status": null,
         "team_abbr": "PHI",
         "pos": "WR",
@@ -435,6 +474,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Tucker Kraft",
+        "espn": "4572680",
         "status": null,
         "team_abbr": "GB",
         "pos": "TE",
@@ -444,6 +484,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Cam Skattebo",
+        "espn": "4696981",
         "status": null,
         "team_abbr": "NYG",
         "pos": "RB",
@@ -453,6 +494,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Travis Etienne Jr.",
+        "espn": "4239996",
         "status": null,
         "team_abbr": "NO",
         "pos": "RB",
@@ -462,6 +504,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Justin Herbert",
+        "espn": "4038941",
         "status": null,
         "team_abbr": "LAC",
         "pos": "QB",
@@ -480,6 +523,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jake Bates",
+        "espn": "4689936",
         "status": null,
         "team_abbr": "DET",
         "pos": "K",
@@ -491,6 +535,7 @@ window.LEAGUE_ROSTERS = {
     "bench": [
       {
         "name": "Bo Nix",
+        "espn": "4426338",
         "status": null,
         "team_abbr": "DEN",
         "pos": "QB",
@@ -509,6 +554,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Ka'imi Fairbairn",
+        "espn": "2971573",
         "status": null,
         "team_abbr": "HOU",
         "pos": "K",
@@ -518,6 +564,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Colston Loveland",
+        "espn": "4723086",
         "status": null,
         "team_abbr": "CHI",
         "pos": "TE",
@@ -527,6 +574,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Malik Nabers",
+        "espn": "4595348",
         "status": "Q",
         "team_abbr": "NYG",
         "pos": "WR",
@@ -536,6 +584,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Chuba Hubbard",
+        "espn": "4241416",
         "status": null,
         "team_abbr": "CAR",
         "pos": "RB",
@@ -550,6 +599,7 @@ window.LEAGUE_ROSTERS = {
     "starters": [
       {
         "name": "Brock Purdy",
+        "espn": "4361741",
         "status": null,
         "team_abbr": "SF",
         "pos": "QB",
@@ -559,6 +609,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Bijan Robinson",
+        "espn": "4430807",
         "status": null,
         "team_abbr": "ATL",
         "pos": "RB",
@@ -568,6 +619,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Kyren Williams",
+        "espn": "4430737",
         "status": null,
         "team_abbr": "LAR",
         "pos": "RB",
@@ -577,6 +629,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Davante Adams",
+        "espn": "16800",
         "status": null,
         "team_abbr": "LAR",
         "pos": "WR",
@@ -586,6 +639,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jalen Coker",
+        "espn": "4695883",
         "status": null,
         "team_abbr": "CAR",
         "pos": "WR",
@@ -595,6 +649,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Christian Watson",
+        "espn": "4248528",
         "status": null,
         "team_abbr": "GB",
         "pos": "WR",
@@ -604,6 +659,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Travis Kelce",
+        "espn": "15847",
         "status": null,
         "team_abbr": "KC",
         "pos": "TE",
@@ -613,6 +669,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Ashton Jeanty",
+        "espn": "4890973",
         "status": null,
         "team_abbr": "LV",
         "pos": "RB",
@@ -622,6 +679,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Bucky Irving",
+        "espn": "4596448",
         "status": null,
         "team_abbr": "TB",
         "pos": "RB",
@@ -631,6 +689,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jared Goff",
+        "espn": "3046779",
         "status": null,
         "team_abbr": "DET",
         "pos": "QB",
@@ -649,6 +708,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Cam Little",
+        "espn": "4686361",
         "status": null,
         "team_abbr": "JAX",
         "pos": "K",
@@ -660,6 +720,7 @@ window.LEAGUE_ROSTERS = {
     "bench": [
       {
         "name": "DJ Moore",
+        "espn": "3915416",
         "status": "Q",
         "team_abbr": "BUF",
         "pos": "WR",
@@ -669,6 +730,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Emeka Egbuka",
+        "espn": "4567750",
         "status": null,
         "team_abbr": "TB",
         "pos": "WR",
@@ -678,6 +740,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Quinshon Judkins",
+        "espn": "4685702",
         "status": null,
         "team_abbr": "CLE",
         "pos": "RB",
@@ -687,6 +750,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Sam LaPorta",
+        "espn": "4430027",
         "status": null,
         "team_abbr": "DET",
         "pos": "TE",
@@ -696,6 +760,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "David Montgomery",
+        "espn": "4035538",
         "status": null,
         "team_abbr": "HOU",
         "pos": "RB",
@@ -705,6 +770,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Matthew Stafford",
+        "espn": "12483",
         "status": null,
         "team_abbr": "LAR",
         "pos": "QB",
@@ -716,6 +782,7 @@ window.LEAGUE_ROSTERS = {
     "ir": [
       {
         "name": "A.J. Brown",
+        "espn": "4047646",
         "status": "IR",
         "team_abbr": "NE",
         "pos": "WR",
@@ -729,6 +796,7 @@ window.LEAGUE_ROSTERS = {
     "starters": [
       {
         "name": "Josh Allen",
+        "espn": "3918298",
         "status": null,
         "team_abbr": "BUF",
         "pos": "QB",
@@ -738,6 +806,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Christian McCaffrey",
+        "espn": "3117251",
         "status": null,
         "team_abbr": "SF",
         "pos": "RB",
@@ -747,6 +816,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jonathan Taylor",
+        "espn": "4242335",
         "status": null,
         "team_abbr": "IND",
         "pos": "RB",
@@ -756,6 +826,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Amon-Ra St. Brown",
+        "espn": "4374302",
         "status": null,
         "team_abbr": "DET",
         "pos": "WR",
@@ -765,6 +836,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Tetairoa McMillan",
+        "espn": "4685472",
         "status": null,
         "team_abbr": "CAR",
         "pos": "WR",
@@ -774,6 +846,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Garrett Wilson",
+        "espn": "4569618",
         "status": null,
         "team_abbr": "NYJ",
         "pos": "WR",
@@ -783,6 +856,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Kyle Pitts Sr.",
+        "espn": "4360248",
         "status": null,
         "team_abbr": "ATL",
         "pos": "TE",
@@ -792,6 +866,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Saquon Barkley",
+        "espn": "3929630",
         "status": "Q",
         "team_abbr": "PHI",
         "pos": "RB",
@@ -801,6 +876,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Javonte Williams",
+        "espn": "4361579",
         "status": null,
         "team_abbr": "DAL",
         "pos": "RB",
@@ -810,6 +886,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Chris Olave",
+        "espn": "4361370",
         "status": null,
         "team_abbr": "NO",
         "pos": "WR",
@@ -828,6 +905,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Cameron Dicker",
+        "espn": "4362081",
         "status": null,
         "team_abbr": "LAC",
         "pos": "K",
@@ -839,6 +917,7 @@ window.LEAGUE_ROSTERS = {
     "bench": [
       {
         "name": "Jayden Daniels",
+        "espn": "4426348",
         "status": "D",
         "team_abbr": "WSH",
         "pos": "QB",
@@ -848,6 +927,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "George Pickens",
+        "espn": "4426354",
         "status": null,
         "team_abbr": "DAL",
         "pos": "WR",
@@ -857,6 +937,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Brock Bowers",
+        "espn": "4432665",
         "status": "Q",
         "team_abbr": "LV",
         "pos": "TE",
@@ -866,6 +947,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Nico Collins",
+        "espn": "4258173",
         "status": "Q",
         "team_abbr": "HOU",
         "pos": "WR",
@@ -875,6 +957,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jaxson Dart",
+        "espn": "4689114",
         "status": "D",
         "team_abbr": "NYG",
         "pos": "QB",
@@ -884,6 +967,7 @@ window.LEAGUE_ROSTERS = {
       },
       {
         "name": "Jeremiyah Love",
+        "espn": "4870808",
         "status": null,
         "team_abbr": "ARI",
         "pos": "RB",
@@ -908,6 +992,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Tee Higgins",
+    "espn": "4239993",
     "status": null,
     "team_abbr": "CIN",
     "pos": "WR",
@@ -917,6 +1002,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Gunnar Helm",
+    "espn": "4686728",
     "status": null,
     "team_abbr": "TEN",
     "pos": "TE",
@@ -926,6 +1012,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Matt Gay",
+    "espn": "4249087",
     "status": null,
     "team_abbr": "LV",
     "pos": "K",
@@ -944,6 +1031,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Tyler Warren",
+    "espn": "4431459",
     "status": null,
     "team_abbr": "IND",
     "pos": "TE",
@@ -953,6 +1041,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Caleb Williams",
+    "espn": "4431611",
     "status": null,
     "team_abbr": "CHI",
     "pos": "QB",
@@ -962,6 +1051,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Stefon Diggs",
+    "espn": "2976212",
     "status": null,
     "team_abbr": "WSH",
     "pos": "WR",
@@ -971,6 +1061,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Terry McLaurin",
+    "espn": "3121422",
     "status": null,
     "team_abbr": "WSH",
     "pos": "WR",
@@ -980,6 +1071,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Isaiah Likely",
+    "espn": "4361050",
     "status": null,
     "team_abbr": "NYG",
     "pos": "TE",
@@ -989,6 +1081,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Evan McPherson",
+    "espn": "4360234",
     "status": null,
     "team_abbr": "CIN",
     "pos": "K",
@@ -1007,6 +1100,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Dallas Goedert",
+    "espn": "3121023",
     "status": null,
     "team_abbr": "PHI",
     "pos": "TE",
@@ -1016,6 +1110,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Chad Ryland",
+    "espn": "4363538",
     "status": null,
     "team_abbr": "ARI",
     "pos": "K",
@@ -1034,6 +1129,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Tyler Loop",
+    "espn": "4697745",
     "status": null,
     "team_abbr": "BAL",
     "pos": "K",
@@ -1043,6 +1139,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Bryce Young",
+    "espn": "4685720",
     "status": null,
     "team_abbr": "CAR",
     "pos": "QB",
@@ -1061,6 +1158,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jason Sanders",
+    "espn": "3124679",
     "status": null,
     "team_abbr": "NYJ",
     "pos": "K",
@@ -1070,6 +1168,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Mike Gesicki",
+    "espn": "3116164",
     "status": null,
     "team_abbr": "CIN",
     "pos": "TE",
@@ -1079,6 +1178,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Dalton Kincaid",
+    "espn": "4385690",
     "status": null,
     "team_abbr": "BUF",
     "pos": "TE",
@@ -1088,6 +1188,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Trey Smack",
+    "espn": "4869461",
     "status": null,
     "team_abbr": "GB",
     "pos": "K",
@@ -1097,6 +1198,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Tyler Bass",
+    "espn": "3917232",
     "status": null,
     "team_abbr": "BUF",
     "pos": "K",
@@ -1106,6 +1208,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Pat Freiermuth",
+    "espn": "4361411",
     "status": null,
     "team_abbr": "PIT",
     "pos": "TE",
@@ -1115,6 +1218,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Cairo Santos",
+    "espn": "17427",
     "status": null,
     "team_abbr": "CHI",
     "pos": "K",
@@ -1124,6 +1228,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Juwan Johnson",
+    "espn": "3929645",
     "status": null,
     "team_abbr": "NO",
     "pos": "TE",
@@ -1142,6 +1247,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Tyler Shough",
+    "espn": "4360689",
     "status": null,
     "team_abbr": "NO",
     "pos": "QB",
@@ -1160,6 +1266,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Evan Engram",
+    "espn": "3051876",
     "status": null,
     "team_abbr": "DEN",
     "pos": "TE",
@@ -1169,6 +1276,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "T.J. Hockenson",
+    "espn": "4036133",
     "status": null,
     "team_abbr": "MIN",
     "pos": "TE",
@@ -1178,6 +1286,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Chase McLaughlin",
+    "espn": "3150744",
     "status": null,
     "team_abbr": "TB",
     "pos": "K",
@@ -1187,6 +1296,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Parker Washington",
+    "espn": "4432620",
     "status": null,
     "team_abbr": "JAX",
     "pos": "WR",
@@ -1205,6 +1315,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Noah Fant",
+    "espn": "4036131",
     "status": null,
     "team_abbr": "NO",
     "pos": "TE",
@@ -1214,6 +1325,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Ladd McConkey",
+    "espn": "4612826",
     "status": "Q",
     "team_abbr": "LAC",
     "pos": "WR",
@@ -1223,6 +1335,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Kyle Monangai",
+    "espn": "4608686",
     "status": null,
     "team_abbr": "CHI",
     "pos": "RB",
@@ -1232,6 +1345,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jordan Love",
+    "espn": "4036378",
     "status": null,
     "team_abbr": "GB",
     "pos": "QB",
@@ -1241,6 +1355,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Cole Kmet",
+    "espn": "4258595",
     "status": null,
     "team_abbr": "CHI",
     "pos": "TE",
@@ -1250,6 +1365,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Kenyon Sadiq",
+    "espn": "5083315",
     "status": null,
     "team_abbr": "NYJ",
     "pos": "TE",
@@ -1259,6 +1375,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Devaughn Vele",
+    "espn": "4569559",
     "status": null,
     "team_abbr": "NO",
     "pos": "WR",
@@ -1277,6 +1394,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Carson Wentz",
+    "espn": "2573079",
     "status": null,
     "team_abbr": "MIN",
     "pos": "QB",
@@ -1286,6 +1404,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Deebo Samuel Sr.",
+    "espn": "3126486",
     "status": null,
     "team_abbr": "SF",
     "pos": "WR",
@@ -1295,6 +1414,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Brenton Strange",
+    "espn": "4430539",
     "status": null,
     "team_abbr": "JAX",
     "pos": "TE",
@@ -1304,6 +1424,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Chris Boswell",
+    "espn": "17372",
     "status": null,
     "team_abbr": "PIT",
     "pos": "K",
@@ -1313,6 +1434,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Nick Folk",
+    "espn": "10621",
     "status": null,
     "team_abbr": "ATL",
     "pos": "K",
@@ -1322,6 +1444,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Ryan Fitzgerald",
+    "espn": "4568263",
     "status": null,
     "team_abbr": "CAR",
     "pos": "K",
@@ -1331,6 +1454,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Malik Willis",
+    "espn": "4242512",
     "status": null,
     "team_abbr": "MIA",
     "pos": "QB",
@@ -1340,6 +1464,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Antonio Williams",
+    "espn": "5081432",
     "status": null,
     "team_abbr": "WSH",
     "pos": "WR",
@@ -1358,6 +1483,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Dontayvion Wicks",
+    "espn": "4428850",
     "status": null,
     "team_abbr": "PHI",
     "pos": "WR",
@@ -1385,6 +1511,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jacoby Brissett",
+    "espn": "2578570",
     "status": null,
     "team_abbr": "ARI",
     "pos": "QB",
@@ -1412,6 +1539,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Harrison Butker",
+    "espn": "3055899",
     "status": null,
     "team_abbr": "KC",
     "pos": "K",
@@ -1421,6 +1549,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Will Reichard",
+    "espn": "4567104",
     "status": null,
     "team_abbr": "MIN",
     "pos": "K",
@@ -1430,6 +1559,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "C.J. Stroud",
+    "espn": "4432577",
     "status": null,
     "team_abbr": "HOU",
     "pos": "QB",
@@ -1439,6 +1569,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Spencer Shrader",
+    "espn": "4571557",
     "status": null,
     "team_abbr": "IND",
     "pos": "K",
@@ -1448,6 +1579,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "David Njoku",
+    "espn": "3123076",
     "status": null,
     "team_abbr": "LAC",
     "pos": "TE",
@@ -1457,6 +1589,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Riley Patterson",
+    "espn": "4243371",
     "status": null,
     "team_abbr": "MIA",
     "pos": "K",
@@ -1466,6 +1599,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jacory Croskey-Merritt",
+    "espn": "4575131",
     "status": null,
     "team_abbr": "WSH",
     "pos": "RB",
@@ -1475,6 +1609,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Rhamondre Stevenson",
+    "espn": "4569173",
     "status": null,
     "team_abbr": "NE",
     "pos": "RB",
@@ -1484,6 +1619,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Denzel Boston",
+    "espn": "4832800",
     "status": null,
     "team_abbr": "CLE",
     "pos": "WR",
@@ -1493,6 +1629,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Mark Andrews",
+    "espn": "3116365",
     "status": null,
     "team_abbr": "BAL",
     "pos": "TE",
@@ -1511,6 +1648,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Matthew Golden",
+    "espn": "4701936",
     "status": null,
     "team_abbr": "GB",
     "pos": "WR",
@@ -1520,6 +1658,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jordan Mason",
+    "espn": "4360569",
     "status": "Q",
     "team_abbr": "MIN",
     "pos": "RB",
@@ -1529,6 +1668,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Deshaun Watson",
+    "espn": "3122840",
     "status": null,
     "team_abbr": "CLE",
     "pos": "QB",
@@ -1538,6 +1678,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Eli Raridon",
+    "espn": "4831959",
     "status": null,
     "team_abbr": "NE",
     "pos": "TE",
@@ -1547,6 +1688,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Kirk Cousins",
+    "espn": "14880",
     "status": null,
     "team_abbr": "LV",
     "pos": "QB",
@@ -1556,6 +1698,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Michael Mayer",
+    "espn": "4429086",
     "status": null,
     "team_abbr": "LV",
     "pos": "TE",
@@ -1574,6 +1717,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Kalif Raymond",
+    "espn": "2973405",
     "status": null,
     "team_abbr": "CHI",
     "pos": "WR",
@@ -1583,6 +1727,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Devin Singletary",
+    "espn": "4040761",
     "status": null,
     "team_abbr": "NYG",
     "pos": "RB",
@@ -1610,6 +1755,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jake Elliott",
+    "espn": "3050478",
     "status": null,
     "team_abbr": "PHI",
     "pos": "K",
@@ -1619,6 +1765,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Andy Borregales",
+    "espn": "4569923",
     "status": null,
     "team_abbr": "NE",
     "pos": "K",
@@ -1637,6 +1784,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jonnu Smith",
+    "espn": "3054212",
     "status": null,
     "team_abbr": "GB",
     "pos": "TE",
@@ -1646,6 +1794,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Demarcus Robinson",
+    "espn": "3043116",
     "status": null,
     "team_abbr": "SF",
     "pos": "WR",
@@ -1655,6 +1804,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Caleb Douglas",
+    "espn": "4869645",
     "status": null,
     "team_abbr": "MIA",
     "pos": "WR",
@@ -1664,6 +1814,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Dalton Schultz",
+    "espn": "3117256",
     "status": null,
     "team_abbr": "HOU",
     "pos": "TE",
@@ -1673,6 +1824,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Drew Lock",
+    "espn": "3924327",
     "status": null,
     "team_abbr": "SEA",
     "pos": "QB",
@@ -1682,6 +1834,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Aaron Jones Sr.",
+    "espn": "3042519",
     "status": null,
     "team_abbr": "MIN",
     "pos": "RB",
@@ -1691,6 +1844,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Aaron Rodgers",
+    "espn": "8439",
     "status": null,
     "team_abbr": "PIT",
     "pos": "QB",
@@ -1700,6 +1854,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Daniel Carlson",
+    "espn": "3051909",
     "status": null,
     "team_abbr": "NO",
     "pos": "K",
@@ -1709,6 +1864,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Drew Stevens",
+    "espn": "5081335",
     "status": null,
     "team_abbr": "WSH",
     "pos": "K",
@@ -1718,6 +1874,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Joey Slye",
+    "espn": "3124084",
     "status": null,
     "team_abbr": "TEN",
     "pos": "K",
@@ -1727,6 +1884,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Kendrick Bourne",
+    "espn": "3045523",
     "status": null,
     "team_abbr": "ARI",
     "pos": "WR",
@@ -1736,6 +1894,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Bhayshul Tuten",
+    "espn": "4882093",
     "status": null,
     "team_abbr": "JAX",
     "pos": "RB",
@@ -1745,6 +1904,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Jakobi Meyers",
+    "espn": "3916433",
     "status": null,
     "team_abbr": "JAX",
     "pos": "WR",
@@ -1754,6 +1914,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Cam Ward",
+    "espn": "4688380",
     "status": null,
     "team_abbr": "TEN",
     "pos": "QB",
@@ -1772,6 +1933,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Oronde Gadsden",
+    "espn": "4595342",
     "status": null,
     "team_abbr": "LAC",
     "pos": "TE",
@@ -1781,6 +1943,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Hunter Henry",
+    "espn": "3046439",
     "status": null,
     "team_abbr": "NE",
     "pos": "TE",
@@ -1790,6 +1953,7 @@ window.FREE_AGENTS = [
   },
   {
     "name": "Baker Mayfield",
+    "espn": "3052587",
     "status": null,
     "team_abbr": "TB",
     "pos": "QB",

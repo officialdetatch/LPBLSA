@@ -221,7 +221,8 @@
   function rowHTML(entry) {
     var p = entry.player, loc = entry.loc;
     return '<tr>' +
-      '<td><span class="player-cell"><span class="player-avatar">' + esc(p.pos || '?') + '</span>' +
+      '<td><span class="player-cell">' + (window.LPBSA_playerAvatar ? window.LPBSA_playerAvatar(p, 'nfl', p.pos || '?')
+        : '<span class="player-avatar">' + esc(p.pos || '?') + '</span>') +
       '<span><span class="player-name">' + esc(p.name) + '</span>' +
       '<span class="nfl-tag">' + esc(p.team_abbr) + ' ' + esc(p.pos) + '</span></span></span></td>' +
       '<td>' + locLabel(loc) + '</td>' +
@@ -446,6 +447,16 @@
   });
 
   start();
+
+  /* ---------- player photos from ESPN (assets/espn-photos.js) ---------- */
+  if (window.LPBSA_ESPN) {
+    window.LPBSA_ESPN.mount({
+      host: document.getElementById('rmPhotos'),
+      league: 'nfl',
+      players: function () { return allEntries().map(function (e) { return e.player; }); },
+      changed: function () { saveDraft(); renderAll(); }
+    });
+  }
 
   /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
   if (window.LPBSA_PUBLISH) {
