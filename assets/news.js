@@ -12,6 +12,11 @@ window.LEAGUE_NEWS = [
     "summary": "Resumen tardio? Bueno todo tiene su razon!",
     "blocks": [
       {
+        "type": "image",
+        "src": "images/news/resumen6.png",
+        "caption": ""
+      },
+      {
         "type": "h",
         "text": "Los Puntos de Piña son masacrados por los Mugiwara de Caimito"
       },
