@@ -1,9 +1,10 @@
 /* ============================================================
    NFL LEAGUE STANDINGS
    The ORDER of this list is the rank -- the first team is 1st place,
-   the last is last place. Reorder, add or edit teams with
-   nfl-standings-manager.html rather than editing this file by hand.
-   Generated with nfl-standings-manager.html
+   the last is last place. Kept up to date from ESPN Fantasy by the
+   "ESPN sync" robot (every 3 hours). The "playoff" chances are the only
+   thing ESPN does not share: set them in nfl-standings-manager.html,
+   the robot keeps them.
    ============================================================ */
 window.LEAGUE_STANDINGS = [
   {
@@ -26,7 +27,7 @@ window.LEAGUE_STANDINGS = [
     "pct": ".750",
     "gb": "0.5",
     "pf": 688.2,
-    "pa": 655.38,
+    "pa": 665.38,
     "streak": "W2",
     "playoff": "97%"
   },
