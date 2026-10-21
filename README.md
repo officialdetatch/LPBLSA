@@ -472,6 +472,72 @@ The icons are the white image files in images/socials-logo/. To swap one,
 replace the file there and keep the same file name. The small size tweaks
 that keep them looking even live in assets/style.css under .social-link img.
 
+## Preguntas frecuentes (faq.html)
+The FAQ for newcomers. Every public page's footer has a "Preguntas frecuentes"
+button next to the social icons; assets/nav.js adds it (so it is not written
+into each page), and the private tools and the Consola don't get it.
+  faq.html               the page
+  assets/faq-data.js     the questions and answers - edit them here
+  assets/faq.js          draws them, with the search box and topic buttons
+  assets/faq.css         the page's look
+Each question has a short id (draft, premio, inactivo...). A link to
+faq.html#draft opens that question, so you can send people straight to an
+answer (an answer can link to another one the same way: href="#inactivo").
+faq-data.js is also meant to be what the AI helper reads later, so keep the
+answers true when the rules change.
+
+## Leonidas - the AI helper in the bubble (assets/leonidas.js)
+Leonidas, the lion from the logo, answers visitors' questions inside the round
+bubble in the bottom corner (home page, the NFL and NBA pages and the FAQ page).
+He uses Gemini through Firebase AI Logic in the lpblsa Firebase project, on the
+free Gemini Developer API: the project stays on the free Spark plan, so it can
+never cost anything. If Google's free daily limit runs out, he says he is resting.
+
+What he knows: only the site's own files, read fresh each visit - the FAQ
+(assets/faq-data.js), the history (about-data.js), the 8 newest stories
+(news.js) and, for every league that is 'live' in assets/leagues.js, its rules,
+teams, rosters, free agents, standings, schedule and playoffs. Update those
+files the usual way and he knows at once. He is told never to make things up and
+to send people to info@lpblsa.vip (or managers-affairs@lpblsa.vip) instead.
+
+The files:
+  assets/leonidas.js         the brain and the chat (CONFIG at the top: the Gemini
+                             model, 30 questions per visitor per day, greeting,
+                             the suggested questions)
+  assets/fantasy-switcher.js the bubble: with Leonidas on, it opens to his chat and
+                             the league tiles + coffee become a small row under it
+  images/leonidas.png        his picture (the lion from the logo)
+  assets/firebase-config.js  recaptchaKey - while it is empty Leonidas is OFF and
+                             the bubble is the old "otro Fantasy" panel
+
+### Switching him on (one time, about 10 minutes)
+1. Firebase console > project lpblsa > AI Logic (under AI / AI Services in the
+   left menu) > Get started > pick the **Gemini Developer API** (the free one) >
+   finish the steps. Do not upgrade to Blaze.
+2. Make the reCAPTCHA key: Google Cloud console (same project, lpblsa) > search
+   "reCAPTCHA" > create a key: type Website, domains lpblsa.vip and
+   www.lpblsa.vip, NO checkbox challenge. Copy the key (it starts with 6L...).
+3. Firebase console > App Check > Apps > your web app > reCAPTCHA Enterprise >
+   paste the key > Save. Then App Check > APIs: make sure Firebase AI Logic is
+   "Enforced" (only lpblsa.vip can then use the free quota).
+4. Paste the same key into assets/firebase-config.js, recaptchaKey: '6L...'.
+   Push. The bubble turns into Leonidas.
+
+Testing on your computer (localhost) before pushing: reCAPTCHA only vouches for
+lpblsa.vip, so open the site locally, open the bubble, ask something, then look
+in the browser console (F12) for "App Check debug token: ...". Copy it to
+Firebase console > App Check > Apps > (the web app's menu) > Manage debug tokens
+> Add. Ask again and he answers.
+
+If he always says he "can't confirm this page is lpblsa.vip": the key in
+firebase-config.js and the one in App Check are different, or the domain is
+missing from the reCAPTCHA key. If he always says something failed: Google Cloud
+console > APIs & Services > Credentials > the Browser key - if it is restricted
+to a list of APIs, add "Firebase AI Logic API".
+
+To turn him off again without deleting anything: leonidas: false in the CONFIG
+of assets/fantasy-switcher.js.
+
 ## Badge shapes
 Every crest can be a pointed shield or a circle. The league logo in the header
 is already round. To flip one, add or remove the class crest-circle:

@@ -81,6 +81,24 @@
     if (window.localStorage.getItem('lpblsa.console.token')) nav.insertAdjacentHTML('beforeend', link('consola', 'Consola', 'consola.html'));
   } catch (e) { /* storage blocked: no tab */ }
 
+  /* "Preguntas frecuentes" (faq.html) in every public page's footer. The footers are written into each
+     page, so it is added here, once, instead of in 20-odd files. Private tools (no data-active) skip it. */
+  function addFooterLinks() {
+    var foot = document.querySelector('.site-footer .wrap');
+    if (!foot || !active || active === 'consola' || foot.querySelector('.footer-links')) return;
+    var box = document.createElement('div');
+    box.className = 'footer-links';
+    box.innerHTML = '<a href="' + esc(root + 'faq.html') + '"' + (active === 'faq' ? ' aria-current="page"' : '') + '>' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+      '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.6M12 17.2v.1"/></svg>' +
+      'Preguntas frecuentes</a>';
+    /* next to the social icons, so it all stays on one line on a computer */
+    var social = foot.querySelector('.footer-social');
+    if (social) social.insertBefore(box, social.firstChild); else foot.appendChild(box);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addFooterLinks);
+  else addFooterLinks();
+
   /* the phone menu button, for screen readers (it is written "Show menu" in every page) */
   var menuBtn = document.getElementById('navToggle');
   if (menuBtn) menuBtn.setAttribute('aria-label', 'Abrir el men\u00fa');

@@ -5,6 +5,112 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "resumen-de-la-semana-6",
+    "league": "football",
+    "date": "Week 6 | Oct 20",
+    "headline": "Resumen De La Semana 6",
+    "summary": "Resumen tardio? Bueno todo tiene su razon!",
+    "blocks": [
+      {
+        "type": "h",
+        "text": "Los Puntos de Piña son masacrados por los Mugiwara de Caimito"
+      },
+      {
+        "type": "p",
+        "text": "Fue una de esas semanas. Los Puntos de Piña no querrán ver la repetición de este partido tras perder por 44.74 puntos. Asi mismo como lees 44.74 puntos, aunque anterior a esto se confirmo como el Manager, Detatch,  hacia matematicas y googleaba como podia generar 75+ puntos con un QB."
+      },
+      {
+        "type": "p",
+        "text": "La D/ST de los Texans espera que el equipo no se lo reproche mucho, pues en vez de anotar puntos, vinieron a que le resten estos obtuvieron -2.0 puntos. (si son negativos)"
+      },
+      {
+        "type": "p",
+        "text": "No hay mucho que rescatar, salvo que el equipo simplemente no la hizo. Lo mejor es soltarlo y pasar la página hacia Cincinnati... o mejor dicho, hacia Sierra Linda donde esta proxima semana se enfrentan a los Cameltoes."
+      },
+      {
+        "type": "h",
+        "text": "El Abandono"
+      },
+      {
+        "type": "image",
+        "src": "images/news/IMG_9125.jpeg",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "Queue Sarah McLachlan - Angel..."
+      },
+      {
+        "type": "p",
+        "text": "Peters Perfect Team, es confirmado como ABANDONADO! Un equipo que pudiera estar en la gloria con picks como Drake Maye,  Kenneth Walker III, y George Kittle, es abandonado y dejado a la perdicion."
+      },
+      {
+        "type": "p",
+        "text": "Como se demuestra? El peor record de la liga estando 1-4. Llamamos al comisionado a tomar acciones y rescatar a tan buenos jugadores de esas condiciones mediocres!!!!"
+      },
+      {
+        "type": "p",
+        "text": "Si el comisionado no toma accion, la mano invisible de Dios tendra que hacerlo."
+      },
+      {
+        "type": "h",
+        "text": "Tabla de Posiciones"
+      },
+      {
+        "type": "p",
+        "text": "Luego de esta semana 6 asi queda la tabla:"
+      },
+      {
+        "type": "p",
+        "text": "1. Mugiwaras De Caimito (Daniel Heredia): 4-1-0"
+      },
+      {
+        "type": "p",
+        "text": "2. Hobbit (Jose Cruz): 3-1-0"
+      },
+      {
+        "type": "p",
+        "text": "3. Los Puntos de Pina (Christopher Ramirez): 2-3-0"
+      },
+      {
+        "type": "p",
+        "text": "4. Sierra Linda Cameltoes (George Sanchez): 2-3-0"
+      },
+      {
+        "type": "p",
+        "text": "5. Peter’s Perfect Team (Peter Cruz): 1-4-0"
+      },
+      {
+        "type": "h",
+        "text": "En fin..!"
+      },
+      {
+        "type": "p",
+        "text": "Antes de culminar fuerte el aplauso para Germie Bernard! Sus 20.2 puntos estuvieron 12.41 por encima de su proyección e impulsaron a Mugiwaras De Caimito a la victoria. Se necesita más de un jugador para ganar, pero no te hace daño tener en tu roster a uno de los mejores de la semana."
+      },
+      {
+        "type": "p",
+        "text": "Tristemente esta semana no hubo milagro de MONDAAAAAAAAAAAAY NIIIIIIIIIGHT FOOOOTBALL! El milagro hubiera sido 75 puntos de Brock Purdy... Pero eso es mucho pedir."
+      },
+      {
+        "type": "h",
+        "text": "Enfrentamientos de esta semana"
+      },
+      {
+        "type": "p",
+        "text": "Peter’s Perfect Team (53%) vs. Hobbit (47%)"
+      },
+      {
+        "type": "p",
+        "text": "Sierra Linda Cameltoes (38%) vs. Los Puntos de Pina (62%)"
+      },
+      {
+        "type": "p",
+        "text": "Como siempre, nos vemos la proxima semana, en este, TU RESUMEN SEMANAL! Disfruten los waivers, y el inicio de la NBA!"
+      }
+    ]
+  },
+  {
     "id": "resumen-de-la-semana-5",
     "league": "football",
     "date": "Week 5 | Oct 13",
@@ -744,10 +850,10 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "⚾",
-  "El virus de las lesiones sigue en toda la NFL, chequeen sus players probablemente estan lesionados",
-  "Los Puntos de Piña han hecho mas puntos estando en BYE WEEK, que cuando jugan normal",
-  "El draft de NBA dejo mucho de que hablar, mas informacion en la seccion de noticias",
-  "Si tienen alguna noticia que quieran que publiquemos, mandenla a nuestro correo: newsletter@lpblsa.vip",
-  "Criture es el mejor ser humano del mundo, gracias por tu apoyo!!"
+  "EMPEZO LA NBA!!!!!!!!",
+  "Nos abandono... :( - Drake Maye, luego de que su manager abandonara el equipo",
+  "Si no tienes un jugador lesionado en tu roster, el comisionado te mandara 5$ por ATH MOVIL o ZELLE",
+  "Paul George esta asi de duro??? Hizo 82.75 en una sola noche.",
+  "Ya no se que poner aqui, tirenme con ideas",
+  "Daniel se fue de bye, deberia prestar sus players!!"
 ];

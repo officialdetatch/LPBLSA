@@ -27,7 +27,15 @@
    the row (and put the old wording back in  prompt).
 
    To open MLB, set its status to 'live' (and give it a home) in
-   assets/leagues.js - this bubble follows automatically.                    */
+   assets/leagues.js - this bubble follows automatically.
+
+   LEONIDAS (the AI helper)
+   Once assets/firebase-config.js has a recaptchaKey, the bubble becomes
+   Leonidas: the button shows the lion, the speech bubble says  leoPrompt , and
+   the panel opens to his chat (assets/leonidas.js, loaded from here) with the
+   league tiles and the coffee button as a small row under it. Without the key
+   - or with  leonidas: false  below - the bubble is exactly as before.
+   Other pages can open it with  LPBSA_BUBBLE.open()  (the FAQ page does).   */
 (function () {
   'use strict';
 
@@ -42,13 +50,23 @@
     delayMs: 2500,          /* how long after load the speech bubble pops out   */
     rememberDismiss: true,  /* true = once closed, the speech bubble stays away */
                             /*        for the rest of that browser visit        */
-    tiles: null             /* null = build them from assets/leagues.js */
+    tiles: null,            /* null = build them from assets/leagues.js */
+    leonidas: true,         /* false = never show Leonidas, even with the key */
+    leoPrompt: '¿Preguntas sobre la liga? Pregúntale a Leonidas.',
+    leoTitle: 'Leonidas',
+    leoSub: 'El león de la liga · te contesta al momento',
+    leoOther: 'Otro fantasy'
   };
 
   var user = window.LPBSA_SWITCHER || {};
   Object.keys(user).forEach(function (k) { CONFIG[k] = user[k]; });
 
   if (!document.body || document.getElementById('fsRoot')) return;
+
+  /* Leonidas only when the Firebase settings carry the App Check key (see the top of assets/leonidas.js) */
+  var FBC = window.LPBSA_FIREBASE || {};
+  var LEO = !!(CONFIG.leonidas && FBC.recaptchaKey && FBC.apiKey);
+  if (LEO) CONFIG.prompt = CONFIG.leoPrompt;
 
   var ROOT = document.body.getAttribute('data-root') || '';
   var HERE = document.body.getAttribute('data-league') || '';
@@ -171,6 +189,23 @@
     '.fs-ctext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}' +
     '.fs-cname{font-family:var(--font-display);font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;}' +
     '.fs-csub{font-size:.74rem;color:var(--mute);line-height:1.3;}' +
+    /* ---- with Leonidas: lion button, chat on top, the leagues and coffee as one small row ---- */
+    '.fs-fab.lion{background:var(--navy-900);border-color:var(--gold);overflow:visible;}' +
+    '.fs-fab.lion img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;}' +
+    '.fs-panel.leo{width:min(420px,calc(100vw - 36px));padding:16px 16px 14px;text-align:left;}' +
+    '.fs-head{display:flex;align-items:center;gap:12px;margin:0 34px 12px 0;}' +
+    '.fs-av{width:48px;height:48px;flex:none;border-radius:50%;border:2px solid var(--gold);background:var(--navy-950);object-fit:cover;}' +
+    '.fs-panel.leo .fs-head h2{margin:0;font-size:1.5rem;letter-spacing:.04em;}' +
+    '.fs-head small{display:block;font-size:.76rem;color:var(--mute);line-height:1.3;}' +
+    '.fs-mini{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);}' +
+    '.fs-mini-label{flex-basis:100%;font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-bottom:2px;}' +
+    '.fs-mt{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 3px;border-radius:999px;border:1px solid var(--line);' +
+      'background:var(--navy-950);color:var(--white);text-decoration:none;font-family:var(--font-display);font-size:.95rem;' +
+      'letter-spacing:.05em;line-height:1;transition:border-color .15s ease,transform .15s ease;}' +
+    'a.fs-mt:hover,a.fs-mt:focus-visible{border-color:var(--gold);transform:translateY(-2px);outline:none;}' +
+    '.fs-mt.soon{opacity:.55;cursor:default;}' +
+    '.fs-mt-ico{width:26px;height:26px;display:inline-flex;}.fs-mt-ico img,.fs-mt-ico svg{width:100%;height:100%;object-fit:contain;}' +
+    '.fs-mt.cafe{margin-left:auto;border-style:dashed;border-color:var(--gold);}' +
     '@keyframes fsPop{from{opacity:0;transform:translateY(12px) scale(.92);}to{opacity:1;transform:none;}}' +
     '@keyframes fsPulse{0%{transform:scale(1);opacity:.9;}100%{transform:scale(1.55);opacity:0;}}' +
     '@media (prefers-reduced-motion:reduce){.fs-tip,.fs-panel{animation:none;}.fs-fab.nudge::after{animation:none;}' +
@@ -187,7 +222,9 @@
       '.fs-go{font-size:.62rem;letter-spacing:.05em;}' +
       '.fs-soon{font-size:.58rem;letter-spacing:.05em;padding:2px 6px;}' +
       '.fs-coffee{margin-top:8px;padding:10px 12px;gap:12px;}.fs-cup{flex-basis:38px;width:38px;height:38px;}' +
-      '.fs-cname{font-size:1rem;line-height:1.15;}}';
+      '.fs-cname{font-size:1rem;line-height:1.15;}' +
+      '.fs-panel.leo{width:calc(100vw - 24px);padding:14px 12px 12px;}' +
+      '.fs-mt.cafe{margin-left:0;}}';
   document.head.appendChild(css);
 
   /* ---------- markup ---------- */
@@ -214,26 +251,65 @@
   }
   window.__fsIcon = function (name) { return ICONS[name] || ''; };
 
+  /* the small versions, for the row under Leonidas */
+  function miniHTML(t) {
+    var art = t.img
+      ? '<img src="' + esc(t.img) + '" alt="" onerror="this.outerHTML=window.__fsIcon(\'' + esc(t.icon) + '\')">'
+      : (ICONS[t.icon] || '');
+    var inner = '<span class="fs-mt-ico">' + art + '</span>' + esc(t.label);
+    return t.href
+      ? '<a class="fs-mt" href="' + esc(t.href) + '" data-fantasy="' + esc(t.key) + '" title="' + esc(t.sub || t.label) + '">' + inner + '</a>'
+      : '<span class="fs-mt soon" aria-disabled="true" data-fantasy="' + esc(t.key) + '" title="' + esc(t.soon || 'Pronto') + '">' + inner + '</span>';
+  }
+  function miniCoffeeHTML() {
+    if (!CONFIG.coffee || !CONFIG.coffeeUrl) return '';
+    return '<a class="fs-mt cafe" href="' + esc(CONFIG.coffeeUrl) + '" target="_blank" rel="noopener noreferrer" data-coffee="1" title="' +
+      esc(CONFIG.coffeeSub) + '"><span class="fs-mt-ico">' + CUP + '</span>Café</a>';
+  }
+  var LION = '<img src="' + esc(ROOT + 'images/leonidas.png') + '" alt="" onerror="this.outerHTML=window.__fsChat">';
+  window.__fsChat = CHAT;
+
   var root = document.createElement('div');
   root.className = 'fs-root';
   root.id = 'fsRoot';
+  var panelInner = LEO
+    ? '<div class="fs-head"><img class="fs-av" src="' + esc(ROOT + 'images/leonidas.png') + '" alt="" onerror="this.remove()">' +
+        '<div><h2 id="fsTitle">' + esc(CONFIG.leoTitle) + '</h2><small>' + esc(CONFIG.leoSub) + '</small></div></div>' +
+      '<div id="fsLeo"></div>' +
+      '<div class="fs-mini"><span class="fs-mini-label">' + esc(CONFIG.leoOther) + '</span>' +
+        CONFIG.tiles.map(miniHTML).join('') + miniCoffeeHTML() + '</div>'
+    : '<h2 id="fsTitle">' + esc(CONFIG.title) + '</h2>' +
+      '<p>' + esc(CONFIG.hint) + '</p>' +
+      '<div class="fs-tiles">' + CONFIG.tiles.map(tileHTML).join('') + '</div>' +
+      coffeeHTML();
   root.innerHTML =
     '<div class="fs-tip" id="fsTip" hidden role="status">' + esc(CONFIG.prompt) +
       '<button type="button" class="fs-tip-x" id="fsTipX" aria-label="Cerrar">&times;</button></div>' +
-    '<div class="fs-panel" id="fsPanel" role="dialog" aria-labelledby="fsTitle" hidden style="position:relative">' +
-      '<button type="button" class="fs-x" id="fsX" aria-label="Cerrar">&times;</button>' +
-      '<h2 id="fsTitle">' + esc(CONFIG.title) + '</h2>' +
-      '<p>' + esc(CONFIG.hint) + '</p>' +
-      '<div class="fs-tiles">' + CONFIG.tiles.map(tileHTML).join('') + '</div>' +
-      coffeeHTML() +
+    '<div class="fs-panel' + (LEO ? ' leo' : '') + '" id="fsPanel" role="dialog" aria-labelledby="fsTitle" hidden style="position:relative">' +
+      '<button type="button" class="fs-x" id="fsX" aria-label="Cerrar">&times;</button>' + panelInner +
     '</div>' +
-    '<button type="button" class="fs-fab" id="fsFab" aria-label="' + esc(CONFIG.prompt) + '" aria-expanded="false" aria-controls="fsPanel">' +
-      CHAT + '<span class="fs-dot"></span></button>';
+    '<button type="button" class="fs-fab' + (LEO ? ' lion' : '') + '" id="fsFab" aria-label="' + esc(CONFIG.prompt) + '" aria-expanded="false" aria-controls="fsPanel">' +
+      (LEO ? LION : CHAT) + '<span class="fs-dot"></span></button>';
   document.body.appendChild(root);
 
   var tip = document.getElementById('fsTip');
   var panel = document.getElementById('fsPanel');
   var fab = document.getElementById('fsFab');
+
+  /* Leonidas lives in his own file; load it and let him draw his chat in the panel */
+  var leoReady = false, leoQueue = [];
+  if (LEO) {
+    var tag = document.createElement('script');
+    tag.src = ROOT + 'assets/leonidas.js';
+    tag.onload = function () {
+      if (!window.LPBSA_LEONIDAS) return;
+      window.LPBSA_LEONIDAS.mount(document.getElementById('fsLeo'));
+      leoReady = true;
+      leoQueue.splice(0).forEach(function (f) { f(); });
+    };
+    document.body.appendChild(tag);
+  }
+  function whenLeo(f) { if (leoReady) f(); else leoQueue.push(f); }
 
   function hideTip(remember) {
     tip.hidden = true;
@@ -244,6 +320,15 @@
     hideTip(true);
     panel.hidden = false;
     fab.setAttribute('aria-expanded', 'true');
+    if (LEO) {
+      whenLeo(function () {
+        window.LPBSA_LEONIDAS.warm();
+        /* the keyboard only jumps up by itself on a computer, not on a phone */
+        if (window.matchMedia && window.matchMedia('(hover:hover)').matches) window.LPBSA_LEONIDAS.focus();
+        else document.getElementById('fsX').focus();
+      });
+      return;
+    }
     var first = panel.querySelector('a.fs-tile') || document.getElementById('fsX');
     if (first && first.focus) first.focus();
   }
@@ -263,6 +348,13 @@
   document.addEventListener('click', function (e) {
     if (!panel.hidden && !root.contains(e.target)) closePanel(false);
   });
+
+  /* for other pages: LPBSA_BUBBLE.open() opens the panel; ask('...') also asks Leonidas */
+  window.LPBSA_BUBBLE = {
+    leonidas: LEO,
+    open: openPanel,
+    ask: function (q) { openPanel(); if (LEO) whenLeo(function () { window.LPBSA_LEONIDAS.ask(q); }); }
+  };
 
   /* ---------- the speech bubble pops out after a moment ---------- */
   /* If the signup pop-up is on screen, wait until it is closed so the two

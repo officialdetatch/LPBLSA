@@ -1137,8 +1137,20 @@ a.team-link:hover span.name{ color:var(--gold-light); }
 }
 .site-footer .wrap > div:first-child{ color:var(--white); font-family:var(--font-display); font-weight:600; font-size:1.15rem; letter-spacing:.01em; }
 .footer-social{
-  display:flex; gap:10px; align-items:center;
+  display:flex; gap:10px; align-items:center; flex-wrap:wrap;
 }
+/* "Preguntas frecuentes" (added to every footer by assets/nav.js) */
+.footer-links{ margin-right:6px; }
+.footer-links a{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:9px 16px; border-radius:999px;
+  border:1px solid var(--line); background:rgba(255,255,255,.03);
+  color:var(--white); text-decoration:none;
+  font-family:var(--font-display); font-weight:600; font-size:1.02rem; letter-spacing:.02em;
+  transition:border-color .15s ease, color .15s ease, background-color .15s ease;
+}
+.footer-links a svg{ width:17px; height:17px; color:var(--gold); }
+.footer-links a:hover, .footer-links a[aria-current]{ border-color:var(--gold); color:var(--gold-light); background:rgba(212,175,55,.12); }
 .social-link{
   display:inline-flex; align-items:center; justify-content:center;
   width:42px; height:42px;
