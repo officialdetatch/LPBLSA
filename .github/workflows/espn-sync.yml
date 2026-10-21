@@ -1,0 +1,73 @@
+# Keeps the ROSTERS, FREE AGENTS and STANDINGS of every league up to date from ESPN Fantasy.
+# Every 3 hours it reads ESPN (the leagues must be "Viewable to Public") and, only if
+# something changed, saves the new leagues/<league>/assets/<league>-roster-data.js and
+# -standings-data.js on main. Before you push from your computer: git pull.
+# Run it any time: Actions tab > "ESPN sync" > Run workflow.
+# What it does and how to change it: README.md, "Rosters and standings from ESPN".
+name: ESPN sync
+
+on:
+  schedule:
+    - cron: "37 */3 * * *"   # every 3 hours (UTC), at :37
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only show what would change (nothing is saved)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write            # to save the updated data files
+  pages: write               # to ask GitHub Pages to rebuild right after
+
+concurrency:
+  group: espn-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Read ESPN and update the data files
+        id: sync
+        continue-on-error: true    # one league failing must not stop the other's update from being saved
+        run: node scripts/espn-sync.mjs
+        env:
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+
+      - name: Save the changes
+        id: save
+        run: |
+          if git diff --quiet -- leagues; then
+            echo "Nothing changed on ESPN since the last sync."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add leagues/*/assets/*-roster-data.js leagues/*/assets/*-standings-data.js
+          git commit -q -m "ESPN sync: rosters and standings $(date -u '+%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do
+            git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 5
+          done
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Rebuild the site
+        if: steps.save.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" --silent || echo "GitHub Pages will rebuild on its own."
+
+      - name: Show red if a league had a problem
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "A league could not be synced - open this run's Summary to see why. Its files were left as they were."
+          exit 1

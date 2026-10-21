@@ -37,14 +37,23 @@ window.LPBSA_LEAGUES = [
     key: 'nfl', short: 'NFL', name: 'NFL Fantasy', sport: 'F\u00fatbol americano', story: 'football',
     status: 'live', home: 'leagues/nfl/nfl-landing-page.html', logo: 'images/leagues/nfl.png',
     assetRoot: '', teamPages: 'leagues/nfl/teams/', noTies: false,
-    rules: 'leagues/nfl/nfl-rules.html', playoffs: 'leagues/nfl/nfl-playoffs.html'
+    rules: 'leagues/nfl/nfl-rules.html', playoffs: 'leagues/nfl/nfl-playoffs.html',
+    /* live scores in La Jornada (assets/live-scores.js): the league on ESPN Fantasy.
+       game: ffl = football. season: the year the season STARTS. league: the League ID (League > Settings).
+       teams: ESPN's team number -> our slug (ESPN team names can change, the numbers never do). */
+    espn: { game: 'ffl', season: 2026, league: 894158307,
+      teams: { 1: 'puntos', 2: 'sierra', 3: 'hobbit', 4: 'mugiwaras', 5: 'peters' } }
   },
   {
     key: 'nba', short: 'NBA', name: 'NBA Fantasy', sport: 'Baloncesto', story: 'basketball',
     status: 'live', home: 'leagues/nba/nba-landing-page.html', logo: 'images/leagues/nba.png',
     assetRoot: 'leagues/nba/', teamPages: 'leagues/nba/teams/', noTies: true,
     rules: 'leagues/nba/nba-rules.html', playoffs: 'leagues/nba/nba-playoffs.html',
-    tagline: 'Todos 0-0. Tip-off el 20 de octubre.'
+    tagline: 'Todos 0-0. Tip-off el 20 de octubre.',
+    /* live scores (assets/live-scores.js). game: fba = basketball. season: for basketball ESPN uses the year
+       the season ENDS (2026-27 = 2027). */
+    espn: { game: 'fba', season: 2027, league: 904543600,
+      teams: { 1: 'puntos', 2: 'sin-talento', 3: 'imcebollin', 4: 'concheros', 5: 'mugiwaras', 6: 'pantyman' } }
   },
   {
     /* the baseball division - greyed out ("Pronto") until it opens. To keep it a secret for now,

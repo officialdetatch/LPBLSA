@@ -252,7 +252,8 @@
               ', ' + esc(b.team.name) + ' ' + fmt(b.pfg) + '"><span class="mu-bar-a" style="width:' + pct + '%"></span>' +
               '<span class="mu-bar-b"></span></div></div>';
         }
-        return '<article class="matchup" aria-label="' + esc(a.team.name) + ' contra ' + esc(b.team.name) + '">' +
+        return '<article class="matchup" data-league="' + esc(key) + '" data-week="' + cal.week + '" data-a="' + esc(g[0]) +
+          '" data-b="' + esc(g[1]) + '" aria-label="' + esc(a.team.name) + ' contra ' + esc(b.team.name) + '">' +
           '<div class="mu-teams">' + sideHTML(a) + '<span class="mu-vs" aria-hidden="true">VS</span>' + sideHTML(b) + '</div>' +
           bar + '<p class="mu-sass">' + esc(matchupLine(a, b, n)) + '</p></article>';
       }).join('');
@@ -266,6 +267,9 @@
       host.innerHTML =
         '<p class="jornada-week"><b>' + esc(cal.unit) + ' ' + cal.week + '</b> de ' + esc(L.name) + '</p>' +
         '<div class="jornada-games">' + games + '</div>' + byes;
+      /* tells assets/live-scores.js the cards were (re)drawn, so it can put the live points back on them */
+      host.setAttribute('data-phase', cal.phase);
+      try { host.dispatchEvent(new CustomEvent('lpbsa:jornada', { bubbles: true, detail: { league: key, week: cal.week, phase: cal.phase } })); } catch (e) { /* very old browser */ }
       return cal;
     }
 

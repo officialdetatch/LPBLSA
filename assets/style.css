@@ -2012,6 +2012,28 @@ a.mu-team:hover .mu-name{ color:var(--gold-light); }
 .mu-bar-track{ display:flex; height:8px; border-radius:999px; overflow:hidden; background:var(--navy-900); }
 .mu-bar-a{ background:linear-gradient(90deg, var(--gold-dark), var(--gold)); }
 .mu-bar-b{ flex:1; margin-left:3px; background:linear-gradient(90deg, #5b74ad, #93a8da); }
+/* live points from ESPN (assets/live-scores.js) - they take the place of the season bar */
+.mu-live{ margin-top:18px; }
+.mu-live-row{ display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:10px; margin-bottom:8px; }
+.mu-live-pts{
+  font-family:var(--font-display); font-weight:800; font-size:2rem; line-height:1; color:var(--white);
+  font-variant-numeric:tabular-nums; letter-spacing:.01em; transition:color .3s ease;
+}
+.mu-live-row > :last-child{ text-align:right; }
+.mu-live-pts.is-ahead{ color:var(--gold-light); }
+.mu-live-tag{
+  display:inline-flex; align-items:center; gap:6px; justify-self:center; white-space:nowrap;
+  padding:4px 10px; border-radius:999px; border:1px solid var(--line);
+  font-size:.74rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--mute);
+}
+.mu-live-tag.is-live{ color:#ffb8c1; border-color:rgba(255,77,94,.45); background:rgba(255,77,94,.1); }
+.mu-live-tag.is-final{ color:var(--gold-light); border-color:rgba(212,175,55,.45); background:rgba(212,175,55,.08); }
+.mu-live-proj{
+  display:flex; justify-content:space-between; gap:10px; margin:8px 0 0;
+  font-size:.8rem; color:var(--mute); font-variant-numeric:tabular-nums;
+}
+.mu-live-proj span{ color:var(--silver); font-weight:600; }
+@media (max-width:600px){ .mu-live-pts{ font-size:1.7rem; } }
 .mu-sass{
   position:relative; margin:18px 0 0; padding:14px 0 0 18px;
   border-top:1px solid var(--line-soft);

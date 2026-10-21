@@ -390,6 +390,8 @@ form; if you ever want a different inbox, redo the steps above with the new
 address and swap in the new endpoint.
 
 ## Managing rosters and free agents - nfl-roster-manager.html
+(Since Oct 2026 the rosters come from ESPN on their own - see "Rosters and standings
+from ESPN". This tool is now only a backup.)
 Rosters and the free agent board are no longer baked into each team page by
 hand. They all read from one file, leagues/nfl/assets/nfl-roster-data.js, and you edit that
 file using nfl-roster-manager.html - never by editing the tables in leagues/nfl/teams/*.html
@@ -485,6 +487,59 @@ faq.html#draft opens that question, so you can send people straight to an
 answer (an answer can link to another one the same way: href="#inactivo").
 faq-data.js is also meant to be what the AI helper reads later, so keep the
 answers true when the rules change.
+
+## Rosters and standings from ESPN (the "ESPN sync" robot)
+Every 3 hours a free GitHub Action (.github/workflows/espn-sync.yml, which runs
+scripts/espn-sync.mjs) reads both leagues from ESPN Fantasy and rewrites:
+  leagues/nfl/assets/nfl-roster-data.js     + nba-roster-data.js
+      every team's starters (in the site's slot order), bench and IR, each
+      player's ESPN id (photo), injury tag (Q, D, OUT, IR, DTD, BYE...), NFL/NBA
+      team, positions, season projection, average and last game - and the
+      free-agent board (the 100 most-owned free agents and waiver players)
+  leagues/nfl/assets/nfl-standings-data.js  + nba-standings-data.js
+      the order (ESPN's ranking), W-L-T, PCT, GB, PF, PA and streak
+It only saves (one commit on main, "ESPN sync: ...") when something actually
+changed, and the site rebuilds a minute later. Team names, logos and the NFL team
+list are never touched. Leonidas, the team pages, the free-agent pages, the photos
+and the standings all follow by themselves.
+
+  - Before you push from your computer: git pull (the robot may have saved since).
+  - Playoff %: ESPN doesn't share it. Set it in the standings manager as before;
+    the robot keeps whatever is there.
+  - The roster and standings managers still work, but anything else you change
+    with them is replaced on the next sync. Keep them for when ESPN is down.
+  - Run it now: GitHub > Actions > "ESPN sync" > Run workflow (tick "dry run" to
+    only see what would change). Each run's Summary says what it did.
+  - If a run shows red: open its Summary. The usual reasons are a league made
+    private again on ESPN, or a new team on ESPN that is not in "teams" in
+    assets/leagues.js. A league with a problem is left exactly as it was.
+  - Turn it off: GitHub > Actions > "ESPN sync" > ... > Disable workflow.
+  - Every 3 hours = the cron line in espn-sync.yml ("37 */3 * * *", UTC).
+  - The settings it uses are the same "espn" lines of assets/leagues.js as the
+    live scores (below). Test it on your computer: node scripts/espn-sync.mjs
+    (DRY_RUN=1 in front to only look).
+
+## Live scores in La Jornada (assets/live-scores.js)
+While a week is on, every matchup card in La Jornada (home page, NFL page, NBA page)
+shows the real points of the week from ESPN Fantasy - big numbers, a bar with who
+is ahead, "En vivo" while the games are on and "Final" once ESPN has a winner. NFL
+cards also show ESPN's projection. They refresh every minute while the page is on
+screen (every 10 minutes before kickoff, never in a hidden tab). Before anyone
+scores, a card looks as before (points per week of the season).
+
+It works because both leagues are "Viewable to Public" on ESPN - no login or
+password anywhere. If a league is made private again, or ESPN is down or changes
+its data, the cards quietly go back to how they were.
+
+The settings are the "espn" lines of each league in assets/leagues.js:
+  game     ffl = football, fba = basketball (fbb = baseball, for MLB)
+  season   NFL: the year the season starts. NBA: the year it ENDS (2026-27 = 2027)
+  league   the League ID (ESPN > League > Settings > League Info)
+  teams    ESPN's team number -> our team slug. ESPN team names can be changed by
+           the managers, the numbers never change. (If a number is missing, the
+           team is matched by name.)
+Each new season: update season (and league, if ESPN gives the league a new ID).
+For MLB: add an espn line the same way when it opens.
 
 ## Leonidas - the AI helper in the bubble (assets/leonidas.js)
 Leonidas, the lion from the logo, answers visitors' questions inside the round
