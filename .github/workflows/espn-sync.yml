@@ -18,7 +18,6 @@ on:
 
 permissions:
   contents: write            # to save the updated data files
-  pages: write               # to ask GitHub Pages to rebuild right after
 
 concurrency:
   group: espn-sync
@@ -58,13 +57,7 @@ jobs:
             sleep 5
           done
           echo "pushed=true" >> "$GITHUB_OUTPUT"
-
-      - name: Rebuild the site
-        if: steps.save.outputs.pushed == 'true'
-        continue-on-error: true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" --silent || echo "GitHub Pages will rebuild on its own."
+          # (GitHub Pages rebuilds the site by itself after this push)
 
       - name: Show red if a league had a problem
         if: steps.sync.outcome == 'failure'
