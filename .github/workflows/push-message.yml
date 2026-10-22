@@ -1,0 +1,42 @@
+# Sends YOUR OWN push notifications (written in the Consola: "Mandar una notificación").
+# The Consola saves the message in alerts/push-messages.json; this runs on that push and sends it
+# to everyone who turned notifications on (or only to one fantasy's fans). Same Firebase secret as
+# the news notifications (PUSH-SETUP.md). README.md: "Push messages from the Consola".
+name: Push message
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - alerts/push-messages.json
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run = only count who would get the newest message | test = send it only to the newest device (yours) | send = send it to everyone it is for"
+        type: choice
+        options: [dry-run, test, send]
+        default: dry-run
+
+permissions:
+  contents: read
+
+concurrency:
+  group: push-message
+  cancel-in-progress: false
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Send the new message(s)
+        run: node scripts/send-push-message.mjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          BEFORE_SHA: ${{ github.event_name == 'workflow_dispatch' && 'manual' || github.event.before }}
+          MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'send' }}

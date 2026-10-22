@@ -488,6 +488,23 @@ answer (an answer can link to another one the same way: href="#inactivo").
 faq-data.js is also meant to be what the AI helper reads later, so keep the
 answers true when the rules change.
 
+## Push messages from the Consola ("Mandar una notificación")
+The first card in the Consola sends your own push notification - "¡Revisen sus
+lineups!", "se procesan los waivers", anything - to every device that turned the
+bell on, a minute or two after you press Enviar. As many as you like.
+  Para       Todos, or only the fans of one fantasy (what each device picked)
+  Ideas      ready-made texts to start from (edit IDEAS in assets/console-push.js)
+  Abre       the page that opens when they tap it
+How it works: the Consola adds the message to alerts/push-messages.json (one
+commit, "Consola: notificación: ...") and .github/workflows/push-message.yml
+(scripts/send-push-message.mjs) sends it with the same Firebase secret as the
+news notifications. Each message goes out once: re-runs never repeat it, and a
+message older than 6 hours is never sent. The file keeps the last 30.
+  - Test it first: Actions > "Push message" > Run workflow > test = sends the
+    newest message only to your own (newest) device, with [PRUEBA] in front.
+  - Only people who turned notifications on get them (on iPhone: the site added
+    to the Home Screen, then the bell).
+
 ## Rosters and standings from ESPN (the "ESPN sync" robot)
 Every 3 hours a free GitHub Action (.github/workflows/espn-sync.yml, which runs
 scripts/espn-sync.mjs) reads both leagues from ESPN Fantasy and rewrites:
