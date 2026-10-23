@@ -1390,16 +1390,6 @@ window.FREE_AGENTS = [
     "last": 12
   },
   {
-    "name": "Jakobi Meyers",
-    "espn": "3916433",
-    "status": "BYE",
-    "team_abbr": "JAX",
-    "pos": "WR",
-    "fpts": 100.15,
-    "avg": 8.45,
-    "last": 10.8
-  },
-  {
     "name": "Emanuel Wilson",
     "espn": "4887558",
     "status": null,
@@ -1408,6 +1398,16 @@ window.FREE_AGENTS = [
     "fpts": 10.12,
     "avg": 8.97,
     "last": 5.2
+  },
+  {
+    "name": "Jakobi Meyers",
+    "espn": "3916433",
+    "status": "BYE",
+    "team_abbr": "JAX",
+    "pos": "WR",
+    "fpts": 100.15,
+    "avg": 8.45,
+    "last": 10.8
   },
   {
     "name": "Zach Charbonnet",
@@ -1697,16 +1697,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "MarShawn Lloyd",
-    "espn": "4429023",
-    "status": null,
-    "team_abbr": "GB",
-    "pos": "RB",
-    "fpts": 24.8,
-    "avg": 6.45,
-    "last": 1
-  },
-  {
     "name": "Chris Godwin Jr.",
     "espn": "3116165",
     "status": null,
@@ -1715,6 +1705,16 @@ window.FREE_AGENTS = [
     "fpts": 79.99,
     "avg": 5.82,
     "last": 5.7
+  },
+  {
+    "name": "MarShawn Lloyd",
+    "espn": "4429023",
+    "status": null,
+    "team_abbr": "GB",
+    "pos": "RB",
+    "fpts": 24.8,
+    "avg": 6.45,
+    "last": 1
   },
   {
     "name": "Hunter Henry",
