@@ -372,7 +372,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "SEA",
         "pos": "D/ST",
-        "fpts": 80.03,
+        "fpts": 80.12,
         "avg": 9.5,
         "last": 6
       },
@@ -427,7 +427,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "HOU",
         "pos": "QB",
-        "fpts": 196.76,
+        "fpts": 196.79,
         "avg": 18.69,
         "last": 22.98
       },
@@ -632,7 +632,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "LAR",
         "pos": "RB",
-        "fpts": 179,
+        "fpts": 178.99,
         "avg": 17.33,
         "last": 8.2
       },
@@ -702,7 +702,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "LAR",
         "pos": "QB",
-        "fpts": 186.36,
+        "fpts": 186.35,
         "avg": 17.64,
         "last": 16.88
       },
@@ -1076,7 +1076,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "HOU",
     "pos": "D/ST",
-    "fpts": 81.32,
+    "fpts": 81.35,
     "avg": 4.83,
     "last": -2
   },
@@ -1111,16 +1111,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "DJ Moore",
-    "espn": "3915416",
-    "status": "Q",
-    "team_abbr": "BUF",
-    "pos": "WR",
-    "fpts": 121.06,
-    "avg": 7.58,
-    "last": 0
-  },
-  {
     "name": "Jaylen Waddle",
     "espn": "4372016",
     "status": null,
@@ -1131,12 +1121,22 @@ window.FREE_AGENTS = [
     "last": 4.4
   },
   {
+    "name": "DJ Moore",
+    "espn": "3915416",
+    "status": "Q",
+    "team_abbr": "BUF",
+    "pos": "WR",
+    "fpts": 121.06,
+    "avg": 7.58,
+    "last": 0
+  },
+  {
     "name": "Caleb Williams",
     "espn": "4431611",
     "status": null,
     "team_abbr": "CHI",
     "pos": "QB",
-    "fpts": 199.26,
+    "fpts": 199.25,
     "avg": 20.9,
     "last": 22.12
   },
@@ -1370,16 +1370,6 @@ window.FREE_AGENTS = [
     "last": 0.9
   },
   {
-    "name": "Josh Downs",
-    "espn": "4688813",
-    "status": null,
-    "team_abbr": "IND",
-    "pos": "WR",
-    "fpts": 78.11,
-    "avg": 6.93,
-    "last": 6.7
-  },
-  {
     "name": "Emanuel Wilson",
     "espn": "4887558",
     "status": null,
@@ -1388,6 +1378,16 @@ window.FREE_AGENTS = [
     "fpts": 10.12,
     "avg": 8.97,
     "last": 5.2
+  },
+  {
+    "name": "Josh Downs",
+    "espn": "4688813",
+    "status": null,
+    "team_abbr": "IND",
+    "pos": "WR",
+    "fpts": 78.11,
+    "avg": 6.93,
+    "last": 6.7
   },
   {
     "name": "Harrison Butker",
@@ -1557,16 +1557,6 @@ window.FREE_AGENTS = [
     "last": 11.4
   },
   {
-    "name": "Wan'Dale Robinson",
-    "espn": "4569587",
-    "status": null,
-    "team_abbr": "TEN",
-    "pos": "WR",
-    "fpts": 78.61,
-    "avg": 7.4,
-    "last": 3.7
-  },
-  {
     "name": "Tre Tucker",
     "espn": "4428718",
     "status": null,
@@ -1575,6 +1565,16 @@ window.FREE_AGENTS = [
     "fpts": 90.16,
     "avg": 11.08,
     "last": 24.2
+  },
+  {
+    "name": "Wan'Dale Robinson",
+    "espn": "4569587",
+    "status": null,
+    "team_abbr": "TEN",
+    "pos": "WR",
+    "fpts": 78.61,
+    "avg": 7.4,
+    "last": 3.7
   },
   {
     "name": "Rachaad White",
@@ -1617,16 +1617,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Terry McLaurin",
-    "espn": "3121422",
-    "status": "OUT",
-    "team_abbr": "WSH",
-    "pos": "WR",
-    "fpts": 0,
-    "avg": 7.7,
-    "last": 3.2
-  },
-  {
     "name": "Jake Ferguson",
     "espn": "4242355",
     "status": null,
@@ -1645,6 +1635,16 @@ window.FREE_AGENTS = [
     "fpts": 75.27,
     "avg": 5.6,
     "last": 5.3
+  },
+  {
+    "name": "Terry McLaurin",
+    "espn": "3121422",
+    "status": "OUT",
+    "team_abbr": "WSH",
+    "pos": "WR",
+    "fpts": 0,
+    "avg": 7.7,
+    "last": 3.2
   },
   {
     "name": "Aaron Rodgers",
@@ -1945,15 +1945,6 @@ window.FREE_AGENTS = [
     "last": 5.3
   },
   {
-    "name": "Jaguars",
-    "status": "BYE",
-    "team_abbr": "JAX",
-    "pos": "D/ST",
-    "fpts": 79.86,
-    "avg": 5.67,
-    "last": -2
-  },
-  {
     "name": "Tyreek Hill",
     "espn": "3116406",
     "status": "Q",
@@ -1962,6 +1953,15 @@ window.FREE_AGENTS = [
     "fpts": null,
     "avg": null,
     "last": null
+  },
+  {
+    "name": "Jaguars",
+    "status": "BYE",
+    "team_abbr": "JAX",
+    "pos": "D/ST",
+    "fpts": 79.86,
+    "avg": 5.67,
+    "last": -2
   },
   {
     "name": "Keon Coleman",
