@@ -1181,16 +1181,6 @@ window.FREE_AGENTS = [
     "last": 8.9
   },
   {
-    "name": "Dallas Goedert",
-    "espn": "3121023",
-    "status": "Q",
-    "team_abbr": "PHI",
-    "pos": "TE",
-    "fpts": 86.16,
-    "avg": 9.63,
-    "last": 9.1
-  },
-  {
     "name": "J.K. Dobbins",
     "espn": "4241985",
     "status": null,
@@ -1199,6 +1189,16 @@ window.FREE_AGENTS = [
     "fpts": 126.11,
     "avg": 7.62,
     "last": 12.1
+  },
+  {
+    "name": "Dallas Goedert",
+    "espn": "3121023",
+    "status": "Q",
+    "team_abbr": "PHI",
+    "pos": "TE",
+    "fpts": 86.16,
+    "avg": 9.63,
+    "last": 9.1
   },
   {
     "name": "David Montgomery",
@@ -1637,14 +1637,14 @@ window.FREE_AGENTS = [
     "last": 2.3
   },
   {
-    "name": "Dominic Zvada",
-    "espn": "5082424",
+    "name": "Tyler Allgeier",
+    "espn": "4373626",
     "status": null,
-    "team_abbr": "NYG",
-    "pos": "K",
-    "fpts": 122.58,
-    "avg": 9.33,
-    "last": 8
+    "team_abbr": "ARI",
+    "pos": "RB",
+    "fpts": 75.27,
+    "avg": 5.6,
+    "last": 5.3
   },
   {
     "name": "Aaron Rodgers",
@@ -1657,14 +1657,14 @@ window.FREE_AGENTS = [
     "last": 16.02
   },
   {
-    "name": "Tyler Allgeier",
-    "espn": "4373626",
+    "name": "Dominic Zvada",
+    "espn": "5082424",
     "status": null,
-    "team_abbr": "ARI",
-    "pos": "RB",
-    "fpts": 75.27,
-    "avg": 5.6,
-    "last": 5.3
+    "team_abbr": "NYG",
+    "pos": "K",
+    "fpts": 122.58,
+    "avg": 9.33,
+    "last": 8
   },
   {
     "name": "Alec Pierce",
@@ -1846,16 +1846,6 @@ window.FREE_AGENTS = [
     "last": 6.9
   },
   {
-    "name": "Jonathon Brooks",
-    "espn": "4678008",
-    "status": "IR",
-    "team_abbr": "CAR",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 4.15,
-    "last": 0
-  },
-  {
     "name": "Makai Lemon",
     "espn": "4870795",
     "status": null,
@@ -1864,6 +1854,16 @@ window.FREE_AGENTS = [
     "fpts": 50.02,
     "avg": 3.53,
     "last": 3.4
+  },
+  {
+    "name": "Jonathon Brooks",
+    "espn": "4678008",
+    "status": "IR",
+    "team_abbr": "CAR",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 4.15,
+    "last": 0
   },
   {
     "name": "Omar Cooper Jr.",
@@ -1935,15 +1935,6 @@ window.FREE_AGENTS = [
     "last": 19
   },
   {
-    "name": "Jaguars",
-    "status": "BYE",
-    "team_abbr": "JAX",
-    "pos": "D/ST",
-    "fpts": 79.86,
-    "avg": 5.67,
-    "last": -2
-  },
-  {
     "name": "Dalton Schultz",
     "espn": "3117256",
     "status": null,
@@ -1952,6 +1943,15 @@ window.FREE_AGENTS = [
     "fpts": 71.07,
     "avg": 6.95,
     "last": 5.3
+  },
+  {
+    "name": "Jaguars",
+    "status": "BYE",
+    "team_abbr": "JAX",
+    "pos": "D/ST",
+    "fpts": 79.86,
+    "avg": 5.67,
+    "last": -2
   },
   {
     "name": "Tyreek Hill",
@@ -1984,13 +1984,13 @@ window.FREE_AGENTS = [
     "last": 9.3
   },
   {
-    "name": "Tyjae Spears",
-    "espn": "4428557",
-    "status": "Q",
-    "team_abbr": "TEN",
-    "pos": "RB",
-    "fpts": 61.13,
-    "avg": 3.27,
-    "last": 1.3
+    "name": "Quentin Johnston",
+    "espn": "4429025",
+    "status": "BYE",
+    "team_abbr": "LAC",
+    "pos": "WR",
+    "fpts": 58.41,
+    "avg": 4.16,
+    "last": 6.2
   }
 ];
