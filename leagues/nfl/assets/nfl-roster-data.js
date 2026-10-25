@@ -262,7 +262,7 @@ window.LEAGUE_ROSTERS = {
         "status": "Q",
         "team_abbr": "NYJ",
         "pos": "RB",
-        "fpts": 142.36,
+        "fpts": 129.3,
         "avg": 12.5,
         "last": 0
       },
@@ -477,7 +477,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "NYG",
         "pos": "WR",
-        "fpts": 163.26,
+        "fpts": 163.37,
         "avg": 13.65,
         "last": 22.5
       },
@@ -567,7 +567,7 @@ window.LEAGUE_ROSTERS = {
         "status": "OUT",
         "team_abbr": "PHI",
         "pos": "WR",
-        "fpts": 121.1,
+        "fpts": 121.07,
         "avg": 14,
         "last": 17
       },
@@ -992,7 +992,7 @@ window.LEAGUE_ROSTERS = {
         "status": "Q",
         "team_abbr": "PHI",
         "pos": "RB",
-        "fpts": 131.26,
+        "fpts": 131.24,
         "avg": 5.25,
         "last": 0
       }
@@ -1017,7 +1017,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "NYG",
     "pos": "TE",
-    "fpts": 128.74,
+    "fpts": 128.82,
     "avg": 14.97,
     "last": 20.9
   },
@@ -1067,7 +1067,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "NYG",
     "pos": "RB",
-    "fpts": 74.72,
+    "fpts": 88.56,
     "avg": 7.72,
     "last": 0
   },
@@ -1196,7 +1196,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "PHI",
     "pos": "TE",
-    "fpts": 86.08,
+    "fpts": 86.05,
     "avg": 9.63,
     "last": 9.1
   },
@@ -1246,7 +1246,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "NYJ",
     "pos": "RB",
-    "fpts": 72.94,
+    "fpts": 78.27,
     "avg": 8.73,
     "last": 11.4
   },
@@ -1647,16 +1647,6 @@ window.FREE_AGENTS = [
     "last": 8
   },
   {
-    "name": "Jake Ferguson",
-    "espn": "4242355",
-    "status": null,
-    "team_abbr": "DAL",
-    "pos": "TE",
-    "fpts": 51.15,
-    "avg": 6,
-    "last": 2.3
-  },
-  {
     "name": "Chris Godwin Jr.",
     "espn": "3116165",
     "status": null,
@@ -1665,6 +1655,16 @@ window.FREE_AGENTS = [
     "fpts": 80.01,
     "avg": 5.82,
     "last": 5.7
+  },
+  {
+    "name": "Jake Ferguson",
+    "espn": "4242355",
+    "status": null,
+    "team_abbr": "DAL",
+    "pos": "TE",
+    "fpts": 51.15,
+    "avg": 6,
+    "last": 2.3
   },
   {
     "name": "Terry McLaurin",
@@ -1737,16 +1737,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Jalen Hurts",
-    "espn": "4040715",
-    "status": "IR",
-    "team_abbr": "PHI",
-    "pos": "QB",
-    "fpts": 0,
-    "avg": 16,
-    "last": 0
-  },
-  {
     "name": "Brian Thomas Jr.",
     "espn": "4432773",
     "status": "BYE",
@@ -1754,6 +1744,16 @@ window.FREE_AGENTS = [
     "pos": "WR",
     "fpts": 51.37,
     "avg": 3.5,
+    "last": 0
+  },
+  {
+    "name": "Jalen Hurts",
+    "espn": "4040715",
+    "status": "IR",
+    "team_abbr": "PHI",
+    "pos": "QB",
+    "fpts": 0,
+    "avg": 16,
     "last": 0
   },
   {
@@ -1767,16 +1767,6 @@ window.FREE_AGENTS = [
     "last": 12.2
   },
   {
-    "name": "Dameon Pierce",
-    "espn": "4360238",
-    "status": null,
-    "team_abbr": "PHI",
-    "pos": "RB",
-    "fpts": 53.43,
-    "avg": 7.6,
-    "last": 13
-  },
-  {
     "name": "KC Concepcion",
     "espn": "4870653",
     "status": null,
@@ -1785,6 +1775,16 @@ window.FREE_AGENTS = [
     "fpts": 79.1,
     "avg": 4.78,
     "last": 5.9
+  },
+  {
+    "name": "Dameon Pierce",
+    "espn": "4360238",
+    "status": null,
+    "team_abbr": "PHI",
+    "pos": "RB",
+    "fpts": 53.42,
+    "avg": 7.6,
+    "last": 13
   },
   {
     "name": "Kendre Miller",
@@ -1841,7 +1841,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "PHI",
     "pos": "WR",
-    "fpts": 49.63,
+    "fpts": 49.6,
     "avg": 3.53,
     "last": 3.4
   },
@@ -1871,7 +1871,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "NYJ",
     "pos": "WR",
-    "fpts": 64.25,
+    "fpts": 64.73,
     "avg": 11.4,
     "last": 19.3
   },
@@ -1940,7 +1940,7 @@ window.FREE_AGENTS = [
     "status": "OUT",
     "team_abbr": "PHI",
     "pos": "WR",
-    "fpts": 66.74,
+    "fpts": 66.73,
     "avg": 7.32,
     "last": 3.4
   },
@@ -1955,15 +1955,6 @@ window.FREE_AGENTS = [
     "last": null
   },
   {
-    "name": "Jaguars",
-    "status": "BYE",
-    "team_abbr": "JAX",
-    "pos": "D/ST",
-    "fpts": 79.86,
-    "avg": 5.67,
-    "last": -2
-  },
-  {
     "name": "Keon Coleman",
     "espn": "4635008",
     "status": "BYE",
@@ -1972,6 +1963,15 @@ window.FREE_AGENTS = [
     "fpts": 59.16,
     "avg": 9.3,
     "last": 13.9
+  },
+  {
+    "name": "Jaguars",
+    "status": "BYE",
+    "team_abbr": "JAX",
+    "pos": "D/ST",
+    "fpts": 79.86,
+    "avg": 5.67,
+    "last": -2
   },
   {
     "name": "Rashid Shaheed",
