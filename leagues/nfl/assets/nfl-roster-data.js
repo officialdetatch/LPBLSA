@@ -1577,16 +1577,6 @@ window.FREE_AGENTS = [
     "last": 11.4
   },
   {
-    "name": "Tyler Allgeier",
-    "espn": "4373626",
-    "status": null,
-    "team_abbr": "ARI",
-    "pos": "RB",
-    "fpts": 75.27,
-    "avg": 5.71,
-    "last": 6.4
-  },
-  {
     "name": "Chris Godwin Jr.",
     "espn": "3116165",
     "status": null,
@@ -1595,6 +1585,16 @@ window.FREE_AGENTS = [
     "fpts": 80.01,
     "avg": 5.66,
     "last": 4.7
+  },
+  {
+    "name": "Tyler Allgeier",
+    "espn": "4373626",
+    "status": null,
+    "team_abbr": "ARI",
+    "pos": "RB",
+    "fpts": 75.27,
+    "avg": 5.71,
+    "last": 6.4
   },
   {
     "name": "Kirk Cousins",
@@ -1985,13 +1985,13 @@ window.FREE_AGENTS = [
     "last": 4.7
   },
   {
-    "name": "Dontayvion Wicks",
-    "espn": "4428850",
-    "status": "OUT",
-    "team_abbr": "PHI",
+    "name": "Quentin Johnston",
+    "espn": "4429025",
+    "status": "BYE",
+    "team_abbr": "LAC",
     "pos": "WR",
-    "fpts": 66.73,
-    "avg": 7.32,
-    "last": 3.4
+    "fpts": 58.41,
+    "avg": 4.16,
+    "last": 6.2
   }
 ];
