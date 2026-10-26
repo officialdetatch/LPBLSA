@@ -313,8 +313,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "KC",
         "pos": "RB",
         "fpts": 245.87,
-        "avg": 26.2,
-        "last": 26.9
+        "avg": 23.12,
+        "last": 7.7
       },
       {
         "name": "Tony Pollard",
@@ -327,14 +327,14 @@ window.LEAGUE_ROSTERS = {
         "last": 35
       },
       {
-        "name": "Dak Prescott",
-        "espn": "2577417",
+        "name": "Patrick Mahomes",
+        "espn": "3139477",
         "status": null,
-        "team_abbr": "DAL",
+        "team_abbr": "KC",
         "pos": "QB",
-        "fpts": 185.2,
-        "avg": 17.48,
-        "last": 11.02
+        "fpts": 212.69,
+        "avg": 16.68,
+        "last": 6
       },
       {
         "name": "Ravens",
@@ -352,21 +352,11 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "K",
         "fpts": 108.69,
-        "avg": 9.83,
-        "last": 7
+        "avg": 9.57,
+        "last": 8
       }
     ],
     "bench": [
-      {
-        "name": "Patrick Mahomes",
-        "espn": "3139477",
-        "status": null,
-        "team_abbr": "KC",
-        "pos": "QB",
-        "fpts": 212.69,
-        "avg": 18.81,
-        "last": 10.48
-      },
       {
         "name": "Rashee Rice",
         "espn": "4428331",
@@ -383,8 +373,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "D/ST",
         "fpts": 80.12,
-        "avg": 9.5,
-        "last": 6
+        "avg": 9.43,
+        "last": 9
       },
       {
         "name": "Omarion Hampton",
@@ -395,6 +385,16 @@ window.LEAGUE_ROSTERS = {
         "fpts": 84.31,
         "avg": 8.83,
         "last": 5.9
+      },
+      {
+        "name": "Dak Prescott",
+        "espn": "2577417",
+        "status": null,
+        "team_abbr": "DAL",
+        "pos": "QB",
+        "fpts": 185.2,
+        "avg": 17.48,
+        "last": 11.02
       },
       {
         "name": "Harold Fannin Jr.",
@@ -458,8 +458,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "WR",
         "fpts": 186.85,
-        "avg": 23.39,
-        "last": 19.4
+        "avg": 23.88,
+        "last": 26.8
       },
       {
         "name": "Drake London",
@@ -518,8 +518,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DEN",
         "pos": "QB",
         "fpts": 159.87,
-        "avg": 13.71,
-        "last": 26.28
+        "avg": 13.69,
+        "last": 26.18
       },
       {
         "name": "Vikings",
@@ -633,8 +633,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "LAR",
         "pos": "RB",
         "fpts": 178.32,
-        "avg": 17.2,
-        "last": 16.4
+        "avg": 17.3,
+        "last": 17.1
       },
       {
         "name": "A.J. Brown",
@@ -673,8 +673,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "KC",
         "pos": "TE",
         "fpts": 100.1,
-        "avg": 10.38,
-        "last": 7.3
+        "avg": 9.72,
+        "last": 6.4
       },
       {
         "name": "Bucky Irving",
@@ -734,8 +734,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "LAR",
         "pos": "QB",
         "fpts": 186.34,
-        "avg": 17.67,
-        "last": 17.8
+        "avg": 17.62,
+        "last": 17.5
       },
       {
         "name": "Cam Little",
@@ -1267,8 +1267,8 @@ window.FREE_AGENTS = [
     "team_abbr": "KC",
     "pos": "WR",
     "fpts": 99.33,
-    "avg": 7.42,
-    "last": 10.8
+    "avg": 6.62,
+    "last": 2.6
   },
   {
     "name": "Dalton Kincaid",
@@ -1346,8 +1346,8 @@ window.FREE_AGENTS = [
     "team_abbr": "KC",
     "pos": "D/ST",
     "fpts": 70.26,
-    "avg": 7.4,
-    "last": 14
+    "avg": 6,
+    "last": -1
   },
   {
     "name": "Emanuel Wilson",
@@ -1356,8 +1356,8 @@ window.FREE_AGENTS = [
     "team_abbr": "SEA",
     "pos": "RB",
     "fpts": 10.12,
-    "avg": 8.97,
-    "last": 5.2
+    "avg": 10.26,
+    "last": 18
   },
   {
     "name": "Harrison Butker",
@@ -1366,8 +1366,8 @@ window.FREE_AGENTS = [
     "team_abbr": "KC",
     "pos": "K",
     "fpts": 130.93,
-    "avg": 9.2,
-    "last": 12
+    "avg": 8.17,
+    "last": 3
   },
   {
     "name": "Juwan Johnson",
@@ -1667,16 +1667,6 @@ window.FREE_AGENTS = [
     "last": 2.3
   },
   {
-    "name": "Terry McLaurin",
-    "espn": "3121422",
-    "status": "OUT",
-    "team_abbr": "WSH",
-    "pos": "WR",
-    "fpts": 0,
-    "avg": 7.7,
-    "last": 3.2
-  },
-  {
     "name": "Alec Pierce",
     "espn": "4360078",
     "status": "IR",
@@ -1685,6 +1675,16 @@ window.FREE_AGENTS = [
     "fpts": 69.69,
     "avg": 4.85,
     "last": 0
+  },
+  {
+    "name": "Terry McLaurin",
+    "espn": "3121422",
+    "status": "OUT",
+    "team_abbr": "WSH",
+    "pos": "WR",
+    "fpts": 0,
+    "avg": 7.7,
+    "last": 3.2
   },
   {
     "name": "Kenny Gainwell",
@@ -1803,8 +1803,8 @@ window.FREE_AGENTS = [
     "team_abbr": "DET",
     "pos": "K",
     "fpts": 106.46,
-    "avg": 9.17,
-    "last": 6
+    "avg": 9.67,
+    "last": 9
   },
   {
     "name": "Eagles",
@@ -1911,8 +1911,8 @@ window.FREE_AGENTS = [
     "team_abbr": "SEA",
     "pos": "QB",
     "fpts": 161.22,
-    "avg": 12.16,
-    "last": 11.02
+    "avg": 12.47,
+    "last": 13.98
   },
   {
     "name": "Tank Dell",
@@ -1957,12 +1957,12 @@ window.FREE_AGENTS = [
   {
     "name": "Rashid Shaheed",
     "espn": "4032473",
-    "status": null,
+    "status": "Q",
     "team_abbr": "SEA",
     "pos": "WR",
     "fpts": 77.35,
-    "avg": 5.52,
-    "last": 9.3
+    "avg": 4.89,
+    "last": 1.1
   },
   {
     "name": "Travis Hunter",
@@ -1975,16 +1975,6 @@ window.FREE_AGENTS = [
     "last": 13.9
   },
   {
-    "name": "Dontayvion Wicks",
-    "espn": "4428850",
-    "status": "OUT",
-    "team_abbr": "PHI",
-    "pos": "WR",
-    "fpts": 66.73,
-    "avg": 7.32,
-    "last": 3.4
-  },
-  {
     "name": "Michael Mayer",
     "espn": "4429086",
     "status": null,
@@ -1993,5 +1983,15 @@ window.FREE_AGENTS = [
     "fpts": 67.26,
     "avg": 7.33,
     "last": 4.7
+  },
+  {
+    "name": "Dontayvion Wicks",
+    "espn": "4428850",
+    "status": "OUT",
+    "team_abbr": "PHI",
+    "pos": "WR",
+    "fpts": 66.73,
+    "avg": 7.32,
+    "last": 3.4
   }
 ];
