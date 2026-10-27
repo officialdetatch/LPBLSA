@@ -137,8 +137,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DAL",
         "pos": "WR",
         "fpts": 151.4,
-        "avg": 17.85,
-        "last": 11.5
+        "avg": 16.36,
+        "last": 7.4
       },
       {
         "name": "Jordan Love",
@@ -166,8 +166,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DAL",
         "pos": "K",
         "fpts": 84.66,
-        "avg": 7.5,
-        "last": 1
+        "avg": 7.29,
+        "last": 6
       }
     ],
     "bench": [
@@ -393,8 +393,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DAL",
         "pos": "QB",
         "fpts": 166.27,
-        "avg": 17.48,
-        "last": 11.02
+        "avg": 15.83,
+        "last": 5.96
       },
       {
         "name": "Harold Fannin Jr.",
@@ -569,7 +569,7 @@ window.LEAGUE_ROSTERS = {
         "pos": "WR",
         "fpts": 119.56,
         "avg": 14,
-        "last": 17
+        "last": 0
       },
       {
         "name": "Bhayshul Tuten",
@@ -689,7 +689,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Matthew Golden",
         "espn": "4701936",
-        "status": null,
+        "status": "Q",
         "team_abbr": "GB",
         "pos": "WR",
         "fpts": 131.16,
@@ -780,7 +780,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Jalen Coker",
         "espn": "4695883",
-        "status": null,
+        "status": "Q",
         "team_abbr": "CAR",
         "pos": "WR",
         "fpts": 132.55,
@@ -816,7 +816,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Christian McCaffrey",
         "espn": "3117251",
-        "status": null,
+        "status": "Q",
         "team_abbr": "SF",
         "pos": "RB",
         "fpts": 174.21,
@@ -890,8 +890,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DAL",
         "pos": "RB",
         "fpts": 151.31,
-        "avg": 16.58,
-        "last": 12
+        "avg": 14.79,
+        "last": 4
       },
       {
         "name": "Amon-Ra St. Brown",
@@ -951,8 +951,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "DAL",
         "pos": "WR",
         "fpts": 107.65,
-        "avg": 10.88,
-        "last": 10.3
+        "avg": 9.33,
+        "last": 0
       },
       {
         "name": "Kyle Pitts Sr.",
@@ -989,12 +989,12 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Saquon Barkley",
         "espn": "3929630",
-        "status": "Q",
+        "status": null,
         "team_abbr": "PHI",
         "pos": "RB",
         "fpts": 126.88,
-        "avg": 5.25,
-        "last": 0
+        "avg": 6.6,
+        "last": 12
       }
     ]
   }
@@ -1188,7 +1188,7 @@ window.FREE_AGENTS = [
     "pos": "TE",
     "fpts": 80.47,
     "avg": 9.63,
-    "last": 9.1
+    "last": 0
   },
   {
     "name": "Ladd McConkey",
@@ -1664,7 +1664,7 @@ window.FREE_AGENTS = [
     "pos": "TE",
     "fpts": 46.1,
     "avg": 6,
-    "last": 2.3
+    "last": 0
   },
   {
     "name": "Alec Pierce",
@@ -1794,7 +1794,7 @@ window.FREE_AGENTS = [
     "pos": "RB",
     "fpts": 40.48,
     "avg": 7.6,
-    "last": 13
+    "last": 0
   },
   {
     "name": "Jake Bates",
@@ -1812,8 +1812,8 @@ window.FREE_AGENTS = [
     "team_abbr": "PHI",
     "pos": "D/ST",
     "fpts": 62.79,
-    "avg": 2,
-    "last": 1
+    "avg": 2.57,
+    "last": 6
   },
   {
     "name": "Malik Washington",
@@ -1842,8 +1842,8 @@ window.FREE_AGENTS = [
     "team_abbr": "PHI",
     "pos": "WR",
     "fpts": 42.2,
-    "avg": 3.53,
-    "last": 3.4
+    "avg": 3.4,
+    "last": 2.6
   },
   {
     "name": "Brenton Strange",
