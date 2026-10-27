@@ -251,3 +251,22 @@ body.pub-has-bar .toast{ bottom:calc(96px + env(safe-area-inset-bottom, 0px)); }
 .cp-recent li span{ color:var(--silver); font-size:.88rem; }
 .cp-recent li small{ color:var(--gold-light); font-size:.78rem; }
 .cp-recent .cp-empty{ color:var(--mute); font-size:.9rem; }
+
+/* ---------- the news generator (news-writer.html, assets/news-gen.js) ---------- */
+.ng-panel{ border-color:rgba(212,175,55,.5); background:linear-gradient(160deg, rgba(31,54,114,.55), rgba(10,20,48,.9)); }
+.ng-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px; margin-bottom:12px; }
+.ng-head h3{ margin:0; }
+.ng-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:4px 16px; }
+.ng-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:6px; }
+.ng-msg{ color:var(--gold-light); font-size:.92rem; }
+.ng-msg.bad{ color:#ffb3bf; }
+.ng-wth{ margin:0 0 14px; padding:12px 14px; border-radius:var(--radius); border:1px solid rgba(255,77,94,.5);
+  background:rgba(255,77,94,.1); color:#ffd6dc; line-height:1.5; }
+.ng-wth .btn{ margin-left:6px; }
+.ng-facts{ margin-top:14px; }
+.ng-facts summary{ cursor:pointer; color:var(--mute); font-size:.9rem; }
+.ng-facts pre{ white-space:pre-wrap; font-size:.8rem; line-height:1.45; color:var(--silver); background:var(--navy-950);
+  border:1px solid var(--line); border-radius:var(--radius); padding:12px; max-height:360px; overflow:auto; }
+.ng-panel select{ width:100%; padding:11px 12px; border-radius:var(--radius); border:1px solid var(--line);
+  background:var(--navy-950); color:var(--white); font:inherit; font-size:16px; }
+.ng-panel select:focus{ outline:none; border-color:var(--gold); }

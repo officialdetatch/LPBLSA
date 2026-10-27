@@ -82,6 +82,9 @@
         <a href="leagues/nba/nba-standings-manager.html">NBA standings manager</a>, or
         <a href="about-manager.html">go to the about page manager</a>.</p>
 
+      <!-- the news generator: writes a draft into the form below (assets/news-gen.js) -->
+      <div class="editor-panel ng-panel" id="ngPanel"></div>
+
       <div class="editor-panel">
         <h3 id="wFormTitle">New story</h3>
         <div class="field">
@@ -171,5 +174,7 @@
        straight from GitHub and the Publish button saves it there (see assets/publish.js) -->
   <script src="assets/publish.js"></script>
   <script>LPBSA_PUBLISH.boot({ file: 'assets/news.js', scripts: ['assets/writer.js'] });</script>
+  <script src="assets/firebase-config.js"></script>
+  <script src="assets/news-gen.js"></script>
 </body>
 </html>

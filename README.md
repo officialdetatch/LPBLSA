@@ -488,6 +488,25 @@ answer (an answer can link to another one the same way: href="#inactivo").
 faq-data.js is also meant to be what the AI helper reads later, so keep the
 answers true when the rules change.
 
+## The news generator ("🤖 Generar noticia", at the top of news-writer.html)
+Writes a DRAFT of a story into the form below it - never publishes anything.
+  1. Pick the league, "Resumen de la semana" (or "🚨 Especial WTH"), the week
+     (it opens on the last finished one) and a tone (or "Sorpréndeme").
+  2. Write your own lines and jokes in "Tus notas" - they always go in.
+  3. Generar borrador: it reads that week from ESPN (scores, best and worst
+     starters, points left on the bench, pickups/drops/trades, the table, next
+     week) and Gemini writes it in your style, reading your latest stories as
+     examples and avoiding the headlines and openings you already used.
+  4. Check it, change it, add the photo, Add story, Publish - as always.
+     "Otra versión" writes it again from the same numbers (try another tone).
+     "Lo que encontré en ESPN" shows every number it was given.
+WTH: when the panel opens it checks this week and last week; a single game of
+50+ points (NFL, the week) or 100+ (NBA, one game) shows a red banner with
+"Escribir la noticia especial". The limits, the Gemini model, how the managers
+are called (nicknames) and the tones are in CONFIG at the top of
+assets/news-gen.js. It uses the same free Gemini + App Check as Leonidas (on
+your computer: the same debug token).
+
 ## Push messages from the Consola ("Mandar una notificación")
 The first card in the Consola sends your own push notification - "¡Revisen sus
 lineups!", "se procesan los waivers", anything - to every device that turned the

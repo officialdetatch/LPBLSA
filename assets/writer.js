@@ -550,6 +550,23 @@
     });
   }
 
+  /* the news generator (assets/news-gen.js) puts its draft in the form with this:
+     a NEW story, nothing saved until you press Add story */
+  window.LPBSA_WRITER = {
+    fillNew: function (story) {
+      clearForm();
+      setLeague(story.league || league);
+      f.date.value = story.date || '';
+      f.headline.value = story.headline || '';
+      f.summary.value = story.summary || '';
+      formBlocks = (story.blocks || []).map(cloneBlock);
+      renderFormBlocks();
+      formTitle.textContent = 'Borrador: ' + (story.headline || '');
+      var panel = formTitle.closest('.editor-panel');
+      if (panel && panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   start();
 
   /* ---------- Publish (the commissioner console, assets/publish.js) ---------- */
