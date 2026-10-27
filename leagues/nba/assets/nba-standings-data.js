@@ -1,9 +1,10 @@
 /* ============================================================
    NBA LEAGUE STANDINGS
    The ORDER of this list is the rank -- the first team is 1st place,
-   the last is last place. Reorder, add or edit teams with
-   nba-standings-manager.html rather than editing this file by hand.
-   Generated with nba-standings-manager.html
+   the last is last place. Kept up to date from ESPN Fantasy by the
+   "ESPN sync" robot (every 3 hours). The "playoff" chances are the only
+   thing ESPN does not share: set them in nba-standings-manager.html,
+   the robot keeps them.
    ============================================================ */
 window.LEAGUE_STANDINGS = [
   {
@@ -13,22 +14,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": "1.000",
     "gb": "--",
-    "pf": 1585.5,
-    "pa": 1576,
+    "pf": 2031,
+    "pa": 1979,
     "streak": "W1",
     "playoff": "77%"
-  },
-  {
-    "team": "concheros",
-    "w": 1,
-    "l": 0,
-    "t": 0,
-    "pct": "1.000",
-    "gb": "--",
-    "pf": 1528.75,
-    "pa": 1480,
-    "streak": "W1",
-    "playoff": "76%"
   },
   {
     "team": "imcebollin",
@@ -37,10 +26,22 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": "1.000",
     "gb": "--",
-    "pf": 1416.25,
-    "pa": 1406.75,
+    "pf": 1819.25,
+    "pa": 1852.25,
     "streak": "W1",
     "playoff": "71%"
+  },
+  {
+    "team": "concheros",
+    "w": 1,
+    "l": 0,
+    "t": 0,
+    "pct": "1.000",
+    "gb": "--",
+    "pf": 1576,
+    "pa": 1874,
+    "streak": "W1",
+    "playoff": "76%"
   },
   {
     "team": "pantyman",
@@ -49,8 +50,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 1576,
-    "pa": 1585.5,
+    "pf": 1970,
+    "pa": 1632.75,
     "streak": "L1",
     "playoff": "70%"
   },
@@ -61,8 +62,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 1480,
-    "pa": 1528.75,
+    "pf": 1770.25,
+    "pa": 1850.5,
     "streak": "L1",
     "playoff": "55%"
   },
@@ -73,8 +74,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 1406.75,
-    "pa": 1416.25,
+    "pf": 1728.5,
+    "pa": 1706.5,
     "streak": "L1",
     "playoff": "50%"
   }
