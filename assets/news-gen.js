@@ -27,6 +27,7 @@
 
   var CONFIG = {
     model: 'gemini-3.5-flash',      /* free; writes better than the -lite one Leonidas uses */
+    fallbackModel: 'gemini-3.5-flash-lite',   /* used if the first one is refused (the one Leonidas uses) */
     sdk: '12.19.0',
     temperature: 0.95,              /* higher = more variety between drafts */
     wth: { ffl: 50, fba: 100 },     /* one player's points in ONE game (NFL: the week) that count as "WTH" */
@@ -383,25 +384,48 @@
   /* ============================================================
      GEMINI (Firebase AI Logic + App Check, like Leonidas)
      ============================================================ */
-  var modelPromise = null;
-  function model() {
-    if (modelPromise) return modelPromise;
+  /* one JSON object: headline, summary and the blocks (subtitles and paragraphs) */
+  function storyConfig(ai) {
+    var cfg = { temperature: CONFIG.temperature, maxOutputTokens: 8192, responseMimeType: 'application/json' };
+    try {
+      var S = ai.Schema;
+      if (!noSchema && S && S.object && S.array && S.string) {
+        cfg.responseSchema = S.object({
+          properties: {
+            headline: S.string(),
+            summary: S.string(),
+            blocks: S.array({ items: S.object({ properties: { type: S.enumString ? S.enumString({ enum: ['h', 'p'] }) : S.string(), text: S.string() } }) })
+          }
+        });
+      }
+    } catch (e) { /* older SDK: the prompt alone asks for the shape */ }
+    return cfg;
+  }
+  var models = {}, noSchema = false;
+  function model(name) {
+    name = name || CONFIG.model;
+    if (models[name]) return models[name];
+    var modelPromise;
     if (!FB.recaptchaKey) return Promise.reject(new Error('Falta la llave de App Check (recaptchaKey en assets/firebase-config.js).'));
     var b = 'https://www.gstatic.com/firebasejs/' + CONFIG.sdk + '/';
     modelPromise = Promise.all([import(b + 'firebase-app.js'), import(b + 'firebase-app-check.js'), import(b + 'firebase-ai.js')]).then(function (m) {
       var cfg = {};
       ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'].forEach(function (k) { if (FB[k]) cfg[k] = FB[k]; });
-      var app = m[0].getApps().filter(function (a) { return a.name === 'newsgen'; })[0] || m[0].initializeApp(cfg, 'newsgen');
-      var h = location.hostname;
-      if (!h || h === 'localhost' || h === '127.0.0.1') self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-      m[1].initializeAppCheck(app, { provider: new m[1].ReCaptchaEnterpriseProvider(FB.recaptchaKey), isTokenAutoRefreshEnabled: true });
+      var existing = m[0].getApps().filter(function (a) { return a.name === 'newsgen'; })[0];
+      var app = existing || m[0].initializeApp(cfg, 'newsgen');
+      if (!existing) {
+        var h = location.hostname;
+        if (!h || h === 'localhost' || h === '127.0.0.1') self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+        m[1].initializeAppCheck(app, { provider: new m[1].ReCaptchaEnterpriseProvider(FB.recaptchaKey), isTokenAutoRefreshEnabled: true });
+      }
       var ai = m[2].getAI(app, { backend: new m[2].GoogleAIBackend(), useLimitedUseAppCheckTokens: true });
       return m[2].getGenerativeModel(ai, {
-        model: CONFIG.model,
-        generationConfig: { temperature: CONFIG.temperature, maxOutputTokens: 8192, responseMimeType: 'application/json' }
+        model: name,
+        generationConfig: storyConfig(m[2])
       });
     });
-    modelPromise.catch(function () { modelPromise = null; });
+    models[name] = modelPromise;
+    modelPromise.catch(function () { delete models[name]; });
     return modelPromise;
   }
 
@@ -458,26 +482,65 @@
     ].filter(function (x) { return x !== null; }).join('\n');
   }
 
-  function parseStory(text) {
-    var t = String(text || '').trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
-    var j;
-    try { j = JSON.parse(t); } catch (e) {
-      var a = t.indexOf('{'), b = t.lastIndexOf('}');
-      if (a === -1 || b <= a) throw new Error('Gemini no devolvió una noticia válida. Dale otra vez.');
-      j = JSON.parse(t.slice(a, b + 1));
+  /* Gemini's answer -> { headline, summary, blocks }. It is told to send ONE JSON object, but sometimes
+     adds text around it, sends two objects, or a list: take every complete {...} in the answer and use
+     the best one (or put the pieces together). */
+  function jsonPieces(t) {
+    var out = [], depth = 0, from = -1, inStr = false, escp = false;
+    for (var i = 0; i < t.length; i++) {
+      var c = t.charAt(i);
+      if (inStr) {
+        if (escp) escp = false; else if (c === '\\') escp = true; else if (c === '"') inStr = false;
+        continue;
+      }
+      if (c === '"') { inStr = true; continue; }
+      if (c === '{') { if (depth === 0) from = i; depth++; }
+      else if (c === '}' && depth > 0) {
+        depth--;
+        if (depth === 0 && from !== -1) {
+          try { out.push(JSON.parse(t.slice(from, i + 1))); } catch (e) { /* not a whole object */ }
+          from = -1;
+        }
+      }
     }
-    var blocks = (Array.isArray(j.blocks) ? j.blocks : []).map(function (b) {
-      return { type: b && b.type === 'h' ? 'h' : 'p', text: String((b && b.text) || '').trim() };
+    return out;
+  }
+  function cleanBlocks(list) {
+    return (Array.isArray(list) ? list : []).map(function (b) {
+      if (typeof b === 'string') return { type: 'p', text: b.trim() };
+      return { type: b && (b.type === 'h' || b.type === 'heading' || b.type === 'subtitle') ? 'h' : 'p', text: String((b && (b.text || b.content)) || '').trim() };
     }).filter(function (b) { return b.text; });
-    if (!j.headline || !blocks.length) throw new Error('Gemini devolvió una noticia vacía. Dale otra vez.');
-    return { headline: String(j.headline).trim(), summary: String(j.summary || '').trim(), blocks: blocks };
+  }
+  function parseStory(text) {
+    var t = String(text || '').trim().replace(/^```(?:json)?/i, '').replace(/```\s*$/, '').trim();
+    var whole = null;
+    try { whole = JSON.parse(t); } catch (e) { whole = null; }
+    var pieces = whole ? (Array.isArray(whole) ? whole : [whole]) : jsonPieces(t);
+    var stories = pieces.filter(function (o) { return o && typeof o === 'object' && (o.headline || o.blocks); });
+    var best = stories.slice().sort(function (a, b) { return cleanBlocks(b.blocks).length - cleanBlocks(a.blocks).length; })[0];
+    var blocks = best ? cleanBlocks(best.blocks) : [];
+    /* the story came in pieces: join them */
+    if (stories.length > 1 && blocks.length < 3) {
+      blocks = [].concat.apply([], stories.map(function (o) { return cleanBlocks(o.blocks); }));
+    }
+    if (!blocks.length) blocks = cleanBlocks(pieces.filter(function (o) { return o && o.text; }));
+    var head = (best && best.headline) || (stories.filter(function (o) { return o.headline; })[0] || {}).headline;
+    if (!head || !blocks.length) throw new Error('Gemini no devolvió una noticia que se pueda leer. Dale "Generar borrador" otra vez.');
+    var sum = (best && best.summary) || (stories.filter(function (o) { return o.summary; })[0] || {}).summary || '';
+    return { headline: String(head).trim(), summary: String(sum).trim(), blocks: blocks };
   }
 
   function friendly(err) {
     var t = String((err && err.message) || err || '');
-    if (/429|quota|exhausted/i.test(t)) return 'Gemini llegó a su límite gratis por ahora. Intenta en un rato.';
-    if (/app.?check|recaptcha|401|403|permission/i.test(t)) return 'Gemini no aceptó la página (App Check). En tu computadora usa el debug token, como con Leonidas.';
-    return t || 'Algo falló.';
+    var detail = t ? ' (detalle: ' + t.slice(0, 160) + ')' : '';
+    if (err && err.stage === 'espn') return 'No pude leer ESPN: ' + (t || 'sin respuesta') + '.';
+    if (/429|quota|exhausted/i.test(t)) return 'Gemini llegó a su límite gratis por ahora. Intenta en un rato.' + detail;
+    if (/app.?check|recaptcha|attestation/i.test(t)) {
+      return (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+        ? 'Gemini no aceptó la página: en tu computadora hace falta el debug token de App Check (como con Leonidas).'
+        : 'Gemini no aceptó la página (App Check).') + detail;
+    }
+    return 'Gemini falló' + detail;
   }
 
   /* ============================================================
@@ -559,7 +622,8 @@
     var key = L.key + ':' + week;
     busy = true;
     $('ngGo').disabled = $('ngAgain').disabled = true;
-    var factsP = reuse && state.facts && state.factsKey === key ? Promise.resolve(state.facts) : (say('Leyendo ESPN…'), collect(L, week));
+    var factsP = reuse && state.facts && state.factsKey === key ? Promise.resolve(state.facts)
+      : (say('Leyendo ESPN…'), collect(L, week).catch(function (e) { e = e instanceof Error ? e : new Error(String(e)); e.stage = 'espn'; throw e; }));
     factsP.then(function (facts) {
       state.facts = facts; state.factsKey = key;
       $('ngFactsText').textContent = facts.text;
@@ -570,8 +634,24 @@
       }
       say('Escribiendo… (unos 20 a 40 segundos)');
       var tone = TONES.filter(function (t) { return t.id === $('ngTone').value; })[0] || TONES[0];
-      return model().then(function (m) {
-        return m.generateContent(prompt(L, state.kind, facts, $('ngNotes').value.trim(), tone));
+      var text = prompt(L, state.kind, facts, $('ngNotes').value.trim(), tone);
+      function ask(name) { return model(name).then(function (m) { return m.generateContent(text); }); }
+      return ask(CONFIG.model).catch(function (err) {
+        /* Gemini refused the story shape we asked for: ask again without it (the prompt still describes it) */
+        if (!noSchema && /schema|response_schema|400|invalid argument/i.test(String((err && err.message) || err))) {
+          noSchema = true;
+          models = {};
+          return ask(CONFIG.model);
+        }
+        throw err;
+      }).catch(function (err) {
+        /* the better model refused (not offered for free, or not switched on): try the one Leonidas uses */
+        var t = String((err && err.message) || err);
+        if (CONFIG.fallbackModel && !/429|quota|exhausted|app.?check|recaptcha|attestation/i.test(t)) {
+          if (window.console) console.warn('[news generator] ' + CONFIG.model + ' failed, trying ' + CONFIG.fallbackModel, err);
+          return ask(CONFIG.fallbackModel);
+        }
+        throw err;
       }).then(function (res) {
         var story = parseStory(res.response.text());
         var today = new Date();
