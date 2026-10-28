@@ -422,14 +422,14 @@ window.LEAGUE_ROSTERS = {
   "sierra": {
     "starters": [
       {
-        "name": "C.J. Stroud",
-        "espn": "4432577",
-        "status": "BYE",
-        "team_abbr": "HOU",
+        "name": "Bo Nix",
+        "espn": "4426338",
+        "status": null,
+        "team_abbr": "DEN",
         "pos": "QB",
-        "fpts": 170.21,
-        "avg": 18.38,
-        "last": 16.52
+        "fpts": 158.28,
+        "avg": 13.69,
+        "last": 26.18
       },
       {
         "name": "Chuba Hubbard",
@@ -512,14 +512,14 @@ window.LEAGUE_ROSTERS = {
         "last": 15.2
       },
       {
-        "name": "Bo Nix",
-        "espn": "4426338",
-        "status": null,
-        "team_abbr": "DEN",
+        "name": "C.J. Stroud",
+        "espn": "4432577",
+        "status": "BYE",
+        "team_abbr": "HOU",
         "pos": "QB",
-        "fpts": 158.28,
-        "avg": 13.69,
-        "last": 26.18
+        "fpts": 170.21,
+        "avg": 18.38,
+        "last": 16.52
       },
       {
         "name": "Vikings",
@@ -1072,15 +1072,6 @@ window.FREE_AGENTS = [
     "last": 18.6
   },
   {
-    "name": "Texans",
-    "status": "BYE",
-    "team_abbr": "HOU",
-    "pos": "D/ST",
-    "fpts": 61.14,
-    "avg": 4.14,
-    "last": 0
-  },
-  {
     "name": "Luther Burden III",
     "espn": "4685278",
     "status": null,
@@ -1109,6 +1100,15 @@ window.FREE_AGENTS = [
     "fpts": 132.51,
     "avg": 17.6,
     "last": 17.6
+  },
+  {
+    "name": "Texans",
+    "status": "BYE",
+    "team_abbr": "HOU",
+    "pos": "D/ST",
+    "fpts": 61.14,
+    "avg": 4.14,
+    "last": 0
   },
   {
     "name": "Jaylen Waddle",
@@ -1400,15 +1400,6 @@ window.FREE_AGENTS = [
     "last": 2.8
   },
   {
-    "name": "Jets",
-    "status": null,
-    "team_abbr": "NYJ",
-    "pos": "D/ST",
-    "fpts": 54.76,
-    "avg": 5.71,
-    "last": 0
-  },
-  {
     "name": "Jakobi Meyers",
     "espn": "3916433",
     "status": null,
@@ -1417,6 +1408,15 @@ window.FREE_AGENTS = [
     "fpts": 100.75,
     "avg": 8.45,
     "last": 10.8
+  },
+  {
+    "name": "Jets",
+    "status": null,
+    "team_abbr": "NYJ",
+    "pos": "D/ST",
+    "fpts": 54.76,
+    "avg": 5.71,
+    "last": 0
   },
   {
     "name": "Zach Charbonnet",
@@ -1509,15 +1509,6 @@ window.FREE_AGENTS = [
     "last": 2
   },
   {
-    "name": "Browns",
-    "status": null,
-    "team_abbr": "CLE",
-    "pos": "D/ST",
-    "fpts": 65.93,
-    "avg": 6,
-    "last": 5
-  },
-  {
     "name": "Tyler Loop",
     "espn": "4697745",
     "status": null,
@@ -1526,6 +1517,15 @@ window.FREE_AGENTS = [
     "fpts": 84.21,
     "avg": 9,
     "last": 7
+  },
+  {
+    "name": "Browns",
+    "status": null,
+    "team_abbr": "CLE",
+    "pos": "D/ST",
+    "fpts": 65.93,
+    "avg": 6,
+    "last": 5
   },
   {
     "name": "Tre Tucker",
@@ -1538,6 +1538,15 @@ window.FREE_AGENTS = [
     "last": 18.8
   },
   {
+    "name": "Patriots",
+    "status": null,
+    "team_abbr": "NE",
+    "pos": "D/ST",
+    "fpts": 58.93,
+    "avg": 6,
+    "last": -1
+  },
+  {
     "name": "Pat Freiermuth",
     "espn": "4361411",
     "status": null,
@@ -1546,15 +1555,6 @@ window.FREE_AGENTS = [
     "fpts": 72.94,
     "avg": 7.99,
     "last": 3
-  },
-  {
-    "name": "Patriots",
-    "status": null,
-    "team_abbr": "NE",
-    "pos": "D/ST",
-    "fpts": 58.93,
-    "avg": 6,
-    "last": -1
   },
   {
     "name": "Wan'Dale Robinson",
@@ -1787,16 +1787,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Kendre Miller",
-    "espn": "4599739",
-    "status": "BYE",
-    "team_abbr": "NO",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 5.68,
-    "last": 4.3
-  },
-  {
     "name": "Jake Bates",
     "espn": "4689936",
     "status": null,
@@ -1805,6 +1795,16 @@ window.FREE_AGENTS = [
     "fpts": 98.71,
     "avg": 9.67,
     "last": 9
+  },
+  {
+    "name": "Kendre Miller",
+    "espn": "4599739",
+    "status": "BYE",
+    "team_abbr": "NO",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 5.68,
+    "last": 4.3
   },
   {
     "name": "Eagles",
@@ -1945,16 +1945,6 @@ window.FREE_AGENTS = [
     "last": 13.9
   },
   {
-    "name": "Tyreek Hill",
-    "espn": "3116406",
-    "status": "Q",
-    "team_abbr": "FA",
-    "pos": "WR",
-    "fpts": null,
-    "avg": null,
-    "last": null
-  },
-  {
     "name": "Rashid Shaheed",
     "espn": "4032473",
     "status": "Q",
@@ -1963,6 +1953,16 @@ window.FREE_AGENTS = [
     "fpts": 66.35,
     "avg": 4.89,
     "last": 1.1
+  },
+  {
+    "name": "Tyreek Hill",
+    "espn": "3116406",
+    "status": "Q",
+    "team_abbr": "FA",
+    "pos": "WR",
+    "fpts": null,
+    "avg": null,
+    "last": null
   },
   {
     "name": "Travis Hunter",
