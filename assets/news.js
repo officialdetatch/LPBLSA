@@ -5,6 +5,183 @@
    ============================================================ */
 window.LEAGUE_NEWS = [
   {
+    "id": "arranc-la-nba-en-lpblsa-resumen-de-la-semana-1",
+    "league": "basketball",
+    "date": "Matchup 1  |  Oct 27",
+    "headline": "¡Arrancó la NBA en LPBLSA! Resumen de la Semana 1",
+    "summary": "El comisionado se impone por la mínima, Concheros deja más de 300 puntos sentados y Tyrese Maxey firma la actuación más salvaje de la semana.",
+    "blocks": [
+      {
+        "type": "image",
+        "src": "images/news/NBAResumendelaSemana1@2x.png",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "El comisionado sufre pero liquida a Pantyman Squad por la mínima"
+      },
+      {
+        "type": "p",
+        "text": "Qué manera de abrir la temporada de NBA fantasy. Los Puntos de Piña lograron sacarle la victoria del buche a Pantyman Squad por un suspiro de apenas 9.5 puntos, dejando el marcador 1585.5 a 1576 en el juego más apretado de la jornada."
+      },
+      {
+        "type": "p",
+        "text": "La estrella indiscutible fue el pookie bear Luka Doncic, tirándose un juego monstruoso de 108.25 puntos para acumular 193.75 en el matchup. Sengun respaldó la causa con 151.5 y Amen Thompson sumó 149.5, compensando los tristes 27.5 puntos que aportó Rudy Gobert en el cuadro titular."
+      },
+      {
+        "type": "p",
+        "text": "El equipo de Pantyman dio la pelea con  Sabonis acumulando 184.25 y Dyson Daniels metiendo 163.75, pero los 18.25 puntos de Jalen Green dolieron bastante. Ni los 116.5 puntos que le sacó a Paul George tras recogerlo de waivers pudieron evitar el trago amargo de arrancar 0-1."
+      },
+      {
+        "type": "h",
+        "text": "Concheros de la Concha le mete una paliza a Mugiwaras a pesar del banco millonario"
+      },
+      {
+        "type": "p",
+        "text": "La pela del matchup se la llevó Surf cuando Mugiwaras De Caimito cayó 1480 a 1528.75 frente a Concheros de la Concha. La diferencia de 48.75 puntos dictó la sentencia en el duelo menos parejo de la semana."
+      },
+      {
+        "type": "p",
+        "text": "El bando de George se apoyó en Shai con 177 puntos, Austin Reaves sumando 173.75 y Jaylen Brown con 166.5. Lo insólito es que Concheros dejó  321.75 puntos botados en el banco, donde John Collins vio el juego cómodo con sus 68 puntos engatillados."
+      },
+      {
+        "type": "p",
+        "text": "Mugiwaras tuvo a Ty Jerome encendido con 205 puntos y a Jalen Johnson con 180, pero la floja actuación de Aaron Gordon con solo 20.75 los terminó de rematar. Al menos Zubac vino de waivers a aportar 49.75 puntos, aunque no fue suficiente para salvar la racha."
+      },
+      {
+        "type": "h",
+        "text": "Cebollin sobrevive al terremoto Tyrese Maxey y frena a Sin Talento de Barrio"
+      },
+      {
+        "type": "p",
+        "text": "Sin Talento de Barrio batalló duro pero se quedó corto por 9.5 puntos, cayendo 1406.75 a 1416.25 ante iMcebollin. Tatiana tuvo en su roster al MVP de la semana, un Tyrese Maxey desatado que se convirtió en el líder del matchup con 236.25 puntos."
+      },
+      {
+        "type": "p",
+        "text": "El problema para STB fue que Brandon Miller aportó apenas 6 puntos tras recogerlo de waivers, mientras que Myles Turner selló el bochorno de la semana con un INSÓLITO NEGATIVO 2. Ni los 146.75 puntos del recién añadido Joel Embiid pudieron completar la remontada."
+      },
+      {
+        "type": "p",
+        "text": "Criture amarró la victoria gracias a los 176.25 puntos de Tyrese Haliburton y los 155.75 de Anthony Edwards. El triunfo llegó a pesar de haber dejado 260 puntos sentados en la banca, con Cameron Boozer mirando desde afuera sus 72.5 puntos."
+      },
+      {
+        "type": "h",
+        "text": "Puntos desperdiciados, baile en waivers y la tabla tras el Matchup 1"
+      },
+      {
+        "type": "p",
+        "text": "El premio al mayor desperdicio se lo lleva Concheros de la Concha al dejar 321.75 puntos durmiendo en el banco. La agencia libre estuvo bien caliente, destacando a Pantyman Squad sacándole 116.5 puntos a Paul George y 84.25 a Jaden McDaniels, mientras iMcebollin botó a Norman Powell para volverlo a recoger y sumar 26 puntos."
+      },
+      {
+        "type": "p",
+        "text": "La tabla de posiciones arranca con Los Puntos de Piña en la cima (1-0, W1, PF 2031), seguidos por iMcebollin (1-0, W1, PF 1819.25) y Concheros de la Concha (1-0, W1, PF 1576). En el sótano intentando recuperarse quedan Pantyman Squad (0-1, L1, PF 1970), Mugiwaras De Caimito (0-1, L1, PF 1770.25) y Sin Talento de Barrio (0-1, L1, PF 1728.5)."
+      },
+      {
+        "type": "h",
+        "text": "Cartelera para el Matchup 2"
+      },
+      {
+        "type": "p",
+        "text": "La segunda semana promete mantener la chispa encendida en la liga. Concheros de la Concha chocará contra Pantyman Squad, mientras que Mugiwaras De Caimito y Sin Talento de Barrio buscarán desesperadamente su primera victoria del año."
+      },
+      {
+        "type": "p",
+        "text": "En el choque estelar de invictos, Los Puntos de Piña se medirán cara a cara frente a iMcebollin por el control absoluto del primer lugar. Preparen sus rosters y no dejen puntos botados."
+      },
+      {
+        "type": "p",
+        "text": "NOS VEMOS LA SEMANA QUE VIENE!!!"
+      }
+    ]
+  },
+  {
+    "id": "resumen-de-la-semana-7",
+    "league": "football",
+    "date": "Week 7  |  Oct 27",
+    "headline": "Resumen de la Semana 7",
+    "summary": "La Semana 7 nos dejó la resurrección de Peter's Perfect Team, y la muerte de Los Puntos de Piña",
+    "blocks": [
+      {
+        "type": "image",
+        "src": "images/news/ResumendelaSemana7@2x.png",
+        "caption": ""
+      },
+      {
+        "type": "h",
+        "text": "Peter despierta del abismo y aprieta a Hobbit"
+      },
+      {
+        "type": "p",
+        "text": "Peter's Perfect Team logró salir de la mala racha al vencer a Hobbit con marcador de 139.94 a 130.72 en el juego más apretado de la jornada, definido por solo 9.22 puntos. Todo el crédito va para el MVP de la semana, Tony Pollard, quien explotó con 35 puntos para cargar el equipo de Peter. Acompañando la gesta, Drake Maye sumó 27.44 y Zay Flowers aportó otros 23.7 puntos."
+      },
+      {
+        "type": "p",
+        "text": "Ni siquiera la triste actuación de la defensa de los Ravens restando 3 puntos, pudo detener a Peter, a pesar de que dejó a Dak Prescott flotando en su banco con 23.28 de sus 42.38 puntos desperdiciados. Por su parte, Hobbit contó con buenas actuaciones de Javonte Williams con 21.5, Amon-Ra St. Brown con 19.7 y Christian McCaffrey con 19. Sin embargo, el doloroso 1.6 de Nico Collins y los 14.1 puntos de Saquon Barkley atrapados en un banco de 38.5 puntos inclinaron la balanza en su contra."
+      },
+      {
+        "type": "h",
+        "text": "RIP Los Puntos de Piña."
+      },
+      {
+        "type": "image",
+        "src": "images/news/48A8008F-E256-4CFC-8A2C-2A0C5AA6DE3C.png",
+        "caption": ""
+      },
+      {
+        "type": "p",
+        "text": "Un minuto de silencio no es suficiente para el entierro de Los Puntos de Piña, que cayeron masacrados 130.34 a 186 por Sierra Linda Cameltoes. Sierra Linda Cameltoes se vistió de gala y montó una verdadera paliza, marcando la diferencia más amplia de la semana con 55.66 puntos. El manager George tuvo una jornada estelar liderada por Jaxon Smith-Njigba con 26.8 puntos y Bo Nix..."
+      },
+      {
+        "type": "p",
+        "text": "Nope no estamos mintiendo. El bastardo Bo Nix aportó 26.18! Quisiéramos que esto fuera fake o escrito por AI, pero nope no fue AI fue real."
+      },
+      {
+        "type": "p",
+        "text": "El denominador común para Detatch esta semana... sus WRs, entre los 4 no hicieron ni 25 puntos, osea, menos que JSN!!! Esto es algo que debería estudiarse en Harvard o MIT. Los algoritmos de proyecciones nunca han estado tan en contra como lo están para los WR del comisionado. Comisionado, ¡BOTE A ESA GENTE DEL EQUIPO!"
+      },
+      {
+        "type": "p",
+        "text": "Para completar la tragedia, Detatch soltó a Jaylen Warren para que George lo recogiera de waivers y le sacara 15.2 puntos inmediatamente en la cara. Los Puntos de Piña intentaron dar señales de vida con Bucky Irving y sus 23.5 puntos, pero la defensa de los Broncos solo pudo aportar 3 tristes unidades."
+      },
+      {
+        "type": "p",
+        "text": "Guardemos otro momento para procesar semejante velatorio deportivo."
+      },
+      {
+        "type": "h",
+        "text": "Lo más loco de la semana: movidas de waivers y reajuste en la tabla"
+      },
+      {
+        "type": "p",
+        "text": "La actividad en la agencia libre dejó claros ganadores y perdedores. Sierra Linda estuvo bien fino agregando a C.J. Stroud para 16.52 puntos, a Chris Boswell para 11 y recuperando a Jaylen Warren, mientras soltaba a Travis Etienne Jr. y Justin Herbert. En la otra acera, Los Puntos de Piña recogió a DeMario Douglas para 3.8 puntos, a Broncos D/ST para 3 puntos y a DK Metcalf para 6.6 puntos, soltando a DJ Moore y Deebo Samuel Sr. en el proceso."
+      },
+      {
+        "type": "p",
+        "text": "Aprovechando que Mugiwaras De Caimito estaba en su bye week, la tabla sufrió movimientos. Mugiwaras mantiene el liderato con 4-1, Hobbit cae al segundo puesto con 3-2 y Sierra Linda sube al tercer lugar igualando 3-3. En la parte baja, Peter's Perfect Team toma respiro poniéndose 2-4 y empata a Los Puntos de Piña que cae al fondo tras acumular su segunda derrota consecutiva."
+      },
+      {
+        "type": "h",
+        "text": "Cartelera de la Semana 8: Mugiwaras regresa..."
+      },
+      {
+        "type": "p",
+        "text": "HE IS BAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK!!!!!"
+      },
+      {
+        "type": "p",
+        "text": "La acción regresa en grande con el puntero Mugiwaras De Caimito volviendo a la cancha para medirse contra un equipo de Sierra Linda Cameltoes que viene encendido."
+      },
+      {
+        "type": "p",
+        "text": "En el otro enfrentamiento, Hobbit buscará sacudirse la derrota cuando choque contra el saco de boxeo, digo, el coge puño y bofeta, perdón… Los Puntos de Piña. Veremos quién logra hacer los ajustes correctos en los waivers para no dejar la victoria atrapada en el banco."
+      },
+      {
+        "type": "p",
+        "text": "Como siempre, nos vemos la semana que viene, en este TU RESUMEN DE LA SEMANA!!!"
+      }
+    ]
+  },
+  {
     "id": "resumen-de-la-semana-6",
     "league": "football",
     "date": "Week 6 | Oct 20",
@@ -855,10 +1032,10 @@ window.LEAGUE_NEWS = [
 
 /* Short lines for the gold wire at the top of every page. */
 window.LEAGUE_TICKER = [
-  "EMPEZO LA NBA!!!!!!!!",
-  "Nos abandono... :( - Drake Maye, luego de que su manager abandonara el equipo",
-  "Si no tienes un jugador lesionado en tu roster, el comisionado te mandara 5$ por ATH MOVIL o ZELLE",
-  "Paul George esta asi de duro??? Hizo 82.75 en una sola noche.",
-  "Ya no se que poner aqui, tirenme con ideas",
-  "Daniel se fue de bye, deberia prestar sus players!!"
+  "Detatch es mejor en territorios desconocidos!",
+  "Bo Nix el peor QB de la NFL, no se dejen engañar",
+  "Surf cambia mas de jugadores que de calzoncillos",
+  "ONE PIECE VA SALIR EN FORTNITEEEEE",
+  "Chelsea Green se fue a fuego ayer en RAW.",
+  "Mandemne mas cafes pa seguir haciendo historias, ta apreta la cosa."
 ];
