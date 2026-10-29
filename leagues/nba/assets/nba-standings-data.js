@@ -14,8 +14,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": "1.000",
     "gb": "--",
-    "pf": 2252,
-    "pa": 2172.75,
+    "pf": 2607.25,
+    "pa": 2465.5,
     "streak": "W1",
     "playoff": "77%"
   },
@@ -26,8 +26,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": "1.000",
     "gb": "--",
-    "pf": 2009,
-    "pa": 2073.25,
+    "pf": 2301.75,
+    "pa": 2426.5,
     "streak": "W1",
     "playoff": "71%"
   },
@@ -38,8 +38,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": "1.000",
     "gb": "--",
-    "pf": 1820.25,
-    "pa": 2016.75,
+    "pf": 2122.25,
+    "pa": 2378.75,
     "streak": "W1",
     "playoff": "76%"
   },
@@ -50,8 +50,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 2110.75,
-    "pa": 1877,
+    "pf": 2473.5,
+    "pa": 2179,
     "streak": "L1",
     "playoff": "70%"
   },
@@ -62,8 +62,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 1922.25,
-    "pa": 1991,
+    "pf": 2385.75,
+    "pa": 2437.75,
     "streak": "L1",
     "playoff": "55%"
   },
@@ -74,8 +74,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".000",
     "gb": "1",
-    "pf": 1869,
-    "pa": 1852.5,
+    "pf": 2313.75,
+    "pa": 2316.75,
     "streak": "L1",
     "playoff": "50%"
   }
