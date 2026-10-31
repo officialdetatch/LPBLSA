@@ -1182,15 +1182,6 @@ window.FREE_AGENTS = [
     "last": 7.3
   },
   {
-    "name": "Broncos",
-    "status": null,
-    "team_abbr": "DEN",
-    "pos": "D/ST",
-    "fpts": 72.06,
-    "avg": 7,
-    "last": 3
-  },
-  {
     "name": "Ladd McConkey",
     "espn": "4612826",
     "status": null,
@@ -1199,6 +1190,15 @@ window.FREE_AGENTS = [
     "fpts": 97.01,
     "avg": 6.5,
     "last": 2.2
+  },
+  {
+    "name": "Broncos",
+    "status": null,
+    "team_abbr": "DEN",
+    "pos": "D/ST",
+    "fpts": 72.06,
+    "avg": 7,
+    "last": 3
   },
   {
     "name": "Rome Odunze",
@@ -1280,6 +1280,16 @@ window.FREE_AGENTS = [
     "last": 7.3
   },
   {
+    "name": "Rachaad White",
+    "espn": "4697815",
+    "status": null,
+    "team_abbr": "WSH",
+    "pos": "RB",
+    "fpts": 114.46,
+    "avg": 8.36,
+    "last": 13.7
+  },
+  {
     "name": "Ka'imi Fairbairn",
     "espn": "2971573",
     "status": "BYE",
@@ -1298,16 +1308,6 @@ window.FREE_AGENTS = [
     "fpts": 72.81,
     "avg": 9.15,
     "last": 13
-  },
-  {
-    "name": "Rachaad White",
-    "espn": "4697815",
-    "status": null,
-    "team_abbr": "WSH",
-    "pos": "RB",
-    "fpts": 114.46,
-    "avg": 8.36,
-    "last": 13.7
   },
   {
     "name": "Xavier Worthy",
@@ -1478,16 +1478,6 @@ window.FREE_AGENTS = [
     "last": 2.8
   },
   {
-    "name": "Courtland Sutton",
-    "espn": "3128429",
-    "status": null,
-    "team_abbr": "DEN",
-    "pos": "WR",
-    "fpts": 78.84,
-    "avg": 4.4,
-    "last": 6
-  },
-  {
     "name": "Tyler Bass",
     "espn": "3917232",
     "status": null,
@@ -1496,6 +1486,16 @@ window.FREE_AGENTS = [
     "fpts": 110.56,
     "avg": 10.33,
     "last": 17
+  },
+  {
+    "name": "Courtland Sutton",
+    "espn": "3128429",
+    "status": null,
+    "team_abbr": "DEN",
+    "pos": "WR",
+    "fpts": 78.84,
+    "avg": 4.4,
+    "last": 6
   },
   {
     "name": "Devaughn Vele",
@@ -1518,14 +1518,14 @@ window.FREE_AGENTS = [
     "last": 13.9
   },
   {
-    "name": "Harrison Butker",
-    "espn": "3055899",
+    "name": "Kirk Cousins",
+    "espn": "14880",
     "status": null,
-    "team_abbr": "KC",
-    "pos": "K",
-    "fpts": 105.91,
-    "avg": 8.17,
-    "last": 3
+    "team_abbr": "LV",
+    "pos": "QB",
+    "fpts": 45.42,
+    "avg": 18.78,
+    "last": 20.4
   },
   {
     "name": "Khalil Shakir",
@@ -1538,14 +1538,14 @@ window.FREE_AGENTS = [
     "last": 11.4
   },
   {
-    "name": "Kirk Cousins",
-    "espn": "14880",
+    "name": "Harrison Butker",
+    "espn": "3055899",
     "status": null,
-    "team_abbr": "LV",
-    "pos": "QB",
-    "fpts": 45.42,
-    "avg": 18.78,
-    "last": 20.4
+    "team_abbr": "KC",
+    "pos": "K",
+    "fpts": 105.91,
+    "avg": 8.17,
+    "last": 3
   },
   {
     "name": "KC Concepcion",
@@ -1736,16 +1736,6 @@ window.FREE_AGENTS = [
     "last": 13.08
   },
   {
-    "name": "Michael Pittman Jr.",
-    "espn": "4035687",
-    "status": "IR",
-    "team_abbr": "PIT",
-    "pos": "WR",
-    "fpts": 0,
-    "avg": 4.13,
-    "last": 0
-  },
-  {
     "name": "Makai Lemon",
     "espn": "4870795",
     "status": null,
@@ -1754,6 +1744,16 @@ window.FREE_AGENTS = [
     "fpts": 49.15,
     "avg": 5.34,
     "last": 16.2
+  },
+  {
+    "name": "Michael Pittman Jr.",
+    "espn": "4035687",
+    "status": "IR",
+    "team_abbr": "PIT",
+    "pos": "WR",
+    "fpts": 0,
+    "avg": 4.13,
+    "last": 0
   },
   {
     "name": "Terry McLaurin",
@@ -1786,16 +1786,6 @@ window.FREE_AGENTS = [
     "last": 9
   },
   {
-    "name": "Eddy Pineiro",
-    "espn": "4034949",
-    "status": "BYE",
-    "team_abbr": "SF",
-    "pos": "K",
-    "fpts": 75.71,
-    "avg": 5.86,
-    "last": 2
-  },
-  {
     "name": "Chase McLaughlin",
     "espn": "3150744",
     "status": null,
@@ -1804,6 +1794,16 @@ window.FREE_AGENTS = [
     "fpts": 93.04,
     "avg": 11,
     "last": 12
+  },
+  {
+    "name": "Eddy Pineiro",
+    "espn": "4034949",
+    "status": "BYE",
+    "team_abbr": "SF",
+    "pos": "K",
+    "fpts": 75.71,
+    "avg": 5.86,
+    "last": 2
   },
   {
     "name": "Brian Thomas Jr.",
@@ -1894,16 +1894,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "De'Von Achane",
-    "espn": "4429160",
-    "status": "IR",
-    "team_abbr": "MIA",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 7.03,
-    "last": 0
-  },
-  {
     "name": "Geno Smith",
     "espn": "15864",
     "status": null,
@@ -1914,12 +1904,13 @@ window.FREE_AGENTS = [
     "last": 23.48
   },
   {
-    "name": "Jets",
-    "status": null,
-    "team_abbr": "NYJ",
-    "pos": "D/ST",
-    "fpts": 54.4,
-    "avg": 5.71,
+    "name": "De'Von Achane",
+    "espn": "4429160",
+    "status": "IR",
+    "team_abbr": "MIA",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 7.03,
     "last": 0
   },
   {
@@ -1933,24 +1924,23 @@ window.FREE_AGENTS = [
     "last": 13.98
   },
   {
+    "name": "Jets",
+    "status": null,
+    "team_abbr": "NYJ",
+    "pos": "D/ST",
+    "fpts": 54.4,
+    "avg": 5.71,
+    "last": 0
+  },
+  {
     "name": "Brian Robinson Jr.",
     "espn": "4241474",
     "status": "OUT",
     "team_abbr": "ATL",
     "pos": "RB",
     "fpts": 52.97,
-    "avg": 7.23,
-    "last": 0
-  },
-  {
-    "name": "Kendre Miller",
-    "espn": "4599739",
-    "status": "BYE",
-    "team_abbr": "NO",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 5.68,
-    "last": 4.3
+    "avg": 8.43,
+    "last": 2
   },
   {
     "name": "Caleb Douglas",
@@ -1961,6 +1951,16 @@ window.FREE_AGENTS = [
     "fpts": 83.31,
     "avg": 11.6,
     "last": 20
+  },
+  {
+    "name": "Kendre Miller",
+    "espn": "4599739",
+    "status": "BYE",
+    "team_abbr": "NO",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 5.68,
+    "last": 4.3
   },
   {
     "name": "Keon Coleman",
@@ -1982,13 +1982,12 @@ window.FREE_AGENTS = [
     "last": 28
   },
   {
-    "name": "Travis Hunter",
-    "espn": "4685415",
+    "name": "Lions",
     "status": null,
-    "team_abbr": "JAX",
-    "pos": "WR",
-    "fpts": 22.95,
-    "avg": 2.82,
-    "last": 13.9
+    "team_abbr": "DET",
+    "pos": "D/ST",
+    "fpts": 45.66,
+    "avg": 3.33,
+    "last": 6
   }
 ];
