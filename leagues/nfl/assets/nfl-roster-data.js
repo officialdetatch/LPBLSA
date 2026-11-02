@@ -1934,15 +1934,6 @@ window.FREE_AGENTS = [
     "last": 6.3
   },
   {
-    "name": "Lions",
-    "status": null,
-    "team_abbr": "DET",
-    "pos": "D/ST",
-    "fpts": 38.86,
-    "avg": 4,
-    "last": 8
-  },
-  {
     "name": "Bears",
     "status": null,
     "team_abbr": "CHI",
@@ -1950,6 +1941,15 @@ window.FREE_AGENTS = [
     "fpts": 53.04,
     "avg": 6.57,
     "last": 3
+  },
+  {
+    "name": "Lions",
+    "status": null,
+    "team_abbr": "DET",
+    "pos": "D/ST",
+    "fpts": 38.86,
+    "avg": 4,
+    "last": 8
   },
   {
     "name": "Buccaneers",
