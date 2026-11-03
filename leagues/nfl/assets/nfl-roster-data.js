@@ -137,8 +137,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "CHI",
         "pos": "RB",
         "fpts": 128.42,
-        "avg": 15.97,
-        "last": 17
+        "avg": 14.55,
+        "last": 4.6
       },
       {
         "name": "Jordan Love",
@@ -342,8 +342,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "D/ST",
         "fpts": 71.19,
-        "avg": 9.43,
-        "last": 9
+        "avg": 8.88,
+        "last": 5
       },
       {
         "name": "Jason Myers",
@@ -352,8 +352,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "K",
         "fpts": 84.61,
-        "avg": 9.57,
-        "last": 8
+        "avg": 8.75,
+        "last": 3
       }
     ],
     "bench": [
@@ -434,7 +434,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Bhayshul Tuten",
         "espn": "4882093",
-        "status": null,
+        "status": "Q",
         "team_abbr": "JAX",
         "pos": "RB",
         "fpts": 150.83,
@@ -458,8 +458,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "SEA",
         "pos": "WR",
         "fpts": 160.38,
-        "avg": 23.88,
-        "last": 26.8
+        "avg": 23.05,
+        "last": 17.2
       },
       {
         "name": "Drake London",
@@ -653,8 +653,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "CHI",
         "pos": "WR",
         "fpts": 107.03,
-        "avg": 11.36,
-        "last": 21.7
+        "avg": 11.83,
+        "last": 15.1
       },
       {
         "name": "DeMario Douglas",
@@ -699,7 +699,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Matthew Stafford",
         "espn": "12483",
-        "status": null,
+        "status": "Q",
         "team_abbr": "LAR",
         "pos": "QB",
         "fpts": 139.56,
@@ -1008,8 +1008,8 @@ window.FREE_AGENTS = [
     "team_abbr": "CHI",
     "pos": "TE",
     "fpts": 93.38,
-    "avg": 7.06,
-    "last": 16.4
+    "avg": 7.05,
+    "last": 7
   },
   {
     "name": "A.J. Brown",
@@ -1072,16 +1072,6 @@ window.FREE_AGENTS = [
     "last": 20.2
   },
   {
-    "name": "Cam Skattebo",
-    "espn": "4696981",
-    "status": "Q",
-    "team_abbr": "NYG",
-    "pos": "RB",
-    "fpts": 122.3,
-    "avg": 9.27,
-    "last": 18.6
-  },
-  {
     "name": "Jameson Williams",
     "espn": "4426388",
     "status": null,
@@ -1090,6 +1080,16 @@ window.FREE_AGENTS = [
     "fpts": 110.68,
     "avg": 12.46,
     "last": 15
+  },
+  {
+    "name": "Cam Skattebo",
+    "espn": "4696981",
+    "status": "Q",
+    "team_abbr": "NYG",
+    "pos": "RB",
+    "fpts": 122.3,
+    "avg": 9.27,
+    "last": 18.6
   },
   {
     "name": "DJ Moore",
@@ -1118,8 +1118,8 @@ window.FREE_AGENTS = [
     "team_abbr": "CHI",
     "pos": "QB",
     "fpts": 166.75,
-    "avg": 20.9,
-    "last": 22.12
+    "avg": 18.94,
+    "last": 11.12
   },
   {
     "name": "Omarion Hampton",
@@ -1217,8 +1217,8 @@ window.FREE_AGENTS = [
     "team_abbr": "CHI",
     "pos": "WR",
     "fpts": 79.96,
-    "avg": 6.87,
-    "last": 8.9
+    "avg": 6.66,
+    "last": 5.2
   },
   {
     "name": "Braelon Allen",
@@ -1316,8 +1316,8 @@ window.FREE_AGENTS = [
     "team_abbr": "SEA",
     "pos": "RB",
     "fpts": 111.01,
-    "avg": null,
-    "last": 0
+    "avg": 1.7,
+    "last": 1.7
   },
   {
     "name": "Patriots",
@@ -1371,7 +1371,7 @@ window.FREE_AGENTS = [
   {
     "name": "Jakobi Meyers",
     "espn": "3916433",
-    "status": null,
+    "status": "Q",
     "team_abbr": "JAX",
     "pos": "WR",
     "fpts": 95.05,
@@ -1441,22 +1441,12 @@ window.FREE_AGENTS = [
   {
     "name": "Jadarian Price",
     "espn": "4685512",
-    "status": "IR",
-    "team_abbr": "SEA",
-    "pos": "RB",
-    "fpts": 62.86,
-    "avg": 3,
-    "last": 0
-  },
-  {
-    "name": "Emanuel Wilson",
-    "espn": "4887558",
     "status": null,
     "team_abbr": "SEA",
     "pos": "RB",
-    "fpts": 33.31,
-    "avg": 10.26,
-    "last": 18
+    "fpts": 62.86,
+    "avg": 2.8,
+    "last": 2
   },
   {
     "name": "Rico Dowdle",
@@ -1477,6 +1467,16 @@ window.FREE_AGENTS = [
     "fpts": 114.19,
     "avg": 11.14,
     "last": 16
+  },
+  {
+    "name": "Emanuel Wilson",
+    "espn": "4887558",
+    "status": null,
+    "team_abbr": "SEA",
+    "pos": "RB",
+    "fpts": 33.31,
+    "avg": 10.26,
+    "last": 0
   },
   {
     "name": "Texans",
@@ -1558,6 +1558,15 @@ window.FREE_AGENTS = [
     "last": 6
   },
   {
+    "name": "Browns",
+    "status": null,
+    "team_abbr": "CLE",
+    "pos": "D/ST",
+    "fpts": 60.75,
+    "avg": 5.5,
+    "last": 2
+  },
+  {
     "name": "Devaughn Vele",
     "espn": "4569559",
     "status": "BYE",
@@ -1566,15 +1575,6 @@ window.FREE_AGENTS = [
     "fpts": 72.14,
     "avg": 9.9,
     "last": 13.9
-  },
-  {
-    "name": "Browns",
-    "status": null,
-    "team_abbr": "CLE",
-    "pos": "D/ST",
-    "fpts": 60.75,
-    "avg": 5.5,
-    "last": 2
   },
   {
     "name": "Alvin Kamara",
@@ -1589,7 +1589,7 @@ window.FREE_AGENTS = [
   {
     "name": "Tyler Loop",
     "espn": "4697745",
-    "status": null,
+    "status": "Q",
     "team_abbr": "BAL",
     "pos": "K",
     "fpts": 67.11,
@@ -1755,16 +1755,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Aaron Rodgers",
-    "espn": "8439",
-    "status": null,
-    "team_abbr": "PIT",
-    "pos": "QB",
-    "fpts": 141.57,
-    "avg": 14.64,
-    "last": 4.88
-  },
-  {
     "name": "Chase McLaughlin",
     "espn": "3150744",
     "status": null,
@@ -1773,6 +1763,16 @@ window.FREE_AGENTS = [
     "fpts": 85.38,
     "avg": 11.13,
     "last": 12
+  },
+  {
+    "name": "Aaron Rodgers",
+    "espn": "8439",
+    "status": null,
+    "team_abbr": "PIT",
+    "pos": "QB",
+    "fpts": 141.57,
+    "avg": 14.64,
+    "last": 4.88
   },
   {
     "name": "Keenan Allen",
@@ -1910,8 +1910,8 @@ window.FREE_AGENTS = [
     "team_abbr": "SEA",
     "pos": "QB",
     "fpts": 125.36,
-    "avg": 12.47,
-    "last": 13.98
+    "avg": 11.88,
+    "last": 8.36
   },
   {
     "name": "De'Von Achane",
@@ -1939,8 +1939,8 @@ window.FREE_AGENTS = [
     "team_abbr": "CHI",
     "pos": "D/ST",
     "fpts": 55.19,
-    "avg": 6.57,
-    "last": 3
+    "avg": 6.63,
+    "last": 7
   },
   {
     "name": "Lions",
