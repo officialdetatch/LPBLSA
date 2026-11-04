@@ -970,7 +970,7 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Jeremiyah Love",
         "espn": "4870808",
-        "status": "OUT",
+        "status": "IR",
         "team_abbr": "ARI",
         "pos": "RB",
         "fpts": 48.1,
@@ -1261,16 +1261,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "J.K. Dobbins",
-    "espn": "4241985",
-    "status": null,
-    "team_abbr": "DEN",
-    "pos": "RB",
-    "fpts": 70.32,
-    "avg": 6.91,
-    "last": 1.3
-  },
-  {
     "name": "Rachaad White",
     "espn": "4697815",
     "status": null,
@@ -1279,6 +1269,16 @@ window.FREE_AGENTS = [
     "fpts": 114.88,
     "avg": 9.13,
     "last": 13
+  },
+  {
+    "name": "J.K. Dobbins",
+    "espn": "4241985",
+    "status": null,
+    "team_abbr": "DEN",
+    "pos": "RB",
+    "fpts": 70.32,
+    "avg": 6.91,
+    "last": 1.3
   },
   {
     "name": "Dalton Kincaid",
@@ -1360,16 +1360,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Woody Marks",
-    "espn": "4429059",
-    "status": null,
-    "team_abbr": "HOU",
-    "pos": "RB",
-    "fpts": 72.68,
-    "avg": 7.93,
-    "last": 8.6
-  },
-  {
     "name": "Jakobi Meyers",
     "espn": "3916433",
     "status": "Q",
@@ -1378,6 +1368,16 @@ window.FREE_AGENTS = [
     "fpts": 94.82,
     "avg": 7.73,
     "last": 3.4
+  },
+  {
+    "name": "Woody Marks",
+    "espn": "4429059",
+    "status": null,
+    "team_abbr": "HOU",
+    "pos": "RB",
+    "fpts": 72.68,
+    "avg": 7.93,
+    "last": 8.6
   },
   {
     "name": "TreVeyon Henderson",
@@ -1420,16 +1420,6 @@ window.FREE_AGENTS = [
     "last": 2
   },
   {
-    "name": "Mark Andrews",
-    "espn": "3116365",
-    "status": null,
-    "team_abbr": "BAL",
-    "pos": "TE",
-    "fpts": 41.89,
-    "avg": 5.04,
-    "last": 2.9
-  },
-  {
     "name": "Tyler Shough",
     "espn": "4360689",
     "status": null,
@@ -1438,6 +1428,16 @@ window.FREE_AGENTS = [
     "fpts": 156.46,
     "avg": 17.99,
     "last": 13.82
+  },
+  {
+    "name": "Mark Andrews",
+    "espn": "3116365",
+    "status": null,
+    "team_abbr": "BAL",
+    "pos": "TE",
+    "fpts": 41.89,
+    "avg": 5.04,
+    "last": 2.9
   },
   {
     "name": "Jadarian Price",
@@ -1479,16 +1479,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Emanuel Wilson",
-    "espn": "4887558",
-    "status": null,
-    "team_abbr": "SEA",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 8.98,
-    "last": 0
-  },
-  {
     "name": "Josh Downs",
     "espn": "4688813",
     "status": null,
@@ -1497,6 +1487,16 @@ window.FREE_AGENTS = [
     "fpts": 55.62,
     "avg": 6.84,
     "last": 10.3
+  },
+  {
+    "name": "Emanuel Wilson",
+    "espn": "4887558",
+    "status": null,
+    "team_abbr": "SEA",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 8.98,
+    "last": 0
   },
   {
     "name": "Courtland Sutton",
@@ -1509,16 +1509,6 @@ window.FREE_AGENTS = [
     "last": 7.3
   },
   {
-    "name": "KC Concepcion",
-    "espn": "4870653",
-    "status": null,
-    "team_abbr": "CLE",
-    "pos": "WR",
-    "fpts": 75.6,
-    "avg": 6.64,
-    "last": 5.2
-  },
-  {
     "name": "Khalil Shakir",
     "espn": "4373678",
     "status": null,
@@ -1527,6 +1517,16 @@ window.FREE_AGENTS = [
     "fpts": 82.93,
     "avg": 7.56,
     "last": 8.9
+  },
+  {
+    "name": "KC Concepcion",
+    "espn": "4870653",
+    "status": null,
+    "team_abbr": "CLE",
+    "pos": "WR",
+    "fpts": 75.6,
+    "avg": 6.64,
+    "last": 5.2
   },
   {
     "name": "Kirk Cousins",
@@ -1590,7 +1590,7 @@ window.FREE_AGENTS = [
   {
     "name": "Tyler Loop",
     "espn": "4697745",
-    "status": "D",
+    "status": "IR",
     "team_abbr": "BAL",
     "pos": "K",
     "fpts": 67.07,
