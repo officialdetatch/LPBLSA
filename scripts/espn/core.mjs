@@ -266,10 +266,14 @@ export async function syncLeague(L, getJSON, current) {
       pf: round2(r.pointsFor || 0),
       pa: round2(r.pointsAgainst || 0),
       streak: kind && r.streakLength ? kind + r.streakLength : '',
-      /* ESPN does not share playoff chances: whatever the standings manager last had stays */
-      playoff: oldRows[slug] && oldRows[slug].playoff != null ? oldRows[slug].playoff : ''
+      /* ESPN's own playoff odds when it sends them (currentSimulationResults.playoffPct);
+         when it does not, whatever the standings manager last had stays */
+      playoff: espnOdds(t) || (oldRows[slug] && oldRows[slug].playoff != null ? oldRows[slug].playoff : '')
     };
   });
+  const gotOdds = league.teams.filter((t) => espnOdds(t)).length;
+  notes.push('playoff odds from ESPN: ' + gotOdds + ' of ' + league.teams.length + ' teams' +
+    (gotOdds ? '' : ' (ESPN sent none - the manager values were kept)'));
   const K = L.key.toUpperCase();
   const standingsText = [
     '/* ============================================================',
@@ -277,13 +281,23 @@ export async function syncLeague(L, getJSON, current) {
     '   The ORDER of this list is the rank -- the first team is 1st place,',
     '   the last is last place. Kept up to date from ESPN Fantasy by the',
     '   "ESPN sync" robot (every 3 hours). The "playoff" chances are the only',
-    '   thing ESPN does not share: set them in ' + L.key + '-standings-manager.html,',
-    '   the robot keeps them.',
+    '   thing ESPN may not share: when it does the robot saves them, when it does not',
+    '   set them in ' + L.key + '-standings-manager.html and the robot keeps them.',
     '   ============================================================ */'
   ].join('\n') + '\nwindow.LEAGUE_STANDINGS = ' + JSON.stringify(table, null, 2) + ';\n';
   notes.push('standings: ' + table.map((r) => r.team + ' ' + r.w + '-' + r.l + (r.t ? '-' + r.t : '')).join(', '));
 
   return { rosterText: problems.length ? null : rosterText, standingsText, notes, problems };
+}
+
+/* ESPN's playoff odds for one team as text like "72%", or '' when ESPN did not send one.
+   ESPN has sent this as a 0-1 fraction or as a 0-100 number, so both are handled. */
+function espnOdds(t) {
+  const sim = t && t.currentSimulationResults;
+  const v = sim && Number(sim.playoffPct);
+  if (!isFinite(v) || sim.playoffPct === null || sim.playoffPct === '') return '';
+  const pct = v <= 1 ? v * 100 : v;
+  return Math.round(pct) + '%';
 }
 
 /* the part of a data file that matters (the comment at the top can change without it counting as news) */
