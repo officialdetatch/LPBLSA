@@ -60,7 +60,7 @@
     <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
   </div>
 
-  <main>
+  <main data-team="sierra">
   <section class="wrap team-hero">
     <span class="crest crest-lg">
       <!-- TEAM LOGO: drop your file at images/sierra.png (square, 400x400 works well).
@@ -70,15 +70,15 @@
     </span>
     <div>
       <h1>Sierra Linda Cameltoes</h1>
-      <div class="team-meta">Manager: George Sanchez &middot; Ranked #5 of 5</div>
+      <div class="team-meta">Manager: George Sanchez &middot; <span data-tp="rank">Ranked #5 of 5</span></div>
       <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
       <p class="team-bio">De Sierra Linda aunque no pueda decir Sierra bien. No lo hagan decir "tres tristes tigres..."</p>
       <div class="team-badges">
-        <span class="pill">Record <b>2-3-0</b></span>
-        <span class="pill">Points for <b>727.58</b></span>
-        <span class="pill">Points against <b>747.06</b></span>
-        <span class="pill">Streak <b>W1</b></span>
-        <span class="pill gold-pill">Playoff odds <b>74%</b></span>
+        <span class="pill">Record <b data-tp="record">2-3-0</b></span>
+        <span class="pill">Points for <b data-tp="pf">727.58</b></span>
+        <span class="pill">Points against <b data-tp="pa">747.06</b></span>
+        <span class="pill">Streak <b data-tp="streak">W1</b></span>
+        <span class="pill gold-pill">Playoff odds <b data-tp="playoff">74%</b></span>
         <span class="pill gold-pill">Starters projected <b id="starters-projected-sierra">&mdash;</b></span>
       </div>
     </div>
@@ -297,7 +297,9 @@
 
   <script src="../../../assets/news.js"></script>
   <script src="../assets/nfl-roster-data.js"></script>
+  <script src="../assets/nfl-standings-data.js"></script>
   <script src="../../../assets/app.js"></script>
+  <script src="../../../assets/team-page.js"></script>
   
 </body>
 </html>

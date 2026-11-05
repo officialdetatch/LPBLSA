@@ -1,8 +1,9 @@
 /* ============================================================
    TEAM PAGE  --  the parts of a team page that keep themselves up to date.
-   Used by the NBA team pages (leagues/nba/teams/<team>.html); a new league's
-   team pages can use it too. The NFL team pages are written out by hand and
-   do not load it.
+   Used by the NBA and NFL team pages (leagues/<league>/teams/<team>.html); a new
+   league's team pages can use it too. A page with no data-league is the NFL.
+   (The NFL pages use only the hero below; their schedule is still written out
+   in the page.)
 
    The page says which team it is with  <main data-team="sin-talento">  and
    which league with  <body data-league="nba">. Then this fills in:
@@ -33,7 +34,7 @@
   var main = document.querySelector('main[data-team]');
   if (!main || !window.LPBSA_findLeague) return;
   var root = document.body.getAttribute('data-root') || '';
-  var L = window.LPBSA_findLeague(document.body.getAttribute('data-league'));
+  var L = window.LPBSA_findLeague(document.body.getAttribute('data-league') || 'nfl');
   if (!L) return;
   var slug = main.getAttribute('data-team');
   var teams = window.LPBSA_teamsOf(L.key);

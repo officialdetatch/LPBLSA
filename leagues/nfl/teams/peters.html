@@ -60,7 +60,7 @@
     <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
   </div>
 
-  <main>
+  <main data-team="peters">
   <section class="wrap team-hero">
     <span class="crest crest-lg">
       <!-- TEAM LOGO: drop your file at images/peters.png (square, 400x400 works well).
@@ -70,15 +70,15 @@
     </span>
     <div>
       <h1>Peter&#x27;s Perfect Team</h1>
-      <div class="team-meta">Manager: Peter Cruz &middot; Ranked #5 of 5</div>
+      <div class="team-meta">Manager: Peter Cruz &middot; <span data-tp="rank">Ranked #5 of 5</span></div>
       <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
       <p class="team-bio">El autor del robo del siglo, drafteando a Drake "Drake Maye" Maye antes que los Puntos de Piña. No se hizo un brujo con Willie Lengua por que Drake Maye es Drake Maye</p>
       <div class="team-badges">
-        <span class="pill">Record <b>1-4-0</b></span>
-        <span class="pill">Points for <b>735.6</b></span>
-        <span class="pill">Points against <b>848.12</b></span>
-        <span class="pill">Streak <b>L4</b></span>
-        <span class="pill gold-pill">Playoff odds <b>59%</b></span>
+        <span class="pill">Record <b data-tp="record">1-4-0</b></span>
+        <span class="pill">Points for <b data-tp="pf">735.6</b></span>
+        <span class="pill">Points against <b data-tp="pa">848.12</b></span>
+        <span class="pill">Streak <b data-tp="streak">L4</b></span>
+        <span class="pill gold-pill">Playoff odds <b data-tp="playoff">59%</b></span>
         <span class="pill gold-pill">Starters projected <b id="starters-projected-peters">&mdash;</b></span>
       </div>
     </div>
@@ -297,7 +297,9 @@
 
   <script src="../../../assets/news.js"></script>
   <script src="../assets/nfl-roster-data.js"></script>
+  <script src="../assets/nfl-standings-data.js"></script>
   <script src="../../../assets/app.js"></script>
+  <script src="../../../assets/team-page.js"></script>
   
 </body>
 </html>

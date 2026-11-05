@@ -60,7 +60,7 @@
     <div class="ticker-track-outer"><div class="ticker-track" id="tickerTrack"></div></div>
   </div>
 
-  <main>
+  <main data-team="puntos">
   <section class="wrap team-hero commish-hero">
     <span class="crest crest-circle crest-lg commish-crest">
       <!-- TEAM LOGO: drop your file at images/puntos.png (square, 400x400 works well).
@@ -70,15 +70,15 @@
     </span>
     <div>
       <h1>Los Puntos de Piña</h1>
-      <div class="team-meta">Manager: Christopher Ramirez &middot; Ranked #3 of 5</div>
+      <div class="team-meta">Manager: Christopher Ramirez &middot; <span data-tp="rank">Ranked #3 of 5</span></div>
       <!-- MANAGER BIO: rewrite this paragraph to say whatever you want about this team. -->
      
       <div class="team-badges">
-        <span class="pill">Record <b>2-3-0</b></span>
-        <span class="pill">Points for <b>741.94</b></span>
-        <span class="pill">Points against <b>810.3</b></span>
-        <span class="pill">Streak <b>L1</b></span>
-        <span class="pill gold-pill">Playoff odds <b>72%</b></span>
+        <span class="pill">Record <b data-tp="record">2-3-0</b></span>
+        <span class="pill">Points for <b data-tp="pf">741.94</b></span>
+        <span class="pill">Points against <b data-tp="pa">810.3</b></span>
+        <span class="pill">Streak <b data-tp="streak">L1</b></span>
+        <span class="pill gold-pill">Playoff odds <b data-tp="playoff">72%</b></span>
         <span class="pill gold-pill">Starters projected <b id="starters-projected-puntos">&mdash;</b></span>
       </div>
         <button class="btn btn-solid commish-trigger" data-commish-open>&#9819; El Bio mas duro.</button>
@@ -347,7 +347,9 @@
 
   <script src="../../../assets/news.js"></script>
   <script src="../assets/nfl-roster-data.js"></script>
+  <script src="../assets/nfl-standings-data.js"></script>
   <script src="../../../assets/app.js"></script>
+  <script src="../../../assets/team-page.js"></script>
   
 </body>
 </html>
