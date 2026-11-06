@@ -119,6 +119,24 @@ export async function syncLeague(L, getJSON, current) {
 
   const league = await getJSON(leagueURL(E, ['mRoster', 'mTeam', 'mSettings', 'mStatus']), null);
   const proInfo = await getJSON(API + E.game + '/seasons/' + E.season + '?view=proTeamSchedules_wl', null);
+
+  /* PLAYOFF ODDS: ESPN's own site shows them, but which view carries them is not documented.
+     Look in the main data and in a few other views, and write down where they were found
+     (or that nothing was) so the run's Summary says what happened. */
+  const oddsById = {};
+  const oddsSeen = [];
+  const oddsFrom = (data, label) => {
+    (data && data.teams || []).forEach((t) => {
+      const o = espnOdds(t);
+      if (o && !oddsById[t.id]) oddsById[t.id] = o;
+    });
+    findOddsKeys(data, '', 0, oddsSeen, label);
+  };
+  oddsFrom(league, 'mTeam');
+  for (const v of ['mStandings', 'modular', 'mMatchupScore']) {
+    try { oddsFrom(await getJSON(leagueURL(E, [v]), null), v); }
+    catch (err) { notes.push('odds search: view ' + v + ' failed (' + String(err.message || err).slice(0, 80) + ')'); }
+  }
   const proTeams = {}, proByes = {};
   ((proInfo.settings && proInfo.settings.proTeams) || []).forEach((t) => {
     proTeams[t.id] = t.abbrev ? String(t.abbrev).toUpperCase() : 'FA';
@@ -268,12 +286,14 @@ export async function syncLeague(L, getJSON, current) {
       streak: kind && r.streakLength ? kind + r.streakLength : '',
       /* ESPN's own playoff odds when it sends them (currentSimulationResults.playoffPct);
          when it does not, whatever the standings manager last had stays */
-      playoff: espnOdds(t) || (oldRows[slug] && oldRows[slug].playoff != null ? oldRows[slug].playoff : '')
+      playoff: oddsById[t.id] || (oldRows[slug] && oldRows[slug].playoff != null ? oldRows[slug].playoff : '')
     };
   });
-  const gotOdds = league.teams.filter((t) => espnOdds(t)).length;
+  const gotOdds = league.teams.filter((t) => oddsById[t.id]).length;
   notes.push('playoff odds from ESPN: ' + gotOdds + ' of ' + league.teams.length + ' teams' +
     (gotOdds ? '' : ' (ESPN sent none - the manager values were kept)'));
+  oddsSeen.slice(0, 12).forEach((x) => notes.push('odds search saw: ' + x));
+  if (!gotOdds && !oddsSeen.length) notes.push('odds search saw: no key with playoff / simulation / odds in its name in any view tried');
   const K = L.key.toUpperCase();
   const standingsText = [
     '/* ============================================================',
@@ -288,6 +308,21 @@ export async function syncLeague(L, getJSON, current) {
   notes.push('standings: ' + table.map((r) => r.team + ' ' + r.w + '-' + r.l + (r.t ? '-' + r.t : '')).join(', '));
 
   return { rosterText: problems.length ? null : rosterText, standingsText, notes, problems };
+}
+
+/* Walks ESPN's answer and writes down where something named like playoff odds lives
+   (a key containing playoff / simulat / odds, with a number or text value). */
+function findOddsKeys(node, path, depth, out, label) {
+  if (!node || typeof node !== 'object' || depth > 7 || out.length >= 40) return;
+  if (Array.isArray(node)) { node.slice(0, 3).forEach((x, i) => findOddsKeys(x, path + '[' + i + ']', depth + 1, out, label)); return; }
+  for (const k of Object.keys(node)) {
+    const v = node[k];
+    if (/playoff|simulat|odds/i.test(k) && (v === null || typeof v !== 'object')) {
+      out.push(label + ': ' + (path + '.' + k).replace(/^\./, '') + ' = ' + JSON.stringify(v));
+    } else if (v && typeof v === 'object') {
+      findOddsKeys(v, path + '.' + k, depth + 1, out, label);
+    }
+  }
 }
 
 /* ESPN's playoff odds for one team as text like "72%", or '' when ESPN did not send one.
