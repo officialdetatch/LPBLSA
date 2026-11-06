@@ -3,8 +3,8 @@
    The ORDER of this list is the rank -- the first team is 1st place,
    the last is last place. Kept up to date from ESPN Fantasy by the
    "ESPN sync" robot (every 3 hours). The "playoff" chances are the only
-   thing ESPN does not share: set them in nfl-standings-manager.html,
-   the robot keeps them.
+   thing ESPN may not share: when it does the robot saves them, when it does not
+   set them in nfl-standings-manager.html and the robot keeps them.
    ============================================================ */
 window.LEAGUE_STANDINGS = [
   {
@@ -17,7 +17,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1112.1,
     "pa": 916.74,
     "streak": "W3",
-    "playoff": "98%"
+    "playoff": "100%"
   },
   {
     "team": "hobbit",
@@ -29,7 +29,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 968.96,
     "pa": 942.96,
     "streak": "W1",
-    "playoff": "97%"
+    "playoff": "98%"
   },
   {
     "team": "sierra",
@@ -41,7 +41,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1107.96,
     "pa": 1089.6,
     "streak": "L1",
-    "playoff": "74%"
+    "playoff": "83%"
   },
   {
     "team": "peters",
@@ -53,7 +53,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 875.54,
     "pa": 978.84,
     "streak": "W1",
-    "playoff": "59%"
+    "playoff": "75%"
   },
   {
     "team": "puntos",
@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1009.92,
     "pa": 1146.34,
     "streak": "L3",
-    "playoff": "72%"
+    "playoff": "43%"
   }
 ];
