@@ -1509,15 +1509,6 @@ window.FREE_AGENTS = [
     "last": 2.9
   },
   {
-    "name": "Patriots",
-    "status": null,
-    "team_abbr": "NE",
-    "pos": "D/ST",
-    "fpts": 51.01,
-    "avg": 6.38,
-    "last": 9
-  },
-  {
     "name": "Khalil Shakir",
     "espn": "4373678",
     "status": null,
@@ -1528,14 +1519,13 @@ window.FREE_AGENTS = [
     "last": 8.9
   },
   {
-    "name": "RJ Harvey",
-    "espn": "4568490",
-    "status": "IR",
-    "team_abbr": "DEN",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 9.15,
-    "last": 0
+    "name": "Patriots",
+    "status": null,
+    "team_abbr": "NE",
+    "pos": "D/ST",
+    "fpts": 51.01,
+    "avg": 6.38,
+    "last": 9
   },
   {
     "name": "Courtland Sutton",
@@ -1546,6 +1536,16 @@ window.FREE_AGENTS = [
     "fpts": 70.97,
     "avg": 4.76,
     "last": 7.3
+  },
+  {
+    "name": "RJ Harvey",
+    "espn": "4568490",
+    "status": "IR",
+    "team_abbr": "DEN",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 9.15,
+    "last": 0
   },
   {
     "name": "Chiefs",
@@ -1626,16 +1626,6 @@ window.FREE_AGENTS = [
     "last": 14
   },
   {
-    "name": "Kyler Murray",
-    "espn": "3917315",
-    "status": "OUT",
-    "team_abbr": "MIN",
-    "pos": "QB",
-    "fpts": 140.07,
-    "avg": 12.26,
-    "last": 19.9
-  },
-  {
     "name": "Jake Bates",
     "espn": "4689936",
     "status": null,
@@ -1644,6 +1634,16 @@ window.FREE_AGENTS = [
     "fpts": 92.69,
     "avg": 9.14,
     "last": 6
+  },
+  {
+    "name": "Kyler Murray",
+    "espn": "3917315",
+    "status": "OUT",
+    "team_abbr": "MIN",
+    "pos": "QB",
+    "fpts": 140.07,
+    "avg": 12.26,
+    "last": 19.9
   },
   {
     "name": "Chris Godwin Jr.",
@@ -1666,6 +1666,15 @@ window.FREE_AGENTS = [
     "last": 3.2
   },
   {
+    "name": "Giants",
+    "status": null,
+    "team_abbr": "NYG",
+    "pos": "D/ST",
+    "fpts": 49,
+    "avg": 5.14,
+    "last": 3
+  },
+  {
     "name": "Alec Pierce",
     "espn": "4360078",
     "status": "IR",
@@ -1674,15 +1683,6 @@ window.FREE_AGENTS = [
     "fpts": 38.17,
     "avg": 4.85,
     "last": 0
-  },
-  {
-    "name": "Giants",
-    "status": null,
-    "team_abbr": "NYG",
-    "pos": "D/ST",
-    "fpts": 49,
-    "avg": 5.14,
-    "last": 3
   },
   {
     "name": "Chris Boswell",
@@ -1765,6 +1765,16 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
+    "name": "Adonai Mitchell",
+    "espn": "4597500",
+    "status": null,
+    "team_abbr": "NYJ",
+    "pos": "WR",
+    "fpts": 79.16,
+    "avg": 10.13,
+    "last": 23.7
+  },
+  {
     "name": "Jacory Croskey-Merritt",
     "espn": "4575131",
     "status": "IR",
@@ -1783,16 +1793,6 @@ window.FREE_AGENTS = [
     "fpts": 60.5,
     "avg": 3.59,
     "last": 0
-  },
-  {
-    "name": "Adonai Mitchell",
-    "espn": "4597500",
-    "status": null,
-    "team_abbr": "NYJ",
-    "pos": "WR",
-    "fpts": 79.16,
-    "avg": 10.13,
-    "last": 23.7
   },
   {
     "name": "Malik Washington",
@@ -1825,6 +1825,16 @@ window.FREE_AGENTS = [
     "last": 11
   },
   {
+    "name": "Devin Singletary",
+    "espn": "4040761",
+    "status": null,
+    "team_abbr": "NYG",
+    "pos": "RB",
+    "fpts": 76.13,
+    "avg": 7.38,
+    "last": 13
+  },
+  {
     "name": "Lions",
     "status": null,
     "team_abbr": "DET",
@@ -1841,26 +1851,6 @@ window.FREE_AGENTS = [
     "fpts": 56.81,
     "avg": 7.14,
     "last": 2
-  },
-  {
-    "name": "Emanuel Wilson",
-    "espn": "4887558",
-    "status": null,
-    "team_abbr": "SEA",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 8.98,
-    "last": 0
-  },
-  {
-    "name": "Terry McLaurin",
-    "espn": "3121422",
-    "status": "IR",
-    "team_abbr": "WSH",
-    "pos": "WR",
-    "fpts": 0,
-    "avg": 7.7,
-    "last": 0
   },
   {
     "name": "Dominic Zvada",
@@ -1883,14 +1873,24 @@ window.FREE_AGENTS = [
     "last": 10.4
   },
   {
-    "name": "Devin Singletary",
-    "espn": "4040761",
+    "name": "Terry McLaurin",
+    "espn": "3121422",
+    "status": "IR",
+    "team_abbr": "WSH",
+    "pos": "WR",
+    "fpts": 0,
+    "avg": 7.7,
+    "last": 0
+  },
+  {
+    "name": "Emanuel Wilson",
+    "espn": "4887558",
     "status": null,
-    "team_abbr": "NYG",
+    "team_abbr": "SEA",
     "pos": "RB",
-    "fpts": 76.13,
-    "avg": 7.38,
-    "last": 13
+    "fpts": 0,
+    "avg": 8.98,
+    "last": 0
   },
   {
     "name": "Eddy Pineiro",

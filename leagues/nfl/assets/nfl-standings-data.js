@@ -29,7 +29,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 968.96,
     "pa": 942.96,
     "streak": "W1",
-    "playoff": "98%"
+    "playoff": "99%"
   },
   {
     "team": "sierra",
@@ -53,7 +53,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 875.54,
     "pa": 978.84,
     "streak": "W1",
-    "playoff": "72%"
+    "playoff": "73%"
   },
   {
     "team": "puntos",
@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1009.92,
     "pa": 1146.34,
     "streak": "L3",
-    "playoff": "47%"
+    "playoff": "45%"
   }
 ];
