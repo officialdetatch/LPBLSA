@@ -1635,16 +1635,6 @@ window.FREE_AGENTS = [
     "last": 14
   },
   {
-    "name": "Kyler Murray",
-    "espn": "3917315",
-    "status": "D",
-    "team_abbr": "MIN",
-    "pos": "QB",
-    "fpts": 0,
-    "avg": 12.26,
-    "last": 0
-  },
-  {
     "name": "Chris Godwin Jr.",
     "espn": "3116165",
     "status": "BYE",
@@ -1653,6 +1643,16 @@ window.FREE_AGENTS = [
     "fpts": 45.25,
     "avg": 4.82,
     "last": 3.8
+  },
+  {
+    "name": "Kyler Murray",
+    "espn": "3917315",
+    "status": "D",
+    "team_abbr": "MIN",
+    "pos": "QB",
+    "fpts": 0,
+    "avg": 12.26,
+    "last": 0
   },
   {
     "name": "Brenton Strange",
@@ -1795,16 +1795,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Brian Thomas Jr.",
-    "espn": "4432773",
-    "status": null,
-    "team_abbr": "JAX",
-    "pos": "WR",
-    "fpts": 46.25,
-    "avg": 3.59,
-    "last": 0
-  },
-  {
     "name": "Malik Washington",
     "espn": "4569603",
     "status": null,
@@ -1813,6 +1803,16 @@ window.FREE_AGENTS = [
     "fpts": 64.09,
     "avg": 7.41,
     "last": 3.1
+  },
+  {
+    "name": "Brian Thomas Jr.",
+    "espn": "4432773",
+    "status": null,
+    "team_abbr": "JAX",
+    "pos": "WR",
+    "fpts": 46.25,
+    "avg": 3.59,
+    "last": 0
   },
   {
     "name": "Jordyn Tyson",
@@ -1893,16 +1893,6 @@ window.FREE_AGENTS = [
     "last": 8
   },
   {
-    "name": "Jonathon Brooks",
-    "espn": "4678008",
-    "status": "IR",
-    "team_abbr": "CAR",
-    "pos": "RB",
-    "fpts": 0,
-    "avg": 4.15,
-    "last": 0
-  },
-  {
     "name": "Eagles",
     "status": "BYE",
     "team_abbr": "PHI",
@@ -1919,6 +1909,16 @@ window.FREE_AGENTS = [
     "fpts": 51.47,
     "avg": 5.13,
     "last": 15
+  },
+  {
+    "name": "Jonathon Brooks",
+    "espn": "4678008",
+    "status": "IR",
+    "team_abbr": "CAR",
+    "pos": "RB",
+    "fpts": 0,
+    "avg": 4.15,
+    "last": 0
   },
   {
     "name": "Emanuel Wilson",
@@ -1961,6 +1961,15 @@ window.FREE_AGENTS = [
     "last": 10.42
   },
   {
+    "name": "Buccaneers",
+    "status": "BYE",
+    "team_abbr": "TB",
+    "pos": "D/ST",
+    "fpts": 56.89,
+    "avg": 10.33,
+    "last": 11
+  },
+  {
     "name": "MarShawn Lloyd",
     "espn": "4429023",
     "status": "Q",
@@ -1969,14 +1978,5 @@ window.FREE_AGENTS = [
     "fpts": 36.08,
     "avg": 5.66,
     "last": 0
-  },
-  {
-    "name": "Buccaneers",
-    "status": "BYE",
-    "team_abbr": "TB",
-    "pos": "D/ST",
-    "fpts": 56.89,
-    "avg": 10.33,
-    "last": 11
   }
 ];
