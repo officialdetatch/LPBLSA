@@ -41,7 +41,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1107.96,
     "pa": 1089.6,
     "streak": "L1",
-    "playoff": "79%"
+    "playoff": "78%"
   },
   {
     "team": "puntos",
@@ -53,7 +53,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1216.96,
     "pa": 1318.22,
     "streak": "W1",
-    "playoff": "63%"
+    "playoff": "65%"
   },
   {
     "team": "peters",
@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1047.42,
     "pa": 1185.88,
     "streak": "L1",
-    "playoff": "61%"
+    "playoff": "60%"
   }
 ];
