@@ -1212,26 +1212,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "T.J. Hockenson",
-    "espn": "4036133",
-    "status": "OUT",
-    "team_abbr": "MIN",
-    "pos": "TE",
-    "fpts": 75.77,
-    "avg": 8.54,
-    "last": 5.3
-  },
-  {
-    "name": "Woody Marks",
-    "espn": "4429059",
-    "status": null,
-    "team_abbr": "HOU",
-    "pos": "RB",
-    "fpts": 66.86,
-    "avg": 7.93,
-    "last": 7.9
-  },
-  {
     "name": "Travis Etienne Jr.",
     "espn": "4239996",
     "status": "IR",
@@ -1242,6 +1222,16 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
+    "name": "T.J. Hockenson",
+    "espn": "4036133",
+    "status": "OUT",
+    "team_abbr": "MIN",
+    "pos": "TE",
+    "fpts": 75.77,
+    "avg": 8.54,
+    "last": 5.3
+  },
+  {
     "name": "Jadarian Price",
     "espn": "4685512",
     "status": null,
@@ -1250,6 +1240,16 @@ window.FREE_AGENTS = [
     "fpts": 73.02,
     "avg": 4.42,
     "last": 9.8
+  },
+  {
+    "name": "Woody Marks",
+    "espn": "4429059",
+    "status": null,
+    "team_abbr": "HOU",
+    "pos": "RB",
+    "fpts": 66.86,
+    "avg": 7.93,
+    "last": 7.9
   },
   {
     "name": "Deebo Samuel Sr.",
@@ -1411,16 +1411,6 @@ window.FREE_AGENTS = [
     "last": 6.4
   },
   {
-    "name": "Xavier Worthy",
-    "espn": "4683062",
-    "status": null,
-    "team_abbr": "KC",
-    "pos": "WR",
-    "fpts": 60.7,
-    "avg": 6.29,
-    "last": 7.8
-  },
-  {
     "name": "Khalil Shakir",
     "espn": "4373678",
     "status": null,
@@ -1428,6 +1418,16 @@ window.FREE_AGENTS = [
     "pos": "WR",
     "fpts": 72.57,
     "avg": 7.59,
+    "last": 7.8
+  },
+  {
+    "name": "Xavier Worthy",
+    "espn": "4683062",
+    "status": null,
+    "team_abbr": "KC",
+    "pos": "WR",
+    "fpts": 60.7,
+    "avg": 6.29,
     "last": 7.8
   },
   {
@@ -1500,16 +1500,6 @@ window.FREE_AGENTS = [
     "last": 5.2
   },
   {
-    "name": "Marvin Harrison Jr.",
-    "espn": "4432708",
-    "status": "OUT",
-    "team_abbr": "HOU",
-    "pos": "WR",
-    "fpts": 43.05,
-    "avg": 4.57,
-    "last": 3
-  },
-  {
     "name": "TreVeyon Henderson",
     "espn": "4432710",
     "status": "OUT",
@@ -1518,6 +1508,16 @@ window.FREE_AGENTS = [
     "fpts": 39.8,
     "avg": 5.22,
     "last": 0
+  },
+  {
+    "name": "Marvin Harrison Jr.",
+    "espn": "4432708",
+    "status": "OUT",
+    "team_abbr": "HOU",
+    "pos": "WR",
+    "fpts": 43.05,
+    "avg": 4.57,
+    "last": 3
   },
   {
     "name": "Tank Dell",
@@ -1530,6 +1530,15 @@ window.FREE_AGENTS = [
     "last": 18.5
   },
   {
+    "name": "Chiefs",
+    "status": null,
+    "team_abbr": "KC",
+    "pos": "D/ST",
+    "fpts": 53.01,
+    "avg": 6.25,
+    "last": 12
+  },
+  {
     "name": "Mark Andrews",
     "espn": "3116365",
     "status": null,
@@ -1540,15 +1549,6 @@ window.FREE_AGENTS = [
     "last": 2.9
   },
   {
-    "name": "Chiefs",
-    "status": null,
-    "team_abbr": "KC",
-    "pos": "D/ST",
-    "fpts": 53.01,
-    "avg": 6.25,
-    "last": 12
-  },
-  {
     "name": "Jake Bates",
     "espn": "4689936",
     "status": null,
@@ -1557,16 +1557,6 @@ window.FREE_AGENTS = [
     "fpts": 81.47,
     "avg": 9.88,
     "last": 15
-  },
-  {
-    "name": "Audric Estime",
-    "espn": "4569682",
-    "status": null,
-    "team_abbr": "NO",
-    "pos": "RB",
-    "fpts": 4.01,
-    "avg": 11.05,
-    "last": 14.2
   },
   {
     "name": "RJ Harvey",
@@ -1597,6 +1587,16 @@ window.FREE_AGENTS = [
     "fpts": 64.85,
     "avg": 7.48,
     "last": 12.7
+  },
+  {
+    "name": "Audric Estime",
+    "espn": "4569682",
+    "status": null,
+    "team_abbr": "NO",
+    "pos": "RB",
+    "fpts": 4.01,
+    "avg": 11.05,
+    "last": 14.2
   },
   {
     "name": "Brenton Strange",
@@ -1942,6 +1942,16 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
+    "name": "Emmett Johnson",
+    "espn": "4832955",
+    "status": null,
+    "team_abbr": "KC",
+    "pos": "RB",
+    "fpts": 47.92,
+    "avg": 6.73,
+    "last": 9.4
+  },
+  {
     "name": "Caleb Douglas",
     "espn": "4869645",
     "status": null,
@@ -1979,15 +1989,5 @@ window.FREE_AGENTS = [
     "fpts": 56.89,
     "avg": 10.33,
     "last": 11
-  },
-  {
-    "name": "Emmett Johnson",
-    "espn": "4832955",
-    "status": null,
-    "team_abbr": "KC",
-    "pos": "RB",
-    "fpts": 47.92,
-    "avg": 6.73,
-    "last": 9.4
   }
 ];
