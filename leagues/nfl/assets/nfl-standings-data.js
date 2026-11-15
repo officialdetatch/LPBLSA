@@ -41,7 +41,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1107.96,
     "pa": 1089.6,
     "streak": "L1",
-    "playoff": "80%"
+    "playoff": "81%"
   },
   {
     "team": "puntos",
