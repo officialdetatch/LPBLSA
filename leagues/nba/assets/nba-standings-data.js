@@ -9,74 +9,74 @@
 window.LEAGUE_STANDINGS = [
   {
     "team": "puntos",
-    "w": 2,
+    "w": 3,
     "l": 1,
     "t": 0,
-    "pct": ".667",
+    "pct": ".750",
     "gb": "--",
-    "pf": 6685.5,
-    "pa": 6204.5,
-    "streak": "L1",
-    "playoff": "82%"
+    "pf": 7057,
+    "pa": 6472.75,
+    "streak": "W1",
+    "playoff": "89%"
   },
   {
     "team": "pantyman",
     "w": 2,
-    "l": 1,
+    "l": 2,
     "t": 0,
-    "pct": ".667",
-    "gb": "--",
-    "pf": 6360,
-    "pa": 5763,
-    "streak": "W2",
-    "playoff": "79%"
+    "pct": ".500",
+    "gb": "1",
+    "pf": 6695.25,
+    "pa": 5916.75,
+    "streak": "L1",
+    "playoff": "72%"
+  },
+  {
+    "team": "sin-talento",
+    "w": 2,
+    "l": 2,
+    "t": 0,
+    "pct": ".500",
+    "gb": "1",
+    "pf": 6574.75,
+    "pa": 6709.75,
+    "streak": "W1",
+    "playoff": "60%"
+  },
+  {
+    "team": "imcebollin",
+    "w": 2,
+    "l": 2,
+    "t": 0,
+    "pct": ".500",
+    "gb": "1",
+    "pf": 6453.25,
+    "pa": 6403.75,
+    "streak": "W1",
+    "playoff": "59%"
   },
   {
     "team": "concheros",
     "w": 2,
-    "l": 1,
-    "t": 0,
-    "pct": ".667",
-    "gb": "--",
-    "pf": 5783,
-    "pa": 6491.25,
-    "streak": "W1",
-    "playoff": "84%"
-  },
-  {
-    "team": "sin-talento",
-    "w": 1,
     "l": 2,
     "t": 0,
-    "pct": ".333",
+    "pct": ".500",
     "gb": "1",
-    "pf": 6421,
-    "pa": 6374.5,
+    "pf": 6051.25,
+    "pa": 6862.75,
     "streak": "L1",
-    "playoff": "48%"
-  },
-  {
-    "team": "imcebollin",
-    "w": 1,
-    "l": 2,
-    "t": 0,
-    "pct": ".333",
-    "gb": "1",
-    "pf": 6180.25,
-    "pa": 6188,
-    "streak": "L2",
-    "playoff": "48%"
+    "playoff": "78%"
   },
   {
     "team": "mugiwaras",
     "w": 1,
-    "l": 2,
+    "l": 3,
     "t": 0,
-    "pct": ".333",
-    "gb": "1",
-    "pf": 6131.25,
-    "pa": 6539.75,
-    "streak": "W1",
-    "playoff": "58%"
+    "pct": ".250",
+    "gb": "2",
+    "pf": 6347,
+    "pa": 6812.75,
+    "streak": "L1",
+    "playoff": "43%"
   }
 ];
