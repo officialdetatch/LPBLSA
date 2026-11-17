@@ -264,8 +264,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "BAL",
         "pos": "RB",
         "fpts": 94.09,
-        "avg": 15.14,
-        "last": 5.58
+        "avg": 15.28,
+        "last": 16.5
       },
       {
         "name": "Kenneth Walker III",
@@ -374,8 +374,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "BAL",
         "pos": "D/ST",
         "fpts": 42.94,
-        "avg": 3.67,
-        "last": 1
+        "avg": 3.7,
+        "last": 4
       },
       {
         "name": "Dak Prescott",
@@ -704,8 +704,8 @@ window.LEAGUE_ROSTERS = {
         "team_abbr": "BAL",
         "pos": "WR",
         "fpts": 75.02,
-        "avg": 13.25,
-        "last": 3.8
+        "avg": 12.71,
+        "last": 8.4
       },
       {
         "name": "Brock Purdy",
@@ -1198,8 +1198,8 @@ window.FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "RB",
     "fpts": 60.09,
-    "avg": 7.84,
-    "last": 6
+    "avg": 8.77,
+    "last": 16.2
   },
   {
     "name": "Jadarian Price",
@@ -1212,16 +1212,6 @@ window.FREE_AGENTS = [
     "last": 10.9
   },
   {
-    "name": "Ladd McConkey",
-    "espn": "4612826",
-    "status": "OUT",
-    "team_abbr": "LAC",
-    "pos": "WR",
-    "fpts": 66.61,
-    "avg": 7.18,
-    "last": 0
-  },
-  {
     "name": "Woody Marks",
     "espn": "4429059",
     "status": "D",
@@ -1232,13 +1222,13 @@ window.FREE_AGENTS = [
     "last": 7
   },
   {
-    "name": "Lamar Jackson",
-    "espn": "3916387",
-    "status": "IR",
-    "team_abbr": "BAL",
-    "pos": "QB",
-    "fpts": 0,
-    "avg": 15.82,
+    "name": "Ladd McConkey",
+    "espn": "4612826",
+    "status": "OUT",
+    "team_abbr": "LAC",
+    "pos": "WR",
+    "fpts": 66.61,
+    "avg": 7.18,
     "last": 0
   },
   {
@@ -1250,6 +1240,16 @@ window.FREE_AGENTS = [
     "fpts": 74.88,
     "avg": 12.8,
     "last": 24.4
+  },
+  {
+    "name": "Lamar Jackson",
+    "espn": "3916387",
+    "status": "IR",
+    "team_abbr": "BAL",
+    "pos": "QB",
+    "fpts": 0,
+    "avg": 15.82,
+    "last": 0
   },
   {
     "name": "Dalton Kincaid",
@@ -1324,7 +1324,7 @@ window.FREE_AGENTS = [
   {
     "name": "David Montgomery",
     "espn": "4035538",
-    "status": "OUT",
+    "status": null,
     "team_abbr": "HOU",
     "pos": "RB",
     "fpts": 83.2,
@@ -1585,8 +1585,8 @@ window.FREE_AGENTS = [
     "team_abbr": "BAL",
     "pos": "TE",
     "fpts": 33.73,
-    "avg": 4.8,
-    "last": 2.9
+    "avg": 5.35,
+    "last": 10.3
   },
   {
     "name": "Harrison Butker",
@@ -1742,8 +1742,8 @@ window.FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "K",
     "fpts": 66.08,
-    "avg": 7.5,
-    "last": 13
+    "avg": 7.89,
+    "last": 11
   },
   {
     "name": "Chris Godwin Jr.",
@@ -1978,8 +1978,8 @@ window.FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "QB",
     "fpts": 92.33,
-    "avg": 10.08,
-    "last": 10.42
+    "avg": 10.72,
+    "last": 15.82
   },
   {
     "name": "Buccaneers",
