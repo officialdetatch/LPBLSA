@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1212.76,
     "pa": 1415.12,
     "streak": "L2",
-    "playoff": "46%"
+    "playoff": "47%"
   }
 ];

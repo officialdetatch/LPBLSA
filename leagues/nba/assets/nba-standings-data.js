@@ -14,8 +14,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".750",
     "gb": "--",
-    "pf": 7552,
-    "pa": 7066.75,
+    "pf": 7952.75,
+    "pa": 7396.75,
     "streak": "W1",
     "playoff": "89%"
   },
@@ -26,8 +26,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 7177.75,
-    "pa": 6175.25,
+    "pf": 7557,
+    "pa": 6459,
     "streak": "L1",
     "playoff": "71%"
   },
@@ -38,10 +38,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 7168.75,
-    "pa": 7204.75,
+    "pf": 7498.75,
+    "pa": 7605.5,
     "streak": "W1",
-    "playoff": "58%"
+    "playoff": "57%"
   },
   {
     "team": "imcebollin",
@@ -50,10 +50,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 6961.25,
-    "pa": 6708.25,
+    "pf": 7317,
+    "pa": 6953.25,
     "streak": "W1",
-    "playoff": "60%"
+    "playoff": "61%"
   },
   {
     "team": "concheros",
@@ -62,10 +62,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 6355.75,
-    "pa": 7370.75,
+    "pf": 6600.75,
+    "pa": 7726.5,
     "streak": "L1",
-    "playoff": "78%"
+    "playoff": "77%"
   },
   {
     "team": "mugiwaras",
@@ -74,8 +74,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".250",
     "gb": "2",
-    "pf": 6605.5,
-    "pa": 7295.25,
+    "pf": 6889.25,
+    "pa": 7674.5,
     "streak": "L1",
     "playoff": "44%"
   }
