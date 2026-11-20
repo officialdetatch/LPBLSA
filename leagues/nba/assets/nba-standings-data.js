@@ -14,22 +14,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".750",
     "gb": "--",
-    "pf": 7952.75,
-    "pa": 7396.75,
+    "pf": 7982,
+    "pa": 7579.25,
     "streak": "W1",
-    "playoff": "89%"
-  },
-  {
-    "team": "pantyman",
-    "w": 2,
-    "l": 2,
-    "t": 0,
-    "pct": ".500",
-    "gb": "1",
-    "pf": 7557,
-    "pa": 6459,
-    "streak": "L1",
-    "playoff": "71%"
+    "playoff": "90%"
   },
   {
     "team": "sin-talento",
@@ -38,10 +26,22 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 7498.75,
-    "pa": 7605.5,
+    "pf": 7681.25,
+    "pa": 7634.75,
     "streak": "W1",
-    "playoff": "57%"
+    "playoff": "53%"
+  },
+  {
+    "team": "pantyman",
+    "w": 2,
+    "l": 2,
+    "t": 0,
+    "pct": ".500",
+    "gb": "1",
+    "pf": 7599.5,
+    "pa": 6588,
+    "streak": "L1",
+    "playoff": "73%"
   },
   {
     "team": "imcebollin",
@@ -50,8 +50,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 7317,
-    "pa": 6953.25,
+    "pf": 7469.75,
+    "pa": 7031.25,
     "streak": "W1",
     "playoff": "61%"
   },
@@ -62,10 +62,10 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".500",
     "gb": "1",
-    "pf": 6600.75,
-    "pa": 7726.5,
+    "pf": 6678.75,
+    "pa": 7879.25,
     "streak": "L1",
-    "playoff": "77%"
+    "playoff": "78%"
   },
   {
     "team": "mugiwaras",
@@ -74,8 +74,8 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".250",
     "gb": "2",
-    "pf": 6889.25,
-    "pa": 7674.5,
+    "pf": 7018.25,
+    "pa": 7717,
     "streak": "L1",
     "playoff": "44%"
   }
