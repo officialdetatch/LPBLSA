@@ -1418,16 +1418,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Tyler Shough",
-    "espn": "4360689",
-    "status": null,
-    "team_abbr": "NO",
-    "pos": "QB",
-    "fpts": 122.93,
-    "avg": 17.29,
-    "last": 9.98
-  },
-  {
     "name": "Mark Andrews",
     "espn": "3116365",
     "status": null,
@@ -1436,6 +1426,16 @@ window.FREE_AGENTS = [
     "fpts": 38.95,
     "avg": 5.54,
     "last": 12.2
+  },
+  {
+    "name": "Tyler Shough",
+    "espn": "4360689",
+    "status": null,
+    "team_abbr": "NO",
+    "pos": "QB",
+    "fpts": 122.93,
+    "avg": 17.29,
+    "last": 9.98
   },
   {
     "name": "Khalil Shakir",
@@ -1557,16 +1557,6 @@ window.FREE_AGENTS = [
     "last": 4.4
   },
   {
-    "name": "DeMario Douglas",
-    "espn": "4427095",
-    "status": "BYE",
-    "team_abbr": "NE",
-    "pos": "WR",
-    "fpts": 44.52,
-    "avg": 8.18,
-    "last": 0.9
-  },
-  {
     "name": "Brenton Strange",
     "espn": "4430539",
     "status": null,
@@ -1575,6 +1565,16 @@ window.FREE_AGENTS = [
     "fpts": 53.89,
     "avg": 7.17,
     "last": 7.9
+  },
+  {
+    "name": "DeMario Douglas",
+    "espn": "4427095",
+    "status": "BYE",
+    "team_abbr": "NE",
+    "pos": "WR",
+    "fpts": 44.52,
+    "avg": 8.18,
+    "last": 0.9
   },
   {
     "name": "Jake Bates",
@@ -1657,16 +1657,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Xavier Hutchinson",
-    "espn": "4686422",
-    "status": null,
-    "team_abbr": "HOU",
-    "pos": "WR",
-    "fpts": 65.16,
-    "avg": 7.04,
-    "last": 2.3
-  },
-  {
     "name": "Adonai Mitchell",
     "espn": "4597500",
     "status": null,
@@ -1675,6 +1665,16 @@ window.FREE_AGENTS = [
     "fpts": 61.09,
     "avg": 7.98,
     "last": 7.4
+  },
+  {
+    "name": "Xavier Hutchinson",
+    "espn": "4686422",
+    "status": null,
+    "team_abbr": "HOU",
+    "pos": "WR",
+    "fpts": 65.16,
+    "avg": 7.04,
+    "last": 2.3
   },
   {
     "name": "Jacory Croskey-Merritt",
@@ -1747,14 +1747,14 @@ window.FREE_AGENTS = [
     "last": 2.5
   },
   {
-    "name": "Matt Gay",
-    "espn": "4249087",
-    "status": "Q",
-    "team_abbr": "LV",
-    "pos": "K",
-    "fpts": 58.69,
-    "avg": 9.6,
-    "last": 8
+    "name": "Aaron Rodgers",
+    "espn": "8439",
+    "status": null,
+    "team_abbr": "PIT",
+    "pos": "QB",
+    "fpts": 122.51,
+    "avg": 14.75,
+    "last": 15.62
   },
   {
     "name": "Romeo Doubs",
@@ -1767,14 +1767,14 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Aaron Rodgers",
-    "espn": "8439",
-    "status": null,
-    "team_abbr": "PIT",
-    "pos": "QB",
-    "fpts": 122.51,
-    "avg": 14.75,
-    "last": 15.62
+    "name": "Matt Gay",
+    "espn": "4249087",
+    "status": "Q",
+    "team_abbr": "LV",
+    "pos": "K",
+    "fpts": 58.69,
+    "avg": 9.6,
+    "last": 8
   },
   {
     "name": "Chris Godwin Jr.",
@@ -1827,25 +1827,6 @@ window.FREE_AGENTS = [
     "last": 16.26
   },
   {
-    "name": "Buccaneers",
-    "status": null,
-    "team_abbr": "TB",
-    "pos": "D/ST",
-    "fpts": 54.9,
-    "avg": 10.33,
-    "last": 11
-  },
-  {
-    "name": "Devaughn Vele",
-    "espn": "4569559",
-    "status": null,
-    "team_abbr": "NO",
-    "pos": "WR",
-    "fpts": 38.02,
-    "avg": 8.27,
-    "last": 2.4
-  },
-  {
     "name": "Caleb Douglas",
     "espn": "4869645",
     "status": null,
@@ -1854,6 +1835,15 @@ window.FREE_AGENTS = [
     "fpts": 63.32,
     "avg": 9.95,
     "last": 8.6
+  },
+  {
+    "name": "Buccaneers",
+    "status": null,
+    "team_abbr": "TB",
+    "pos": "D/ST",
+    "fpts": 54.9,
+    "avg": 10.33,
+    "last": 11
   },
   {
     "name": "Cam Ward",
@@ -1866,15 +1856,6 @@ window.FREE_AGENTS = [
     "last": 19.14
   },
   {
-    "name": "Bengals",
-    "status": null,
-    "team_abbr": "CIN",
-    "pos": "D/ST",
-    "fpts": 47.14,
-    "avg": 6.44,
-    "last": 5
-  },
-  {
     "name": "Jets",
     "status": null,
     "team_abbr": "NYJ",
@@ -1882,6 +1863,25 @@ window.FREE_AGENTS = [
     "fpts": 41.54,
     "avg": 4.3,
     "last": 3
+  },
+  {
+    "name": "Devaughn Vele",
+    "espn": "4569559",
+    "status": null,
+    "team_abbr": "NO",
+    "pos": "WR",
+    "fpts": 38.02,
+    "avg": 8.27,
+    "last": 2.4
+  },
+  {
+    "name": "Bengals",
+    "status": null,
+    "team_abbr": "CIN",
+    "pos": "D/ST",
+    "fpts": 47.14,
+    "avg": 6.44,
+    "last": 5
   },
   {
     "name": "Chase McLaughlin",
@@ -1923,15 +1923,6 @@ window.FREE_AGENTS = [
     "last": 8
   },
   {
-    "name": "Patriots",
-    "status": "BYE",
-    "team_abbr": "NE",
-    "pos": "D/ST",
-    "fpts": 32.01,
-    "avg": 4.4,
-    "last": -2
-  },
-  {
     "name": "Dalton Schultz",
     "espn": "3117256",
     "status": null,
@@ -1940,6 +1931,15 @@ window.FREE_AGENTS = [
     "fpts": 54.98,
     "avg": 6.31,
     "last": 1.6
+  },
+  {
+    "name": "Patriots",
+    "status": "BYE",
+    "team_abbr": "NE",
+    "pos": "D/ST",
+    "fpts": 32.01,
+    "avg": 4.4,
+    "last": -2
   },
   {
     "name": "Brian Thomas Jr.",
