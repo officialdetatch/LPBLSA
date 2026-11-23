@@ -29,7 +29,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1295.22,
     "pa": 1251.5,
     "streak": "W1",
-    "playoff": "92%"
+    "playoff": "93%"
   },
   {
     "team": "hobbit",
@@ -41,7 +41,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1282.68,
     "pa": 1312.34,
     "streak": "L2",
-    "playoff": "97%"
+    "playoff": "96%"
   },
   {
     "team": "puntos",
@@ -53,7 +53,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1216.96,
     "pa": 1318.22,
     "streak": "W1",
-    "playoff": "65%"
+    "playoff": "66%"
   },
   {
     "team": "peters",
@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1212.76,
     "pa": 1415.12,
     "streak": "L2",
-    "playoff": "47%"
+    "playoff": "44%"
   }
 ];
