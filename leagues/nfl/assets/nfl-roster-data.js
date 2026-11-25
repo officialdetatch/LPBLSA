@@ -66,7 +66,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DET",
         "pos": "RB",
-        "fpts": 166.14,
+        "fpts": 166.15,
         "avg": 25.87,
         "last": 25.8
       },
@@ -197,7 +197,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "PIT",
         "pos": "WR",
-        "fpts": 37.34,
+        "fpts": 38.75,
         "avg": 5.88,
         "last": 7
       },
@@ -252,7 +252,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DET",
         "pos": "QB",
-        "fpts": 120.69,
+        "fpts": 120.67,
         "avg": 18.81,
         "last": 20.36
       },
@@ -262,7 +262,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "BAL",
         "pos": "RB",
-        "fpts": 80.24,
+        "fpts": 80.25,
         "avg": 15.44,
         "last": 17.1
       },
@@ -292,7 +292,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "KC",
         "pos": "WR",
-        "fpts": 63.58,
+        "fpts": 64.06,
         "avg": 9.09,
         "last": 8.3
       },
@@ -302,7 +302,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "PIT",
         "pos": "WR",
-        "fpts": 65.71,
+        "fpts": 67.71,
         "avg": 7.65,
         "last": 0.7
       },
@@ -342,7 +342,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "KC",
         "pos": "QB",
-        "fpts": 136.97,
+        "fpts": 137.19,
         "avg": 20.24,
         "last": 24.96
       },
@@ -351,7 +351,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "BAL",
         "pos": "D/ST",
-        "fpts": 36.15,
+        "fpts": 35.79,
         "avg": 4.18,
         "last": 9
       },
@@ -379,10 +379,10 @@ window.LEAGUE_ROSTERS = {
       {
         "name": "Kenneth Walker III",
         "espn": "4567048",
-        "status": "Q",
+        "status": "OUT",
         "team_abbr": "KC",
         "pos": "RB",
-        "fpts": 152.05,
+        "fpts": 132.36,
         "avg": 22.92,
         "last": 0
       },
@@ -392,7 +392,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DAL",
         "pos": "QB",
-        "fpts": 107.06,
+        "fpts": 107.04,
         "avg": 21.61,
         "last": 35.9
       },
@@ -437,7 +437,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "HOU",
         "pos": "QB",
-        "fpts": 139.64,
+        "fpts": 139.65,
         "avg": 20.49,
         "last": 20.46
       },
@@ -507,7 +507,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "PIT",
         "pos": "RB",
-        "fpts": 93.41,
+        "fpts": 93.04,
         "avg": 13.88,
         "last": 3.9
       },
@@ -517,7 +517,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DEN",
         "pos": "RB",
-        "fpts": 105.34,
+        "fpts": 106.19,
         "avg": 14.88,
         "last": 32.9
       },
@@ -536,7 +536,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "MIN",
         "pos": "D/ST",
-        "fpts": 45.96,
+        "fpts": 46.55,
         "avg": 10.6,
         "last": 0
       },
@@ -622,9 +622,19 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "CHI",
         "pos": "QB",
-        "fpts": 109.97,
+        "fpts": 109.98,
         "avg": 17.81,
         "last": 14.34
+      },
+      {
+        "name": "Bijan Robinson",
+        "espn": "4430807",
+        "status": null,
+        "team_abbr": "ATL",
+        "pos": "RB",
+        "fpts": 127.09,
+        "avg": 18.02,
+        "last": 15.7
       },
       {
         "name": "Kyren Williams",
@@ -635,16 +645,6 @@ window.LEAGUE_ROSTERS = {
         "fpts": 92.86,
         "avg": 14.53,
         "last": 4.2
-      },
-      {
-        "name": "Cam Skattebo",
-        "espn": "4696981",
-        "status": null,
-        "team_abbr": "NYG",
-        "pos": "RB",
-        "fpts": 102.1,
-        "avg": 10.54,
-        "last": 4.3
       },
       {
         "name": "Christian Watson",
@@ -682,19 +682,9 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "KC",
         "pos": "TE",
-        "fpts": 71.3,
+        "fpts": 71.31,
         "avg": 10.92,
         "last": 22.4
-      },
-      {
-        "name": "Bijan Robinson",
-        "espn": "4430807",
-        "status": null,
-        "team_abbr": "ATL",
-        "pos": "RB",
-        "fpts": 127.09,
-        "avg": 18.02,
-        "last": 15.7
       },
       {
         "name": "Bhayshul Tuten",
@@ -705,6 +695,16 @@ window.LEAGUE_ROSTERS = {
         "fpts": 106,
         "avg": 14.53,
         "last": 6.8
+      },
+      {
+        "name": "Cam Skattebo",
+        "espn": "4696981",
+        "status": null,
+        "team_abbr": "NYG",
+        "pos": "RB",
+        "fpts": 102.1,
+        "avg": 10.54,
+        "last": 4.3
       },
       {
         "name": "Brock Purdy",
@@ -721,7 +721,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "JAX",
         "pos": "D/ST",
-        "fpts": 46.67,
+        "fpts": 46.08,
         "avg": 7.5,
         "last": 5
       },
@@ -793,7 +793,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DET",
         "pos": "WR",
-        "fpts": 73.41,
+        "fpts": 73.42,
         "avg": 11.6,
         "last": 17.3
       }
@@ -849,7 +849,7 @@ window.LEAGUE_ROSTERS = {
         "status": null,
         "team_abbr": "DET",
         "pos": "WR",
-        "fpts": 102.6,
+        "fpts": 102.61,
         "avg": 16.31,
         "last": 12.2
       },
@@ -1032,16 +1032,6 @@ window.FREE_AGENTS = [
     "last": 6.6
   },
   {
-    "name": "Tyler Warren",
-    "espn": "4431459",
-    "status": null,
-    "team_abbr": "IND",
-    "pos": "TE",
-    "fpts": 36.03,
-    "avg": 7.69,
-    "last": 2.7
-  },
-  {
     "name": "Quinshon Judkins",
     "espn": "4685702",
     "status": null,
@@ -1052,6 +1042,16 @@ window.FREE_AGENTS = [
     "last": 14.6
   },
   {
+    "name": "Tyler Warren",
+    "espn": "4431459",
+    "status": null,
+    "team_abbr": "IND",
+    "pos": "TE",
+    "fpts": 36.03,
+    "avg": 7.69,
+    "last": 2.7
+  },
+  {
     "name": "Omarion Hampton",
     "espn": "4685382",
     "status": null,
@@ -1060,6 +1060,16 @@ window.FREE_AGENTS = [
     "fpts": 77.03,
     "avg": 8.95,
     "last": 9.8
+  },
+  {
+    "name": "Emmett Johnson",
+    "espn": "4832955",
+    "status": null,
+    "team_abbr": "KC",
+    "pos": "RB",
+    "fpts": 59.52,
+    "avg": 10.82,
+    "last": 22.3
   },
   {
     "name": "Emeka Egbuka",
@@ -1081,16 +1091,6 @@ window.FREE_AGENTS = [
     "last": 15
   },
   {
-    "name": "Emmett Johnson",
-    "espn": "4832955",
-    "status": null,
-    "team_abbr": "KC",
-    "pos": "RB",
-    "fpts": 49.82,
-    "avg": 10.82,
-    "last": 22.3
-  },
-  {
     "name": "Josh Jacobs",
     "espn": "4047365",
     "status": "Q",
@@ -1106,7 +1106,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "CHI",
     "pos": "WR",
-    "fpts": 61.65,
+    "fpts": 61.66,
     "avg": 7.93,
     "last": 6.5
   },
@@ -1136,9 +1136,19 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "TEN",
     "pos": "WR",
-    "fpts": 72.76,
+    "fpts": 72.77,
     "avg": 9.14,
     "last": 12.8
+  },
+  {
+    "name": "T.J. Hockenson",
+    "espn": "4036133",
+    "status": null,
+    "team_abbr": "MIN",
+    "pos": "TE",
+    "fpts": 57.93,
+    "avg": 8.53,
+    "last": 8.5
   },
   {
     "name": "Travis Etienne Jr.",
@@ -1156,7 +1166,7 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "DEN",
     "pos": "WR",
-    "fpts": 62.64,
+    "fpts": 62.63,
     "avg": 7.46,
     "last": 7.6
   },
@@ -1165,19 +1175,19 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "DEN",
     "pos": "D/ST",
-    "fpts": 43.18,
+    "fpts": 42.6,
     "avg": 6.8,
     "last": 12
   },
   {
-    "name": "T.J. Hockenson",
-    "espn": "4036133",
+    "name": "Ladd McConkey",
+    "espn": "4612826",
     "status": null,
-    "team_abbr": "MIN",
-    "pos": "TE",
-    "fpts": 57.93,
-    "avg": 8.53,
-    "last": 8.5
+    "team_abbr": "LAC",
+    "pos": "WR",
+    "fpts": 66.97,
+    "avg": 8.76,
+    "last": 18.2
   },
   {
     "name": "Matthew Stafford",
@@ -1200,26 +1210,6 @@ window.FREE_AGENTS = [
     "last": 3.7
   },
   {
-    "name": "Spencer Shrader",
-    "espn": "4571557",
-    "status": null,
-    "team_abbr": "IND",
-    "pos": "K",
-    "fpts": 56.37,
-    "avg": 10.27,
-    "last": 1
-  },
-  {
-    "name": "Ladd McConkey",
-    "espn": "4612826",
-    "status": null,
-    "team_abbr": "LAC",
-    "pos": "WR",
-    "fpts": 66.97,
-    "avg": 8.76,
-    "last": 18.2
-  },
-  {
     "name": "Zach Charbonnet",
     "espn": "4426385",
     "status": null,
@@ -1228,6 +1218,16 @@ window.FREE_AGENTS = [
     "fpts": 85.94,
     "avg": 7.63,
     "last": 9.4
+  },
+  {
+    "name": "Josh Downs",
+    "espn": "4688813",
+    "status": null,
+    "team_abbr": "KC",
+    "pos": "WR",
+    "fpts": 49.51,
+    "avg": 7.25,
+    "last": 7.9
   },
   {
     "name": "Drake Maye",
@@ -1240,23 +1240,24 @@ window.FREE_AGENTS = [
     "last": 3.02
   },
   {
-    "name": "Josh Downs",
-    "espn": "4688813",
+    "name": "Spencer Shrader",
+    "espn": "4571557",
     "status": null,
-    "team_abbr": "KC",
-    "pos": "WR",
-    "fpts": 48.99,
-    "avg": 7.25,
-    "last": 7.9
+    "team_abbr": "IND",
+    "pos": "K",
+    "fpts": 56.37,
+    "avg": 10.27,
+    "last": 1
   },
   {
-    "name": "Bills",
+    "name": "Jakobi Meyers",
+    "espn": "3916433",
     "status": null,
-    "team_abbr": "BUF",
-    "pos": "D/ST",
-    "fpts": 42.65,
-    "avg": 6.1,
-    "last": 10
+    "team_abbr": "JAX",
+    "pos": "WR",
+    "fpts": 66.48,
+    "avg": 7.8,
+    "last": 10.5
   },
   {
     "name": "Jadarian Price",
@@ -1289,16 +1290,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Jakobi Meyers",
-    "espn": "3916433",
-    "status": null,
-    "team_abbr": "JAX",
-    "pos": "WR",
-    "fpts": 66.48,
-    "avg": 7.8,
-    "last": 10.5
-  },
-  {
     "name": "Dalton Kincaid",
     "espn": "4385690",
     "status": "Q",
@@ -1329,16 +1320,6 @@ window.FREE_AGENTS = [
     "last": 1.5
   },
   {
-    "name": "Rico Dowdle",
-    "espn": "4038815",
-    "status": null,
-    "team_abbr": "PIT",
-    "pos": "RB",
-    "fpts": 53.37,
-    "avg": 6.84,
-    "last": 5.4
-  },
-  {
     "name": "Kirk Cousins",
     "espn": "14880",
     "status": null,
@@ -1349,34 +1330,14 @@ window.FREE_AGENTS = [
     "last": 7.4
   },
   {
-    "name": "Woody Marks",
-    "espn": "4429059",
-    "status": "Q",
-    "team_abbr": "HOU",
-    "pos": "RB",
-    "fpts": 51.16,
-    "avg": 7.82,
-    "last": 0
-  },
-  {
-    "name": "Braelon Allen",
-    "espn": "4685247",
+    "name": "Rico Dowdle",
+    "espn": "4038815",
     "status": null,
-    "team_abbr": "NYJ",
+    "team_abbr": "PIT",
     "pos": "RB",
-    "fpts": 45.68,
-    "avg": 9.95,
-    "last": 8.9
-  },
-  {
-    "name": "Courtland Sutton",
-    "espn": "3128429",
-    "status": null,
-    "team_abbr": "DEN",
-    "pos": "WR",
-    "fpts": 47.3,
-    "avg": 5.11,
-    "last": 0
+    "fpts": 53.31,
+    "avg": 6.84,
+    "last": 5.4
   },
   {
     "name": "KC Concepcion",
@@ -1389,23 +1350,43 @@ window.FREE_AGENTS = [
     "last": 10.2
   },
   {
-    "name": "Rachaad White",
-    "espn": "4697815",
+    "name": "Braelon Allen",
+    "espn": "4685247",
     "status": null,
-    "team_abbr": "WSH",
+    "team_abbr": "NYJ",
     "pos": "RB",
-    "fpts": 9.72,
-    "avg": 7.38,
+    "fpts": 45.68,
+    "avg": 9.95,
+    "last": 8.9
+  },
+  {
+    "name": "Woody Marks",
+    "espn": "4429059",
+    "status": "Q",
+    "team_abbr": "HOU",
+    "pos": "RB",
+    "fpts": 51.15,
+    "avg": 7.82,
     "last": 0
   },
   {
-    "name": "Bears",
+    "name": "Bills",
     "status": null,
-    "team_abbr": "CHI",
+    "team_abbr": "BUF",
     "pos": "D/ST",
-    "fpts": 35.54,
-    "avg": 8.4,
-    "last": 15
+    "fpts": 43.24,
+    "avg": 6.1,
+    "last": 10
+  },
+  {
+    "name": "Courtland Sutton",
+    "espn": "3128429",
+    "status": null,
+    "team_abbr": "DEN",
+    "pos": "WR",
+    "fpts": 46.87,
+    "avg": 5.11,
+    "last": 0
   },
   {
     "name": "Khalil Shakir",
@@ -1438,14 +1419,14 @@ window.FREE_AGENTS = [
     "last": 13
   },
   {
-    "name": "Mark Andrews",
-    "espn": "3116365",
+    "name": "Chig Okonkwo",
+    "espn": "4360635",
     "status": null,
-    "team_abbr": "BAL",
+    "team_abbr": "WSH",
     "pos": "TE",
-    "fpts": 30.32,
-    "avg": 5.25,
-    "last": 2.4
+    "fpts": 50.34,
+    "avg": 5.8,
+    "last": 8.6
   },
   {
     "name": "Tyler Shough",
@@ -1468,14 +1449,34 @@ window.FREE_AGENTS = [
     "last": 8
   },
   {
-    "name": "J.K. Dobbins",
-    "espn": "4241985",
-    "status": "OUT",
-    "team_abbr": "DEN",
+    "name": "Rachaad White",
+    "espn": "4697815",
+    "status": null,
+    "team_abbr": "WSH",
     "pos": "RB",
-    "fpts": 18.26,
-    "avg": 5.8,
+    "fpts": 9.72,
+    "avg": 7.38,
     "last": 0
+  },
+  {
+    "name": "Mark Andrews",
+    "espn": "3116365",
+    "status": null,
+    "team_abbr": "BAL",
+    "pos": "TE",
+    "fpts": 30.32,
+    "avg": 5.25,
+    "last": 2.4
+  },
+  {
+    "name": "Kenny Gainwell",
+    "espn": "4371733",
+    "status": null,
+    "team_abbr": "TB",
+    "pos": "RB",
+    "fpts": 55.2,
+    "avg": 6.4,
+    "last": 7.9
   },
   {
     "name": "Alvin Kamara",
@@ -1488,24 +1489,43 @@ window.FREE_AGENTS = [
     "last": 6.7
   },
   {
-    "name": "Chig Okonkwo",
-    "espn": "4360635",
+    "name": "Bears",
     "status": null,
-    "team_abbr": "WSH",
-    "pos": "TE",
-    "fpts": 50.34,
-    "avg": 5.8,
-    "last": 8.6
+    "team_abbr": "CHI",
+    "pos": "D/ST",
+    "fpts": 35.55,
+    "avg": 8.4,
+    "last": 15
   },
   {
-    "name": "Kenny Gainwell",
-    "espn": "4371733",
+    "name": "Jacory Croskey-Merritt",
+    "espn": "4575131",
     "status": null,
-    "team_abbr": "TB",
+    "team_abbr": "WSH",
     "pos": "RB",
-    "fpts": 55.2,
-    "avg": 6.4,
-    "last": 7.9
+    "fpts": 68.25,
+    "avg": 9.52,
+    "last": 14.7
+  },
+  {
+    "name": "J.K. Dobbins",
+    "espn": "4241985",
+    "status": "OUT",
+    "team_abbr": "DEN",
+    "pos": "RB",
+    "fpts": 15.22,
+    "avg": 5.8,
+    "last": 0
+  },
+  {
+    "name": "Jordan Mason",
+    "espn": "4360569",
+    "status": null,
+    "team_abbr": "MIN",
+    "pos": "RB",
+    "fpts": 67.95,
+    "avg": 6,
+    "last": 4.2
   },
   {
     "name": "Tank Dell",
@@ -1523,38 +1543,9 @@ window.FREE_AGENTS = [
     "status": null,
     "team_abbr": "KC",
     "pos": "WR",
-    "fpts": 37.91,
+    "fpts": 38.47,
     "avg": 6.11,
     "last": 10.8
-  },
-  {
-    "name": "Jordan Mason",
-    "espn": "4360569",
-    "status": null,
-    "team_abbr": "MIN",
-    "pos": "RB",
-    "fpts": 67.95,
-    "avg": 6,
-    "last": 4.2
-  },
-  {
-    "name": "Lions",
-    "status": null,
-    "team_abbr": "DET",
-    "pos": "D/ST",
-    "fpts": 38.22,
-    "avg": 5.7,
-    "last": 6
-  },
-  {
-    "name": "Tyler Allgeier",
-    "espn": "4373626",
-    "status": null,
-    "team_abbr": "ARI",
-    "pos": "RB",
-    "fpts": 37.46,
-    "avg": 7.54,
-    "last": 2.3
   },
   {
     "name": "Brenton Strange",
@@ -1577,6 +1568,25 @@ window.FREE_AGENTS = [
     "last": 8
   },
   {
+    "name": "Tyler Allgeier",
+    "espn": "4373626",
+    "status": null,
+    "team_abbr": "ARI",
+    "pos": "RB",
+    "fpts": 37.46,
+    "avg": 7.54,
+    "last": 2.3
+  },
+  {
+    "name": "Lions",
+    "status": null,
+    "team_abbr": "DET",
+    "pos": "D/ST",
+    "fpts": 38.21,
+    "avg": 5.7,
+    "last": 6
+  },
+  {
     "name": "Harrison Butker",
     "espn": "3055899",
     "status": null,
@@ -1597,16 +1607,6 @@ window.FREE_AGENTS = [
     "last": 6
   },
   {
-    "name": "Keenan Allen",
-    "espn": "15818",
-    "status": null,
-    "team_abbr": "SF",
-    "pos": "WR",
-    "fpts": 41.03,
-    "avg": 7.5,
-    "last": 5.3
-  },
-  {
     "name": "DeMario Douglas",
     "espn": "4427095",
     "status": null,
@@ -1617,14 +1617,24 @@ window.FREE_AGENTS = [
     "last": 0.9
   },
   {
-    "name": "Jacory Croskey-Merritt",
-    "espn": "4575131",
+    "name": "Keenan Allen",
+    "espn": "15818",
     "status": null,
-    "team_abbr": "WSH",
+    "team_abbr": "SF",
+    "pos": "WR",
+    "fpts": 41.03,
+    "avg": 7.5,
+    "last": 5.3
+  },
+  {
+    "name": "RJ Harvey",
+    "espn": "4568490",
+    "status": "IR",
+    "team_abbr": "DEN",
     "pos": "RB",
-    "fpts": 68.25,
-    "avg": 9.52,
-    "last": 14.7
+    "fpts": 42.71,
+    "avg": 9.15,
+    "last": 0
   },
   {
     "name": "Marvin Harrison Jr.",
@@ -1637,14 +1647,23 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "RJ Harvey",
-    "espn": "4568490",
-    "status": "IR",
-    "team_abbr": "DEN",
-    "pos": "RB",
-    "fpts": 42.71,
-    "avg": 9.15,
-    "last": 0
+    "name": "Commanders",
+    "status": null,
+    "team_abbr": "WSH",
+    "pos": "D/ST",
+    "fpts": 33.73,
+    "avg": 4.9,
+    "last": 3
+  },
+  {
+    "name": "Antonio Williams",
+    "espn": "5081432",
+    "status": null,
+    "team_abbr": "WSH",
+    "pos": "WR",
+    "fpts": 63.67,
+    "avg": 7.53,
+    "last": 16.7
   },
   {
     "name": "Hunter Henry",
@@ -1677,22 +1696,12 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Xavier Hutchinson",
-    "espn": "4686422",
-    "status": null,
-    "team_abbr": "HOU",
-    "pos": "WR",
-    "fpts": 51.18,
-    "avg": 7.04,
-    "last": 2.3
-  },
-  {
     "name": "Pat Freiermuth",
     "espn": "4361411",
     "status": null,
     "team_abbr": "PIT",
     "pos": "TE",
-    "fpts": 41.42,
+    "fpts": 41.9,
     "avg": 8.35,
     "last": 6.5
   },
@@ -1715,6 +1724,25 @@ window.FREE_AGENTS = [
     "fpts": 37.99,
     "avg": 7.77,
     "last": 1.6
+  },
+  {
+    "name": "Xavier Hutchinson",
+    "espn": "4686422",
+    "status": null,
+    "team_abbr": "HOU",
+    "pos": "WR",
+    "fpts": 51.18,
+    "avg": 7.04,
+    "last": 2.3
+  },
+  {
+    "name": "Buccaneers",
+    "status": null,
+    "team_abbr": "TB",
+    "pos": "D/ST",
+    "fpts": 46.73,
+    "avg": 9.2,
+    "last": -1
   },
   {
     "name": "Alec Pierce",
@@ -1757,25 +1785,6 @@ window.FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Jets",
-    "status": null,
-    "team_abbr": "NYJ",
-    "pos": "D/ST",
-    "fpts": 39.26,
-    "avg": 4.64,
-    "last": 8
-  },
-  {
-    "name": "Aaron Rodgers",
-    "espn": "8439",
-    "status": null,
-    "team_abbr": "PIT",
-    "pos": "QB",
-    "fpts": 105.99,
-    "avg": 14.87,
-    "last": 15.98
-  },
-  {
     "name": "Chris Godwin Jr.",
     "espn": "3116165",
     "status": null,
@@ -1784,6 +1793,16 @@ window.FREE_AGENTS = [
     "fpts": 32.68,
     "avg": 4.62,
     "last": 2.8
+  },
+  {
+    "name": "Michael Pittman Jr.",
+    "espn": "4035687",
+    "status": "IR",
+    "team_abbr": "PIT",
+    "pos": "WR",
+    "fpts": 27.25,
+    "avg": 4.13,
+    "last": 0
   },
   {
     "name": "Kaelon Black",
@@ -1796,23 +1815,14 @@ window.FREE_AGENTS = [
     "last": 2
   },
   {
-    "name": "Michael Pittman Jr.",
-    "espn": "4035687",
-    "status": "IR",
-    "team_abbr": "PIT",
-    "pos": "WR",
-    "fpts": 26.16,
-    "avg": 4.13,
-    "last": 0
-  },
-  {
-    "name": "Buccaneers",
+    "name": "Caleb Douglas",
+    "espn": "4869645",
     "status": null,
-    "team_abbr": "TB",
-    "pos": "D/ST",
-    "fpts": 46.73,
-    "avg": 9.2,
-    "last": -1
+    "team_abbr": "MIA",
+    "pos": "WR",
+    "fpts": 59.12,
+    "avg": 9.1,
+    "last": 4
   },
   {
     "name": "Bengals",
@@ -1834,46 +1844,6 @@ window.FREE_AGENTS = [
     "last": 22.44
   },
   {
-    "name": "Caleb Douglas",
-    "espn": "4869645",
-    "status": null,
-    "team_abbr": "MIA",
-    "pos": "WR",
-    "fpts": 59.12,
-    "avg": 9.1,
-    "last": 4
-  },
-  {
-    "name": "Cam Ward",
-    "espn": "4688380",
-    "status": null,
-    "team_abbr": "TEN",
-    "pos": "QB",
-    "fpts": 103.63,
-    "avg": 14.19,
-    "last": 22.22
-  },
-  {
-    "name": "Juwan Johnson",
-    "espn": "3929645",
-    "status": "Q",
-    "team_abbr": "NO",
-    "pos": "TE",
-    "fpts": 30.18,
-    "avg": 6.87,
-    "last": 0
-  },
-  {
-    "name": "Chase McLaughlin",
-    "espn": "3150744",
-    "status": null,
-    "team_abbr": "TB",
-    "pos": "K",
-    "fpts": 62.6,
-    "avg": 10.2,
-    "last": 3
-  },
-  {
     "name": "Devaughn Vele",
     "espn": "4569559",
     "status": null,
@@ -1884,24 +1854,13 @@ window.FREE_AGENTS = [
     "last": 11.1
   },
   {
-    "name": "Matt Gay",
-    "espn": "4249087",
+    "name": "Jets",
     "status": null,
-    "team_abbr": "LV",
-    "pos": "K",
-    "fpts": 50.35,
-    "avg": 9.27,
-    "last": 6
-  },
-  {
-    "name": "Michael Mayer",
-    "espn": "4429086",
-    "status": null,
-    "team_abbr": "LV",
-    "pos": "TE",
-    "fpts": 28.41,
-    "avg": 6,
-    "last": 0.9
+    "team_abbr": "NYJ",
+    "pos": "D/ST",
+    "fpts": 39.77,
+    "avg": 4.64,
+    "last": 8
   },
   {
     "name": "Dominic Zvada",
@@ -1914,34 +1873,34 @@ window.FREE_AGENTS = [
     "last": 15
   },
   {
-    "name": "Eddy Pineiro",
-    "espn": "4034949",
+    "name": "Chase McLaughlin",
+    "espn": "3150744",
     "status": null,
-    "team_abbr": "SF",
+    "team_abbr": "TB",
     "pos": "K",
-    "fpts": 46.71,
-    "avg": 6.2,
-    "last": 5
+    "fpts": 62.6,
+    "avg": 10.2,
+    "last": 3
   },
   {
-    "name": "Dalton Schultz",
-    "espn": "3117256",
-    "status": null,
-    "team_abbr": "HOU",
+    "name": "Juwan Johnson",
+    "espn": "3929645",
+    "status": "Q",
+    "team_abbr": "NO",
     "pos": "TE",
-    "fpts": 41.39,
-    "avg": 6.31,
-    "last": 1.6
+    "fpts": 30.18,
+    "avg": 6.87,
+    "last": 0
   },
   {
-    "name": "Brian Thomas Jr.",
-    "espn": "4432773",
+    "name": "Matt Gay",
+    "espn": "4249087",
     "status": null,
-    "team_abbr": "JAX",
-    "pos": "WR",
-    "fpts": 32.61,
-    "avg": 4.14,
-    "last": 8.3
+    "team_abbr": "LV",
+    "pos": "K",
+    "fpts": 50.35,
+    "avg": 9.27,
+    "last": 6
   },
   {
     "name": "Mike Gesicki",
@@ -1954,24 +1913,13 @@ window.FREE_AGENTS = [
     "last": 10.2
   },
   {
-    "name": "Jonathon Brooks",
-    "espn": "4678008",
-    "status": "IR",
-    "team_abbr": "CAR",
-    "pos": "RB",
-    "fpts": 28.85,
-    "avg": 4.15,
-    "last": 0
-  },
-  {
-    "name": "Malik Washington",
-    "espn": "4569603",
+    "name": "Giants",
     "status": null,
-    "team_abbr": "MIA",
-    "pos": "WR",
-    "fpts": 45.35,
-    "avg": 7.68,
-    "last": 5.6
+    "team_abbr": "NYG",
+    "pos": "D/ST",
+    "fpts": 40.85,
+    "avg": 6.1,
+    "last": 6
   },
   {
     "name": "Browns",
@@ -1983,23 +1931,72 @@ window.FREE_AGENTS = [
     "last": 5
   },
   {
-    "name": "Cairo Santos",
-    "espn": "17427",
+    "name": "Aaron Rodgers",
+    "espn": "8439",
     "status": null,
-    "team_abbr": "CHI",
-    "pos": "K",
-    "fpts": 61.79,
-    "avg": 8.7,
-    "last": 8
+    "team_abbr": "PIT",
+    "pos": "QB",
+    "fpts": 0,
+    "avg": 14.87,
+    "last": 15.98
   },
   {
-    "name": "Jake Ferguson",
-    "espn": "4242355",
-    "status": "D",
-    "team_abbr": "DAL",
-    "pos": "TE",
-    "fpts": 18.73,
-    "avg": 5.01,
+    "name": "Eddy Pineiro",
+    "espn": "4034949",
+    "status": null,
+    "team_abbr": "SF",
+    "pos": "K",
+    "fpts": 46.71,
+    "avg": 6.2,
+    "last": 5
+  },
+  {
+    "name": "Justice Hill",
+    "espn": "4038441",
+    "status": null,
+    "team_abbr": "BAL",
+    "pos": "RB",
+    "fpts": 47.81,
+    "avg": 6.64,
+    "last": 15.6
+  },
+  {
+    "name": "Brian Thomas Jr.",
+    "espn": "4432773",
+    "status": null,
+    "team_abbr": "JAX",
+    "pos": "WR",
+    "fpts": 32.61,
+    "avg": 4.14,
+    "last": 8.3
+  },
+  {
+    "name": "Jonathon Brooks",
+    "espn": "4678008",
+    "status": "IR",
+    "team_abbr": "CAR",
+    "pos": "RB",
+    "fpts": 28.85,
+    "avg": 4.15,
     "last": 0
+  },
+  {
+    "name": "Cam Ward",
+    "espn": "4688380",
+    "status": null,
+    "team_abbr": "TEN",
+    "pos": "QB",
+    "fpts": 103.63,
+    "avg": 14.19,
+    "last": 22.22
+  },
+  {
+    "name": "Patriots",
+    "status": null,
+    "team_abbr": "NE",
+    "pos": "D/ST",
+    "fpts": 24.32,
+    "avg": 4.4,
+    "last": -2
   }
 ];
