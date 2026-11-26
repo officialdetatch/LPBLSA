@@ -23,8 +23,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIA",
         "pos": "PG",
         "fpts": 1840.5,
-        "avg": 45.95,
-        "last": 24.25
+        "avg": 45.91,
+        "last": 45.25
       },
       {
         "name": "VJ Edgecombe",
@@ -33,8 +33,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "PHI",
         "pos": "SG",
         "fpts": 2402.25,
-        "avg": 38.01,
-        "last": 38.5
+        "avg": 38.44,
+        "last": 45.75
       },
       {
         "name": "Michael Porter Jr.",
@@ -43,8 +43,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "BKN",
         "pos": "SF, PF",
         "fpts": 2721.5,
-        "avg": 37.45,
-        "last": 17.5
+        "avg": 36.95,
+        "last": 29.5
       },
       {
         "name": "Cooper Flagg",
@@ -63,8 +63,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "OKC",
         "pos": "C",
         "fpts": 1601.25,
-        "avg": 32.18,
-        "last": 45.75
+        "avg": 32.95,
+        "last": 46.75
       },
       {
         "name": "Amen Thompson",
@@ -73,8 +73,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "HOU",
         "pos": "SF, SG",
         "fpts": 3078.5,
-        "avg": 40.87,
-        "last": 53.75
+        "avg": 40.54,
+        "last": 35
       },
       {
         "name": "Zion Williamson",
@@ -93,8 +93,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "HOU",
         "pos": "C",
         "fpts": 2989.75,
-        "avg": 57.59,
-        "last": 50
+        "avg": 57.07,
+        "last": 48.75
       },
       {
         "name": "Donovan Clingan",
@@ -103,8 +103,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "POR",
         "pos": "C",
         "fpts": 1970.25,
-        "avg": 41.76,
-        "last": 61.75
+        "avg": 39.63,
+        "last": 3.25
       }
     ],
     "bench": [
@@ -181,8 +181,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "PHI",
         "pos": "PG, SG",
         "fpts": 3552,
-        "avg": 52.51,
-        "last": 35.75
+        "avg": 52.67,
+        "last": 55.25
       },
       {
         "name": "James Harden",
@@ -191,8 +191,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "CLE",
         "pos": "PG, SG",
         "fpts": 3205.25,
-        "avg": 40.03,
-        "last": 28.25
+        "avg": 40,
+        "last": 39.5
       },
       {
         "name": "Jonathan Kuminga",
@@ -201,18 +201,18 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIN",
         "pos": "PF, SF",
         "fpts": 1709.25,
-        "avg": 31.13,
-        "last": 31.25
+        "avg": 30.19,
+        "last": 14.25
       },
       {
         "name": "Giannis Antetokounmpo",
         "espn": "3032977",
-        "status": "DTD",
+        "status": null,
         "team_abbr": "MIA",
         "pos": "PF, C",
         "fpts": 4028,
-        "avg": 67.95,
-        "last": 0
+        "avg": 68.09,
+        "last": 70.25
       },
       {
         "name": "Joel Embiid",
@@ -227,22 +227,22 @@ window.NBA_ROSTERS = {
       {
         "name": "Zach LaVine",
         "espn": "3064440",
-        "status": null,
+        "status": "OUT",
         "team_abbr": "SAC",
         "pos": "SG, SF",
         "fpts": 2146.75,
         "avg": 38.38,
-        "last": 36.75
+        "last": 0
       },
       {
         "name": "Yaxel Lendeborg",
         "espn": "5175737",
-        "status": "DTD",
+        "status": null,
         "team_abbr": "GS",
         "pos": "SF, PF",
         "fpts": 2299.75,
-        "avg": 40.62,
-        "last": 21
+        "avg": 39.07,
+        "last": 12.75
       },
       {
         "name": "Brook Lopez",
@@ -251,8 +251,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "LAC",
         "pos": "C",
         "fpts": 1823,
-        "avg": 33.13,
-        "last": 7.5
+        "avg": 32.25,
+        "last": 18.25
       },
       {
         "name": "Devin Vassell",
@@ -261,8 +261,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "SA",
         "pos": "SG, SF",
         "fpts": 1917.75,
-        "avg": 29.88,
-        "last": 35.25
+        "avg": 27.9,
+        "last": -3.75
       }
     ],
     "bench": [
@@ -279,12 +279,12 @@ window.NBA_ROSTERS = {
       {
         "name": "Jalen Smith",
         "espn": "4397189",
-        "status": "DTD",
+        "status": "OUT",
         "team_abbr": "CHI",
         "pos": "PF, C",
         "fpts": 1268,
         "avg": 38.48,
-        "last": 32.75
+        "last": 0
       },
       {
         "name": "Franz Wagner",
@@ -349,8 +349,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIN",
         "pos": "SG, PG",
         "fpts": 2311.5,
-        "avg": 39.14,
-        "last": 46.25
+        "avg": 38.66,
+        "last": 30
       },
       {
         "name": "Cam Spencer",
@@ -359,8 +359,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MEM",
         "pos": "SG, PG",
         "fpts": null,
-        "avg": 33.64,
-        "last": 48.5
+        "avg": 33.49,
+        "last": 30.75
       },
       {
         "name": "Caleb Wilson",
@@ -389,8 +389,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "CLE",
         "pos": "C",
         "fpts": 2407.75,
-        "avg": 36.62,
-        "last": 29.75
+        "avg": 36.23,
+        "last": 30.5
       },
       {
         "name": "Stephon Castle",
@@ -399,8 +399,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "SA",
         "pos": "PG, SG",
         "fpts": 2727,
-        "avg": 39.13,
-        "last": 63
+        "avg": 38.03,
+        "last": 18.25
       },
       {
         "name": "Deni Avdija",
@@ -409,8 +409,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "POR",
         "pos": "SF, PF",
         "fpts": 3002.25,
-        "avg": 50.53,
-        "last": 59.25
+        "avg": 48.48,
+        "last": 17.75
       },
       {
         "name": "Anthony Davis",
@@ -517,18 +517,18 @@ window.NBA_ROSTERS = {
         "team_abbr": "OKC",
         "pos": "PG",
         "fpts": 4891.5,
-        "avg": 59.29,
-        "last": 66.75
+        "avg": 59.35,
+        "last": 60.25
       },
       {
         "name": "Jaylen Brown",
         "espn": "3917376",
-        "status": null,
+        "status": "DTD",
         "team_abbr": "PHI",
         "pos": "SF, SG",
         "fpts": 2933.5,
-        "avg": 46.17,
-        "last": 46
+        "avg": 43.66,
+        "last": 6
       },
       {
         "name": "Matas Buzelis",
@@ -537,8 +537,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "CHI",
         "pos": "SF, PF",
         "fpts": 2367,
-        "avg": 29.1,
-        "last": 28.25
+        "avg": 29.58,
+        "last": 37.75
       },
       {
         "name": "Julius Randle",
@@ -547,23 +547,23 @@ window.NBA_ROSTERS = {
         "team_abbr": "BKN",
         "pos": "PF",
         "fpts": 2666.5,
-        "avg": 41.64,
-        "last": 50.25
+        "avg": 42.19,
+        "last": 51
       },
       {
         "name": "Karl-Anthony Towns",
         "espn": "3136195",
-        "status": "DTD",
+        "status": null,
         "team_abbr": "NY",
         "pos": "C",
         "fpts": 2875.75,
-        "avg": 54.97,
-        "last": 86.25
+        "avg": 54.79,
+        "last": 52
       },
       {
         "name": "De'Aaron Fox",
         "espn": "4066259",
-        "status": "DTD",
+        "status": "OUT",
         "team_abbr": "SA",
         "pos": "PG, SG",
         "fpts": 2933.25,
@@ -577,18 +577,18 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIA",
         "pos": "C, PF",
         "fpts": 2674.75,
-        "avg": 51.36,
-        "last": 100.75
+        "avg": 50.49,
+        "last": 36.5
       },
       {
         "name": "Jalen Brunson",
         "espn": "3934672",
-        "status": "DTD",
+        "status": null,
         "team_abbr": "NY",
         "pos": "PG",
         "fpts": 3604.25,
-        "avg": 49.09,
-        "last": 37.5
+        "avg": 47.64,
+        "last": 23
       },
       {
         "name": "Austin Reaves",
@@ -649,8 +649,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "GS",
         "pos": "SG, PG",
         "fpts": 2370.5,
-        "avg": 34.9,
-        "last": 20.75
+        "avg": 33.97,
+        "last": 20
       }
     ],
     "ir": []
@@ -664,8 +664,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "PHX",
         "pos": "PG, SG",
         "fpts": 3501.25,
-        "avg": 47.7,
-        "last": 56.5
+        "avg": 46.72,
+        "last": 31
       },
       {
         "name": "Ty Jerome",
@@ -674,8 +674,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MEM",
         "pos": "SG, PG",
         "fpts": 3280.25,
-        "avg": 47.29,
-        "last": 51.25
+        "avg": 48.25,
+        "last": 60.75
       },
       {
         "name": "LeBron James",
@@ -684,8 +684,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "PHI",
         "pos": "SF, PF",
         "fpts": 2821.25,
-        "avg": 43.32,
-        "last": 45.75
+        "avg": 45.67,
+        "last": 78.5
       },
       {
         "name": "Jabari Smith Jr.",
@@ -694,8 +694,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "HOU",
         "pos": "PF, C",
         "fpts": 1850.25,
-        "avg": 36.03,
-        "last": 26.75
+        "avg": 35.83,
+        "last": 32.25
       },
       {
         "name": "Day'Ron Sharpe",
@@ -704,8 +704,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "BKN",
         "pos": "C",
         "fpts": 1552.25,
-        "avg": 32.7,
-        "last": 27.25
+        "avg": 34.41,
+        "last": 61.75
       },
       {
         "name": "Tyler Herro",
@@ -714,8 +714,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIL",
         "pos": "SG, PG",
         "fpts": 2766,
-        "avg": 43.69,
-        "last": 76
+        "avg": 44.29,
+        "last": 54.5
       },
       {
         "name": "Precious Achiuwa",
@@ -724,28 +724,28 @@ window.NBA_ROSTERS = {
         "team_abbr": "SAC",
         "pos": "PF, C",
         "fpts": 1499.75,
-        "avg": 25.95,
-        "last": 19.75
+        "avg": 24.02,
+        "last": -3
       },
       {
         "name": "Victor Wembanyama",
         "espn": "5104157",
-        "status": "DTD",
+        "status": null,
         "team_abbr": "SA",
         "pos": "C",
         "fpts": 3892,
-        "avg": 79.06,
-        "last": 0
+        "avg": 75.99,
+        "last": 23.75
       },
       {
         "name": "LaMelo Ball",
         "espn": "4432816",
-        "status": null,
+        "status": "DTD",
         "team_abbr": "MIN",
         "pos": "PG",
         "fpts": 3232.75,
-        "avg": 36.57,
-        "last": 33.5
+        "avg": 36.97,
+        "last": 44.25
       }
     ],
     "bench": [
@@ -832,8 +832,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "CLE",
         "pos": "SG, PG",
         "fpts": 3603,
-        "avg": 49.53,
-        "last": 58.75
+        "avg": 50.75,
+        "last": 71.5
       },
       {
         "name": "Ajay Mitchell",
@@ -842,8 +842,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "OKC",
         "pos": "PG, SG",
         "fpts": 2463.5,
-        "avg": 35.06,
-        "last": 19.5
+        "avg": 35.65,
+        "last": 45
       },
       {
         "name": "Jaden McDaniels",
@@ -852,8 +852,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "MIN",
         "pos": "SF, PF",
         "fpts": 2249.25,
-        "avg": 45.17,
-        "last": 84.5
+        "avg": 47.16,
+        "last": 83
       },
       {
         "name": "Miles Bridges",
@@ -862,8 +862,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "PHX",
         "pos": "SF, PF",
         "fpts": 2384.25,
-        "avg": 39.77,
-        "last": 42
+        "avg": 38.03,
+        "last": 10.25
       },
       {
         "name": "Moussa Diabate",
@@ -872,8 +872,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "CHA",
         "pos": "PF, C",
         "fpts": 1330,
-        "avg": 36.2,
-        "last": 47.75
+        "avg": 36.52,
+        "last": 41
       },
       {
         "name": "Darius Acuff Jr.",
@@ -882,8 +882,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "SAC",
         "pos": "PG",
         "fpts": 2425.5,
-        "avg": 43.16,
-        "last": 17.25
+        "avg": 41,
+        "last": 4.25
       },
       {
         "name": "Kevin Durant",
@@ -892,8 +892,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "HOU",
         "pos": "PF, SF",
         "fpts": 3356.5,
-        "avg": 43.28,
-        "last": 68
+        "avg": 42.83,
+        "last": 34.75
       },
       {
         "name": "Nikola Jokic",
@@ -912,8 +912,8 @@ window.NBA_ROSTERS = {
         "team_abbr": "SAC",
         "pos": "C, PF",
         "fpts": 2825.75,
-        "avg": 44.31,
-        "last": 55.75
+        "avg": 43.25,
+        "last": 26.25
       }
     ],
     "bench": [
@@ -1001,8 +1001,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "CHI",
     "pos": "PG, SG",
     "fpts": 2938.5,
-    "avg": 35.07,
-    "last": 22.75
+    "avg": 35.32,
+    "last": 39.5
   },
   {
     "name": "Darius Garland",
@@ -1011,8 +1011,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "PG",
     "fpts": 3066,
-    "avg": 39.52,
-    "last": 52.75
+    "avg": 38.5,
+    "last": 22.25
   },
   {
     "name": "Damian Lillard",
@@ -1021,8 +1021,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "POR",
     "pos": "PG",
     "fpts": 2722.75,
-    "avg": 36.06,
-    "last": 35.25
+    "avg": 35.68,
+    "last": 29.25
   },
   {
     "name": "Naz Reid",
@@ -1031,8 +1031,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "CHA",
     "pos": "C, PF",
     "fpts": 2529,
-    "avg": 33.3,
-    "last": 40.25
+    "avg": 33.37,
+    "last": 34.5
   },
   {
     "name": "Brandon Miller",
@@ -1041,8 +1041,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "CHA",
     "pos": "SF, SG",
     "fpts": 2643,
-    "avg": 33.04,
-    "last": 34.75
+    "avg": 34.97,
+    "last": 62
   },
   {
     "name": "AJ Dybantsa",
@@ -1091,8 +1091,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MEM",
     "pos": "SF, SG",
     "fpts": 1971.5,
-    "avg": 39.93,
-    "last": 31.25
+    "avg": 39.71,
+    "last": 36
   },
   {
     "name": "Darryn Peterson",
@@ -1131,8 +1131,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "HOU",
     "pos": "PG, SG",
     "fpts": 2308.25,
-    "avg": 35.12,
-    "last": 22.5
+    "avg": 34.19,
+    "last": 20.25
   },
   {
     "name": "Chet Holmgren",
@@ -1151,8 +1151,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "NY",
     "pos": "SF, SG",
     "fpts": 2802.75,
-    "avg": 20.35,
-    "last": 7.75
+    "avg": 21.72,
+    "last": 45
   },
   {
     "name": "Jeremiah Fears",
@@ -1181,8 +1181,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIN",
     "pos": "C",
     "fpts": 2016.25,
-    "avg": 26.53,
-    "last": 33.75
+    "avg": 26.25,
+    "last": 21.5
   },
   {
     "name": "Brandon Ingram",
@@ -1191,8 +1191,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "SF, PF",
     "fpts": 2248.75,
-    "avg": 26.5,
-    "last": 26.5
+    "avg": 24.38,
+    "last": 22.25
   },
   {
     "name": "Ivica Zubac",
@@ -1225,6 +1225,16 @@ window.NBA_FREE_AGENTS = [
     "last": 21.5
   },
   {
+    "name": "Josh Hart",
+    "espn": "3062679",
+    "status": null,
+    "team_abbr": "NY",
+    "pos": "SF, SG",
+    "fpts": 2011.25,
+    "avg": 26.63,
+    "last": 56.5
+  },
+  {
     "name": "Anthony Black",
     "espn": "4712849",
     "status": null,
@@ -1233,16 +1243,6 @@ window.NBA_FREE_AGENTS = [
     "fpts": 2009.5,
     "avg": 37.8,
     "last": 2.5
-  },
-  {
-    "name": "Josh Hart",
-    "espn": "3062679",
-    "status": "DTD",
-    "team_abbr": "NY",
-    "pos": "SF, SG",
-    "fpts": 2011.25,
-    "avg": 24.5,
-    "last": 44.5
   },
   {
     "name": "Ace Bailey",
@@ -1271,8 +1271,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "PHX",
     "pos": "SG, SF",
     "fpts": 2411.75,
-    "avg": 26.09,
-    "last": 44.5
+    "avg": 25.94,
+    "last": 23.5
   },
   {
     "name": "CJ McCollum",
@@ -1291,8 +1291,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "CHA",
     "pos": "PG, SG",
     "fpts": 2541.25,
-    "avg": 21.94,
-    "last": 33.75
+    "avg": 23,
+    "last": 32.5
   },
   {
     "name": "Christian Braun",
@@ -1311,8 +1311,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "POR",
     "pos": "PG, SG",
     "fpts": 1866.75,
-    "avg": 34.54,
-    "last": 44
+    "avg": 33.08,
+    "last": 8.25
   },
   {
     "name": "Jaren Jackson Jr.",
@@ -1331,8 +1331,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "SF, SG",
     "fpts": 2123.5,
-    "avg": 28.01,
-    "last": 6.5
+    "avg": 29.12,
+    "last": 49
   },
   {
     "name": "Saddiq Bey",
@@ -1361,8 +1361,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "C",
     "fpts": 2005.25,
-    "avg": 23.6,
-    "last": 30.5
+    "avg": 24.7,
+    "last": 44.5
   },
   {
     "name": "Reed Sheppard",
@@ -1371,8 +1371,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "HOU",
     "pos": "SG, PG",
     "fpts": 2326,
-    "avg": 21.37,
-    "last": 20
+    "avg": 20.67,
+    "last": 10.25
   },
   {
     "name": "Myles Turner",
@@ -1381,8 +1381,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "C",
     "fpts": 1900.75,
-    "avg": 27.98,
-    "last": 57.75
+    "avg": 27.74,
+    "last": 23.75
   },
   {
     "name": "Ryan Rollins",
@@ -1391,8 +1391,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "SG, PG",
     "fpts": 2253.25,
-    "avg": 24.22,
-    "last": 9.75
+    "avg": 23.22,
+    "last": 7.25
   },
   {
     "name": "Andrew Wiggins",
@@ -1401,8 +1401,18 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIA",
     "pos": "SF, PF",
     "fpts": 2171,
-    "avg": 21.11,
-    "last": 12.25
+    "avg": 20.99,
+    "last": 19
+  },
+  {
+    "name": "Julian Champagnie",
+    "espn": "4592479",
+    "status": null,
+    "team_abbr": "SA",
+    "pos": "SF, PF",
+    "fpts": 1722.75,
+    "avg": 25.45,
+    "last": 13.25
   },
   {
     "name": "Quentin Grimes",
@@ -1415,24 +1425,14 @@ window.NBA_FREE_AGENTS = [
     "last": 23.75
   },
   {
-    "name": "Julian Champagnie",
-    "espn": "4592479",
-    "status": null,
-    "team_abbr": "SA",
-    "pos": "SF, PF",
-    "fpts": 1722.75,
-    "avg": 26.13,
-    "last": 44.75
-  },
-  {
     "name": "Zach Edey",
     "espn": "4600663",
-    "status": null,
+    "status": "DTD",
     "team_abbr": "MEM",
     "pos": "C",
     "fpts": 1722,
-    "avg": 25.39,
-    "last": 27
+    "avg": 25.62,
+    "last": 28.75
   },
   {
     "name": "Daniss Jenkins",
@@ -1451,18 +1451,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIA",
     "pos": "SG, SF",
     "fpts": 1418.25,
-    "avg": 28.37,
-    "last": 30
-  },
-  {
-    "name": "Daniel Gafford",
-    "espn": "4278049",
-    "status": null,
-    "team_abbr": "DAL",
-    "pos": "C",
-    "fpts": 1841.5,
-    "avg": 30.38,
-    "last": 40.5
+    "avg": 27.36,
+    "last": 12.25
   },
   {
     "name": "Tobias Harris",
@@ -1475,14 +1465,34 @@ window.NBA_FREE_AGENTS = [
     "last": 0
   },
   {
+    "name": "Daniel Gafford",
+    "espn": "4278049",
+    "status": null,
+    "team_abbr": "DAL",
+    "pos": "C",
+    "fpts": 1841.5,
+    "avg": 30.38,
+    "last": 40.5
+  },
+  {
     "name": "Peyton Watson",
     "espn": "4576087",
     "status": null,
     "team_abbr": "CLE",
     "pos": "SF, PF",
     "fpts": 2080,
-    "avg": 27.41,
-    "last": 44
+    "avg": 27.68,
+    "last": 31.5
+  },
+  {
+    "name": "Nic Claxton",
+    "espn": "4278067",
+    "status": null,
+    "team_abbr": "CHI",
+    "pos": "C",
+    "fpts": 1934.5,
+    "avg": 26.19,
+    "last": 35
   },
   {
     "name": "Jalen Williams",
@@ -1493,16 +1503,6 @@ window.NBA_FREE_AGENTS = [
     "fpts": 655,
     "avg": 29,
     "last": 0
-  },
-  {
-    "name": "Nic Claxton",
-    "espn": "4278067",
-    "status": null,
-    "team_abbr": "CHI",
-    "pos": "C",
-    "fpts": 1934.5,
-    "avg": 24.93,
-    "last": 20.5
   },
   {
     "name": "Jakob Poeltl",
@@ -1531,38 +1531,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "OKC",
     "pos": "SG, PG",
     "fpts": 1726.75,
-    "avg": 25.5,
-    "last": 25.25
-  },
-  {
-    "name": "Collin Gillespie",
-    "espn": "4278585",
-    "status": null,
-    "team_abbr": "PHX",
-    "pos": "PG",
-    "fpts": 2024,
-    "avg": 26.05,
-    "last": 34.5
-  },
-  {
-    "name": "Keegan Murray",
-    "espn": "4594327",
-    "status": null,
-    "team_abbr": "SAC",
-    "pos": "PF, SF",
-    "fpts": 1953,
-    "avg": 24.85,
-    "last": 26
-  },
-  {
-    "name": "Nikola Vucevic",
-    "espn": "6478",
-    "status": null,
-    "team_abbr": "ORL",
-    "pos": "C",
-    "fpts": 1969.5,
-    "avg": 11.66,
-    "last": 0
+    "avg": 24.42,
+    "last": 5
   },
   {
     "name": "Kevin Porter Jr.",
@@ -1575,14 +1545,44 @@ window.NBA_FREE_AGENTS = [
     "last": null
   },
   {
+    "name": "Collin Gillespie",
+    "espn": "4278585",
+    "status": null,
+    "team_abbr": "PHX",
+    "pos": "PG",
+    "fpts": 2024,
+    "avg": 25.5,
+    "last": 16.75
+  },
+  {
+    "name": "Keegan Murray",
+    "espn": "4594327",
+    "status": null,
+    "team_abbr": "SAC",
+    "pos": "PF, SF",
+    "fpts": 1953,
+    "avg": 23.66,
+    "last": 11.75
+  },
+  {
+    "name": "Nikola Vucevic",
+    "espn": "6478",
+    "status": null,
+    "team_abbr": "ORL",
+    "pos": "C",
+    "fpts": 1969.5,
+    "avg": 11.66,
+    "last": 0
+  },
+  {
     "name": "Dillon Brooks",
     "espn": "3155526",
     "status": null,
     "team_abbr": "PHX",
     "pos": "SF, SG",
     "fpts": 2014.25,
-    "avg": 27.66,
-    "last": 36.5
+    "avg": 27.59,
+    "last": 26.5
   },
   {
     "name": "Kristaps Porzingis",
@@ -1621,8 +1621,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "POR",
     "pos": "PF, SF",
     "fpts": 1650.25,
-    "avg": 24.56,
-    "last": 10
+    "avg": 23.06,
+    "last": -2.5
   },
   {
     "name": "Egor Demin",
@@ -1631,8 +1631,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "BKN",
     "pos": "PG, SG",
     "fpts": 2130,
-    "avg": 19.68,
-    "last": 22
+    "avg": 20.61,
+    "last": 30
   },
   {
     "name": "Jimmy Butler III",
@@ -1661,8 +1661,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "SG",
     "fpts": 1674.5,
-    "avg": 27.15,
-    "last": 46.75
+    "avg": 25.87,
+    "last": 2.75
   },
   {
     "name": "Kris Dunn",
@@ -1671,8 +1671,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "PG, SG",
     "fpts": 1424,
-    "avg": 27.44,
-    "last": 23.75
+    "avg": 27.81,
+    "last": 33.75
   },
   {
     "name": "Draymond Green",
@@ -1681,8 +1681,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "GS",
     "pos": "PF, C",
     "fpts": 1604.25,
-    "avg": 22.89,
-    "last": 18.5
+    "avg": 21.8,
+    "last": 6.5
   },
   {
     "name": "Rui Hachimura",
@@ -1691,8 +1691,18 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "PF, SF",
     "fpts": 1725.5,
-    "avg": 28.41,
-    "last": 43.25
+    "avg": 28.82,
+    "last": 34.5
+  },
+  {
+    "name": "De'Andre Hunter",
+    "espn": "4065732",
+    "status": null,
+    "team_abbr": "SAC",
+    "pos": "SF, PF",
+    "fpts": 1624.25,
+    "avg": 26.8,
+    "last": -2
   },
   {
     "name": "Jalen Suggs",
@@ -1703,16 +1713,6 @@ window.NBA_FREE_AGENTS = [
     "fpts": 1705.5,
     "avg": 22.31,
     "last": 14.5
-  },
-  {
-    "name": "De'Andre Hunter",
-    "espn": "4065732",
-    "status": null,
-    "team_abbr": "SAC",
-    "pos": "SF, PF",
-    "fpts": 1624.25,
-    "avg": 28.72,
-    "last": 45.75
   },
   {
     "name": "Collin Sexton",
@@ -1751,8 +1751,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "HOU",
     "pos": "SF, PF",
     "fpts": 1337.75,
-    "avg": 26.9,
-    "last": 32
+    "avg": 26.09,
+    "last": 11.5
   },
   {
     "name": "Jordan Poole",
@@ -1781,18 +1781,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "MIL",
     "pos": "PF, SF",
     "fpts": 1580.5,
-    "avg": 27.31,
-    "last": 35.25
-  },
-  {
-    "name": "Oso Ighodaro",
-    "espn": "4601023",
-    "status": null,
-    "team_abbr": "PHX",
-    "pos": "PF",
-    "fpts": 1777.75,
-    "avg": 20.8,
-    "last": 27.5
+    "avg": 26.96,
+    "last": 21
   },
   {
     "name": "Kelly Oubre Jr.",
@@ -1803,6 +1793,16 @@ window.NBA_FREE_AGENTS = [
     "fpts": 1541.25,
     "avg": 26.09,
     "last": 45.75
+  },
+  {
+    "name": "Oso Ighodaro",
+    "espn": "4601023",
+    "status": null,
+    "team_abbr": "PHX",
+    "pos": "PF",
+    "fpts": 1777.75,
+    "avg": 21.28,
+    "last": 28
   },
   {
     "name": "Mo Bamba",
@@ -1821,8 +1821,18 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "PHI",
     "pos": "SG, PG",
     "fpts": 1680.5,
-    "avg": 19.31,
-    "last": 1.5
+    "avg": 19.03,
+    "last": 14
+  },
+  {
+    "name": "Alex Caruso",
+    "espn": "2991350",
+    "status": null,
+    "team_abbr": "OKC",
+    "pos": "SG, PG",
+    "fpts": 1585.25,
+    "avg": 25.38,
+    "last": 43.75
   },
   {
     "name": "Ja'Kobe Walter",
@@ -1833,16 +1843,6 @@ window.NBA_FREE_AGENTS = [
     "fpts": 1184,
     "avg": 26.74,
     "last": 36.25
-  },
-  {
-    "name": "Alex Caruso",
-    "espn": "2991350",
-    "status": null,
-    "team_abbr": "OKC",
-    "pos": "SG, PG",
-    "fpts": 1585.25,
-    "avg": 23.85,
-    "last": 0
   },
   {
     "name": "Collin Murray-Boyles",
@@ -1871,18 +1871,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "SA",
     "pos": "SF, PF",
     "fpts": 1815.5,
-    "avg": 22.82,
-    "last": 29
-  },
-  {
-    "name": "Bobby Portis",
-    "espn": "3064482",
-    "status": null,
-    "team_abbr": "MIA",
-    "pos": "PF, C",
-    "fpts": 1541.5,
-    "avg": 19.22,
-    "last": 19.25
+    "avg": 21.78,
+    "last": 3
   },
   {
     "name": "Malik Monk",
@@ -1891,8 +1881,18 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "SAC",
     "pos": "SG, PG",
     "fpts": 2013.75,
-    "avg": 16.73,
-    "last": 37.75
+    "avg": 15.97,
+    "last": 3.75
+  },
+  {
+    "name": "Bobby Portis",
+    "espn": "3064482",
+    "status": null,
+    "team_abbr": "MIA",
+    "pos": "PF, C",
+    "fpts": 1541.5,
+    "avg": 19.15,
+    "last": 18
   },
   {
     "name": "Mitchell Robinson",
@@ -1905,6 +1905,26 @@ window.NBA_FREE_AGENTS = [
     "last": 0
   },
   {
+    "name": "Tre Jones",
+    "espn": "4395626",
+    "status": null,
+    "team_abbr": "CHI",
+    "pos": "PG",
+    "fpts": 1877.75,
+    "avg": 28.01,
+    "last": 32.75
+  },
+  {
+    "name": "Pelle Larsson",
+    "espn": "4601025",
+    "status": null,
+    "team_abbr": "MIA",
+    "pos": "SG, SF",
+    "fpts": null,
+    "avg": 26.8,
+    "last": 15
+  },
+  {
     "name": "Jaxson Hayes",
     "espn": "4397077",
     "status": "DTD",
@@ -1915,24 +1935,14 @@ window.NBA_FREE_AGENTS = [
     "last": 0
   },
   {
-    "name": "Pelle Larsson",
-    "espn": "4601025",
+    "name": "Mikel Brown Jr.",
+    "espn": "5101761",
     "status": null,
-    "team_abbr": "MIA",
-    "pos": "SG, SF",
-    "fpts": null,
-    "avg": 27.71,
-    "last": 54.25
-  },
-  {
-    "name": "Tre Jones",
-    "espn": "4395626",
-    "status": null,
-    "team_abbr": "CHI",
+    "team_abbr": "BKN",
     "pos": "PG",
-    "fpts": 1877.75,
-    "avg": 27.74,
-    "last": 42
+    "fpts": 1929.75,
+    "avg": 20.13,
+    "last": 6.75
   },
   {
     "name": "Kevin Huerter",
@@ -1951,18 +1961,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "PG, SG",
     "fpts": 1829,
-    "avg": 21.66,
-    "last": 4.5
-  },
-  {
-    "name": "Mikel Brown Jr.",
-    "espn": "5101761",
-    "status": null,
-    "team_abbr": "BKN",
-    "pos": "PG",
-    "fpts": 1929.75,
-    "avg": 21.25,
-    "last": 35.5
+    "avg": 21.32,
+    "last": 16
   },
   {
     "name": "Derrick Jones Jr.",
@@ -1971,8 +1971,8 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "LAC",
     "pos": "SF, PF",
     "fpts": 1436.25,
-    "avg": 26.35,
-    "last": 25.25
+    "avg": 25.02,
+    "last": 5
   },
   {
     "name": "Meleek Thomas",
@@ -1981,17 +1981,17 @@ window.NBA_FREE_AGENTS = [
     "team_abbr": "CLE",
     "pos": "SG",
     "fpts": null,
-    "avg": 27.4,
-    "last": 31
+    "avg": 26.83,
+    "last": 18.25
   },
   {
-    "name": "Zaccharie Risacher",
-    "espn": "5211175",
+    "name": "Matisse Thybulle",
+    "espn": "3907498",
     "status": null,
-    "team_abbr": "DAL",
+    "team_abbr": "LAL",
     "pos": "SF",
-    "fpts": 1338.75,
-    "avg": 25.21,
-    "last": 33.25
+    "fpts": 1099.25,
+    "avg": 25.83,
+    "last": 44.25
   }
 ];
