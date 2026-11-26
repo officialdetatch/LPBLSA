@@ -29,7 +29,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 1469.76,
     "pa": 1400.42,
     "streak": "W2",
-    "playoff": "99%"
+    "playoff": "100%"
   },
   {
     "team": "hobbit",
@@ -65,6 +65,6 @@ window.LEAGUE_STANDINGS = [
     "pf": 1361.68,
     "pa": 1589.66,
     "streak": "L3",
-    "playoff": "38%"
+    "playoff": "37%"
   }
 ];
