@@ -29,7 +29,7 @@ window.LEAGUE_STANDINGS = [
     "pf": 9399.25,
     "pa": 8103.5,
     "streak": "W1",
-    "playoff": "86%"
+    "playoff": "87%"
   },
   {
     "team": "imcebollin",
@@ -63,7 +63,7 @@ window.LEAGUE_STANDINGS = [
     "pct": ".400",
     "gb": "1",
     "pf": 7619.5,
-    "pa": 9384.75,
+    "pa": 9388.75,
     "streak": "L2",
     "playoff": "34%"
   },
@@ -74,7 +74,7 @@ window.LEAGUE_STANDINGS = [
     "t": 0,
     "pct": ".200",
     "gb": "2",
-    "pf": 8502,
+    "pf": 8506,
     "pa": 8986,
     "streak": "L2",
     "playoff": "29%"
